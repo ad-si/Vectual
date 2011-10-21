@@ -88,7 +88,7 @@ class Pie extends VectualGraph {
 					d="M 0,0 L '.$this->lastx.','.$this->lasty.' A '.$this->radius.','.$this->radius.' '.$size.' '.$this->nextx.','.$this->nexty.' z"
 					transform="rotate('.$this->angle_all_last.',0,0)" >'.
 	
-					'<animate attributeName="opacity" to="1" dur="0.6s" fill="freeze"/>'.
+					'<animate attributeName="opacity" from="0" to="1" dur="0.6s" fill="freeze"/>'.
 										
 					'<animateTransform attributeName="transform" type="rotate" dur="1s"
 						calcMode="spline" keySplines="0 0 0 1" values="'.$this->angle_all_last.',0,0; 0,0,0" additive="replace" fill="freeze" />									
@@ -103,9 +103,7 @@ class Pie extends VectualGraph {
 					if($angle_translate_deg > 255 && $angle_translate_deg <= 285) $this->pie .='text-anchor="middle" ';
 					if($angle_translate_deg > 285 && $angle_translate_deg <= 360) $this->pie .='text-anchor="end" ';
 	
-					
-					
-				$this->pie .='style="font-size:'.($angle_this * $this->radius * 0.002 + 8).'px;"
+				$this->pie .='style="font-size:'.($angle_this * $this->radius * 0.002 + 8).'px;opacity:0;"
 					fill="'.$this->color[$i].'" '.
 					'transform="translate(0, 5)"'.
 					' > '.						
@@ -113,10 +111,10 @@ class Pie extends VectualGraph {
 						.'<animate attributeName="opacity" begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
 				</text>'.
 				
-				'<title>'
-					.$this->sortedKeys[$i].'  |  '
-					.$this->sortedValues[$i].'  |  '
-					.(round($this->sortedValues[$i]/$this->totalValue * 100, 2) ).'%'.						
+				'<title>'.
+					$this->sortedKeys[$i].'  |  '.
+					$this->sortedValues[$i].'  |  '.
+					(round($this->sortedValues[$i]/$this->totalValue * 100, 2) ).'%'.						
 				'</title>'.
 				
 						//move pie segment on mouseover

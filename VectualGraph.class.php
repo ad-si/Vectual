@@ -1,12 +1,13 @@
 <?php
 
 class VectualGraph{		
-
 	
 	protected $data;
 	
 	protected $width;
 	protected $height;
+	
+	protected $inline;
 
 	protected $graphWidth;
 	protected $graphHeight;
@@ -18,36 +19,60 @@ class VectualGraph{
 	protected $minValue;
 	protected $minKey;
 	protected $numValues;
+	protected $sortedArray = array();
 	protected $sortedKeys = array();
 	protected $sortedValues = array();
+	
+	protected $xRange;
+	protected $yRange;
+
+	protected $label = array();
 	
 	protected $color = array();
 		
 	function __construct($data, $config) {
-		$this->data = $data;
 		
-		$this->width = $config["width"];
-		$this->height = $config["height"];
+		$this->data = $data;
+	
+		$this->inline = $config['inline'];
+		
+		if($this->inline){
+			$this->width = 3 * $config['lineHeight'];
+			$this->height = $config['lineHeight'];
+		}else{
+			$this->width = $config['width'];
+			$this->height = $config['height'];
+		}
 		
 		$this->graphWidth = ($this->width  - 50);
 		$this->graphHeight = ($this->height - 100);
 		
-		$this->totalValue = array_sum($data[1]["value"]);
-		$this->numKeys = count($data[1]["key"]);
-		$this->numValues = count($data[1]["value"]);
-		$this->maxValue = max($data[1]["value"]);
-		$this->maxKey = array_search($this->maxValue, $data[1]["value"]);
-		$this->minValue = min($data[1]["value"]);
-		$this->minKey = array_search($this->minValue, $data[1]["value"]);
-		$this->sortedValues = $data[1]["value"]; 
-		$this->sortedKeys = $data[1]["key"];	
-		array_multisort($this->sortedValues, $this->sortedKeys);
+		$this->inline = $config['inline'];
 		
+		$this->totalValue = array_sum($data);
+		$this->values = array_values($data);
+		$this->numValues = count($data);
+		$this->minValue = min(array_values($data));
+		$this->minValueIndex= array_search($this->minValue, array_values($data));
+		$this->maxValue = max(array_values($data));
+		$this->maxValueIndex= array_search($this->maxValue, array_values($data));
+		$this->keys = array_keys($data);
+		$this->numKeys = count($data);
+		$this->minKey = array_search($this->minValue, array_values($data));
+		$this->maxKey = array_search($this->maxValue, array_values($data));	
+		$this->sortedArray = $data;
+			asort($this->sortedArray); 
+		$this->sortedValues = array_values($this->sortedArray); 
+		$this->sortedKeys = array_keys($this->sortedArray); 
+		
+		$this->xRange = $this->maxKey - $this->minKey;
+		$this->yRange = $this->maxValue - $this->minValue;
+		
+		$this->label = $config['label'];	
 		
 		for($i=0; $i<=$this->numValues; $i++){
 			$this->color[$i] = 'rgb(255, '.rand(1,255).', '.rand(1,255).')';
-		}
-			
+		}			
 	}
 }
 

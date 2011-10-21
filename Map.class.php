@@ -23,7 +23,7 @@ class Map extends VectualGraph{
 		
 		$map .= $this->setColors();
 		
-		$map .= file_get_contents("/var/www/vectual-dev/class/map.txt");
+		$map .= file_get_contents('map.txt', true);
 		
 		$map .='</g>';
 			
@@ -37,9 +37,9 @@ class Map extends VectualGraph{
 		$style ='<style>';
 		
 			for($i=0; $i < $this->numValues; $i++){	
-				$color = (255 - ($this->data[1]['value'][$i]/$this->maxValue * 255));
+				$color = (255 - ($this->values[$i]/$this->maxValue * 255));
 			
-				$style .= '.'.$this->data[1]['location'][$i].'{fill: rgb(255,'.round($color).','.round($color).');} ';	
+				$style .= '.'.$this->keys[$i].'{fill: rgb(255,'.round($color).','.round($color).');} ';	
 			}
 			
 		$style .='</style>';

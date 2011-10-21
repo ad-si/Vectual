@@ -4,70 +4,86 @@ class CoordinateSystem extends VectualGraph{
 
 	protected $density_y = 0.1; 
 	protected $density_x = 0.2;
-	protected $this->coordinate;
 	
-	function __construct($v){
-		$this->coordinate = '';	
+	protected $xRange;
+	protected $yRange;
+	
+	protected $var;
+	
+	
+	function __construct($data, $config){
+		parent::__construct($data, $config);
+		
+		$this->xRange = $this->maxKey - $this->minKey;
+		$this->yRange = $this->maxValue - $this->minValue;
+			
 	}
 	
-	private function compileCoordinatesystem(){
-			
-		$range_y = $this->maxValue - $this->minValue;
-		$range_x = $this->maxKey - $this->minKey;
+	protected function getCoordinatesystem(){
+		return $this->compileCoordinatesystem;
+	}
+	
+	protected function compileCoordinatesystem(){
 				
-		if(!empty($this->toolbar)) $translate_y = $this->height + 40; //space for toolbar
-		else $translate_y = $this->height;
+		((!empty($this->toolbar)) ? ($translate_y = $this->height + 40) : ($translate_y = $this->height));
 		
-		$this->coordinate .=
+		$var =
 		'<g transform="translate('.($this->graphWidth * 0.08).', '.$translate_y.')">';
 		
-		$this->coordinate .= '</g>';
+		$var .= $this->horizontalLoop();
+		$var .= $this->verticalLoop();
+		
+		$var .= 
+		'</g>';
 
-		return $this->coordinate;
-	
+		return $var;
 	}
 	
 	private function horizontalLoop(){	
 						
 		for($i=0; $i<$this->numValues; $i++){ //horizontal loop
 			
-			$this->coordinate .= 
+			$var .= 
 			'<line class="'; 
 			
-			(($i==0) $this->coordinate .= 'vectual_coordinate_axis_y'; : $this->coordinate .= 'vectual_coordinate_lines_y';);
+			(($i==0) ? $var .= 'vectual_coordinate_axis_y' : $var .= 'vectual_coordinate_lines_y');
 			
-			$this->coordinate .=
+			$var .=
 			'" x1="'.(($this->graphWidth/$this->numValues)*$i).'" y1="5"
 			x2="'.(($this->graphWidth/$this->numValues)*$i).'" y2="'.(-$this->graphHeight).'" />';
 			
-			$this->coordinate .=
+			$var .=
 			'<text class="vectual_coordinate_labels_x" transform="rotate(40 '.(($this->graphWidth/$this->numValues) * $i).', 10)" 
 				x="'.(($this->graphWidth/$this->numValues) * $i).'" y="10">'.
 					$this->data[1]["time"][$i].
 			'</text>';
-		}	
+		}
+		
+		return $var;
 	}
 	
 	private function verticalLoop(){
 		
-		for($i=0; $i<=($range_y * $density_y); $i++){ //vertical loop
+		for($i=0; $i<=($this->yRange * $this->density_y); $i++){ //vertical loop
 
-			$this->coordinate .= 
+			$var .= 
 			'<line class="'; 
 			
-			(($i==0) ? $this->coordinate .= 'vectual_coordinate_axis_x'; : $this->coordinate .= 'vectual_coordinate_lines_x';);
+			(($i==0) ? $var .= 'vectual_coordinate_axis_x' : $var .= 'vectual_coordinate_lines_x');
 			
-			$this->coordinate .=
-			'" x1="-5" y1="'.(-($this->graphHeight/$range_y)*($i/$density_y)).'"
-			x2="'.$this->graphWidth .'" y2="'.(-($this->graphHeight/$range_y)*($i/$density_y)).'" 
+			$var .=
+			'" x1="-5" y1="'.(-($this->graphHeight/$this->yRange)*($i/$this->density_y)).'"
+			x2="'.$this->graphWidth .'" y2="'.(-($this->graphHeight/$this->yRange)*($i/$this->density_y)).'" 
 			/>';
 			
-			$this->coordinate .=
-			'<text class="vectual_coordinate_labels_y" x="'.(-$v['width']*0.05).'" y="'.(-($this->graphHeight/$range_y)*($i/$density_y)).'" >
-				'.(($i/$density_y) + $this->minValue).'
+			$var .=
+			'<text class="vectual_coordinate_labels_y" x="'.(-$v['width']*0.05).'" y="'.(-($this->graphHeight/$this->yRange)*($i/$this->density_y)).'" >
+				'.(($i/$this->density_y) + $this->minValue).'
 			</text>';
-		}	
+		}
 		
-	}       	    		
+		return $var;	
+	} 
+}      	    		
 
 ?>

@@ -1,16 +1,8 @@
 <?php
-
-//namespace \vectual;
-
-
-class VectualException extends Exception {
-
-}
-
+//namespace Vectual;
 
 class Vectual {
 
-	protected $svg = '';
 	protected $header = '';
 	protected $toolbarObjects = array();
 	
@@ -18,8 +10,10 @@ class Vectual {
 	protected $height;
 	protected $type;
 	protected $title;
-	protected $doctype;
+	protected $class;
+	protected $xhtml;
 	protected $standalone;
+	protected $inline;
 	protected $data;
 	protected $config;	
 	
@@ -30,35 +24,78 @@ class Vectual {
 	
 		$this->toolbarObjects = $config['toolbar'];
 		
-		$this->width = $config['width'];
-		$this->height = $config['height'];
-		$this->type = $config['type'];
+		$this->inline = $config['inline'];
+		if($this->inline){
+			$this->width = 3 * $config['lineHeight'];
+			$this->height = $config['lineHeight'];
+		}else{
+			$this->width = $config['width'];
+			$this->height = $config['height'];
+		}
+		
 		$this->title = $config['title'];
-		$this->doctype = $config['doctype'];
+		$this->xhtml = $config['xhtml'];
 		$this->standalone = $config['standalone'];
 		$this->data = $data;
 		$this->config = $config;
 		
-		
-		$this->header = (($this->doctype == 'xhtml') ? 'xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"' : '');
-		
+		$this->class = (($this->inline) ? 'vectual_inline' : 'vectual');	
 	}
 	
-	private function checkInput(){
+	public function getPiechart(){
+		$this->type = 'pie';
+		return $this->draw();
 	}
 	
-	public function draw() {	
+	public function getBarchart(){
+		$this->type = 'bar';
+		return $this->draw();
+	}
 	
-		if($this->standalone){ 
-			header("Content-type: image/svg+xml");
-			
-			$this->svg = 
+	public function getLinechart(){
+		$this->type = 'line';
+		return $this->draw();
+	}
+	
+	public function getScatterchart(){
+		$this->type = 'scatter';
+		return $this->draw();
+	}
+	
+	public function getTagcloud(){
+		$this->type = 'tagcloud';
+		return $this->draw();
+	}
+	
+	public function getMap(){
+		$this->type = 'map';
+		return $this->draw();
+	}
+	
+	public function getTable(){
+		$this->type = 'table';
+		return $this->draw();
+	}
+	
+	public function getSparkline(){
+		$this->type = 'sparkline';
+		return $this->draw();
+	}
+	
+	
+
+	
+	private function draw(){
+		$svg = '';
+	
+		if($this->standalone){		
+			$svg .= 
 			'<?xml version="1.0" standalone="no"?>
 			<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
 		}
 	
-		$this->svg = 
-		'<svg '.$this->header.' class="vectual" width="'.$this->width.'" height="'.$this->height.'" >'.
+		$svg .=
+		'<svg '.$this->getHeader().' class="'.$this->class.'" width="'.$this->width.'" height="'.$this->height.'" >'.
 			$this->getDefs().
 			$this->getStyle(). 
 			$this->getBackground(). 
@@ -66,10 +103,20 @@ class Vectual {
 			$this->getGraph(). 
 		'</svg>'; 
 		
-		return $this->svg;
+		return $svg;
 	}
 	
 	
+	private function getHeader(){
+		if($this->xhtml || $this->standalone){
+			$header = 'xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"';
+		}else{
+			$header = '';
+		}
+		
+		return $header;
+	}
+
 	private function getGraph() {
 	
 		switch($this->type){
@@ -77,20 +124,37 @@ class Vectual {
 				$new = new Pie($this->data, $this->config);
 				return $new->getPie();
 				break;
-			
 			case 'map':
 				$new = new Map($this->data, $this->config);
 				return $new->getMap();
 				break;
-			case 'Bar':
+			case 'bar':
 				$new = new Bar($this->data, $this->config);
-				return $new->getBar();
+				return $new->getBargraph();
+				break;
+			case 'line':
+				$new = new Line($this->data, $this->config);
+				return $new->getLinegraph();
+				break;
+			case 'table':
+				$new = new Table($this->data, $this->config);
+				return $new->getTable();
+				break;
+			case 'sparkline':
+				$new = new Sparkline($this->data, $this->config);
+				return $new->getSparkline();
+				break;
+			case 'scatter':
+				$new = new Scatter($this->data, $this->config);
+				return $new->getScatter();
+				break;
+			case 'tagcloud':
+				$new = new Tagcloud($this->data, $this->config);
+				return $new->getTagcloud();
 				break;
 		}
 	
-		
-		
-/*		
+		/*		
 		$new = new Pie($this->data, $this->config);
 			
 		return $new->getPie();
@@ -102,8 +166,7 @@ class Vectual {
 		newGraph($type,$data) {
 			return new $type($data);
 		}
-*/
-
+		*/
 	}	
 	
 
@@ -127,9 +190,13 @@ class Vectual {
 	}
 	
 	private function getStyle(){
-		$style = '<style>';
-		$style .= (($this->standalone) ? file_get_contents("vectual.css") : file_get_contents("/var/www/vectual-dev/class/vectual.css"));
-		$style .= '</style>';
+		$style = '';
+		
+		if($this->standalone){
+			$style .= '<style>';
+			$style .= file_get_contents('vectual.css', true);
+			$style .= '</style>';
+		}
 		
 		return $style;
 	}
@@ -141,8 +208,8 @@ class Vectual {
 		'<rect class="vectual_background" x="0" y="0" rx="14" ry="14" height="'.$this->height.'" width="'.$this->width.'" />';
 		
 		$background .=
-		'<text class="vectual_title" x="'.($this->width * 0.03).'" y="'.($this->height * 0.07).'" 
-			style="font-height:'.($this->height * $this->width * 0.00009).'" >
+		'<text class="vectual_title" x="'.(20).'" y="'.(10 + $this->height * 0.05).'" 
+			style="font-size:'.($this->height * 0.05).'px" >
 				'.$this->title.'
 		</text>';
 		
@@ -152,10 +219,9 @@ class Vectual {
 	
 	private function getToolbar(){
 			
-		$toolbar ='
-		<g class="toolbar_container" transform="translate('.($this->width - 120).', '.($this->width * 0.02).') scale(0.7)">';
-		 
-		 
+		$toolbar =
+		'<g class="toolbar_container" transform="translate('.($this->width - 120).', '.($this->width * 0.02).') scale(0.7)">';
+		  
 			if(in_array('save', $this->toolbarObjects)){
 				$toolbar .=
 				'<g id="tb_save" class="tb_icon" >'.

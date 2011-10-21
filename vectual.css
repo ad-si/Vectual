@@ -2,7 +2,6 @@
  
 svg.vectual {
 	display: inline-block;
- 	margin: 10px;
 }
 
 
@@ -13,6 +12,8 @@ svg.vectual {
 }
 
 .vectual_title {
+	font-size: 20px;
+	font-family: Arial;
 	fill: white;
 }
 
@@ -70,12 +71,13 @@ svg.vectual_inline {
 
 
 .vectual_coordinate_labels_x {
-	font-size: 12px;
+	font-size: 10px;
 	line-height: 12px,
 	font-family: Arial;
 	font-style:;
 	font-variant:;
 	font-weight: 100;
+	/*stroke: white;*/
 	fill: white;
 }
 
@@ -96,6 +98,7 @@ svg.vectual_inline {
 	font-style:;
 	font-variant:;
 	font-weight: 100;
+	/*stroke: white;*/
 	fill: white;
 }
 
