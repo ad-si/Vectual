@@ -1,6 +1,6 @@
 <?php
 
-class VectualGraph{		
+abstract class VectualGraph{		
 	
 	protected $data;
 	
