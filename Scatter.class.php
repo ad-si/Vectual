@@ -1,6 +1,8 @@
 <?php
+
+// NOT UPDATED YET
 			
-class scatter extends CoordinateSystem{
+class Scatter extends CoordinateSystem{
 
 	public function getScatter(){
 		

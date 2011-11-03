@@ -1,13 +1,13 @@
 <?php
 
-abstract class VectualGraph{		
-	
+abstract class VectualGraph extends SVG{
 	protected $data;
 	
 	protected $width;
 	protected $height;
 	
-	protected $inline;
+	protected $toolbar;
+	protected $animations;
 
 	protected $graphWidth;
 	protected $graphHeight;
@@ -15,8 +15,10 @@ abstract class VectualGraph{
 	protected $totalValue;
 	protected $numKeys;
 	protected $maxValue;
+	protected $maxValueIndex;
 	protected $maxKey;
 	protected $minValue;
+	protected $minValueIndex;
 	protected $minKey;
 	protected $numValues;
 	protected $sortedArray = array();
@@ -30,32 +32,25 @@ abstract class VectualGraph{
 	
 	protected $color = array();
 		
-	function __construct($data, $config) {
-		
+	function __construct($data, $config){
+
 		$this->data = $data;
-	
-		$this->inline = $config['inline'];
-		
-		if($this->inline){
-			$this->width = 3 * $config['lineHeight'];
-			$this->height = $config['lineHeight'];
-		}else{
-			$this->width = $config['width'];
-			$this->height = $config['height'];
-		}
+
+		$this->toolbar = $config['toolbar'];
+		$this->animations = $config['animations'];
+		$this->width = $config['width'];
+		$this->height = $config['height'];
 		
 		$this->graphWidth = ($this->width  - 50);
 		$this->graphHeight = ($this->height - 100);
-		
-		$this->inline = $config['inline'];
 		
 		$this->totalValue = array_sum($data);
 		$this->values = array_values($data);
 		$this->numValues = count($data);
 		$this->minValue = min(array_values($data));
-		$this->minValueIndex= array_search($this->minValue, array_values($data));
+		$this->minValueIndex = array_search($this->minValue, array_values($data));
 		$this->maxValue = max(array_values($data));
-		$this->maxValueIndex= array_search($this->maxValue, array_values($data));
+		$this->maxValueIndex = array_search($this->maxValue, array_values($data));
 		$this->keys = array_keys($data);
 		$this->numKeys = count($data);
 		$this->minKey = array_search($this->minValue, array_values($data));

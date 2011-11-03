@@ -2,6 +2,7 @@
  
 svg.vectual {
 	display: inline-block;
+	margin: 0;
 }
 
 
@@ -116,7 +117,6 @@ svg.vectual_inline {
 /*---------------------------------------------LINE----------------------------------------------*/
 
 .vectual_line_line {
-	opacity: 0;
 	fill: none;
 	stroke:rgb(96,255,0);
 	stroke-width:3;
@@ -125,7 +125,6 @@ svg.vectual_inline {
 
 .vectual_line_dot {
 	fill: rgb(96,255,0);
-	opacity:0;
 	stroke: rgb(96,255,0);
 	stroke-width: 0;
 }
@@ -135,7 +134,6 @@ svg.vectual_inline {
 .vectual_scatter_dot {
 	fill:rgb(255,0,0);
 	stroke: rgb(255,0,0);
-	opacity: 0;
 }
 
 /*-------------------------------------------TAGCLOUD--------------------------------------------*/

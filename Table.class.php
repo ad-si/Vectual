@@ -2,38 +2,35 @@
 
 class Table extends VectualGraph{
 
-	function __construct($data, $config){	
-		parent::__construct($data, $config);
+	private $table;
+
+	function __construct($data, $config, $svg){	
+		parent::__construct($data, $config, $svg);
+		
+		$this->table = $svg->addChild('foreignObject');
 	}
 		
-	public function getTable(){
-		return $this->compileTable();
-	}	
+	public function setTable(){
 	
-	private function compileTable(){
-		$table = 
-		'<foreignObject x="0" y="0" width="100%" height="400%" transform="translate(20,25)">	     
-			<table class="vectual_table">';	
+		$this->table->addAttribute('x','0');
+		$this->table->addAttribute('y','0');
+		$this->table->addAttribute('width','100%');
+		$this->table->addAttribute('height','100%');
+		$this->table->addAttribute('transform','translate(20,25)');
 		
-			 $table .= 
-			 '<tr>
-			    <th>'.$this->label[2].'</th>
-			    <th>'.$this->label[1].'</th>
-			 </tr>';
-			 
-		for($i=($this->numValues - 1); $i>=0; $i--){
-			$table .= 
-			'<tr>		 
-			   	 <td>'.$this->sortedKeys[$i].'</td>
-			  	 <td>'.$this->sortedValues[$i].'</td>
-			</tr>';
-		}
-			 
-			$table .= 
-			'</table>
-	    </foreignObject>';
-
-		return $table;	
+		
+		$html = $this->table->addChild('table');
+			$html->addAttribute('class','vectual_table');
+			
+			$th = $html->addChild('tr');
+				$th->addChild('th', $this->label[2]);
+				$th->addChild('th', $this->label[1]);
+				
+				for($i=($this->numValues - 1); $i>=0; $i--){
+					$td = $html->addChild('tr');
+						$td->addChild('td', $this->sortedKeys[$i]);
+						$td->addChild('td', $this->sortedValues[$i]);
+				}
 	}		
 }
 

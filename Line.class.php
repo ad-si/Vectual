@@ -2,164 +2,156 @@
 
 class Line extends VectualGraph{
 
-	protected $density_y = 0.1; 
-	protected $density_x = 0.2;
+	private $line;
+	private $group;
 	
-	protected $xRange;
-	protected $yRange;
+	private $yDensity = 0.1; 
+	private $xDensity = 0.2;
 
-	function __construct($data, $config){
-		parent::__construct($data, $config);	
+	function __construct($data, $config, $svg){
+		parent::__construct($data, $config, $svg);
+		
+		$this->line = $svg->addChild('g');		
 	}
 	
-	public function getLinegraph(){
-		
-		((!empty($this->toolbar)) ? ($translate_y = $this->height) : ($translate_y = $this->height-40));
-		
-		$var =
-		'<g transform="translate('.($this->graphWidth * 0.08).', '.$translate_y.')">';
-		
-		$var .= $this->getCoordinatesystem();		
-		$var .= $this->getLine();	
-		
-		$var .= '</g>';
-		
-		return $var;	
-	}
-	
-	public function getLine(){
-		$var = '';
-		
-			$var .= $this->buildLine();
-			$var .= $this->getDots();			
+	public function setLinegraph(){
 			
-		return $var;
+		!empty($this->toolbar) ? $yTranslate = ($this->height - 40) : $yTranslate = ($this->height - 40);
+		
+		$this->line->addAttribute('transform','translate('.($this->graphWidth * 0.08).', '.$yTranslate.')');
+		
+		$this->setCoordinatesystem();		
+		$this->buildLine();
+		$this->setDots();		
 	}
-	
-	public function getCoordinatesystem(){
-		$var = $this->horizontalLoop();
-		$var .= $this->verticalLoop();
-
-		return $var;
-	}
-	
 	
 	private function buildLine(){
-		
-		/*dropshadow for safari
-		$line =
-			'<polyline transform="translate(2,2)" points="';					
-					for($i=0; $i < $num; $i++){$line .=''.($i * ($width/$num)).',0 ';}					
-				$line .=
-				'" style="opacity: 0; fill: none; stroke:black; stroke-width:3; stroke-linejoin: round;" >'.
-				
-				'<animate attributeName="points" to="';			
-					for($i=0; $i < $num; $i++){			
-							$line .=''.($i * ($width/$num)).','.((-$v["data"][1]["value"][$i]+$min_value) * ($height/$range_y)).' ';}		
-				$line .=
-				'" '.
-				'begin="0" dur="0.8s" fill="freeze" />
-				<animate attributeName="opacity" begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/>'.
-				
-			'</polyline>';*/
-		
-
-		$line =
-		'<g filter="url(#dropshadow)">'.
-		'<polyline class="vectual_line_line" points="';								
-				
-			for($i=0; $i < $this->numValues; $i++){
-				 $line .=''.($i * ($this->graphWidth/$this->numValues)).',0 ';
-			}					
-				
-			$line .='" >'.
-				
-			'<animate attributeName="points" to="';			
 			
-				for($i=0; $i < $this->numValues; $i++){
-					$line .=''.($i * ($this->graphWidth/$this->numValues)).','.((-$this->values[$i]+$this->minValue) * ($this->graphHeight/$this->yRange)).' ';
-				}		
-				
-			$line .='" begin="0" dur="0.8s" fill="freeze" />
-					
-			<animate attributeName="opacity" begin="0s" to="1" dur="0.8s" additive="replace" fill="freeze"/>'.
-			
-		'</polyline>';
+		$points = '';
+		for($i=0; $i < $this->numValues; $i++){
+				 $points .= ($i * ($this->graphWidth/$this->numValues)).',0 ';
+		}
 		
-		return $line;
+		$pointsto = '';
+		for($i=0; $i < $this->numValues; $i++){
+			$pointsto .= ($i * ($this->graphWidth/$this->numValues)).','.((-$this->values[$i]+$this->minValue) * ($this->graphHeight/$this->yRange)).' ';
+		}	
+	
+		$this->group = $this->line->addChild('g');
+			$this->group->addAttribute('filter', 'url(#dropshadow)');
+			
+			$line = $this->group->addChild('polyline');
+				$line->addAttribute('class', 'vectual_line_line');
+				$line->addAttribute('points', $pointsto);
+				
+				if($this->animations){
+					$a = $line->addChild('animate');
+						$a->addAttribute('attributeName','points');
+						$a->addAttribute('from', $points);
+						$a->addAttribute('to', $pointsto);
+						$a->addAttribute('begin','0s');
+						$a->addAttribute('dur','0.8s');
+						$a->addAttribute('fill','freeze');
+						
+					$b = $line->addChild('animate');
+						$b->addAttribute('attributeName','opacity');
+						$b->addAttribute('begin', '0s');
+						$b->addAttribute('from','0');
+						$b->addAttribute('to','1');
+						$b->addAttribute('dur','0.8s');
+						$b->addAttribute('additive','replace');
+						$b->addAttribute('fill','freeze');
+				}
 	}
 	
-	private function getDots(){
-		$dots = '';
+	private function setDots(){
 		
 		for($i=0; $i < $this->numValues; $i++){
-			
-				$dots .=
-				'<circle class="vectual_line_dot" r="4" 
-					cx="'.($i * ($this->graphWidth/$this->numValues)).'"
-					cy="'.((-$this->values[$i]+$this->minValue) * ($this->graphHeight/$this->yRange)).'" >'.
-					
-					'<animate attributeName="opacity" begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/>'.
-						
-					'<animate attributeName="r" to="8" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" />'.
-					'<animate attributeName="r" to="4" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" />'.
-					
-					'<title>'.$this->keys[$i].':  '.$this->values[$i].'</title>'.
-					
-				'</circle>';			
-		}
 		
-		return $dots;
+			$circle = $this->group->addChild('circle');
+				$circle->addAttribute('class','vectual_line_dot');
+				$circle->addAttribute('r','4');
+				$circle->addAttribute('cx', $i * ($this->graphWidth/$this->numValues));
+				$circle->addAttribute('cy', (-$this->values[$i]+$this->minValue) * ($this->graphHeight/$this->yRange));
+				
+				$title = $circle->addChild('title', $this->keys[$i].':  '.$this->values[$i]);
+				
+				
+				if($this->animations){
+					$a = $circle->addChild('animate');
+						$a->addAttribute('attributeName','opacity');
+						$a->addAttribute('begin','0s');
+						$a->addAttribute('values','0;0;1');
+						$a->addAttribute('keyTimes','0.0;0.8;1');
+						$a->addAttribute('dur','1s');
+						$a->addAttribute('additive','replace');
+						$a->addAttribute('fill','freeze');
+						
+					$b = $circle->addChild('animate');
+						$b->addAttribute('attributeName','r');
+						$b->addAttribute('to','8');
+						$b->addAttribute('dur','0.1s');
+						$b->addAttribute('begin','mouseover');
+						$b->addAttribute('additive','replace');
+						$b->addAttribute('fill','freeze');	
+						
+					$c = $circle->addChild('animate');
+						$c->addAttribute('attributeName','r');
+						$c->addAttribute('to','4');
+						$c->addAttribute('dur','0.2s');
+						$c->addAttribute('begin','mouseout');
+						$c->addAttribute('additive','replace');
+						$c->addAttribute('fill','freeze');
+				}
+		}
 	}
 	
-	private function horizontalLoop(){	
+	public function setCoordinatesystem(){
+		$this->horizontalLoop();
+		$this->verticalLoop();
+	}
 	
-		$var = '';
-						
+	private function horizontalLoop(){
+	
 		for($i=0; $i<$this->numValues; $i++){
 			
-			$var .= 
-			'<line class="'; 
+			($i==0) ? $var = 'vectual_coordinate_axis_y' : $var = 'vectual_coordinate_lines_y';
 			
-			(($i==0) ? $var .= 'vectual_coordinate_axis_y' : $var .= 'vectual_coordinate_lines_y');
-			
-			$var .=
-			'" x1="'.(($this->graphWidth/$this->numValues)*$i).'" y1="5"
-			x2="'.(($this->graphWidth/$this->numValues)*$i).'" y2="'.(-$this->graphHeight).'" />';
-			
-			$var .=
-			'<text class="vectual_coordinate_labels_x" transform="rotate(40 '.(($this->graphWidth/$this->numValues) * $i).', 10)" 
-				x="'.(($this->graphWidth/$this->numValues) * $i).'" y="10">'.
-					$this->keys[$i].
-			'</text>';
+			$line = $this->line->addChild('line');
+				$line->addAttribute('class', $var);
+				$line->addAttribute('x1', ($this->graphWidth/$this->numValues)*$i);
+				$line->addAttribute('y1','5');
+				$line->addAttribute('x2', ($this->graphWidth/$this->numValues)*$i);
+				$line->addAttribute('y2', -$this->graphHeight);
+				
+			$text = $this->line->addChild('text', $this->keys[$i]);
+				$text->addAttribute('class','vectual_coordinate_labels_x');
+				$text->addAttribute('transform','rotate(40 '.(($this->graphWidth/$this->numValues) * $i).', 10)');
+				$text->addAttribute('x', (($this->graphWidth/$this->numValues) * $i));
+				$text->addAttribute('y','10');
+														
 		}
-		
-		return $var;
 	}
 	
 	private function verticalLoop(){
 	
-		$var = '';
-		
-		for($i=0; $i<=($this->yRange * $this->density_y); $i++){
-
-			$var .= 
-			'<line class="'; 
+		for($i=0; $i<=($this->yRange * $this->yDensity); $i++){
 			
-			(($i==0) ? $var .= 'vectual_coordinate_axis_x' : $var .= 'vectual_coordinate_lines_x');
+			($i==0) ? $var = 'vectual_coordinate_axis_x' : $var = 'vectual_coordinate_lines_x';
 			
-			$var .=
-			'" x1="-5" y1="'.(-($this->graphHeight/$this->yRange)*($i/$this->density_y)).'"
-			x2="'.$this->graphWidth .'" y2="'.(-($this->graphHeight/$this->yRange)*($i/$this->density_y)).'" 
-			/>';
-			
-			$var .=
-			'<text class="vectual_coordinate_labels_y" x="'.(-$this->graphWidth * 0.05).'" y="'.(-($this->graphHeight/$this->yRange)*($i/$this->density_y)).'" >
-				'.(($i/$this->density_y) + $this->minValue).'
-			</text>';
+			$line = $this->line->addChild('line');
+				$line->addAttribute('class', $var);
+				$line->addAttribute('x1', '-5');
+				$line->addAttribute('y1', -($this->graphHeight/$this->yRange)*($i/$this->yDensity));
+				$line->addAttribute('x2', $this->graphWidth);
+				$line->addAttribute('y2', -($this->graphHeight/$this->yRange)*($i/$this->yDensity));
+				
+			$text = $this->line->addChild('text', ($i/$this->yDensity) + $this->minValue);
+				$text->addAttribute('class','vectual_coordinate_labels_y');
+				$text->addAttribute('x', -$this->graphWidth * 0.05);
+				$text->addAttribute('y', -($this->graphHeight/$this->yRange)*($i/$this->yDensity));
+														
 		}
-		
-		return $var;	
 	} 
 }
 

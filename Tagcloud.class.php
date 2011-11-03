@@ -1,5 +1,7 @@
 <?php
 
+// NOT UPDATED YET
+
 class Tagcloud extends VectualGraph{
 
 
