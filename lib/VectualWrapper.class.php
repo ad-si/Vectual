@@ -54,7 +54,7 @@ class VectualWrapper extends SVG {
 				<filter id="dropshadow">
 					<feGaussianBlur in="SourceAlpha" stdDeviation="0.5" result="blur"/>
 					<feOffset in="blur" dx="2" dy="2" result="offsetBlur"/>
-					<feComposite in="SourceGraphic" result="origin" />
+					<feComposite in="SourceGraphic" in2="offsetBlur" result="origin" />
 				</filter>
 			</defs>');
 			

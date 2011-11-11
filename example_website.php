@@ -84,9 +84,9 @@ $mapData = array(
 	"za" 	=> "65"
 );
 
-//Specify the path to the vectual class directory
+//Specify the path to the vectual lib directory
 function __autoload($class){
-	require_once($class.'.class.php');
+	require_once('lib/'.$class.'.class.php');
 }
 
 //Create an Vectual instance
