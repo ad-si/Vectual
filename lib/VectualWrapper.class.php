@@ -71,7 +71,9 @@ class VectualWrapper extends SVG {
 	
 	public function setStyle(){
 	
-		$css = file_get_contents('vectual.css', true);
+		
+	
+		$css = file_get_contents(__DIR__.'/../vectual.css', true);
 	
 		$css = str_replace("\r", "", $css);
 		$css = str_replace("\t", "", $css);

@@ -53,10 +53,10 @@ abstract class VectualGraph extends SVG{
 		$this->maxValueIndex = array_search($this->maxValue, array_values($data));
 		$this->keys = array_keys($data);
 		$this->numKeys = count($data);
-		$this->minKey = array_search($this->minValue, array_values($data));
-		$this->maxKey = array_search($this->maxValue, array_values($data));	
+		$this->minKey = min(array_keys($data));;
+		$this->maxKey = max(array_keys($data));
 		$this->sortedArray = $data;
-			asort($this->sortedArray); 
+			asort($this->sortedArray);
 		$this->sortedValues = array_values($this->sortedArray); 
 		$this->sortedKeys = array_keys($this->sortedArray); 
 		

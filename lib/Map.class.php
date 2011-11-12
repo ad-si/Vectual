@@ -9,7 +9,7 @@ class Map extends VectualGraph{
 		
 		$this->svg = $svg;
 		
-		$this->map = new SimpleXMLElement(file_get_contents('map.txt', true));
+		$this->map = new SimpleXMLElement(file_get_contents(__DIR__.'/../map.txt', true));
 		
 	}
 
