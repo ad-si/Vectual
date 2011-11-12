@@ -5,13 +5,13 @@ class Line extends VectualGraph{
 	private $line;
 	private $group;
 	
-	private $yDensity = 0.1; 
-	private $xDensity = 0.2;
+	private $yGridSpacing = 2; //px
+	private $xGridSpacing = 0.2; //px
 
 	function __construct($data, $config, $svg){
 		parent::__construct($data, $config, $svg);
 		
-		$this->line = $svg->addChild('g');		
+		$this->line = $svg->addChild('g');	
 	}
 	
 	public function setLinegraph(){
@@ -20,7 +20,9 @@ class Line extends VectualGraph{
 		
 		$this->line->addAttribute('transform','translate('.($this->graphWidth * 0.08).', '.$yTranslate.')');
 		
-		$this->setCoordinatesystem();		
+		$this->setCoordinatesystem();	
+		
+		$this->group = $this->line->addChild('g');	
 		$this->buildLine();
 		$this->setDots();		
 	}
@@ -34,10 +36,11 @@ class Line extends VectualGraph{
 		
 		$pointsto = '';
 		for($i=0; $i < $this->numValues; $i++){
-			$pointsto .= ($i * ($this->graphWidth/$this->numValues)).','.((-$this->values[$i]+$this->minValue) * ($this->graphHeight/$this->yRange)).' ';
+			$pointsto .= 
+			($i * ($this->graphWidth/$this->numValues)).','. //x
+			((-$this->values[$i]+$this->minValue) * ($this->graphHeight/$this->yRange)).' '; //y
 		}	
 	
-		$this->group = $this->line->addChild('g');
 			$this->group->addAttribute('filter', 'url(#dropshadow)');
 			
 			$line = $this->group->addChild('polyline');
@@ -135,21 +138,21 @@ class Line extends VectualGraph{
 	
 	private function verticalLoop(){
 	
-		for($i=0; $i<=($this->yRange * $this->yDensity); $i++){
+		for($i=0; $i<=($this->graphHeight / $this->yGridSpacing); $i++){
 			
 			($i==0) ? $var = 'vectual_coordinate_axis_x' : $var = 'vectual_coordinate_lines_x';
 			
 			$line = $this->line->addChild('line');
 				$line->addAttribute('class', $var);
 				$line->addAttribute('x1', '-5');
-				$line->addAttribute('y1', -($this->graphHeight/$this->yRange)*($i/$this->yDensity));
+				$line->addAttribute('y1', -($i * $this->yGridSpacing));
 				$line->addAttribute('x2', $this->graphWidth);
-				$line->addAttribute('y2', -($this->graphHeight/$this->yRange)*($i/$this->yDensity));
+				$line->addAttribute('y2', -($i * $this->yGridSpacing));
 				
-			$text = $this->line->addChild('text', ($i/$this->yDensity) + $this->minValue);
+			$text = $this->line->addChild('text', $this->minValue + ($this->yRange/$this->graphHeight) * $i * $this->yGridSpacing);
 				$text->addAttribute('class','vectual_coordinate_labels_y');
 				$text->addAttribute('x', -$this->graphWidth * 0.05);
-				$text->addAttribute('y', -($this->graphHeight/$this->yRange)*($i/$this->yDensity));
+				$text->addAttribute('y', -($i * $this->yGridSpacing));
 														
 		}
 	} 
