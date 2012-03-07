@@ -1,46 +1,50 @@
 <!doctype html>
 <html>
-	<head>
-		<title>vectual.js</title>
-		<script type="text/javascript" src="js/vectual.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/vectual.css"/>
-	</head>
-	<body>
-		<h1>vectual.js</h1>
+<head>
+	<title>vectual.js</title>
+	<script type="text/javascript" src="js/vectual.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/vectual.css"/>
+</head>
+<body>
+<h1>vectual.js</h1>
 
-		<div id="demo"></div>
+<div id="demo"></div>
 
-		<script>
-			var obj = {
-				"title":"Fruit Consumption",
-				"id":"demo",
-				"height":300,
-				"width":500,
-				"animations": true,
-				"inline": false,
-				"data":{
-					"Apple":50,
-					"Plum":27,
-					"Peach":11,
-					"Lime":2,
-					"Cherry":13,
-					"Pineapple":69,
-					"Melon":26,
-					"Grapefruit":35,
-					"Strawberry":56,
-					"Orange":34,
-					"Kiwi":65
-				},
-				"callback":function () {
-					alert('test');
-				}
-			};
+<script>
 
-			var test = vectual(obj);
-				test.barChart();
-				//test.pieChart();
+	var obj, test;
+
+	obj = {
+		"title":"Fruit Consumption",
+		"id":"demo",
+		"height":300,
+		"width":500,
+		"animations":true,
+		"inline":false,
+		"data":{
+			"Apple":50,
+			"Plum":27,
+			"Peach":11,
+			"Lime":2,
+			"Cherry":13,
+			"Pineapple":69,
+			"Melon":26,
+			"Grapefruit":35,
+			"Strawberry":56,
+			"Orange":34,
+			"Kiwi":65
+		},
+		"callback":function () {
+			alert('test');
+		}
+	};
+
+	test = vectual(obj);
+	//test.barChart();
+	//test.pieChart();
+	test.lineChart();
 
 
-		</script>
-	</body>
+</script>
+</body>
 </html>

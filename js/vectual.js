@@ -117,6 +117,9 @@
             pieChart:function () {
                 return new Pie();
             },
+            lineChart:function () {
+                return new Line();
+            },
             barChart:function () {
                 return new Bar();
             }
@@ -305,14 +308,14 @@
             text,
             graphHeight,
             graphWidth,
-            coorSysHeight,
-            coorSysWidth;
+            coSysHeight,
+            coSysWidth;
 
         graphWidth = c.width * 0.95;
         graphHeight = c.height * 0.8;
 
-        coorSysWidth = c.width * 0.85;
-        coorSysHeight = c.height * 0.6;
+        coSysWidth = c.width * 0.85;
+        coSysHeight = c.height * 0.6;
 
         bars = svg.appendChild(document.createElementNS(svgNS, 'g'));
         bars.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight * 1.0) + ')');
@@ -329,10 +332,10 @@
             var bar = bars.appendChild(document.createElementNS(svgNS, 'rect'));
             //bar.setAttribute('filter', 'url(#dropshadow)');
             bar.setAttribute('class', 'vectual_bar_bar');
-            bar.setAttribute('x', (i * (coorSysWidth / c.size)));
+            bar.setAttribute('x', (i * (coSysWidth / c.size)));
             bar.setAttribute('y', -(c.values[i] - c.min.val) * (graphHeight / yRange));
-            bar.setAttribute('height', (c.values[i] - c.min.val) * (coorSysHeight / yRange));
-            bar.setAttribute('width', (0.7 * (coorSysWidth / c.size)));
+            bar.setAttribute('height', (c.values[i] - c.min.val) * (coSysHeight / yRange));
+            bar.setAttribute('width', (0.7 * (coSysWidth / c.size)));
 
             //title = bar.appendChild(document.createElementNS(svgNS, 'title', c.keys[i] + ':  ' + c.values[i]));
 
@@ -340,7 +343,7 @@
                 a = bar.appendChild(document.createElementNS(svgNS, 'animate'));
                 a.setAttribute('attributeName', 'height');
                 a.setAttribute('from', '0');
-                a.setAttribute('to', (c.values[i] - c.min.val) * (coorSysHeight / yRange));
+                a.setAttribute('to', (c.values[i] - c.min.val) * (coSysHeight / yRange));
                 a.setAttribute('begin', '0s');
                 a.setAttribute('dur', '1s');
                 a.setAttribute('fill', 'freeze');
@@ -348,7 +351,7 @@
                 b = bar.appendChild(document.createElementNS(svgNS, 'animate'));
                 b.setAttribute('attributeName', 'y');
                 b.setAttribute('from', '0');
-                b.setAttribute('to', -(c.values[i] - c.min.val) * (coorSysHeight / yRange));
+                b.setAttribute('to', -(c.values[i] - c.min.val) * (coSysHeight / yRange));
                 b.setAttribute('begin', '0s');
                 b.setAttribute('dur', '1s');
                 b.setAttribute('fill', 'freeze');
@@ -390,17 +393,17 @@
 
                 line = bars.appendChild(document.createElementNS(svgNS, 'line'));
                 line.setAttribute('class', cssClass);
-                line.setAttribute('x1', (coorSysWidth / c.size) * i);
+                line.setAttribute('x1', (coSysWidth / c.size) * i);
                 line.setAttribute('y1', '5');
-                line.setAttribute('x2', (coorSysWidth / c.size) * i);
-                line.setAttribute('y2', -coorSysHeight);
+                line.setAttribute('x2', (coSysWidth / c.size) * i);
+                line.setAttribute('y2', -coSysHeight);
 
                 textEl = document.createElementNS(svgNS, 'text');
                 textEl.appendChild(document.createTextNode(c.keys[i]));
                 text = bars.appendChild(textEl);
                 text.setAttribute('class', 'vectual_coordinate_labels_x');
-                text.setAttribute('transform', 'rotate(40 ' + ((coorSysWidth / c.size) * i) + ', 10)');
-                text.setAttribute('x', ((coorSysWidth / c.size) * i));
+                text.setAttribute('transform', 'rotate(40 ' + ((coSysWidth / c.size) * i) + ', 10)');
+                text.setAttribute('x', ((coSysWidth / c.size) * i));
                 text.setAttribute('y', '10');
 
             }
@@ -417,16 +420,186 @@
                 line = bars.appendChild(document.createElementNS(svgNS, 'line'));
                 line.setAttribute('class', styleClass);
                 line.setAttribute('x1', '-5');
-                line.setAttribute('y1', -(coorSysHeight / yRange) * (i / yDensity));
-                line.setAttribute('x2', coorSysWidth);
-                line.setAttribute('y2', -(coorSysHeight / yRange) * (i / yDensity));
+                line.setAttribute('y1', -(coSysHeight / yRange) * (i / yDensity));
+                line.setAttribute('x2', coSysWidth);
+                line.setAttribute('y2', -(coSysHeight / yRange) * (i / yDensity));
 
                 textEl = document.createElementNS(svgNS, 'text');
                 textEl.appendChild(document.createTextNode(i / yDensity + c.min.val));
                 text = bars.appendChild(textEl);
                 text.setAttribute('class', 'vectual_coordinate_labels_y');
-                text.setAttribute('x', -coorSysWidth * 0.05);
-                text.setAttribute('y', -(coorSysHeight / yRange) * (i / yDensity));
+                text.setAttribute('x', -coSysWidth * 0.05);
+                text.setAttribute('y', -(coSysHeight / yRange) * (i / yDensity));
+
+            }
+        }
+    }
+
+    function Line() {
+
+        var yDensity = 0.1,
+            xDensity = 0.2,
+            yRange = (c.max.val - c.min.val),
+            g,
+            graph,
+            text,
+            graphHeight,
+            graphWidth,
+            coSysHeight,
+            coSysWidth;
+
+        graphWidth = c.width * 0.95;
+        graphHeight = c.height * 0.8;
+
+        coSysWidth = c.width * 0.85;
+        coSysHeight = c.height * 0.6;
+
+        graph = svg.appendChild(document.createElementNS(svgNS, 'g'));
+        graph.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight * 1.0) + ')');
+
+        horizontalLoop();
+        verticalLoop();
+        buildLine();
+        setDots();
+
+
+        function buildLine() {
+
+            var points = '',
+                pointsTo = '',
+                line,
+                a,
+                b;
+
+            for (var i = 0; i < c.size; i++) {
+                points += (i * (coSysWidth / c.size)) + ',0 ';
+            }
+
+            for (var j = 0; j < c.size; j++) {
+                pointsTo += (j * (coSysWidth / c.size)) + ',' + ((-c.values[j] + c.min.val) * (coSysHeight / yRange)) + ' ';
+            }
+
+            line = graph.appendChild(document.createElementNS(svgNS, 'polyline'));
+            line.setAttribute('class', 'vectual_line_line');
+            line.setAttribute('points', pointsTo);
+
+
+            if (c.animations) {
+                a = line.appendChild(document.createElementNS(svgNS, 'animate'));
+                a.setAttribute('attributeName', 'points');
+                a.setAttribute('from', points);
+                a.setAttribute('to', pointsTo);
+                a.setAttribute('begin', '0s');
+                a.setAttribute('dur', '1s');
+                a.setAttribute('fill', 'freeze');
+
+                b = line.appendChild(document.createElementNS(svgNS, 'animate'));
+                b.setAttribute('attributeName', 'opacity');
+                b.setAttribute('begin', '0s');
+                b.setAttribute('from', '0');
+                b.setAttribute('to', '1');
+                b.setAttribute('dur', '1s');
+                b.setAttribute('additive', 'replace');
+                b.setAttribute('fill', 'freeze');
+            }
+        }
+
+        function setDots() {
+
+            var circle,
+                a,
+                b,
+                d;
+
+            for (var i = 0; i < c.size; i++) {
+
+                circle = graph.appendChild(document.createElementNS(svgNS, 'circle'));
+                circle.setAttribute('class', 'vectual_line_dot');
+                circle.setAttribute('r', '4');
+                circle.setAttribute('cx', i * (coSysWidth / c.size));
+                circle.setAttribute('cy', (-c.values[i] + c.min.val) * (coSysHeight / yRange));
+
+                var title = circle.appendChild(document.createElementNS(svgNS, 'title'));
+                title.appendChild(document.createTextNode(c.keys[i] + ':  ' + c.values[i]));
+
+
+                if (c.animations) {
+                    a = circle.appendChild(document.createElementNS(svgNS, 'animate'));
+                    a.setAttribute('attributeName', 'opacity');
+                    a.setAttribute('begin', '0s');
+                    a.setAttribute('values', '0;0;1');
+                    a.setAttribute('keyTimes', '0;0.8;1');
+                    a.setAttribute('dur', '1.5s');
+                    a.setAttribute('additive', 'replace');
+                    a.setAttribute('fill', 'freeze');
+
+                    b = circle.appendChild(document.createElementNS(svgNS, 'animate'));
+                    b.setAttribute('attributeName', 'r');
+                    b.setAttribute('to', '8');
+                    b.setAttribute('dur', '0.1s');
+                    b.setAttribute('begin', 'mouseover');
+                    b.setAttribute('additive', 'replace');
+                    b.setAttribute('fill', 'freeze');
+
+                    d = circle.appendChild(document.createElementNS(svgNS, 'animate'));
+                    d.setAttribute('attributeName', 'r');
+                    d.setAttribute('to', '4');
+                    d.setAttribute('dur', '0.2s');
+                    d.setAttribute('begin', 'mouseout');
+                    d.setAttribute('additive', 'replace');
+                    d.setAttribute('fill', 'freeze');
+                }
+            }
+
+        }
+
+        function horizontalLoop() {
+
+            var cssClass, textEl;
+
+            for (var i = 0; i < c.size; i++) {
+
+                (i == 0) ? cssClass = 'vectual_coordinate_axis_y' : cssClass = 'vectual_coordinate_lines_y';
+
+                line = graph.appendChild(document.createElementNS(svgNS, 'line'));
+                line.setAttribute('class', cssClass);
+                line.setAttribute('x1', (coSysWidth / c.size) * i);
+                line.setAttribute('y1', '5');
+                line.setAttribute('x2', (coSysWidth / c.size) * i);
+                line.setAttribute('y2', -coSysHeight);
+
+                textEl = document.createElementNS(svgNS, 'text');
+                textEl.appendChild(document.createTextNode(c.keys[i]));
+                text = graph.appendChild(textEl);
+                text.setAttribute('class', 'vectual_coordinate_labels_x');
+                text.setAttribute('transform', 'rotate(40 ' + ((coSysWidth / c.size) * i) + ', 10)');
+                text.setAttribute('x', ((coSysWidth / c.size) * i));
+                text.setAttribute('y', '10');
+
+            }
+        }
+
+        function verticalLoop() {
+
+            var styleClass, line, text, textEl;
+
+            for (var i = 0; i <= (yRange * yDensity); i++) {
+
+                styleClass = (i == 0) ? 'vectual_coordinate_axis_x' : 'vectual_coordinate_lines_x';
+
+                line = graph.appendChild(document.createElementNS(svgNS, 'line'));
+                line.setAttribute('class', styleClass);
+                line.setAttribute('x1', '-5');
+                line.setAttribute('y1', -(coSysHeight / yRange) * (i / yDensity));
+                line.setAttribute('x2', coSysWidth);
+                line.setAttribute('y2', -(coSysHeight / yRange) * (i / yDensity));
+
+                textEl = document.createElementNS(svgNS, 'text');
+                textEl.appendChild(document.createTextNode(i / yDensity + c.min.val));
+                text = graph.appendChild(textEl);
+                text.setAttribute('class', 'vectual_coordinate_labels_y');
+                text.setAttribute('x', -coSysWidth * 0.05);
+                text.setAttribute('y', -(coSysHeight / yRange) * (i / yDensity));
 
             }
         }
