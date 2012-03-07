@@ -7,7 +7,7 @@
 
     function attr(obj, attributes) {
         for (var prop in attributes) {
-            if (attributes.hasOwnProperty(prop)){
+            if (attributes.hasOwnProperty(prop)) {
                 obj.setAttribute(prop, attributes[prop]);
             }
         }
@@ -25,25 +25,38 @@
 
         c.colors = ['yellow', 'green', 'blue', 'brown', 'grey', 'yellow', 'green', 'blue', 'brown', 'yellow', 'green', 'blue', 'brown'];
         c.tuples = [];
-        c.sortedValues = [];
-        c.sortedKeys = [];
+        c.keys = [];
+        c.values = [];
+        c.sorted = {
+            'key':[],
+            'val':[]
+        };
         c.size = 0;
         c.totalValue = 0;
-        c.max = {};
+        c.max = {"key":"", "val":0};
+        c.min = {"key":"", "val":0};
+        c.range = {};
 
         for (var i in c.data) {
 
             if (c.data.hasOwnProperty(i)) {
 
+                //get maxium and minimum value and corresponding key
                 if (c.data[i] > c.max.val) {
                     c.max.key = i;
                     c.max.val = c.data[i];
+                }
+                if (c.data[i] < c.min.val) {
+                    c.min.key = i;
+                    c.min.val = c.data[i];
                 }
 
                 c.totalValue += Number(c.data[i]); //get sum of all Values
 
                 c.size++; //get length of object
 
+                c.keys.push(i);
+                c.values.push(c.data[i]);
                 c.tuples.push([i, c.data[i]]); //get sortable array
             }
         }
@@ -55,8 +68,8 @@
 
         //split into key/value arrays
         for (var a = 0; a < c.tuples.length; a++) {
-            c.sortedKeys.push(c.tuples[a][0]);
-            c.sortedValues.push(c.tuples[a][1]);
+            c.sorted.key.push(c.tuples[a][0]);
+            c.sorted.val.push(c.tuples[a][1]);
         }
 
         function el(type) {
@@ -101,10 +114,15 @@
         svg.appendChild(title);
 
         return {
-            'pieChart':new Pie(c),
-            'test':'test'
+            pieChart:function () {
+                return new Pie();
+            },
+            barChart:function () {
+                return new Bar();
+            }
         };
     }
+
 
     function Pie() {
         var pie,
@@ -159,12 +177,12 @@
                 trans_deg, tx, ty, sector, size, at, atra, path, ani,
                 aniTransform, text, animate, title, nextx, nexty;
 
-            if (((c.sortedValues[i] / c.totalValue) * 360) > 180) size = '0 1,0';
+            if (((c.sorted.val[i] / c.totalValue) * 360) > 180) size = '0 1,0';
             else size = '0 0,0';
 
             //Angle
             angle_all_last = angle_all;
-            angle_this = ((c.sortedValues[i] / c.totalValue) * 360);
+            angle_this = ((c.sorted.val[i] / c.totalValue) * 360);
             angle_all = angle_this + angle_all;
             angle_all_rad = toRad(angle_all);
 
@@ -232,21 +250,20 @@
                 aniTransform.setAttribute('fill', 'freeze');
 
                 /*
-                 fanOut = path.addChild('animate');
+                 fanOut = path.appendChild(document.createElementNS(svgNS, 'animate');
                  fanOut.setAttribute('attributeName', 'd');
-                 //fanOut.setAttribute('from','M 0,0 L '+lastx+','+lasty+' A '+radius+','+radius+' '+size+' '+lastx+','+lasty+' z');
-                 //fanOut.setAttribute('to','M 0,0 L '+lastx+','+lasty+' A '+radius+','+radius+' '+size+' '+nextx+','+nexty+' z');
+                 fanOut.setAttribute('from','M 0,0 L '+lastx+','+lasty+' A '+radius+','+radius+' '+size+' '+lastx+','+lasty+' z');
+                 fanOut.setAttribute('to','M 0,0 L '+lastx+','+lasty+' A '+radius+','+radius+' '+size+' '+nextx+','+nexty+' z');
                  fanOut.setAttribute('values', 'M 0,0 L ' + lastx + ',' + lasty + ' A ' + radius + ',' + radius + ' ' + size + ' ' + lastx + ',' + lasty + ' z; ' +
                  'M 0,0 L ' + lastx + ',' + lasty + ' A ' + radius + ',' + radius + ' ' + size + ' ' + xValues + ',' + yValues + ' z; ' +
                  'M 0,0 L ' + lastx + ',' + lasty + ' A ' + radius + ',' + radius + ' ' + size + ' ' + nextx + ',' + nexty + ' z; ');
                  fanOut.setAttribute('dur', '0.8s');
                  */
-
             }
 
 
             text = sector.appendChild(document.createElementNS(svgNS, 'text'));
-            text.appendChild(document.createTextNode(c.sortedKeys[i]));
+            text.appendChild(document.createTextNode(c.sorted.key[i]));
             text.setAttribute('class', 'vectual_pie_text');
             text.setAttribute('x', (tx * 1.2));
             text.setAttribute('y', (ty * 1.2));
@@ -266,184 +283,154 @@
             }
 
             title = sector.appendChild(document.createElementNS(svgNS, 'title'));
-            title.appendChild(document.createTextNode(c.sortedKeys[i] + ' | ' + c.sortedValues[i] + ' | ' + (Math.round(c.sortedValues[i] / c.totalValue * 100, 2) ) + '%'));
+            title.appendChild(document.createTextNode(c.sorted.key[i] + ' | ' + c.sorted.val[i] + ' | ' + (Math.round(c.sorted.val[i] / c.totalValue * 100, 2) ) + '%'));
 
             lastx = nextx;
             lasty = nexty;
         }
     }
 
-    /*
-     function Bar() {
+    function Bar() {
 
-     var bar,
-     yDensity = 0.1,
-     xDensity = 0.2,
-     toolbar,
-     bar = svg.addChild('g'),
-     toolbar,
-     height,
-     width,
-     graphWidth,
-     numValues,
-     a,
-     b,
-     title,
-     c,
-     d,
-     e,
-     line,
-     text;
+        var bars,
+            yDensity = 0.1,
+            xDensity = 0.2,
+            yRange = (c.max.val - c.min.val),
+            a,
+            b,
+            d,
+            g,
+            e,
+            line,
+            text,
+            graphHeight,
+            graphWidth,
+            coorSysHeight,
+            coorSysWidth;
 
-     function setBargraph() {
+        graphWidth = c.width * 0.95;
+        graphHeight = c.height * 0.8;
 
-     !empty(toolbar) ? translate_y = height : translate_y = (height - 40);
+        coorSysWidth = c.width * 0.85;
+        coorSysHeight = c.height * 0.6;
 
-     bar.setAttribute('transform', 'translate(' + (graphWidth * 0.08) + ', ' + translate_y + ')');
+        bars = svg.appendChild(document.createElementNS(svgNS, 'g'));
+        bars.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight * 1.0) + ')');
 
-     setCoordinatesystem();
-     setBar();
-     }
+        horizontalLoop();
+        verticalLoop();
 
-     function setBar() {
-
-     for (var i = 0; i < numValues; i++) {
-     buildBar(i);
-     }
-     }
-
-     function setCoordinatesystem() {
-     horizontalLoop();
-     verticalLoop();
-     }
-
-     function buildBar(i) {
-
-     bar = bar.addChild('rect');
-     bar.setAttribute('filter', 'url(#dropshadow)');
-     bar.setAttribute('class', 'vectual_bar_bar');
-     bar.setAttribute('x', (i * (graphWidth / numValues)));
-     bar.setAttribute('y', -(values[i] - minValue) * (graphHeight / yRange));
-     bar.setAttribute('height', (values[i] - minValue) * (graphHeight / yRange));
-     bar.setAttribute('width', (0.7 * (graphWidth / numValues)));
+        for (var i = 0; i < c.size; i++) {
+            buildBar(i);
+        }
 
 
-     title = bar.addChild('title', keys[i] + ':  ' + values[i]);
+        function buildBar(i) {
+            var bar = bars.appendChild(document.createElementNS(svgNS, 'rect'));
+            //bar.setAttribute('filter', 'url(#dropshadow)');
+            bar.setAttribute('class', 'vectual_bar_bar');
+            bar.setAttribute('x', (i * (coorSysWidth / c.size)));
+            bar.setAttribute('y', -(c.values[i] - c.min.val) * (graphHeight / yRange));
+            bar.setAttribute('height', (c.values[i] - c.min.val) * (coorSysHeight / yRange));
+            bar.setAttribute('width', (0.7 * (coorSysWidth / c.size)));
 
-     if (animations) {
-     a = bar.addChild('animate');
-     a.setAttribute('attributeName', 'height');
-     a.setAttribute('from', '0');
-     a.setAttribute('to', (values[i] - minValue) * (graphHeight / yRange));
-     a.setAttribute('begin', '0s');
-     a.setAttribute('dur', '0.8s');
-     a.setAttribute('fill', 'freeze');
+            //title = bar.appendChild(document.createElementNS(svgNS, 'title', c.keys[i] + ':  ' + c.values[i]));
 
-     b = bar.addChild('animate');
-     b.setAttribute('attributeName', 'y');
-     b.setAttribute('from', '0');
-     b.setAttribute('to', -(values[i] - minValue) * (graphHeight / yRange));
-     b.setAttribute('begin', '0s');
-     b.setAttribute('dur', '0.8s');
-     b.setAttribute('fill', 'freeze');
+            if (c.animations) {
+                a = bar.appendChild(document.createElementNS(svgNS, 'animate'));
+                a.setAttribute('attributeName', 'height');
+                a.setAttribute('from', '0');
+                a.setAttribute('to', (c.values[i] - c.min.val) * (coorSysHeight / yRange));
+                a.setAttribute('begin', '0s');
+                a.setAttribute('dur', '1s');
+                a.setAttribute('fill', 'freeze');
 
-     c = bar.addChild('animate');
-     c.setAttribute('attributeName', 'opacity');
-     c.setAttribute('from', '0');
-     c.setAttribute('to', '0.8');
-     c.setAttribute('begin', '0s');
-     c.setAttribute('dur', '0.8s');
-     c.setAttribute('fill', 'freeze');
-     c.setAttribute('additive', 'replace');
+                b = bar.appendChild(document.createElementNS(svgNS, 'animate'));
+                b.setAttribute('attributeName', 'y');
+                b.setAttribute('from', '0');
+                b.setAttribute('to', -(c.values[i] - c.min.val) * (coorSysHeight / yRange));
+                b.setAttribute('begin', '0s');
+                b.setAttribute('dur', '1s');
+                b.setAttribute('fill', 'freeze');
 
-     d = bar.addChild('animate');
-     d.setAttribute('attributeName', 'fill');
-     d.setAttribute('to', 'rgb(100,210,255)');
-     d.setAttribute('begin', 'mouseover');
-     d.setAttribute('dur', '0.1s');
-     d.setAttribute('fill', 'freeze');
-     d.setAttribute('additive', 'replace');
+                g = bar.appendChild(document.createElementNS(svgNS, 'animate'));
+                g.setAttribute('attributeName', 'opacity');
+                g.setAttribute('from', '0');
+                g.setAttribute('to', '0.8');
+                g.setAttribute('begin', '0s');
+                g.setAttribute('dur', '1s');
+                g.setAttribute('fill', 'freeze');
+                g.setAttribute('additive', 'replace');
 
-     e = bar.addChild('animate');
-     e.setAttribute('attributeName', 'fill');
-     e.setAttribute('to', 'rgb(0,150,250)');
-     e.setAttribute('begin', 'mouseout');
-     e.setAttribute('dur', '0.2s');
-     e.setAttribute('fill', 'freeze');
-     e.setAttribute('additive', 'replace');
-     }
+                d = bar.appendChild(document.createElementNS(svgNS, 'animate'));
+                d.setAttribute('attributeName', 'fill');
+                d.setAttribute('to', 'rgb(100,210,255)');
+                d.setAttribute('begin', 'mouseover');
+                d.setAttribute('dur', '0.1s');
+                d.setAttribute('fill', 'freeze');
+                d.setAttribute('additive', 'replace');
 
+                e = bar.appendChild(document.createElementNS(svgNS, 'animate'));
+                e.setAttribute('attributeName', 'fill');
+                e.setAttribute('to', 'rgb(0,150,250)');
+                e.setAttribute('begin', 'mouseout');
+                e.setAttribute('dur', '0.2s');
+                e.setAttribute('fill', 'freeze');
+                e.setAttribute('additive', 'replace');
+            }
+        }
 
-     var =
-     '<rect filter="url(#dropshadow)" class="vectual_bar_bar" style="opacity:0;"
-     x="'+(i * (graphWidth/numValues))+'" y="0"
-     height="0" width="'+(0.7 * (graphWidth/numValues))+'" >'+
+        function horizontalLoop() {
 
-     '<title>'+keys[i]+':  '+values[i]+'</title>'+
+            var cssClass, textEl;
 
-     '<animate attributeName="height" to="'+((values[i] - minValue) * (graphHeight/yRange))+'"
-     begin="0" dur="0.8s" fill="freeze" />'+
-     '<animate attributeName="y" to="-'+((values[i] - minValue) * (graphHeight/yRange))+'"
-     begin="0" dur="0.8s" fill="freeze" />'+
-     '<animate attributeName="opacity" begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/>'+
+            for (var i = 0; i < c.size; i++) {
 
-     '<animate attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" />'+
-     '<animate attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" />'+
-     '</rect>';
+                (i == 0) ? cssClass = 'vectual_coordinate_axis_y' : cssClass = 'vectual_coordinate_lines_y';
 
-     return var;
+                line = bars.appendChild(document.createElementNS(svgNS, 'line'));
+                line.setAttribute('class', cssClass);
+                line.setAttribute('x1', (coorSysWidth / c.size) * i);
+                line.setAttribute('y1', '5');
+                line.setAttribute('x2', (coorSysWidth / c.size) * i);
+                line.setAttribute('y2', -coorSysHeight);
 
-     }
+                textEl = document.createElementNS(svgNS, 'text');
+                textEl.appendChild(document.createTextNode(c.keys[i]));
+                text = bars.appendChild(textEl);
+                text.setAttribute('class', 'vectual_coordinate_labels_x');
+                text.setAttribute('transform', 'rotate(40 ' + ((coorSysWidth / c.size) * i) + ', 10)');
+                text.setAttribute('x', ((coorSysWidth / c.size) * i));
+                text.setAttribute('y', '10');
 
+            }
+        }
 
-     function horizontalLoop() {
+        function verticalLoop() {
 
-     var cssClass;
+            var styleClass, line, text, textEl;
 
-     for (var i = 0; i < numValues; i++) {
+            for (var i = 0; i <= (yRange * yDensity); i++) {
 
-     (i == 0) ? cssClass = 'vectual_coordinate_axis_y' : cssClass = 'vectual_coordinate_lines_y';
+                styleClass = (i == 0) ? 'vectual_coordinate_axis_x' : 'vectual_coordinate_lines_x';
 
-     line = bar.addChild('line');
-     line.setAttribute('class', cssClass);
-     line.setAttribute('x1', (graphWidth / numValues) * i);
-     line.setAttribute('y1', '5');
-     line.setAttribute('x2', (graphWidth / numValues) * i);
-     line.setAttribute('y2', -graphHeight);
+                line = bars.appendChild(document.createElementNS(svgNS, 'line'));
+                line.setAttribute('class', styleClass);
+                line.setAttribute('x1', '-5');
+                line.setAttribute('y1', -(coorSysHeight / yRange) * (i / yDensity));
+                line.setAttribute('x2', coorSysWidth);
+                line.setAttribute('y2', -(coorSysHeight / yRange) * (i / yDensity));
 
-     text = bar.addChild('text', keys[i]);
-     text.setAttribute('class', 'vectual_coordinate_labels_x');
-     text.setAttribute('transform', 'rotate(40 ' + ((graphWidth / numValues) * i) + ', 10)');
-     text.setAttribute('x', ((graphWidth / numValues) * i));
-     text.setAttribute('y', '10');
+                textEl = document.createElementNS(svgNS, 'text');
+                textEl.appendChild(document.createTextNode(i / yDensity + c.min.val));
+                text = bars.appendChild(textEl);
+                text.setAttribute('class', 'vectual_coordinate_labels_y');
+                text.setAttribute('x', -coorSysWidth * 0.05);
+                text.setAttribute('y', -(coorSysHeight / yRange) * (i / yDensity));
 
-     }
-     }
-
-     function verticalLoop() {
-
-     var class;
-
-     for (var i = 0; i <= (yRange * yDensity); i++) {
-
-     (i == 0) ? class = 'vectual_coordinate_axis_x' : class = 'vectual_coordinate_lines_x';
-
-     line = bar.addChild('line');
-     line.setAttribute('class', class);
-     line.setAttribute('x1', '-5');
-     line.setAttribute('y1', -(graphHeight / yRange) * (i / yDensity));
-     line.setAttribute('x2', graphWidth);
-     line.setAttribute('y2', -(graphHeight / yRange) * (i / yDensity));
-
-     text = bar.addChild('text', (i / yDensity) + minValue);
-     text.setAttribute('class', 'vectual_coordinate_labels_y');
-     text.setAttribute('x', -graphWidth * 0.05);
-     text.setAttribute('y', -(graphHeight / yRange) * (i / yDensity));
-
-     }
-     }
-     }
-     */
+            }
+        }
+    }
 
     vectual = v;
 
