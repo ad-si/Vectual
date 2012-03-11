@@ -75,33 +75,65 @@
         function el(type) {
             return document.createElementNS(svgNS, type)
         }
-
-        svg = document.createElementNS(svgNS, 'svg');
-        attr(svg, {
-            'xmlns':"http://www.w3.org/2000/svg",
-            'version':"1.1",
-            'class':(c.inline) ? 'vectual_inline' : 'vectual',
-            'width':c.width,
-            'height':c.height,
-            'viewBox':"0 0 " + c.width + " " + c.height
-        });
+		
+		svg = DOMinate(
+			['svg',{
+				'version':"1.1",
+				'className':(c.inline) ? 'vectual_inline' : 'vectual',
+				'width':c.width,
+				'height':c.height,
+				'viewBox':"0 0 " + c.width + " " + c.height},
+				['defs',
+					['linearGradient#rect_background', {
+						x1:'0%',
+						y1:'0%',
+						x2:'0%',
+						y2:'100%'},
+						['stop', {
+							offset:'0%',
+							style:'stop-color:rgb(80,80,80); stop-opacity:1'}
+						],
+						['stop', {
+							offset:'0%',
+							style:'stop-color:rgb(40,40,40); stop-opacity:1'}
+						],
+					],
+					['filter#dropshadow',
+						['feGaussianBlur', {
+							'in':'SourceAlpha',
+							stdDeviation: 0.5,
+							result: 'blur'}
+						],
+						['feOffset', {
+							'in':'blur',
+							dx:'2',
+							dy:'2',
+							result:'offsetBlur'}
+						],
+						['feComposite', {
+							'in':'SourceGraphic',
+							'in2':'offsetBlur',
+							result:'origin'}
+						]
+					]
+				]
+			]
+		,"http://www.w3.org/2000/svg");
+		
         document.getElementById(obj.id).appendChild(svg);
+        
 
-        defs = document.createElementNS(svgNS, 'defs');
-        defs.innerHTML = '<linearGradient id="rect_background" x1="0%" y1="0%" x2="0%" y2="100%">\n\t\t<stop offset="0%" style="stop-color:rgb(80,80,80); stop-opacity:1"/>\n\t\t<stop offset="100%" style="stop-color:rgb(40,40,40); stop-opacity:1"/>\n\t</linearGradient>\n\t<filter id="dropshadow">\n\t\t<feGaussianBlur in="SourceAlpha" stdDeviation="0.5" result="blur"/>\n\t\t<feOffset in="blur" dx="2" dy="2" result="offsetBlur"/>\n\t\t<feComposite in="SourceGraphic" in2="offsetBlur" result="origin"/>\n\t</filter>';
-        svg.appendChild(defs);
-
-        bg = document.createElementNS(svgNS, 'rect');
-        attr(bg, {
-            'class':'vectual_background',
-            'x':0,
-            'y':0,
-            'width':c.width,
-            'height':c.height,
-            'rx':c.inline ? '' : 10,
-            'ry':c.inline ? '' : 10
-        });
-        svg.appendChild(bg);
+        DOMinate([svg,
+			['rect', {
+				'class':'vectual_background',
+				'x':0,
+				'y':0,
+				'width':c.width,
+				'height':c.height,
+				'rx':c.inline ? '' : 10,
+				'ry':c.inline ? '' : 10}
+			]
+        ], 'http://www.w3.org/2000/svg');
 
         title = document.createElementNS(svgNS, 'text');
         attr(title, {
