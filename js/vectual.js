@@ -75,65 +75,66 @@
         function el(type) {
             return document.createElementNS(svgNS, type)
         }
-		
-		svg = DOMinate(
-			['svg',{
-				'version':"1.1",
-				'className':(c.inline) ? 'vectual_inline' : 'vectual',
-				'width':c.width,
-				'height':c.height,
-				'viewBox':"0 0 " + c.width + " " + c.height},
-				['defs',
-					['linearGradient#rect_background', {
-						x1:'0%',
-						y1:'0%',
-						x2:'0%',
-						y2:'100%'},
-						['stop', {
-							offset:'0%',
-							style:'stop-color:rgb(80,80,80); stop-opacity:1'}
-						],
-						['stop', {
-							offset:'0%',
-							style:'stop-color:rgb(40,40,40); stop-opacity:1'}
-						],
-					],
-					['filter#dropshadow',
-						['feGaussianBlur', {
-							'in':'SourceAlpha',
-							stdDeviation: 0.5,
-							result: 'blur'}
-						],
-						['feOffset', {
-							'in':'blur',
-							dx:'2',
-							dy:'2',
-							result:'offsetBlur'}
-						],
-						['feComposite', {
-							'in':'SourceGraphic',
-							'in2':'offsetBlur',
-							result:'origin'}
-						]
-					]
-				]
-			]
-		,"http://www.w3.org/2000/svg");
-		
-        document.getElementById(obj.id).appendChild(svg);
-        
 
-        DOMinate([svg,
-			['rect', {
-				'class':'vectual_background',
-				'x':0,
-				'y':0,
-				'width':c.width,
-				'height':c.height,
-				'rx':c.inline ? '' : 10,
-				'ry':c.inline ? '' : 10}
-			]
-        ], 'http://www.w3.org/2000/svg');
+        svg = DOMinate(
+            ['svg', {
+                'version':"1.1",
+                'className':(c.inline) ? 'vectual_inline' : 'vectual',
+                'width':c.width,
+                'height':c.height,
+                'viewBox':"0 0 " + c.width + " " + c.height},
+                ['defs',
+                    ['linearGradient#rect_background', {
+                        x1:'0%',
+                        y1:'0%',
+                        x2:'0%',
+                        y2:'100%'},
+                        ['stop', {
+                            offset:'0%',
+                            style:'stop-color:rgb(80,80,80); stop-opacity:1'}
+                        ],
+                        ['stop', {
+                            offset:'0%',
+                            style:'stop-color:rgb(40,40,40); stop-opacity:1'}
+                        ],
+                    ],
+                    ['filter#dropshadow',
+                        ['feGaussianBlur', {
+                            'in':'SourceAlpha',
+                            stdDeviation:0.5,
+                            result:'blur'}
+                        ],
+                        ['feOffset', {
+                            'in':'blur',
+                            dx:'2',
+                            dy:'2',
+                            result:'offsetBlur'}
+                        ],
+                        ['feComposite', {
+                            'in':'SourceGraphic',
+                            'in2':'offsetBlur',
+                            result:'origin'}
+                        ]
+                    ]
+                ]
+            ]
+            , "http://www.w3.org/2000/svg");
+
+        document.getElementById(obj.id).appendChild(svg);
+
+
+        DOMinate(
+            [svg,
+                ['rect', {
+                    'class':'vectual_background',
+                    'x':0,
+                    'y':0,
+                    'width':c.width,
+                    'height':c.height,
+                    'rx':c.inline ? '' : 10,
+                    'ry':c.inline ? '' : 10}
+                ]
+            ], 'http://www.w3.org/2000/svg');
 
         title = document.createElementNS(svgNS, 'text');
         attr(title, {
@@ -154,6 +155,9 @@
             },
             barChart:function () {
                 return new Bar();
+            },
+            tagCloud:function () {
+                return new Tagcloud();
             }
         };
     }
@@ -168,10 +172,12 @@
             lasty = 0,
             angle_all = 0;
 
-        pie = document.createElementNS(svgNS, 'g');
-        pie.setAttribute('transform', 'translate(' + (0.5 * c.width) + ', ' + (0.5 * c.height) + ')');
+        pie = DOMinate(
+            ['g', {
+                transform:'translate(' + (0.5 * c.width) + ', ' + (0.5 * c.height) + ')'}
+            ], 'http://www.w3.org/2000/svg')
 
-        svg.appendChild(pie);
+        DOMinate([svg, [pie]]);
 
 
         if (c.totalValue == c.max.val) { //only one value
@@ -634,6 +640,120 @@
                 text.setAttribute('y', -(coSysHeight / yRange) * (i / yDensity));
 
             }
+        }
+    }
+
+    function Tagcloud() {
+
+        var cloud = DOMinate(
+            ['g', {
+                transform:'translate(' + (0.5 * c.width) + ', ' + (0.5 * c.height) + ')'}
+
+            ], 'http://www.w3.org/2000/svg');
+
+        DOMinate([svg, [cloud]]);
+
+        compileTagcloud();
+
+        function compileTagcloud() {
+
+            var until = 300, // size of spiral
+                factor = 4, // resolution improvement
+                density = 0.2, // density of spiral
+                xySkew = 0.6, // elliptical shape of spiral (0 < xySkew < 1)
+                a = 0, // Word counter
+                points = '',
+                i,
+                b,
+                u,
+                x,
+                y,
+                pos_x = [],
+                pos_y = [],
+                area_x = [],
+                area_y = [];
+
+
+            //Positioning along an archimedic spiral
+            for (i = 0; i < (until * factor * density); i++) { //Testing each point of the spiral
+
+
+                var fontSize = getFontSize(c.values[a]);  // Calculate font-size for each word
+
+                var length = (c.keys[a] * fontSize).length;
+
+                //x and y values of the position to test
+                b = i * (1 / factor);
+
+                x = -(1 / density) * xySkew * b * Math.cos(b);
+                y = -(1 / density) * (1 - xySkew) * b * Math.sin(b);
+
+                pos_x[a] = x;
+                pos_y[a] = y;
+                area_x[a] = length;
+                area_y[a] = fontSize;
+
+                //Test if word covers one of the already printed
+                for (u = 0; u <= a; u++) {
+
+                    if (a == 0) {
+
+                        setWord(c.keys[a], fontSize);
+                        a++;
+
+                    } else {
+
+                        //x-value
+                        if (pos_x[a] < (pos_x[u] - area_x[a]) || pos_x[a] > (pos_x[u] + area_x[u])) {
+
+                            //y-value
+                            if (pos_y[a] < (pos_y[u] - area_y[a]) || pos_y[a] > (pos_y[u] + area_y[u])) {
+
+                                setWord(c.keys[a], fontSize);
+                                a++;
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            function setWord(content, fontSize) {
+                DOMinate(
+                    [cloud,
+                        ['text', content, {
+                            className:'vectual_tagcloud_text',
+                            style:'font-size' + fontSize,
+                            x:x,
+                            y:y}
+                        ]
+                    ],
+                    'http://www.w3.org/2000/svg');
+            }
+
+            function getFontSize(number) {
+                var a = 10;		// Minimum font-size
+
+                return a + ((c.height * 0.1) * (number - c.min.val)) / (c.max.val - c.min.val);
+            }
+
+            for (var j = 0; j < (until * factor * density); j++) {
+                b = j * (1 / factor);
+
+                x = -(1 / density) * xySkew * b * Math.cos(b);
+                y = -(1 / density) * (1 - xySkew) * b * Math.sin(b);
+
+                points += x + ',' + y + ' ';
+            }
+
+            var spiral = DOMinate(
+                [cloud,
+                    ['polyline', {
+                        points:points,
+                        style:'fill: none; stroke:red; stroke-width:1'
+                    }]
+
+                ], 'http://www.w3.org/2000/svg');
         }
     }
 
