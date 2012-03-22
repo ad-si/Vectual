@@ -1,7 +1,7 @@
 (function (window, document, undefined) {
-    var svg,
-        c,
-        xhtmlNS = "http://www.w3.org/1999/xhtml",
+    var svg, // SVG DOMfragment
+        c, // Configuration
+        xhtmlNS = "http://www.w3.org/1999/xhtml", // Namespaces
         svgNS = "http://www.w3.org/2000/svg",
         xlinkNS = "http://www.w3.org/1999/xlink";
 
@@ -19,11 +19,25 @@
 
     function v(config) {
 
-        var defs, bg, title, size, text;
+        var defs,
+            bg,
+            title,
+            size,
+            text;
 
+        // extend configuration file
         c = config;
 
-        c.colors = ['yellow', 'green', 'blue', 'brown', 'grey', 'yellow', 'green', 'blue', 'brown', 'yellow', 'green', 'blue', 'brown'];
+        // Set defaults
+        c.id = config.id || false;
+        c.title = config.title || "vectual.js";
+        c.inline = config.inline || false;
+        c.animations = config.animations || true;
+        c.height = config.height || 300;
+        c.width = config.width || 500;
+        c.colors = config.colors || ['yellow', 'green', 'blue', 'brown', 'grey', 'yellow', 'green', 'blue', 'brown', 'yellow', 'green', 'blue', 'brown'];
+
+        // Calculate
         c.tuples = [];
         c.keys = [];
         c.values = [];
@@ -72,10 +86,6 @@
             c.sorted.val.push(c.tuples[a][1]);
         }
 
-        function el(type) {
-            return document.createElementNS(svgNS, type)
-        }
-
         svg = DOMinate(
             ['svg', {
                 'version':"1.1",
@@ -96,7 +106,7 @@
                         ['stop', {
                             offset:'0%',
                             style:'stop-color:rgb(40,40,40); stop-opacity:1'}
-                        ],
+                        ]
                     ],
                     ['filter#dropshadow',
                         ['feGaussianBlur', {
@@ -120,7 +130,9 @@
             ]
             , "http://www.w3.org/2000/svg");
 
-        document.getElementById(obj.id).appendChild(svg);
+        console.log(c);
+
+        document.getElementById(c.id).appendChild(svg);
 
 
         DOMinate(
@@ -175,7 +187,7 @@
         pie = DOMinate(
             ['g', {
                 transform:'translate(' + (0.5 * c.width) + ', ' + (0.5 * c.height) + ')'}
-            ], 'http://www.w3.org/2000/svg')
+            ], 'http://www.w3.org/2000/svg');
 
         DOMinate([svg, [pie]]);
 
@@ -356,7 +368,8 @@
         coSysHeight = c.height * 0.6;
 
         bars = svg.appendChild(document.createElementNS(svgNS, 'g'));
-        bars.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight * 1.0) + ')');
+        bars.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + graphHeight + ')');
+        git
 
         horizontalLoop();
         verticalLoop();
@@ -493,7 +506,7 @@
         coSysHeight = c.height * 0.6;
 
         graph = svg.appendChild(document.createElementNS(svgNS, 'g'));
-        graph.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight * 1.0) + ')');
+        graph.setAttribute('transform', 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight) + ')');
 
         horizontalLoop();
         verticalLoop();
@@ -593,7 +606,7 @@
 
         function horizontalLoop() {
 
-            var cssClass, textEl;
+            var cssClass, line, textEl;
 
             for (var i = 0; i < c.size; i++) {
 
@@ -756,6 +769,7 @@
                 ], 'http://www.w3.org/2000/svg');
         }
     }
+
 
     vectual = v;
 
