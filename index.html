@@ -1,10 +1,13 @@
 <!doctype html>
 <html>
 <head>
-	<title>vectual.js</title>
-	<link rel="stylesheet" type="text/css" href="css/vectual.css"/>
-	<script src="https://raw.github.com/adius/DOMinate/master/src/dominate.extended.js"></script>
-	<script type="text/javascript" src="js/vectual.js"></script>
+    <meta charset="utf-8">
+    <title>vectual.js</title>
+    <link rel="stylesheet" type="text/css" href="css/vectual.css"/>
+    <script src="https://raw.github.com/adius/DOMinate/master/src/dominate.extended.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script type="text/javascript" src="js/vectual.js"></script>
 </head>
 <body>
 <h1>vectual.js</h1>
@@ -12,35 +15,14 @@
 <div id="demo"></div>
 
 <script>
-	var obj, test;
 
-	obj = {
-		title:"Fruit Consumption",
-		id:"demo",
-		data:{
-			Apple:50,
-			Plum:27,
-			Peach:11,
-			Lime:2,
-			Cherry:13,
-			Pineapple:69,
-			Melon:26,
-			Grapefruit:35,
-			Strawberry:56,
-			Orange:34,
-			Kiwi:65
-
-		},
-		callback:function () {
-			alert('test');
-		}
-	};
-
-	test = vectual(obj);
-	//test.pieChart();
-	test.barChart();
-	//test.lineChart();
-	//test.tagCloud();
+    vectual(fruitConsumption)
+    //.pieChart()
+    //.barChart()
+    //.lineChart()
+    //.map()
+    //.table()
+    .tagCloud();
 
 </script>
 </body>
