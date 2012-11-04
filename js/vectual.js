@@ -52,95 +52,95 @@
 
 			function drawSector(element, i) {
 				var position,
+					angle_all_last = angle_all,
+					angle_this = ((c.sorted.values[i] / c.totalValue) * 360),
+					angle_add = angle_this / 2,
 					angle_all_rad,
-					angle_all_last,
-					angle_this,
-					angle_translate,
-					angle_add,
-					trans_deg,
-					tx,
-					ty,
-					sector,
-					size,
+					trans_deg = angle_all_last + angle_add,
+					angle_translate = toRad(trans_deg),
+					tx = -(Math.cos(angle_translate)) * radius,
+					ty = (Math.sin(angle_translate)) * radius,
 					path,
-					ani,
 					text,
 					animate,
 					title,
 					nextx,
-					nexty;
+					nexty,
+					size = (((c.sorted.values[i] / c.totalValue) * 360) > 180) ? '0 1,0' : '0 0,0',
+					sector = dom(['g', {'class': "vectual_pie_sector"}], svgNS);
 
-				if (((c.sorted.values[i] / c.totalValue) * 360) > 180)
-					size = '0 1,0';
-				else
-					size = '0 0,0';
+				function init(){
 
-				//Angle
-				angle_all_last = angle_all;
-				angle_this = ((c.sorted.values[i] / c.totalValue) * 360);
-				angle_all = angle_this + angle_all;
-				angle_all_rad = toRad(angle_all);
+					//Angle
+					angle_all = angle_this + angle_all;
+					angle_all_rad = toRad(angle_all);
 
-				//Shift direction of sector: add previous angle to half of the current
-				angle_add = angle_this / 2;
-				trans_deg = angle_all_last + angle_add;
-				angle_translate = toRad(trans_deg);
+					nextx = -(Math.cos(angle_all_rad) * radius);
+					nexty = (Math.sin(angle_all_rad) * radius);
 
-				tx = -(Math.cos(angle_translate)) * radius;
-				ty = (Math.sin(angle_translate)) * radius;
+					position =
+						(trans_deg <= 75) ? 'end' :
+							(trans_deg <= 105) ? 'middle' :
+								(trans_deg <= 255) ? 'start' :
+									(trans_deg <= 285) ? 'middle' : 'end';
+				}
 
-				nextx = -(Math.cos(angle_all_rad) * radius);
-				nexty = (Math.sin(angle_all_rad) * radius);
+				function build(){
 
-				position = (trans_deg <= 75) ? 'end' : (trans_deg <= 105) ? 'middle' :
-					(trans_deg <= 255) ? 'start' : (trans_deg <= 285) ? 'middle' : 'end';
+					path = dom(
+						['path', {
+							'class': 'vectual_pie_sector_path',
+							'style': 'stroke-width:' + (radius * 0.015) + ';fill:' + c.colors[i],
+							'd': 'M 0,0 L ' + lastx + ',' + lasty + ' A ' + radius + ',' + radius + ' ' + size + ' ' + nextx + ',' + nexty + ' z'}
+						], svgNS
+					);
 
+					text = dom(
+						['text', {
+							'class': 'vectual_pie_text',
+							'x': (tx * 1.2),
+							'y': (ty * 1.2),
+							'text-anchor': position,
+							'style': 'font-size:' + (angle_this * radius * 0.002 + 8) + 'px',
+							'fill': c.colors[i],
+							'transform': 'translate(0, 5)'
+						}], svgNS
+					);
 
-				sector = dom(
-					[pie,
-						['g', {'class': "vectual_pie_sector"}]
-					]
-					, svgNS);
+					title = dom(
+						['title',
+							c.sorted.keys[i] + ' | ' +
+								c.sorted.values[i] + ' | ' +
+								(Math.round(c.sorted.values[i] / c.totalValue * 100) ) + '%'
+						], svgNS
+					);
 
-				/*Not working
-				 if (c.animations) {
-				 dom(
-				 [sector,
-				 ['animateTransform', {
-				 attributeName: 'transform',
-				 begin: 'mouseover',
-				 type: 'translate',
-				 to: (tx * 0.2) + ', ' + (ty * 0.2),
-				 dur: '1s',
-				 additive: 'replace',
-				 fill: 'freeze'
-				 }],
-				 ['animateTransform', {
-				 attributeName: 'transform',
-				 begin: 'mouseout',
-				 type: 'translate',
-				 to: '0,0',
-				 dur: '1s',
-				 additive: 'replace',
-				 fill: 'freeze'
-				 }]
-				 ], svgNS
-				 );
-				 }
-				 */
+				}
 
-				path = dom(
-					['path', {
-						'class': 'vectual_pie_sector_path',
-						'style': 'stroke-width:' + (radius * 0.015) + ';fill:' + c.colors[i],
-						'd': 'M 0,0 L ' + lastx + ',' + lasty + ' A ' + radius + ',' + radius + ' ' + size + ' ' + nextx + ',' + nexty + ' z'}
-					]
-					, svgNS);
+				function setAnimations() {
 
-				dom([sector, [path]]);
-
-
-				if (c.animations) {
+					dom(
+						[sector,
+							['animateTransform', {
+								attributeName: 'transform',
+								begin: 'mouseover',
+								type: 'translate',
+								to: (tx * 0.2) + ', ' + (ty * 0.2),
+								dur: '300ms',
+								additive: 'replace',
+								fill: 'freeze'
+							}],
+							['animateTransform', {
+								attributeName: 'transform',
+								begin: 'mouseout',
+								type: 'translate',
+								to: '0,0',
+								dur: '600ms',
+								additive: 'replace',
+								fill: 'freeze'
+							}]
+						], svgNS
+					);
 
 					dom(
 						[path,
@@ -149,8 +149,8 @@
 								'from': '0',
 								'to': '1',
 								'dur': '0.6s',
-								'fill': 'freeze'}
-							],
+								'fill': 'freeze'
+							}],
 							['animateTransform', {
 								'attributeName': 'transform',
 								'type': 'rotate',
@@ -159,28 +159,11 @@
 								'keySplines': '0 0 0 1',
 								'values': angle_all_last + ',0,0; 0,0,0',
 								'additive': 'replace',
-								'fill': 'freeze'}
-							]
-						]
-						, svgNS);
-				}
+								'fill': 'freeze'
+							}]
+						], svgNS
+					);
 
-				text = dom(
-					['text', {
-						'class': 'vectual_pie_text',
-						'x': (tx * 1.2),
-						'y': (ty * 1.2),
-						'text-anchor': position,
-						'style': 'font-size:' + (angle_this * radius * 0.002 + 8) + 'px',
-						'fill': c.colors[i],
-						'transform': 'translate(0, 5)'
-					}], svgNS
-				);
-
-				dom([sector, [text]]);
-
-
-				if (c.animations) {
 
 					dom(
 						[text,
@@ -189,21 +172,30 @@
 								'begin': '0s',
 								'values': '0;0;1',
 								'dur': '1s',
-								'fill': 'freeze'}
-							]
-						]
-						, svgNS);
+								'fill': 'freeze'
+							}]
+						], svgNS
+					);
+
 				}
 
-				dom(
-					[sector,
-						['title',
-							c.sorted.keys[i] + ' | ' +
-								c.sorted.values[i] + ' | ' +
-								(Math.round(c.sorted.values[i] / c.totalValue * 100) ) + '%'
-						]
-					]
-					, svgNS);
+				function inject() {
+					dom(
+						[pie,
+							[sector,
+								[path],
+								[text],
+								[title]
+							]
+						], svgNS
+					);
+				}
+
+				init();
+				build();
+				if (c.animations)
+					setAnimations();
+				inject();
 
 				lastx = nextx;
 				lasty = nexty;
@@ -722,12 +714,12 @@
 							[cloud,
 								//bounding-box
 								/*['rect', {
-									width: element.width,
-									height: element.height,
-									style: 'fill: rgba(0,0,255,0.2)',
-									x: element.x,
-									y: element.y - element.height
-								}],*/
+								 width: element.width,
+								 height: element.height,
+								 style: 'fill: rgba(0,0,255,0.2)',
+								 x: element.x,
+								 y: element.y - element.height
+								 }],*/
 								['text', element.key, {
 									class: 'vectual_tagcloud_text',
 									style: 'font-size: ' + element.fontSize,
