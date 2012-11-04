@@ -69,7 +69,7 @@
 					size = (((c.sorted.values[i] / c.totalValue) * 360) > 180) ? '0 1,0' : '0 0,0',
 					sector = dom(['g', {'class': "vectual_pie_sector"}], svgNS);
 
-				function init(){
+				function init() {
 
 					//Angle
 					angle_all = angle_this + angle_all;
@@ -85,7 +85,7 @@
 									(trans_deg <= 285) ? 'middle' : 'end';
 				}
 
-				function build(){
+				function build() {
 
 					path = dom(
 						['path', {
@@ -235,162 +235,187 @@
 
 		var yDensity = 0.1,
 			yRange = (c.max.value - c.min.value),
-			a,
 			g,
-			i,
 			line,
 			text,
 			graphHeight = c.height * 0.8,
 			graphWidth = c.width * 0.95,
 			coSysHeight = c.height * 0.6,
 			coSysWidth = c.width * 0.85,
-			bars = dom(
+			barchart = dom(
 				['g', {
 					transform: 'translate(' + (graphWidth * 0.1) + ', ' + graphHeight + ')'
 				}], svgNS
-			);
+			),
+			coordinateSystem = dom(['g'], svgNS),
+			bars = dom(['g'], svgNS);
 
-		function init() {
-			dom([svg, [bars]]);
 
+		function buildCoordinateSystem() {
+
+			function ordinates() {
+
+				var cssClass,
+					i;
+
+				for (i = 0; i < c.size; i++) {
+
+					cssClass = (i == 0) ? 'vectual_coordinate_axis_y' : 'vectual_coordinate_lines_y';
+
+					dom(
+						[coordinateSystem,
+							['line', {
+								class: cssClass,
+								x1: (coSysWidth / c.size) * i,
+								y1: '5',
+								x2: (coSysWidth / c.size) * i,
+								y2: -coSysHeight
+							}],
+							['text', c.keys[i], {
+								class: 'vectual_coordinate_labels_x',
+								transform: 'rotate(40 ' + ((coSysWidth / c.size) * i) + ', 10)',
+								x: ((coSysWidth / c.size) * i),
+								y: 10
+							}]
+						], svgNS
+					);
+				}
+			}
+
+			function abscissas() {
+
+				var styleClass,
+					line,
+					text,
+					i;
+
+				for (i = 0; i <= (yRange * yDensity); i++) {
+
+					styleClass = (i == 0) ? 'vectual_coordinate_axis_x' : 'vectual_coordinate_lines_x';
+
+					dom(
+						[coordinateSystem,
+							['line', {
+								class: styleClass,
+								x1: -5,
+								y1: -(coSysHeight / yRange) * (i / yDensity),
+								x2: coSysWidth,
+								y2: -(coSysHeight / yRange) * (i / yDensity)
+							}],
+							['text', String(i / yDensity + c.min.value), {
+								class: 'vectual_coordinate_labels_y',
+								x: -coSysWidth * 0.05,
+								y: -(coSysHeight / yRange) * (i / yDensity)
+							}]
+						], svgNS
+					);
+				}
+			}
+
+			abscissas();
+			ordinates();
 		}
 
-		function build() {
+		function buildBars() {
 
 			function drawBar(element, i) {
 
-				var bar = dom(
+				var height = c.animations ? 0 : (c.values[i] - c.min.value) * (coSysHeight / yRange),
+					bar = dom(
 					['rect', {
-						'class': 'vectual_bar_bar',
-						'x': (i * (coSysWidth / c.size)),
-						'y': -(c.values[i] - c.min.value) * (coSysHeight / yRange),
-						'height': (c.values[i] - c.min.value) * (coSysHeight / yRange),
-						'width': (0.7 * (coSysWidth / c.size)) },
+						class: 'vectual_bar_bar',
+						x: (i * (coSysWidth / c.size)),
+						y: -(c.values[i] - c.min.value) * (coSysHeight / yRange),
+						height: height,
+						width: (0.7 * (coSysWidth / c.size))
+					},
 						['title', c.keys[i] + ':  ' + c.values[i]]
-					]
-					, svgNS);
+					], svgNS
+				);
 
-				bars.appendChild(bar);
-
-				if (c.animations) {
-
+				function setAnimations() {
 					dom(
 						[bar,
 							['animate', {
-								'attributeName': 'height',
-								'from': '0',
-								'to': (c.values[i] - c.min.value) * (coSysHeight / yRange),
-								'begin': '0s',
-								'dur': '1s',
-								'fill': 'freeze'}
-							],
+								attributeName: 'height',
+								to: (c.values[i] - c.min.value) * (coSysHeight / yRange),
+								begin: '0s',
+								dur: '1s',
+								fill: 'freeze'
+							}],
 							['animate', {
 								attributeName: 'y',
-								from: '0',
+								from: 0,
 								to: -(c.values[i] - c.min.value) * (coSysHeight / yRange),
 								begin: '0s',
 								dur: '1s',
-								fill: 'freeze'}
-							],
+								fill: 'freeze'
+							}],
 							['animate', {
-								'attributeName': 'opacity',
-								'from': '0',
-								'to': '0.8',
-								'begin': '0s',
-								'dur': '1s',
-								'fill': 'freeze',
-								'additive': 'replace'}
-							],
+								attributeName: 'fill',
+								to: 'rgb(100,210,255)',
+								begin: 'mouseover',
+								dur: '100ms',
+								fill: 'freeze',
+								additive: 'replace'
+							}],
 							['animate', {
-								'attributeName': 'fill',
-								'to': 'rgb(100,210,255)',
-								'begin': 'mouseover',
-								'dur': '0.1s',
-								'fill': 'freeze',
-								'additive': 'replace'}
-							],
-							['animate', {
-								'attributeName': 'fill',
-								'to': 'rgb(0,150,250)',
-								'begin': 'mouseout',
-								'dur': '0.2s',
-								'fill': 'freeze',
-								'additive': 'replace'}
-							]
-						]
-						, svgNS);
+								attributeName: 'fill',
+								to: 'rgb(0,150,250)',
+								begin: 'mouseout',
+								dur: '200ms',
+								fill: 'freeze',
+								additive: 'replace'
+							}]
+						], svgNS
+					);
 				}
+
+				function inject() {
+					dom([bars, [bar]]);
+				}
+
+
+				if (c.animations)
+					setAnimations();
+				inject();
 			}
 
-			function drawCoordinateSystem() {
-
-				function ordinates() {
-
-					var cssClass;
-
-					for (var i = 0; i < c.size; i++) {
-
-						cssClass = (i == 0) ? 'vectual_coordinate_axis_y' : 'vectual_coordinate_lines_y';
-
-						dom(
-							[bars,
-								['line', {
-									'class': cssClass,
-									'x1': (coSysWidth / c.size) * i,
-									'y1': '5',
-									'x2': (coSysWidth / c.size) * i,
-									'y2': -coSysHeight
-								}],
-								['text', c.keys[i], {
-									'class': 'vectual_coordinate_labels_x',
-									'transform': 'rotate(40 ' + ((coSysWidth / c.size) * i) + ', 10)',
-									'x': ((coSysWidth / c.size) * i),
-									'y': '10'}
-								]
-							]
-							, svgNS);
-
-					}
-				}
-
-				function abscissas() {
-
-					var styleClass, line, text;
-
-					for (var i = 0; i <= (yRange * yDensity); i++) {
-
-						styleClass = (i == 0) ? 'vectual_coordinate_axis_x' : 'vectual_coordinate_lines_x';
-
-						dom(
-							[bars,
-								['line', {
-									'class': styleClass,
-									'x1': '-5',
-									'y1': -(coSysHeight / yRange) * (i / yDensity),
-									'x2': coSysWidth,
-									'y2': -(coSysHeight / yRange) * (i / yDensity) }
-								],
-								['text', i / yDensity + c.min.value, {
-									'class': 'vectual_coordinate_labels_y',
-									'x': -coSysWidth * 0.05,
-									'y': -(coSysHeight / yRange) * (i / yDensity)}
-								]
-							]
-							, svgNS);
-
-					}
-				}
-
-				abscissas();
-				ordinates();
-			}
-
-			drawCoordinateSystem();
 			c.data.forEach(drawBar);
 		}
 
-		init();
-		build();
+		function setAnimations() {
+			dom(
+				[bars,
+					['animate', {
+						attributeName: 'opacity',
+						from: 0,
+						to: 0.8,
+						begin: '0s',
+						dur: '1s',
+						fill: 'freeze',
+						additive: 'replace'
+					}]
+				], svgNS
+			);
+		}
+
+		function inject() {
+			dom(
+				[svg,
+					[barchart,
+						[coordinateSystem],
+						[bars]
+					]
+				]
+			);
+		}
+
+		buildCoordinateSystem();
+		buildBars();
+		if (c.animations)
+			setAnimations();
+		inject();
 	}
 
 	function Line() {
@@ -428,20 +453,19 @@
 						dom(
 							[graph,
 								['line', {
-									'class': cssClass,
-									'x1': (coSysWidth / c.size) * i,
-									'y1': 5,
-									'x2': (coSysWidth / c.size) * i,
-									'y2': -coSysHeight}
-								],
+									class: cssClass,
+									x1: (coSysWidth / c.size) * i,
+									y1: 5,
+									x2: (coSysWidth / c.size) * i,
+									y2: -coSysHeight
+								}],
 								['text', c.keys[i], {
-									'class': 'vectual_coordinate_labels_x',
-									'transform': 'rotate(40 ' + ((coSysWidth / c.size) * i) + ', 10)',
-									'x': ((coSysWidth / c.size) * i),
-									'y': '10'}
-								]
-							]
-							, svgNS);
+									class: 'vectual_coordinate_labels_x',
+									transform: 'rotate(40 ' + ((coSysWidth / c.size) * i) + ', 10)',
+									x: ((coSysWidth / c.size) * i),
+									y: 10
+								}]
+							], svgNS);
 
 					}
 				}
