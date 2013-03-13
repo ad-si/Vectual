@@ -1,4 +1,5 @@
 (function (window, document, undefined) {
+
 	var svg, //SVG DOM-fragment
 		svgNS = "http://www.w3.org/2000/svg", //SVG namespace
 		dom = DOMinate, //DOM-building utility
@@ -41,7 +42,7 @@
 				['g', {
 					'transform': 'translate(' + (0.5 * c.width) + ', ' + (0.5 * c.height) + ')'
 				}], svgNS
-			);
+			)[0];
 
 
 		function init() {
@@ -67,7 +68,7 @@
 					nextx,
 					nexty,
 					size = (((c.sorted.values[i] / c.totalValue) * 360) > 180) ? '0 1,0' : '0 0,0',
-					sector = dom(['g', {'class': "vectual_pie_sector"}], svgNS);
+					sector = dom(['g', {'class': "vectual_pie_sector"}], svgNS)[0];
 
 				function init() {
 
@@ -93,7 +94,7 @@
 							'style': 'stroke-width:' + (radius * 0.015) + ';fill:' + c.colors[i],
 							'd': 'M 0,0 L ' + lastx + ',' + lasty + ' A ' + radius + ',' + radius + ' ' + size + ' ' + nextx + ',' + nexty + ' z'}
 						], svgNS
-					);
+					)[0];
 
 					text = dom(
 						['text', {
@@ -105,7 +106,7 @@
 							'fill': c.colors[i],
 							'transform': 'translate(0, 5)'
 						}], svgNS
-					);
+					)[0];
 
 					title = dom(
 						['title',
@@ -113,7 +114,7 @@
 								c.sorted.values[i] + ' | ' +
 								(Math.round(c.sorted.values[i] / c.totalValue * 100) ) + '%'
 						], svgNS
-					);
+					)[0];
 
 				}
 
@@ -246,9 +247,9 @@
 				['g', {
 					transform: 'translate(' + (graphWidth * 0.1) + ', ' + graphHeight + ')'
 				}], svgNS
-			),
-			coordinateSystem = dom(['g'], svgNS),
-			bars = dom(['g'], svgNS);
+			)[0],
+			coordinateSystem = dom(['g'], svgNS)[0],
+			bars = dom(['g'], svgNS)[0];
 
 
 		function buildCoordinateSystem() {
@@ -331,7 +332,7 @@
 					},
 						['title', c.keys[i] + ':  ' + c.values[i]]
 					], svgNS
-				);
+				)[0];
 
 				function setAnimations() {
 					dom(
@@ -432,7 +433,7 @@
 				['g', {
 					'transform': 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight) + ')'
 				}], svgNS
-			);
+			)[0];
 
 		function init() {
 			dom([svg, [graph]]);
@@ -567,7 +568,7 @@
 
 							, ['title', c.keys[i] + ':  ' + c.values[i]]
 						]
-						, svgNS);
+						, svgNS)[0];
 
 
 					graph.appendChild(circle);
@@ -631,7 +632,7 @@
 					transform: 'translate(' + (0.5 * c.width) + ', ' + (0.5 * c.height) + ')',
 					class: 'vectualTagcloud'
 				}], svgNS
-			);
+			)[0];
 
 		function init() {
 
@@ -853,8 +854,6 @@
 
 		c.range = c.max.value - c.min.value;
 
-		console.log(c);
-
 		//--------------------------------------------------------
 
 		svg = dom(
@@ -914,10 +913,10 @@
 					style: 'font-size:' + (c.height * 0.05) + 'px'
 				}]
 			]
-			, svgNS);
+			, svgNS)[0];
 
 
-		dom([document.getElementById(c.id) , [svg]]);
+		document.getElementById(c.id).appendChild(svg)
 
 		return {
 			pieChart: function () {
