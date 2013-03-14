@@ -1,0 +1,35 @@
+svg.vectual{display:inline-block;margin:0}
+.vectual_background{fill:#323232}
+.vectual_title{font-size:20px;font-family:"Arial",sans-serif;fill:#fff}
+svg.vectual_inline{display:inline-block}
+.vectual_inline_sparkline{fill:none;stroke:#c8c8c8;stroke-width:.8}
+.vectual_inline_sparkline_min{fill:#f00}
+.vectual_inline_sparkline_max{fill:#008000}
+.vectual_pie,.vectual_pie_sector_path{stroke:#fff}
+.vectual_pie_text{font-family:"Arial",sans-serif;font-weight:100}
+.vectual_pie_text_single{stroke:#000;fill:#fff}
+.vectual_coordinate_axis_x{stroke:#fff;stroke-width:2}
+.vectual_coordinate_labels_x{font-size:10px;line-height:12px;font-family:"Arial",sans-serif;font-weight:100;fill:#fff}
+.vectual_coordinate_lines_x{stroke:#808080;stroke-width:1}
+.vectual_coordinate_axis_y{stroke:#fff;stroke-width:2}
+.vectual_coordinate_labels_y{font-size:10px;line-height:12px;font-family:"Arial",sans-serif;font-weight:100;fill:#fff}
+.vectual_coordinate_lines_y{stroke:#808080;stroke-width:1}
+.vectual_bar_bar{fill:#0096fa}
+.vectual_line_line{fill:none;stroke:#60ff00;stroke-width:3;stroke-linejoin:round}
+.vectual_line_dot{fill:#60ff00;stroke:#60ff00;stroke-width:0}
+.vectual_scatter_dot{fill:#f00;stroke:#f00}
+.vectual_tagcloud_text{font-weight:500;font-family:"Arial",sans-serif;fill:#fff}
+.vectual_table{background:none;font:200 12px/12px "Arial",sans-serif;margin:10px 0 0 0}
+.vectual_table table,.vectual_table th{background:#96b4b4;padding:2px}
+.vectual_table td{padding:2px}
+.vectual_table tr:nth-child(odd){background-color:#787878}
+.vectual_table tr:nth-child(even){background-color:#b4b4b4}
+.circlexx{opacity:0;fill:#e0e0e0;stroke:#000;stroke-width:.5}
+.subxx{opacity:0;stroke-width:.3}
+.unxx{opacity:0;fill:#e0e0e0;stroke:#000;stroke-width:.3}
+.noxx{opacity:0;fill:#e0e0e0;stroke:#000;stroke-width:.5}
+.landxx{fill:#e6e6e6;stroke:#323232;stroke-width:.5;fill-rule:evenodd}
+.coastxx{fill:#e6e6e6;stroke:#fff;stroke-width:.3;fill-rule:evenodd}
+.limitxx{fill:#e6e6e6;stroke:#fff;stroke-width:0;fill-rule:evenodd}
+.antxx{fill:#e6e6e6;stroke:#fff;stroke-width:0;fill-rule:evenodd}
+.oceanxx{opacity:1;color:#00f;fill:#fff;stroke:#000;stroke-width:.5;stroke-miterlimit:1}

@@ -1,3 +1,5 @@
+/*@preserve vectual by Adrian Sieber*/
+
 (function (window, document, undefined) {
 
 	var svg, //SVG DOM-fragment

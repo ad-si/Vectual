@@ -2,49 +2,63 @@
 
 A simple to use charting library. It visualizes data and helps you to understand it.
 
+**Attention:**
+This software is still a alpha version. It might not work as expected and the API may change at any time.
+
+
 ## Good Looking
+
 Display beautiful charts and customise them to fit perfectly to your needs.
 
-![Charts description](http://vectual.org/img/overview.svg) 
-<!--
-### Piecharts
+
+## Visualisations
+
+### Piechart
 The most ubiquitious chart with an amazing fan out animation.
 You can also explode certain sectors to highlight them.
 
-### Barcharts
+### Barchart
 The right tool to display few data clearly arranged but still appealing
 
-### Graphs
+### Linegraph
 Watch your stocks reaching new hights.
 You can also hover the Graph to get detailed Information.
 
-### Tagclouds
+### Tagcloud
 Need a short overview on whats hot or not?
 Then you might like the awesome tagcloud feature.
 
-### Maps
+### Map
 Is my video more popular in Asia or in Europe?
 It's never been easier to display the answer.
 
-### Tables
+### Table
 There is nothing more convenient than a simple table to display exact values.
 Customise it to show just the relevant information.
 
 ### Export
 You want to integrate the pretty charts in your e-mails, presentations or e-books?
 No problem! Export them as svg images!
--->
 
 
-## Modern
-In contrast to other charting libraries, which are build upon flash or are commercial,
-Vectual is solely based on the newest web standards!
-So even your cell phone and your tablet are able to display the beautiful charts!
+## Usage
 
-## Visions
-The best part is, that Vectual doesn't have to be limited to static visualization.
-Imagine realtime charts, multidimensional charts or even charts which can be played like a video
-to show certain data over time!
+1. Load `vectual.css` in the head tag of your website
 
-## Contribute
-I'd be really happy if you check out the Code, fork it and send me some pull requests! =)
+1. Include [DOMinate](https://github.com/adius/DOMinate)
+
+1. Include `vectual.js` (or `vectual.min.js`) after DOMinate and before your code to draw the graphs
+
+
+To draw a vectual graph with the default configuration (in vectual.js) simply invoke it like this:
+
+	vectual(data).pieChart()
+
+Alternative visualisastion are:
+- `.barChart()`
+- `.lineChart()`
+- `.tagCloud()`
+- `.scatterChart()`
+- `.map()`
+- `.table()`
+
