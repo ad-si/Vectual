@@ -13,4 +13,4 @@ var fruitConsumption = {
 		Orange: 34,
 		Kiwi: 65
 	}
-};
+}

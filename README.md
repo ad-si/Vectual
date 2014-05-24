@@ -1,4 +1,4 @@
-#vectual.js
+# Vectual
 
 A simple to use charting library. It visualizes data and helps you to understand it.
 
@@ -14,29 +14,42 @@ Display beautiful charts and customise them to fit perfectly to your needs.
 ## Visualisations
 
 ### Piechart
+
 The most ubiquitious chart with an amazing fan out animation.
 You can also explode certain sectors to highlight them.
 
+
 ### Barchart
+
 The right tool to display few data clearly arranged but still appealing
 
+
 ### Linegraph
+
 Watch your stocks reaching new hights.
 You can also hover the Graph to get detailed Information.
 
+
 ### Tagcloud
+
 Need a short overview on whats hot or not?
 Then you might like the awesome tagcloud feature.
 
+
 ### Map
+
 Is my video more popular in Asia or in Europe?
 It's never been easier to display the answer.
 
+
 ### Table
+
 There is nothing more convenient than a simple table to display exact values.
 Customise it to show just the relevant information.
 
+
 ### Export
+
 You want to integrate the pretty charts in your e-mails, presentations or e-books?
 No problem! Export them as svg images!
 
