@@ -581,9 +581,9 @@
 			function setDots () {
 
 				var circle,
-				    a
+				    i
 
-				for (var i = 0; i < config.size; i++) {
+				for (i = 0; i < config.size; i++) {
 
 					circle = dom(
 						['circle', {
@@ -689,13 +689,8 @@
 			    points = [],
 			    i,
 			    b,
-			    u,
 			    x,
-			    y,
-			    pos_x = [],
-			    pos_y = [],
-			    area_x = [],
-			    area_y = []
+			    y
 
 
 			function calculatePoints () {
@@ -827,7 +822,6 @@
 	vectual = function v (localConfig) {
 
 		var i,
-		    a,
 		    defs,
 		    size,
 		    text,

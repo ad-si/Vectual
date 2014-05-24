@@ -13,27 +13,35 @@ Display beautiful charts and customise them to fit perfectly to your needs.
 
 ## Visualisations
 
-### Piechart
+### Pie chart
 
-The most ubiquitious chart with an amazing fan out animation.
+The most ubiquitous chart with an amazing fan out animation.
 You can also explode certain sectors to highlight them.
 
+![Pie Chart](img/pieChart.png)
 
-### Barchart
+
+### Bar chart
 
 The right tool to display few data clearly arranged but still appealing
 
-
-### Linegraph
-
-Watch your stocks reaching new hights.
-You can also hover the Graph to get detailed Information.
+![Bar Chart](img/barChart.png)
 
 
-### Tagcloud
+### Line chart
+
+Watch your stocks reaching new heights.
+You can also hover the chart to get detailed Information.
+
+![Line Chart](img/lineChart.png)
+
+
+### Tag cloud
 
 Need a short overview on whats hot or not?
-Then you might like the awesome tagcloud feature.
+Then you might like the awesome tag cloud feature.
+
+![Tag Cloud](img/tagCloud.png)
 
 
 ### Map
@@ -58,7 +66,7 @@ No problem! Export them as svg images!
 
 1. Load `vectual.css` in the head tag of your website
 
-1. Include [DOMinate](https://github.com/adius/DOMinate)
+1. Include [Shaven](https://github.com/adius/shaven)
 
 1. Include `vectual.js` (or `vectual.min.js`) after DOMinate and before your code to draw the graphs
 
@@ -67,7 +75,9 @@ To draw a vectual graph with the default configuration (in vectual.js) simply in
 
 	vectual(data).pieChart()
 
-Alternative visualisastion are:
+
+Alternative visualizations are:
+
 - `.barChart()`
 - `.lineChart()`
 - `.tagCloud()`
