@@ -1,52 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-	<meta http-equiv=content-type content=text/html; charset=utf-8>
+	<meta charset="UTF-8">
 	<title>vectual.js</title>
-	<meta name=description content="vectual.js - the open source charting library">
+	<meta name=description
+	      content="vectual.js - the open source charting library">
 	<meta name=keywords content="vectual, vectual.js, Charting Library">
 
 	<link rel=icon href=img/favicon.png type=image/png>
-	<link rel=stylesheet href=css/screen.css type=text/css>
-	<link rel=stylesheet href=css/vectual.css type=text/css>
 
-	<script src=https://raw.github.com/adius/DOMinate/master/src/dominate.extended.js type=text/javascript></script>
-	<script src=https://raw.github.com/adius/vectual.js/dev/js/vectual.js type=text/javascript></script>
-	<script src=http://code.jquery.com/jquery-1.8.0.min.js></script>
+	<link rel=stylesheet
+	      href=bower_components/github-fork-ribbon-css/gh-fork-ribbon.css>
+	<link rel=stylesheet href=css/screen.css>
+	<link rel=stylesheet href=css/vectual.css>
+
+	<script src="//gitcdn.org/libs/bitcoinate/0.2.1/index.min.js"></script>
 </head>
 
 <body>
-<a id=githubRibbon href=http://github.com/adius/vectual>
-	<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub">
-</a>
+<div class="github-fork-ribbon-wrapper right">
+	<div class="github-fork-ribbon">
+		<a href="https://github.com/adius/vectual">Fork me on GitHub</a>
+	</div>
+</div>
 
 <div id=wrapper>
 
 	<div id=nav>
-		<h1 id=logo><a href="/">vectual.js</a></h1>
+		<h1 id=logo>
+			<a href="/">vectual.js</a>
+		</h1>
+
 		<a href=#about>about</a>
 		<a href=#demos>demos</a>
 		<a href=#generator title=generator>generator</a>
 		<a href=#documentation>documentation</a>
+
 		<div id=generator>
-			<div id=showcase>
-			</div>
+
+			<div id=showcase></div>
+
 			<div id=controls>
 				<form>
-					<label for=type>Type:</label><select id=type>
-					<option>Pie</option>
-					<option>Bar</option>
-					<option>Line</option>
-					<option>Tagcloud</option>
-					<option>Map</option>
-					<option>Table</option>
-				</select><br>
-					<label for=width>Width:</label><input id=width type=number><br>
-					<label for=height>Height:</label><input id=height type=number><br>
-					<label for=animations>Animations:</label><input id=animations type=checkbox><br>
-					<label for=inline>Inline:</label><input id=inline type=checkbox><br>
-					<label for=data>Data:</label><textarea id=data placeholder="JSON Object"></textarea><br>
+					<label for=type>Type:</label>
+					<select id=type>
+						<option>Pie</option>
+						<option>Bar</option>
+						<option>Line</option>
+						<option>Tagcloud</option>
+						<option>Map</option>
+						<option>Table</option>
+					</select>
+					<br>
+					<label for=width>Width:</label>
+					<input id=width type=number>
+					<br>
+					<label for=height>Height:</label>
+					<input id=height type=number>
+					<br>
+					<label for=animations>Animations:</label>
+					<input id=animations type=checkbox>
+					<br>
+					<label for=inline>Inline:</label>
+					<input id=inline type=checkbox>
+					<br>
+					<label for=data>Data:</label>
+					<textarea id=data placeholder="JSON Object"></textarea>
+					<br>
 					<input type=submit value=safe>
 				</form>
 			</div>
@@ -55,65 +75,89 @@
 
 	<div id=wrapcontent>
 		<div id=home>
+
 			<div id=banner></div>
+
 			<h2 id=about>about</h2>
 
 			<div id=description>
 				<h3>What is vectual?</h3>
 
 				<p>vectual is a powerful tool that helps you to visualize data.
-					Display your data as beautiful pie-, bar-, line-, scattercharts
+					Display your data as beautiful pie-, bar-, line-,
+					scattercharts
 					or even as tagclouds and in maps!
-					And if that wasn't enough vectual is real open source software
-					and solely based on the most modern web standards like HTML5 and SVG!</p>
+					And if that wasn't enough vectual is real open source
+					software
+					and solely based on the most modern web standards like HTML5
+					and SVG!</p>
 
 				<h3>Good Looking</h3>
 
-				<p>Display beautiful charts and customise them to fit perfectly to your needs. </p>
+				<p>Display beautiful charts and customise them to fit perfectly
+					to your needs. </p>
 
 				<h3>Modern</h3>
 
-				<p>In contrast to other charting libraries, which are build upon flash,
+				<p>In contrast to other charting libraries, which are build upon
+					flash,
 					vectual is solely based on the newest web standards!
-					So even your cell phones and your tablets are able to display the beautiful charts!</p>
+					So even your cell phones and your tablets are able to
+					display the beautiful charts!</p>
 
 				<h3>Open Source</h3>
 
 				<p>The whole Library will get released as Open Source Software.
-					So you will be able to use it for all of your projects - both non-profit and commercial!</p>
+					So you will be able to use it for all of your projects -
+					both non-profit and commercial!</p>
 
 				<h3>Technology</h3>
 
 				<p>A PHP library is dynamically generating SVG Images.
 					The fancy animations are implemented through SMIL.
-					At the moment it's working without any Javascript and I try to avoid it as much as possible,
-					though I will most likely have to implement certain parts with javascript as the functionality of
+					At the moment it's working without any Javascript and I try
+					to avoid it as much as possible,
+					though I will most likely have to implement certain parts
+					with javascript as the functionality of
 					SMIL
 					isn't fully developed yet.</p>
 
 				<h3>Contribution</h3>
 
-				<p>Please help me to make the world a little more open and help me
+				<p>Please help me to make the world a little more open and help
+					me
 					to build this awesome piece of software!
-					The most important ingredient for such a huge project is time
-					and you can give me the time it takes to iron out such a powerful tool!
-					By pledging you guarantee that I don't have to spend my leisure time with pointless summer jobs,
-					just to be able to pay the next slice of pizza, all the energy drinks a programmer needs
+					The most important ingredient for such a huge project is
+					time
+					and you can give me the time it takes to iron out such a
+					powerful tool!
+					By pledging you guarantee that I don't have to spend my
+					leisure time with pointless summer jobs,
+					just to be able to pay the next slice of pizza, all the
+					energy drinks a programmer needs
 					or to finance my studies!
-					Furthermore I need to purchase domains and pay the servers to be able to get vectual running!</p>
+					Furthermore I need to purchase domains and pay the servers
+					to be able to get vectual running!</p>
 
-				<p>Please subscribe and donate bitcoins to 1AA7UhkdKswDZ1vzM3LLLQrea5mAFxWi5R to support me!</p>
+				<p>Please subscribe and donate bitcoins to
+					1AA7UhkdKswDZ1vzM3LLLQrea5mAFxWi5R to support me!</p>
 
 				<h3>Visions</h3>
 
 				<p>vectual doesn't have to be limited to static visualization.
-					Imagine realtime charts, multidimensional charts or even charts which can be played like a video
-					to show certain data over time! But all those ideas, plans and visions which grew in my head
-					over the last few month need your support to get realized!</p>
+					Imagine realtime charts, multidimensional charts or even
+					charts which can be played like a video
+					to show certain data over time! But all those ideas, plans
+					and visions which grew in my head
+					over the last few month need your support to get
+					realized!</p>
 
 				<h3>Thank you very much for your support!</h3>
 
-				<button id=bitcoinateButton class=bitcoinate data-size=30 data-address=wtwegw45teg>bitcoinate</button>
+				<button class="bitcoinate" data-size="30"
+				        data-address="1LFk8i74MTBEKfViAfvKsbX4mG2iFfRiBF">
+					<span></span>bitcoinate
+				</button>
 			</div>
 
 			<h2 id=demos>demos</h2>
@@ -123,11 +167,13 @@
 	</div>
 </div>
 
-<script src=js/functions.js type=text/javascript></script>
-<script src=https://raw.github.com/adius/bitcoinate/master/js/bitcoinate.min.js></script>
+<script src=bower_components/jquery/dist/jquery.js></script>
+<script src=bower_components/shaven/shaven.js></script>
+<script src=https://rawgit.com/adius/vectual/dev/vectual.js></script>
+<script src=js/functions.js></script>
 
-<!-- Piwik -->
-<!--<script type=text/javascript>
+<!--
+<script type=text/javascript>
 		var pkBaseURL = ((https: == document.location.protocol) ? https://piwik.adriansieber.com/ : http://piwik.adriansieber.com/);
 		document.write(unescape(%3Cscript src=' + pkBaseURL + piwik.js' type='text/javascript'%3E%3C/script%3E));
 	</script>
@@ -139,7 +185,7 @@
 		} catch( err ) {}
 	</script>
 	<noscript><p><img src=http://piwik.adriansieber.com/piwik.php?idsite=5 style=border:0 alt= ></p></noscript>
-	 End Piwik Tracking Code -->
+-->
 
 </body>
 </html>

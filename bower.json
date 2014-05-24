@@ -1,0 +1,34 @@
+{
+  "name": "vectual",
+  "version": "0.1.0",
+  "homepage": "http://vectual.org",
+  "authors": [
+    "adius <mail@adriansieber.com>"
+  ],
+  "description": "The open source charting library",
+  "keywords": [
+    "charts",
+    "charting",
+    "open",
+    "source",
+    "piechart",
+    "barchart",
+    "linegraph",
+    "tagcloud"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "main": "index.html",
+  "dependencies": {
+    "shaven": "~0.4.0",
+    "github-fork-ribbon-css": "~0.1.0",
+    "jquery": "~2.1.1"
+  }
+}

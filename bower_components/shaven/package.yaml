@@ -1,0 +1,124 @@
+name: shaven
+version: 0.4.0
+description: Shaven is a simple DOM building utility and template engine based upon JsonML
+homepage: http://adriansieber.com/shaven
+
+keywords:
+  - template
+  - DOM building
+
+bugs:
+  url: https://github.com/adius/shaven/issues
+
+license: MIT
+
+author:
+  name: adius
+  email: mail@adriansieber.com
+  url: http://adriansieber.com
+
+main: src/index.js
+
+repository:
+  type: git
+  url: https://github.com/adius/shaven.git
+
+scripts:
+  test: ./node_modules/.bin/mocha -b --inline-diffs -R spec
+  prepublish: ./node_modules/.bin/jake -B && npm test && ./node_modules/.bin/jscs .
+
+dependencies:
+  escape-html: ~1.0.1
+
+devDependencies:
+  jake: ~0.7.12
+  uglify-js: ~2.4.13
+  mocha: ~1.18.2
+  jsdom: ~0.10.5
+  jshint: ~2.5.0
+  jscs: ~1.4.0
+  js-yaml: ~3.0.2
+
+engines:
+  node: ~0.10.26
+
+jshintConfig:
+  bitwise: true
+  camelcase: true
+  curly: false
+  eqeqeq: true
+  es3: false
+  forin: true
+  freeze: true
+  immed: true
+  indent: 4
+  latedef: true
+  newcap: true
+  noarg: true
+  noempty: true
+  nonbsp: true
+  nonew: true
+  plusplus: false
+  quotmark: single
+  undef: true
+  unused: true
+  strict: true
+  trailing: true
+  maxparams: 3
+  maxdepth: 4
+  maxstatements: 10
+  maxlen: 100
+
+  asi: true
+
+# Escaped rules should be applied but don't work properly yet
+jscsConfig:
+  excludeFiles: [node_modules/**, bower_components/**, "*.min.js"]
+  requireCurlyBraces: []
+  requireSpaceAfterKeywords:
+    #[if, else, for, while, do, switch, return, try, catch]
+    [if, for, while, do, switch, return, try, catch]
+  requireSpaceBeforeBlockStatements: true
+  #requireParenthesesAroundIIFE: true
+  requireSpacesInFunctionExpression:
+    beforeOpeningRoundBrace: true
+    beforeOpeningCurlyBrace: true
+  requireMultipleVarDecl: onevar
+  requireBlocksOnNewline: true
+  disallowEmptyBlocks: true
+  disallowSpacesInsideArrayBrackets: true
+  disallowSpacesInsideObjectBrackets: true
+  disallowSpacesInsideParentheses: true
+  disallowQuotedKeysInObjects: true
+  disallowDanglingUnderscores: true
+  disallowSpaceAfterObjectKeys: true
+  requireCommaBeforeLineBreak: true
+  requireOperatorBeforeLineBreak:
+    ["?", +, /, "*", :, =, ==, ===, "!=", "!==", ">", ">=", <, <=]
+  disallowLeftStickedOperators:
+    ["?", +, /, "*", :, =, ==, ===, "!=", "!==", ">", ">=", <, <=]
+  disallowRightStickedOperators:
+    ["?", +, /, "*", :, =, ==, ===, "!=", "!==", ">", ">=", <, <=]
+  requireLeftStickedOperators: [,]
+  disallowSpaceAfterPrefixUnaryOperators: [++, --, +, "-", ~, "!"]
+  disallowSpaceBeforePostfixUnaryOperators: [++, --]
+  requireSpaceBeforeBinaryOperators: [+, "-", /, "*", =, ==, ===, "!=", "!=="]
+  requireSpaceAfterBinaryOperators: [+, "-", /, "*", =, ==, ===, "!=", "!=="]
+  disallowImplicitTypeConversion: [numeric, boolean, binary]
+  requireCamelCaseOrUpperCaseIdentifiers: true
+  disallowKeywords: [with]
+  disallowMultipleLineStrings: true
+  validateLineBreaks: LF
+  validateQuoteMarks: "'"
+  #validateIndentation: "\t"
+  disallowMixedSpacesAndTabs: smart
+  disallowTrailingWhitespace: true
+  disallowTrailingComma: true
+  requireKeywordsOnNewLine: [else]
+  requireLineFeedAtFileEnd: true
+  maximumLineLength: 100
+  requireCapitalizedConstructors: true
+  #safeContextKeyword: [that, self]
+  requireDotNotation: true
+  disallowYodaConditions: true
+
