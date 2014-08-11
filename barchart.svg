@@ -1,0 +1,379 @@
+<svg class="vectual" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+		width="319" height="230" >
+		<defs>
+			<linearGradient id="rect_background" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(80,80,80); stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(40,40,40); stop-opacity:1"/>
+			</linearGradient>
+		</defs>		
+		<rect x="0" y="0" rx="14" ry="14" height="230" width="319" fill="rgba(0,0,0,0)" /><g id="toolbar_container" transform="translate(199, 4.6) scale(0.7)"></g><g transform="translate(26.477, 164.45)"><line
+				x1="-5" y1="-0"
+				x2="264.77" y2="-0" 
+				style="stroke:grey;stroke-width:2;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-0"
+					transform="translate(0, 3.4530357142857)" >
+					5
+				</text><line
+				x1="-5" y1="-10.381944444444"
+				x2="264.77" y2="-10.381944444444" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-10.381944444444"
+					transform="translate(0, 3.4530357142857)" >
+					10
+				</text><line
+				x1="-5" y1="-20.763888888889"
+				x2="264.77" y2="-20.763888888889" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-20.763888888889"
+					transform="translate(0, 3.4530357142857)" >
+					15
+				</text><line
+				x1="-5" y1="-31.145833333333"
+				x2="264.77" y2="-31.145833333333" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-31.145833333333"
+					transform="translate(0, 3.4530357142857)" >
+					20
+				</text><line
+				x1="-5" y1="-41.527777777778"
+				x2="264.77" y2="-41.527777777778" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-41.527777777778"
+					transform="translate(0, 3.4530357142857)" >
+					25
+				</text><line
+				x1="-5" y1="-51.909722222222"
+				x2="264.77" y2="-51.909722222222" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-51.909722222222"
+					transform="translate(0, 3.4530357142857)" >
+					30
+				</text><line
+				x1="-5" y1="-62.291666666667"
+				x2="264.77" y2="-62.291666666667" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-62.291666666667"
+					transform="translate(0, 3.4530357142857)" >
+					35
+				</text><line
+				x1="-5" y1="-72.673611111111"
+				x2="264.77" y2="-72.673611111111" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-72.673611111111"
+					transform="translate(0, 3.4530357142857)" >
+					40
+				</text><line
+				x1="-5" y1="-83.055555555556"
+				x2="264.77" y2="-83.055555555556" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-83.055555555556"
+					transform="translate(0, 3.4530357142857)" >
+					45
+				</text><line
+				x1="-5" y1="-93.4375"
+				x2="264.77" y2="-93.4375" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-93.4375"
+					transform="translate(0, 3.4530357142857)" >
+					50
+				</text><line
+				x1="-5" y1="-103.81944444444"
+				x2="264.77" y2="-103.81944444444" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-103.81944444444"
+					transform="translate(0, 3.4530357142857)" >
+					55
+				</text><line
+				x1="-5" y1="-114.20138888889"
+				x2="264.77" y2="-114.20138888889" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-114.20138888889"
+					transform="translate(0, 3.4530357142857)" >
+					60
+				</text><line
+				x1="-5" y1="-124.58333333333"
+				x2="264.77" y2="-124.58333333333" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-124.58333333333"
+					transform="translate(0, 3.4530357142857)" >
+					65
+				</text><line
+				x1="-5" y1="-134.96527777778"
+				x2="264.77" y2="-134.96527777778" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-134.96527777778"
+					transform="translate(0, 3.4530357142857)" >
+					70
+				</text><line
+				x1="-5" y1="-145.34722222222"
+				x2="264.77" y2="-145.34722222222" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-145.34722222222"
+					transform="translate(0, 3.4530357142857)" >
+					75
+				</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 0, 10)" 
+				x="0" y="10">
+							January
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 22.064166666667, 10)" 
+				x="22.064166666667" y="10">
+							February
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 44.128333333333, 10)" 
+				x="44.128333333333" y="10">
+							March
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 66.1925, 10)" 
+				x="66.1925" y="10">
+							April
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 88.256666666667, 10)" 
+				x="88.256666666667" y="10">
+							May
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 110.32083333333, 10)" 
+				x="110.32083333333" y="10">
+							June
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 132.385, 10)" 
+				x="132.385" y="10">
+							July
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 154.44916666667, 10)" 
+				x="154.44916666667" y="10">
+							August
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 176.51333333333, 10)" 
+				x="176.51333333333" y="10">
+							September
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 198.5775, 10)" 
+				x="198.5775" y="10">
+							Oktober
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 220.64166666667, 10)" 
+				x="220.64166666667" y="10">
+							November
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 242.70583333333, 10)" 
+				x="242.70583333333" y="10">
+							Dezember
+						</text><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 264.77, 10)" 
+				x="264.77" y="10">
+							
+						</text> 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="0"
+							y="0"
+							height="0"
+							width="15.444916666667" 
+							><animate attributeName="height" to="0"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="0"
+							y="0"
+							height="0"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>January:  5</title><animate attributeName="height" to="0"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="22.064166666667"
+							y="0"
+							height="45.680555555556"
+							width="15.444916666667" 
+							><animate attributeName="height" to="45.680555555556"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="22.064166666667"
+							y="0"
+							height="45.680555555556"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>February:  27</title><animate attributeName="height" to="45.680555555556"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="44.128333333333"
+							y="0"
+							height="12.458333333333"
+							width="15.444916666667" 
+							><animate attributeName="height" to="12.458333333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="44.128333333333"
+							y="0"
+							height="12.458333333333"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>March:  11</title><animate attributeName="height" to="12.458333333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="66.1925"
+							y="0"
+							height="43.604166666667"
+							width="15.444916666667" 
+							><animate attributeName="height" to="43.604166666667"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="66.1925"
+							y="0"
+							height="43.604166666667"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>April:  26</title><animate attributeName="height" to="43.604166666667"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="88.256666666667"
+							y="0"
+							height="37.375"
+							width="15.444916666667" 
+							><animate attributeName="height" to="37.375"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="88.256666666667"
+							y="0"
+							height="37.375"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>May:  23</title><animate attributeName="height" to="37.375"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="110.32083333333"
+							y="0"
+							height="49.833333333333"
+							width="15.444916666667" 
+							><animate attributeName="height" to="49.833333333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="110.32083333333"
+							y="0"
+							height="49.833333333333"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>June:  29</title><animate attributeName="height" to="49.833333333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="132.385"
+							y="0"
+							height="64.368055555556"
+							width="15.444916666667" 
+							><animate attributeName="height" to="64.368055555556"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="132.385"
+							y="0"
+							height="64.368055555556"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>July:  36</title><animate attributeName="height" to="64.368055555556"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="154.44916666667"
+							y="0"
+							height="62.291666666667"
+							width="15.444916666667" 
+							><animate attributeName="height" to="62.291666666667"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="154.44916666667"
+							y="0"
+							height="62.291666666667"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>August:  35</title><animate attributeName="height" to="62.291666666667"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="176.51333333333"
+							y="0"
+							height="105.89583333333"
+							width="15.444916666667" 
+							><animate attributeName="height" to="105.89583333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="176.51333333333"
+							y="0"
+							height="105.89583333333"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>September:  56</title><animate attributeName="height" to="105.89583333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="198.5775"
+							y="0"
+							height="68.520833333333"
+							width="15.444916666667" 
+							><animate attributeName="height" to="68.520833333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="198.5775"
+							y="0"
+							height="68.520833333333"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>Oktober:  38</title><animate attributeName="height" to="68.520833333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="220.64166666667"
+							y="0"
+							height="124.58333333333"
+							width="15.444916666667" 
+							><animate attributeName="height" to="124.58333333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="220.64166666667"
+							y="0"
+							height="124.58333333333"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>November:  65</title><animate attributeName="height" to="124.58333333333"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						 
+						<rect transform="translate(3,3), scale(1,-1)" opacity="0" fill="black"
+							x="242.70583333333"
+							y="0"
+							height="149.5"
+							width="15.444916666667" 
+							><animate attributeName="height" to="149.5"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></rect>
+						<rect fill="rgb(0,150,250)" opacity="0"
+							x="242.70583333333"
+							y="0"
+							height="149.5"
+							width="15.444916666667" 
+							transform="scale(1,-1)"><title>Dezember:  77</title><animate attributeName="height" to="149.5"		
+									begin="0" dur="0.8s" fill="freeze" />
+								<animate attributeName="opacity" attributeType="CSS"
+									begin="0s" to="0.8" dur="0.8s" additive="replace" fill="freeze"/><animateColor attributeName="fill" to="rgb(100,210,255)" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animateColor attributeName="fill" to="rgb(0,150,250)" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></rect>
+						</g></svg>

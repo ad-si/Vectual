@@ -1,0 +1,30 @@
+Vectual - A Open Source Charting Library
+Hi, I'm Adrian Sieber and I'd like to introduce you to vectual
+Vectual is an open source charting library which visualizes your data and helps you to understand it.
+No matter if you have your own website or you’re selling products, you always generate tons of data. But unlike the guys from Matrix we aren't able to see what does numbers mean just by watching them streaming down the screen.
+We need a tool which converts all those values and numbers to charts which you can finally understand and thats what vectual does.
+But let’s take a closer look:
+You can display your data as beautiful pie charts, bar charts, line charts, scatter charts, tagclouds, maps and tables!
+You can even display the charts inline, in the form of sparklines, tiny bar-charts or tiny pie-charts! 
+Another great feature of Vectual is, that it’s solely based on the newest web standards like HTML 5 and scalable vector graphics That means that even your smartphone and your tablet are able to display the fancy charts! 
+Let me show you
+
+What i need now is the time it takes to iron out such a powerful tool! Please make it possible for me to purchase domains and servers and more important to spend every single day of my summer holidays coding.
+
+ With your help I don't have to waste my time with pointless summer jobs just to be able to finance my studies, pay the next slice of pizza or to pay all the energy drinks I need for non-stop coding!
+Please help me to make the world a little more open and help me to build an awesome piece of software! 
+I'd also like you to keep in mind that the functionality of vectual is only limited by the amount of funding you can effort. The more you pledge the more time I'll have to bring vectual to perfection.
+Just imagine realtime charts, multidimensional charts or even charts which can be played like a video to show certain data over time! Nothing is impossible!
+For further information please check out the description below and the website vectual.org!
+...and of course check out the awesome pledges! You will love them!
+Thanks for watching and have a nice day!
+
+
+5$ - Thank you so much for helping this open source project and enriching the World with a powerful piece of software! You will also receive exclusive updates about Vectual! 
+10$ - Receive exclusive updates about Vectual and get your own entry on the supporter site! 
+25$ - receive exclusive updates, get your own link and get exclusive access to the server to check out the beta-version of Vectual. 
+50$ - receive exclusive updates, your own link, exclusive access to the server and a awesome vectual t-shirt! 
+150$ -Get all the above and a custom made t-shirt designed just for you! Send me your data and I will create a awesome t-shirt with your custom Vectual charts! 
+250$ -Get all the above, a custom made t-shirt and a lovely self made picture book about my homeland
+500$ - Get all the above and a exclusive 1 square meter poster hand-designed just for you! Send me your data, tell me your wishes and receive a beautiful hand-made visualization of your data! 
+950$ - Visit me in Lindenberg/Germany and enjoy a one day trip to the most beautiful places in the foothills of the Alps! (Ask me for further information!)

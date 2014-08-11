@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   class="vectual_inline"
+   width="60"
+   height="25"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="sparkline.svg"
+   inkscape:export-filename="/Users/adriansieber/Desktop/sparkline.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"><metadata
+   id="metadata22">
+  <rdf:RDF>
+    <cc:Work
+       rdf:about="">
+      <dc:format>image/svg+xml</dc:format>
+      <dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      <dc:title />
+    </cc:Work>
+  </rdf:RDF>
+</metadata>
+<defs
+   id="defs20" />
+<sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1276"
+   inkscape:window-height="1002"
+   id="namedview18"
+   showgrid="false"
+   inkscape:zoom="2.1213203"
+   inkscape:cx="64.3529"
+   inkscape:cy="-12.910659"
+   inkscape:window-x="4"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg2"
+   inkscape:object-paths="true"
+   inkscape:object-nodes="true"
+   inkscape:snap-smooth-nodes="true"
+   inkscape:snap-object-midpoints="true" />
+
+
+
+	
+		
+			​​​​​<rect
+   class="vectual_background"
+   x="3.6070726"
+   y="3.7111983"
+   height="18"
+   width="54"
+   id="rect4"
+   style="fill:#e6e6e6;fill-opacity:1" />
+
+
+
+​​​​​
+			<line
+   id="line8"
+   style="stroke:#000000;stroke-width:0.5;stroke-opacity:1"
+   y2="3.7111983"
+   x2="3.6070726"
+   y1="21.711199"
+   x1="3.6070726" />
+<line
+   id="line10"
+   style="stroke:#000000;stroke-width:0.49999997;stroke-opacity:1"
+   y2="21.711199"
+   x2="57.607071"
+   y1="21.711199"
+   x1="3.6070726" />
+<polyline
+   id="polyline12"
+   points="0,-6.76923076923 4.5,-3.23076923077 9,-0.769230769231 13.5,0 18,-18 22.5,-9.69230769231 27,-3.07692307692 31.5,-4.46153846154 36,-7.69230769231 40.5,-4.30769230769 45,-9.07692307692 49.5,-4.76923076923 "
+   class="vectual_inline_sparkline"
+   transform="translate(3.6070727,21.711198)"
+   style="fill:none;stroke:#060606;stroke-opacity:1;stroke-linejoin:round;stroke-linecap:butt" />
+<circle
+   sodipodi:ry="2"
+   sodipodi:rx="2"
+   sodipodi:cy="-18"
+   sodipodi:cx="18"
+   d="m 20,-18 c 0,1.104569 -0.895431,2 -2,2 -1.104569,0 -2,-0.895431 -2,-2 0,-1.104569 0.895431,-2 2,-2 1.104569,0 2,0.895431 2,2 z"
+   id="circle14"
+   cy="-18"
+   cx="18"
+   r="2"
+   class="vectual_inline_sparkline_max"
+   transform="matrix(0.75,0,0,0.75,8.1070727,17.211198)"
+   style="fill:#ff0000;fill-opacity:1" />
+<circle
+   sodipodi:ry="2"
+   sodipodi:rx="2"
+   sodipodi:cy="0"
+   sodipodi:cx="13.5"
+   d="m 15.5,0 c 0,1.1045695 -0.895431,2 -2,2 -1.104569,0 -2,-0.8954305 -2,-2 0,-1.1045695 0.895431,-2 2,-2 1.104569,0 2,0.8954305 2,2 z"
+   id="circle16"
+   cy="0"
+   cx="13.5"
+   r="2"
+   class="vectual_inline_sparkline_min"
+   transform="matrix(0.75,0,0,0.75,6.9820727,21.711198)"
+   style="fill:#00ff00;fill-opacity:1" />
+</svg>

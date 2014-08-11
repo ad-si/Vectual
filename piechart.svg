@@ -1,0 +1,273 @@
+<svg class="vectual" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+		width="319" height="230" >
+		<defs>
+			<linearGradient id="rect_background" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(80,80,80); stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(40,40,40); stop-opacity:1"/>
+			</linearGradient>
+		</defs>		
+		<rect x="0" y="0" rx="14" ry="14" height="230" width="319" fill="rgba(0,0,0,0)" /><g id="toolbar_container" transform="translate(199, 4.6) scale(0.7)"></g><g transform="translate(159.5, 115)" >
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 231, 8)"
+							d="M 0,0 L -75.9,0 A 75.9,75.9 0 0,0 -75.695624427047,5.5661874384026 z"
+							transform="rotate(,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values=",0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-96.328088900002" y="3.5369107810796" style="font-size:8.6384112149533px;
+							opacity: 0;" fill="rgb(255, 231, 8)"  stroke="none" stroke-width="-0.062382873609013"
+							transform="translate(-6.152273343222, 0)" >						
+									Apple
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Apple  |  5  |  1.17%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-15.169777779528, 0.55699382379206"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 150, 53)"
+							d="M 0,0 L -75.695624427047,5.5661874384026 A 75.9,75.9 0 0,0 -73.815862757287,17.664325783831 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="4.2056074766355,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-95.250105307276" y="14.79959080356" style="font-size:9.4045046728972px;
+							opacity: 0;" fill="rgb(255, 150, 53)"  stroke="none" stroke-width="-0.096625141691234"
+							transform="translate(-9.1252960520403, 0)" >						
+									Plum
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Plum  |  11  |  2.57%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-15.000016583823, 2.330644221033"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 83, 164)"
+							d="M 0,0 L -73.815862757287,17.664325783831 A 75.9,75.9 0 0,0 -63.796322439539,41.119815699859 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="13.457943925234,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-88.643983810784" y="37.866272369398" style="font-size:10.936691588785px;
+							opacity: 0;" fill="rgb(255, 83, 164)"  stroke="none" stroke-width="-0.12865865677717"
+							transform="translate(-13.195156290575, 0)" >						
+									Lime
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Lime  |  23  |  5.37%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-13.959682489887, 5.9631924991178"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 221, 162)"
+							d="M 0,0 L -63.796322439539,41.119815699859 A 75.9,75.9 0 0,0 -43.888690747598,61.924089209787 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="32.803738317757,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-69.644418887007" y="66.642819319797" style="font-size:11.319738317757px;
+							opacity: 0;" fill="rgb(255, 221, 162)"  stroke="none" stroke-width="-0.13398320797249"
+							transform="translate(-14.029341748868, 0)" >						
+									Peach
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Peach  |  26  |  6.07%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-10.967625021576, 10.494932176346"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 88, 182)"
+							d="M 0,0 L -43.888690747598,61.924089209787 A 75.9,75.9 0 0,0 -16.578819374331,74.067217769762 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="54.672897196262,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-39.163469153494" y="88.078562277454" style="font-size:11.447420560748px;
+							opacity: 0;" fill="rgb(255, 88, 182)"  stroke="none" stroke-width="-0.13562224959131"
+							transform="translate(-14.296591319769, 0)" >						
+									Banana
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Banana  |  27  |  6.31%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-6.1674754572432, 13.870639728733"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 85, 184)"
+							d="M 0,0 L -16.578819374331,74.067217769762 A 75.9,75.9 0 0,0 15.489740088378,74.302610667422 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="77.383177570093,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-0.70753462936867" y="96.390403276199" style="font-size:11.702785046729px;
+							opacity: 0;" fill="rgb(255, 85, 184)"  stroke="none" stroke-width="-0.13872567296531"
+							transform="translate(-14.816636267398, 0)" >						
+									Cherry
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Cherry  |  29  |  6.78%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-0.11142277627853, 15.179591067118"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 22, 76)"
+							d="M 0,0 L 15.489740088378,74.302610667422 A 75.9,75.9 0 0,0 50.009432659925,57.095241877344 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="101.77570093458,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="43.003310070082" y="86.268915444767" style="font-size:12.468878504673px;
+							opacity: 0;" fill="rgb(255, 22, 76)"  stroke="none" stroke-width="-0.14689267761044"
+							transform="translate(-16.277385263857, 0)" >						
+									Melon
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Melon  |  35  |  8.18%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="6.7721748141861, 13.585655975554"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 211, 35)"
+							d="M 0,0 L 50.009432659925,57.095241877344 A 75.9,75.9 0 0,0 71.975801008367,24.08929366345 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="131.21495327103,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="80.245987516577" y="53.405916680545" style="font-size:12.596560747664px;
+							opacity: 0;" fill="rgb(255, 211, 35)"  stroke="none" stroke-width="-0.14811612325214"
+							transform="translate(-16.508281693925, 0)" >						
+									Pineapple
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Pineapple  |  36  |  8.41%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="12.637163388437, 8.4103805796134"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 98, 220)"
+							d="M 0,0 L 71.975801008367,24.08929366345 A 75.9,75.9 0 0,0 73.815862757287,-17.664325783831 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="161.4953271028,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="96.299532632433" y="4.2438736756596" style="font-size:12.851925233645px;
+							opacity: 0;" fill="rgb(255, 98, 220)"  stroke="none" stroke-width="-0.15046423283709"
+							transform="translate(-16.960647139831, 0)" >						
+									Strawberry
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Strawberry  |  38  |  8.88%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="15.165280729517, 0.668326563096"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 70, 40)"
+							d="M 0,0 L 73.815862757287,-17.664325783831 A 75.9,75.9 0 0,0 37.304887321027,-66.0995868517 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="193.45794392523,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="76.973409278288" y="-58.023311807214" style="font-size:15.150205607477px;
+							opacity: 0;" fill="rgb(255, 70, 40)"  stroke="none" stroke-width="-0.16730467587603"
+							transform="translate(-20.58944471434, 0)" >						
+									Grapefruit
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Grapefruit  |  56  |  13.08%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="12.121796736738, -9.1375294184589"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 138, 21)"
+							d="M 0,0 L 37.304887321027,-66.0995868517 A 75.9,75.9 0 0,0 -32.356970354786,-68.657384668071 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="240.56074766355,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="3.5369107810795" y="-96.328088900002" style="font-size:16.299345794393px;
+							opacity: 0;" fill="rgb(255, 138, 21)"  stroke="none" stroke-width="-0.1737772088397"
+							transform="translate(-22.182336999657, 0)" >						
+									Orange
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Orange  |  65  |  15.19%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0.55699382379205, -15.169777779528"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g>
+				
+								
+					<g id="pie_container" >
+						
+						<path opacity="0" stroke="white" stroke-width="1.1385" fill="rgb(255, 161, 156)"
+							d="M 0,0 L -32.356970354786,-68.657384668071 A 75.9,75.9 0 0,0 -75.9,-1.8590138411057E-14 z"
+							transform="rotate(0,0,0)" ><animate attributeName="opacity" attributeType="CSS"
+								to="1" dur="0.6s" fill="freeze"/><animateTransform attributeName="transform" attributeType="XML"
+							type="rotate" dur="1s" calcMode="spline" keySplines="0 0 0 1" values="295.23364485981,0,0; 0,0,0"  
+							additive="replace" fill="freeze" />									
+						</path><text x="-81.40246299139" y="-51.626054158103" style="font-size:17.83153271028px;
+							opacity: 0;" fill="rgb(255, 161, 156)"  stroke="none" stroke-width="-0.18113494569266"
+							transform="translate(-24.143263993538, 0)" >						
+									Kiwi
+								<animate attributeName="opacity" attributeType="CSS"
+								begin="0.5s" from="0" to="1" dur="0.4s" additive="replace" fill="freeze"/>				
+						</text><title>Kiwi  |  77  |  17.99%</title><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="-12.819285510455, -8.1300872689926"
+									dur="0.3s" begin="mouseover"
+									additive="replace" fill="freeze" /><animateTransform attributeName="transform" attributeType="XML"
+									type="translate" to="0,0" dur="0.3s" begin="mouseout"
+									additive="replace" fill="freeze" /></g></g></svg>

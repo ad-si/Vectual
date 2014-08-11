@@ -1,0 +1,215 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=1024"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<title>Vektorgrafiken</title>
+
+	<meta name="description" content=""/>
+	<meta name="author" content="Adrian Sieber"/>
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+	      rel="stylesheet"/>
+
+	<link href="css/screen.css" rel="stylesheet"/>
+
+	<link rel="shortcut icon" href="favicon.png"/>
+	<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+
+<!--
+    
+    Body element is used by impress.js to set some useful class names, that will allow you to detect
+    the support and state of the presentation in CSS or other scripts.
+    
+    First very useful class name is `impress-not-supported`. This class means, that browser doesn't
+    support features required by impress.js, so you should apply some fallback styles in your CSS.
+    It's not necessary to add it manually on this element. If the script detects that browser is not
+    good enough it will add this class, but keeping it in HTML means that users without JavaScript
+    will also get fallback styles.
+    
+    When impress.js script detects that browser supports all required features, this class name will
+    be removed.
+    
+    The class name on body element also depends on currently active presentation step. More details about
+    it can be found later, when `hint` element is being described.
+    
+-->
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+	<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this
+	   presentation.</p>
+
+	<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+	<div id="start" class="step" data-x="-160" data-y="0" data-scale='4'>
+		<h1>Vektorgrafiken</h1>
+	</div>
+
+	<div id="rect" class="step" data-x="-900" data-y="800">
+		<svg>
+			<rect x=0 y=0 height=200 width=200></rect>
+		</svg>
+		<br>
+		<code>&lt;rect&gt;</code>
+	</div>
+
+
+	<div id="circle" class="step" data-x="-600" data-y="800">
+		<svg>
+			<circle cx="100" cy="100" r=100></circle>
+		</svg>
+		<br>
+		<code>&lt;circle&gt;</code>
+	</div>
+
+
+	<div id="ellipse" class="step" data-x="-300" data-y="800">
+		<svg>
+			<ellipse cx="100" cy="100" rx=100 ry=60></ellipse>
+		</svg>
+		<br>
+		<code>&lt;ellipse&gt;</code>
+	</div>
+
+	<div id="polygon" class="step" data-x="0" data-y="800">
+		<svg>
+			<polygon points="0,200 100,0 200,200" ></polygon>
+		</svg>
+		<br>
+		<code>&lt;polygon&gt;</code>
+	</div>
+
+	<div id="polyline" class="step" data-x="300" data-y="800">
+		<svg>
+			<polyline points="10,150 50,60 150,180 190,00" ></line>
+		</svg>
+		<br>
+		<code>&lt;polyline&gt;</code>
+	</div>
+
+	<div id="path" class="step" data-x="600" data-y="800">
+		<svg>
+			<path d="M 10 180 q 100 -300 180 0"  stroke="blue" stroke-width="5" fill="none" ></path>
+		</svg>
+		<br>
+		<code>&lt;path&gt;</code>
+	</div>
+
+	<iframe id="example" class="step" data-x="0" data-y="2400" src="http://jsfiddle.net">
+	</iframe>
+
+	<div id="sources" class="step" data-x="0" data-y="3500">
+		<ul>
+			<li><a href="http://w3schools.com/svg">w3schools.com/svg</a></li>
+			<li><a href="http://w3.org/svg">w3.org/svg</a></li>
+			<li><a href="http://de.wikibooks.org/wiki/SVG">de.wikibooks.org/wiki/SVG</a></li>
+			<li><a href="http://docs.webplatform.org/wiki/svg">docs.webplatform.org/wiki/svg</a></li>
+			<li><a href="http://jsfiddle.net/q4tfy/">jsfiddle.net/q4tfy/</a></li>
+
+		</ul>
+	</div>
+
+
+	<div id="twitter" class="step" data-x="0" data-y="4500">
+		<img src="twitter_logo.svg" alt="twitter logo">
+		<h1>@AdrianSieber</h1>
+	</div>
+
+	<!--
+
+		Last, but not least.
+
+		To make all described above really work, you need to include impress.js in the page.
+		I strongly encourage to minify it first.
+
+		In here I just include full source of the script to make it more readable.
+
+		You also need to call a `impress().init()` function to initialize impress.js presentation.
+		And you should do it in the end of your document. Not only because it's a good practice, but also
+		because it should be done when the whole document is ready.
+		Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
+
+	-->
+	<script src="js/impress.js"></script>
+	<script>impress().init();</script>
+
+	<!--
+
+		The `impress()` function also gives you access to the API that controls the presentation.
+
+		Just store the result of the call:
+
+			var api = impress();
+
+		and you will get three functions you can call:
+
+			`api.init()` - initializes the presentation,
+			`api.next()` - moves to next step of the presentation,
+			`api.prev()` - moves to previous step of the presentation,
+			`api.goto( idx | id | element, [duration] )` - moves the presentation to the step given by its index number
+					id or the DOM element; second parameter can be used to define duration of the transition in ms,
+					but it's optional - if not provided default transition duration for the presentation will be used.
+
+		You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+		Don't worry, it wont initialize the presentation again.
+
+		For some example uses of this API check the last part of the source of impress.js where the API
+		is used in event handlers.
+
+	-->
+</div>
+</body>
+</html>
+
+<!--
+    
+    Now you know more or less everything you need to build your first impress.js presentation, but before
+    you start...
+    
+    Oh, you've already cloned the code from GitHub?
+    
+    You have it open in text editor?
+    
+    Stop right there!
+    
+    That's not how you create awesome presentations. This is only a code. Implementation of the idea that
+    first needs to grow in your mind.
+    
+    So if you want to build great presentation take a pencil and piece of paper. And turn off the computer.
+    
+    Sketch, draw and write. Brainstorm your ideas on a paper. Try to build a mind-map of what you'd like
+    to present. It will get you closer and closer to the layout you'll build later with impress.js.
+    
+    Get back to the code only when you have your presentation ready on a paper. It doesn't make sense to do
+    it earlier, because you'll only waste your time fighting with positioning of useless points.
+    
+    If you think I'm crazy, please put your hands on a book called "Presentation Zen". It's all about 
+    creating awesome and engaging presentations.
+    
+    Think about it. 'Cause impress.js may not help you, if you have nothing interesting to say.
+    
+-->
+
+<!--
+    
+    Are you still reading this?
+    
+    For real?
+    
+    I'm impressed! Feel free to let me know that you got that far (I'm @bartaz on Twitter), 'cause I'd like
+    to congratulate you personally :)
+    
+    But you don't have to do it now. Take my advice and take some time off. Make yourself a cup of coffee, tea,
+    or anything you like to drink. And raise a glass for me ;)
+    
+    Cheers!
+    
+-->
+

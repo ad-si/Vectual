@@ -1,0 +1,253 @@
+<svg class="vectual" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+		width="319" height="230" >
+		<defs>
+			<linearGradient id="rect_background" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(80,80,80); stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(40,40,40); stop-opacity:1"/>
+			</linearGradient>
+		</defs>		
+		<rect x="0" y="0" rx="14" ry="14" height="230" width="319" fill="rgba(0,0,0,0)" /><g id="toolbar_container" transform="translate(199, 4.6) scale(0.7)"></g><g transform="translate(26.477, 164.45)"><line
+				x1="-5" y1="-0"
+				x2="264.77" y2="-0" 
+				style="stroke:grey;stroke-width:2;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-0"
+					transform="translate(0, 3.4530357142857)" >
+					5
+				</text><line
+				x1="-5" y1="-10.381944444444"
+				x2="264.77" y2="-10.381944444444" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-10.381944444444"
+					transform="translate(0, 3.4530357142857)" >
+					10
+				</text><line
+				x1="-5" y1="-20.763888888889"
+				x2="264.77" y2="-20.763888888889" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-20.763888888889"
+					transform="translate(0, 3.4530357142857)" >
+					15
+				</text><line
+				x1="-5" y1="-31.145833333333"
+				x2="264.77" y2="-31.145833333333" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-31.145833333333"
+					transform="translate(0, 3.4530357142857)" >
+					20
+				</text><line
+				x1="-5" y1="-41.527777777778"
+				x2="264.77" y2="-41.527777777778" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-41.527777777778"
+					transform="translate(0, 3.4530357142857)" >
+					25
+				</text><line
+				x1="-5" y1="-51.909722222222"
+				x2="264.77" y2="-51.909722222222" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-51.909722222222"
+					transform="translate(0, 3.4530357142857)" >
+					30
+				</text><line
+				x1="-5" y1="-62.291666666667"
+				x2="264.77" y2="-62.291666666667" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-62.291666666667"
+					transform="translate(0, 3.4530357142857)" >
+					35
+				</text><line
+				x1="-5" y1="-72.673611111111"
+				x2="264.77" y2="-72.673611111111" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-72.673611111111"
+					transform="translate(0, 3.4530357142857)" >
+					40
+				</text><line
+				x1="-5" y1="-83.055555555556"
+				x2="264.77" y2="-83.055555555556" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-83.055555555556"
+					transform="translate(0, 3.4530357142857)" >
+					45
+				</text><line
+				x1="-5" y1="-93.4375"
+				x2="264.77" y2="-93.4375" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-93.4375"
+					transform="translate(0, 3.4530357142857)" >
+					50
+				</text><line
+				x1="-5" y1="-103.81944444444"
+				x2="264.77" y2="-103.81944444444" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-103.81944444444"
+					transform="translate(0, 3.4530357142857)" >
+					55
+				</text><line
+				x1="-5" y1="-114.20138888889"
+				x2="264.77" y2="-114.20138888889" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-114.20138888889"
+					transform="translate(0, 3.4530357142857)" >
+					60
+				</text><line
+				x1="-5" y1="-124.58333333333"
+				x2="264.77" y2="-124.58333333333" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-124.58333333333"
+					transform="translate(0, 3.4530357142857)" >
+					65
+				</text><line
+				x1="-5" y1="-134.96527777778"
+				x2="264.77" y2="-134.96527777778" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-134.96527777778"
+					transform="translate(0, 3.4530357142857)" >
+					70
+				</text><line
+				x1="-5" y1="-145.34722222222"
+				x2="264.77" y2="-145.34722222222" 
+				style="stroke:grey;stroke-width:1;"/><text style="fill:white; font-size: 9.6685px;" x="-15.95" y="-145.34722222222"
+					transform="translate(0, 3.4530357142857)" >
+					75
+				</text><line x1="0" y1="5"
+					x2="0" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 0, 10)" 
+				x="0" y="10">
+							January
+						</text><line x1="22.064166666667" y1="5"
+					x2="22.064166666667" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 22.064166666667, 10)" 
+				x="22.064166666667" y="10">
+							February
+						</text><line x1="44.128333333333" y1="5"
+					x2="44.128333333333" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 44.128333333333, 10)" 
+				x="44.128333333333" y="10">
+							March
+						</text><line x1="66.1925" y1="5"
+					x2="66.1925" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 66.1925, 10)" 
+				x="66.1925" y="10">
+							April
+						</text><line x1="88.256666666667" y1="5"
+					x2="88.256666666667" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 88.256666666667, 10)" 
+				x="88.256666666667" y="10">
+							May
+						</text><line x1="110.32083333333" y1="5"
+					x2="110.32083333333" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 110.32083333333, 10)" 
+				x="110.32083333333" y="10">
+							June
+						</text><line x1="132.385" y1="5"
+					x2="132.385" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 132.385, 10)" 
+				x="132.385" y="10">
+							July
+						</text><line x1="154.44916666667" y1="5"
+					x2="154.44916666667" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 154.44916666667, 10)" 
+				x="154.44916666667" y="10">
+							August
+						</text><line x1="176.51333333333" y1="5"
+					x2="176.51333333333" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 176.51333333333, 10)" 
+				x="176.51333333333" y="10">
+							September
+						</text><line x1="198.5775" y1="5"
+					x2="198.5775" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 198.5775, 10)" 
+				x="198.5775" y="10">
+							Oktober
+						</text><line x1="220.64166666667" y1="5"
+					x2="220.64166666667" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 220.64166666667, 10)" 
+				x="220.64166666667" y="10">
+							November
+						</text><line x1="242.70583333333" y1="5"
+					x2="242.70583333333" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 242.70583333333, 10)" 
+				x="242.70583333333" y="10">
+							Dezember
+						</text><line x1="264.77" y1="5"
+					x2="264.77" y2="-149.5" style="stroke: grey; stroke-width: 1"/><text fill="white" style="font-size: 12px; fill: white;" 
+				transform="rotate(40 264.77, 10)" 
+				x="264.77" y="10">
+							
+						</text><polyline transform="translate(2,2)" opacity="0" points="0,0 22.064166666667,-45.680555555556 44.128333333333,-12.458333333333 66.1925,-43.604166666667 88.256666666667,-37.375 110.32083333333,-49.833333333333 132.385,-64.368055555556 154.44916666667,-62.291666666667 176.51333333333,-105.89583333333 198.5775,-68.520833333333 220.64166666667,-124.58333333333 242.70583333333,-149.5 " style="fill: none; stroke:black; stroke-width:2; stroke-linejoin: round;">
+			<animate attributeName="opacity" attributeType="CSS"
+							begin="0s" to="0.4" dur="0.8s" additive="replace" fill="freeze"/></polyline><polyline opacity="0" points="0,0 22.064166666667,-45.680555555556 44.128333333333,-12.458333333333 66.1925,-43.604166666667 88.256666666667,-37.375 110.32083333333,-49.833333333333 132.385,-64.368055555556 154.44916666667,-62.291666666667 176.51333333333,-105.89583333333 198.5775,-68.520833333333 220.64166666667,-124.58333333333 242.70583333333,-149.5 " style="fill: none; stroke:rgb(96,255,0); stroke-width:2; stroke-linejoin: round;" >
+					
+				<animate attributeName="opacity" attributeType="CSS"
+								begin="0s" to="1" dur="0.8s" additive="replace" fill="freeze"/></polyline><g fill="rgb(96,255,0)"><circle
+				cx="0"
+				cy="0"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="0"
+				cy="0"
+				r="2" style="opacity:0;" ></circle><title>January:  5</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="22.064166666667"
+				cy="-45.680555555556"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="22.064166666667"
+				cy="-45.680555555556"
+				r="2" style="opacity:0;" ></circle><title>February:  27</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="44.128333333333"
+				cy="-12.458333333333"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="44.128333333333"
+				cy="-12.458333333333"
+				r="2" style="opacity:0;" ></circle><title>March:  11</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="66.1925"
+				cy="-43.604166666667"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="66.1925"
+				cy="-43.604166666667"
+				r="2" style="opacity:0;" ></circle><title>April:  26</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="88.256666666667"
+				cy="-37.375"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="88.256666666667"
+				cy="-37.375"
+				r="2" style="opacity:0;" ></circle><title>May:  23</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="110.32083333333"
+				cy="-49.833333333333"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="110.32083333333"
+				cy="-49.833333333333"
+				r="2" style="opacity:0;" ></circle><title>June:  29</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="132.385"
+				cy="-64.368055555556"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="132.385"
+				cy="-64.368055555556"
+				r="2" style="opacity:0;" ></circle><title>July:  36</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="154.44916666667"
+				cy="-62.291666666667"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="154.44916666667"
+				cy="-62.291666666667"
+				r="2" style="opacity:0;" ></circle><title>August:  35</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="176.51333333333"
+				cy="-105.89583333333"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="176.51333333333"
+				cy="-105.89583333333"
+				r="2" style="opacity:0;" ></circle><title>September:  56</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="198.5775"
+				cy="-68.520833333333"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="198.5775"
+				cy="-68.520833333333"
+				r="2" style="opacity:0;" ></circle><title>Oktober:  38</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="220.64166666667"
+				cy="-124.58333333333"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="220.64166666667"
+				cy="-124.58333333333"
+				r="2" style="opacity:0;" ></circle><title>November:  65</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g><g fill="rgb(96,255,0)"><circle
+				cx="242.70583333333"
+				cy="-149.5"
+				r="3" style="opacity:0; stroke: rgb(96,255,0); stroke-width: 0;" ><animate attributeName="opacity" attributeType="CSS"
+						begin="0.8s" to="1" dur="0.5s" additive="replace" fill="freeze"/></circle><circle 
+				cx="242.70583333333"
+				cy="-149.5"
+				r="2" style="opacity:0;" ></circle><title>Dezember:  77</title><animate attributeName="stroke-width" to="4" dur="0.1s" begin="mouseover" additive="replace" fill="freeze" /><animate attributeName="stroke-width" to="0" dur="0.2s" begin="mouseout" additive="replace" fill="freeze" /></g></g></svg>
