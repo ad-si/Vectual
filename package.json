@@ -1,0 +1,23 @@
+{
+  "name": "vectual",
+  "version": "0.1.0",
+  "description": "The Open Source Charting Library",
+  "main": "src/vectual.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adius/vectual.git"
+  },
+  "keywords": [
+    "charts"
+  ],
+  "author": "Adrian Sieber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adius/vectual/issues"
+  },
+  "homepage": "https://github.com/adius/vectual#readme"
+}
