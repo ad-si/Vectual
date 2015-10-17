@@ -12,7 +12,13 @@
     "url": "git+https://github.com/adius/vectual.git"
   },
   "keywords": [
-    "charts"
+    "graph",
+    "chart",
+    "charting",
+    "barchart"
+    "piechart",
+    "tagcloud",
+    "linegraph"
   ],
   "author": "Adrian Sieber",
   "license": "MIT",
