@@ -73,7 +73,7 @@ No problem! Export them as svg images!
 
 To draw a vectual graph with the default configuration (in vectual.js) simply invoke it like this:
 
-	vectual(data).pieChart()
+  vectual(data).pieChart()
 
 
 Alternative visualizations are:
