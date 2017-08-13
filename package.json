@@ -15,7 +15,7 @@
     "graph",
     "chart",
     "charting",
-    "barchart"
+    "barchart",
     "piechart",
     "tagcloud",
     "linegraph"
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/adius/vectual/issues"
   },
-  "homepage": "https://github.com/adius/vectual#readme"
+  "homepage": "https://github.com/adius/vectual#readme",
+  "dependencies": {
+    "shaven": "^0.7.3"
+  }
 }
