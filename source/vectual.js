@@ -1,48 +1,46 @@
 import shaven from 'shaven'
 
-var svg,
-    svgNS = "http://www.w3.org/2000/svg",
-    config = {
-      id: "demo",
-      title: "vectual.js",
-      inline: false,
-      animations: true,
-      height: 300,
-      width: 500,
-      colors: [
-        'yellow',
-        'green',
-        'blue',
-        'brown',
-        'grey',
-        'yellow',
-        'green',
-        'blue',
-        'brown',
-        'yellow',
-        'green',
-        'blue',
-        'brown'
-      ]
-    }
+let svg
+const svgNS = 'http://www.w3.org/2000/svg'
+const config = {
+  id: 'demo',
+  title: 'vectual.js',
+  inline: false,
+  animations: true,
+  height: 300,
+  width: 500,
+  colors: [
+    'yellow',
+    'green',
+    'blue',
+    'brown',
+    'grey',
+    'yellow',
+    'green',
+    'blue',
+    'brown',
+    'yellow',
+    'green',
+    'blue',
+    'brown',
+  ],
+}
 
 function toRad (degrees) {
   return degrees * (Math.PI / 180)
 }
 
 function Pie () {
-
-  var circle,
-      text,
-      radius = Math.min(config.height, config.width * 0.2),
-      lastx = -radius,
-      lasty = 0,
-      angle_all = 0,
-      pie = shaven(
-        ['g', {
-          'transform': 'translate(' + (0.5 * config.width) + ', ' + (0.5 * config.height) + ')'
-        }], svgNS
-      )[0]
+  const radius = Math.min(config.height, config.width * 0.2)
+  let lastx = -radius
+  let lasty = 0
+  let angleAll = 0
+  const pie = shaven(
+    ['g', {
+      transform: 'translate(' +
+        [0.5 * config.width, 0.5 * config.height].join() + ')',
+    }], svgNS
+  )[0]
 
 
   function init () {
@@ -51,78 +49,84 @@ function Pie () {
 
   function build () {
 
-    function drawSector (element, i) {
+    function drawSector (element, index) {
+      let position
+      const angleAllLast = angleAll
+      const angleThis = (config.sorted.values[index] / config.totalValue) * 360
+      const angleAdd = angleThis / 2
+      let angleAllRad
+      const transDeg = angleAllLast + angleAdd
+      const angleTranslate = toRad(transDeg)
+      const tx = -Math.cos(angleTranslate) * radius
+      const ty = Math.sin(angleTranslate) * radius
+      let path
+      let text
+      let title
+      let nextx
+      let nexty
+      const size =
+        ((config.sorted.values[index] / config.totalValue) * 360) > 180
+          ? '0 1,0'
+          : '0 0,0'
+      const sector = shaven(
+        ['g', {class: 'vectual_pie_sector'}],
+        svgNS
+      )[0]
 
-      var position,
-          angle_all_last = angle_all,
-          angle_this = ((config.sorted.values[i] / config.totalValue) * 360),
-          angle_add = angle_this / 2,
-          angle_all_rad,
-          trans_deg = angle_all_last + angle_add,
-          angle_translate = toRad(trans_deg),
-          tx = -(Math.cos(angle_translate)) * radius,
-          ty = (Math.sin(angle_translate)) * radius,
-          path,
-          text,
-          animate,
-          title,
-          nextx,
-          nexty,
-          size = (((config.sorted.values[i] /
-                    config.totalValue) * 360) > 180) ? '0 1,0' : '0 0,0',
-          sector = shaven(
-            ['g', {'class': "vectual_pie_sector"}], svgNS
-          )[0]
 
+      function localInit () {
+        // Angle
+        angleAll = angleThis + angleAll
+        angleAllRad = toRad(angleAll)
 
-      function init () {
-
-        //Angle
-        angle_all = angle_this + angle_all
-        angle_all_rad = toRad(angle_all)
-
-        nextx = -(Math.cos(angle_all_rad) * radius)
-        nexty = (Math.sin(angle_all_rad) * radius)
+        nextx = -(Math.cos(angleAllRad) * radius)
+        nexty = Math.sin(angleAllRad) * radius
 
         position =
-        (trans_deg <= 75) ? 'end' :
-        (trans_deg <= 105) ? 'middle' :
-        (trans_deg <= 255) ? 'start' :
-        (trans_deg <= 285) ? 'middle' : 'end'
+        transDeg <= 75
+          ? 'end'
+          : transDeg <= 105
+            ? 'middle'
+            : transDeg <= 255
+              ? 'start'
+              : transDeg <= 285
+                ? 'middle'
+                : 'end'
       }
 
-      function build () {
-
+      function localBuild () {
         path = shaven(
           ['path', {
-            'class': 'vectual_pie_sector_path',
-            'style': 'stroke-width:' + (radius * 0.015) +
-                     ';fill:' + config.colors[i],
-            'd': 'M 0,0 L ' + lastx + ',' + lasty + ' A ' +
-                 radius + ',' + radius + ' ' + size + ' ' +
-                 nextx + ',' + nexty + ' z'}
-          ], svgNS
+            class: 'vectual_pie_sector_path',
+            style: 'stroke-width:' + (radius * 0.015) +
+                     ';fill:' + config.colors[index],
+            d: // eslint-disable-line id-length
+              'M 0,0 L ' + lastx + ',' + lasty +
+              ' A ' + radius + ',' + radius + ' ' + size + ' ' +
+                 nextx + ',' + nexty + ' z',
+          }],
+          svgNS
         )[0]
 
         text = shaven(
           ['text', {
-            'class': 'vectual_pie_text',
-            'x': (tx * 1.2),
-            'y': (ty * 1.2),
+            class: 'vectual_pie_text',
+            x: tx * 1.2, // eslint-disable-line id-length
+            y: ty * 1.2, // eslint-disable-line id-length
             'text-anchor': position,
-            'style': 'font-size:' +
-                     (angle_this * radius * 0.002 + 8) + 'px',
-            'fill': config.colors[i],
-            'transform': 'translate(0, 5)'
+            style: 'font-size:' +
+                     (angleThis * radius * 0.002 + 8) + 'px',
+            fill: config.colors[index],
+            transform: 'translate(0, 5)',
           }], svgNS
         )[0]
 
         title = shaven(
           ['title',
-              config.sorted.keys[i] + ' | ' +
-              config.sorted.values[i] + ' | ' +
-              (Math.round(config.sorted.values[i] /
-                          config.totalValue * 100) ) + '%'
+            config.sorted.keys[index] + ' | ' +
+              config.sorted.values[index] + ' | ' +
+              Math.round(config.sorted.values[index] /
+                          config.totalValue * 100)  + '%',
           ], svgNS
         )[0]
 
@@ -139,7 +143,7 @@ function Pie () {
               to: (tx * 0.2) + ', ' + (ty * 0.2),
               dur: '300ms',
               additive: 'replace',
-              fill: 'freeze'
+              fill: 'freeze',
             }],
             ['animateTransform', {
               attributeName: 'transform',
@@ -148,30 +152,30 @@ function Pie () {
               to: '0,0',
               dur: '600ms',
               additive: 'replace',
-              fill: 'freeze'
-            }]
+              fill: 'freeze',
+            }],
           ], svgNS
         )
 
         shaven(
           [path,
             ['animate', {
-              'attributeName': 'opacity',
-              'from': '0',
-              'to': '1',
-              'dur': '0.6s',
-              'fill': 'freeze'
+              attributeName: 'opacity',
+              from: '0',
+              to: '1',
+              dur: '0.6s',
+              fill: 'freeze',
             }],
             ['animateTransform', {
-              'attributeName': 'transform',
-              'type': 'rotate',
-              'dur': '1s',
-              'calcMode': 'spline',
-              'keySplines': '0 0 0 1',
-              'values': angle_all_last + ',0,0; 0,0,0',
-              'additive': 'replace',
-              'fill': 'freeze'
-            }]
+              attributeName: 'transform',
+              type: 'rotate',
+              dur: '1s',
+              calcMode: 'spline',
+              keySplines: '0 0 0 1',
+              values: angleAllLast + ',0,0; 0,0,0',
+              additive: 'replace',
+              fill: 'freeze',
+            }],
           ], svgNS
         )
 
@@ -179,12 +183,12 @@ function Pie () {
         shaven(
           [text,
             ['animate', {
-              'attributeName': 'opacity',
-              'begin': '0s',
-              'values': '0;0;1',
-              'dur': '1s',
-              'fill': 'freeze'
-            }]
+              attributeName: 'opacity',
+              begin: '0s',
+              values: '0;0;1',
+              dur: '1s',
+              fill: 'freeze',
+            }],
           ], svgNS
         )
 
@@ -196,45 +200,46 @@ function Pie () {
             [sector,
               [path],
               [text],
-              [title]
-            ]
+              [title],
+            ],
           ], svgNS
         )
       }
 
-      init()
-      build()
-      if (config.animations)
-        setAnimations()
+      localInit()
+      localBuild()
+      if (config.animations) setAnimations()
       inject()
 
       lastx = nextx
       lasty = nexty
     }
 
-    //Draw circle if only one value
-    if (config.totalValue == config.max.value)
+    // Draw circle if only one value
+    if (config.totalValue === config.max.value)      {
       shaven(
         [pie,
           ['circle', {
-            'class': 'vectual_pie_sector',
-            'cx': '0',
-            'cy': '0',
-            'r': radius,
-            'fill': config.colors[1]
+            class: 'vectual_pie_sector',
+            cx: '0',
+            cy: '0',
+            r: radius, // eslint-disable-line id-length
+            fill: config.colors[1],
           }],
           ['text', config.max.key, {
-            'class': 'vectual_pie_text_single, vectual_pie_text',
-            'x': '0',
-            'y': '0',
-            'style': 'font-size:' + (radius * 0.3) + 'px',
+            class: 'vectual_pie_text_single, vectual_pie_text',
+            x: '0', // eslint-disable-line id-length
+            y: '0', // eslint-disable-line id-length
+            style: 'font-size:' + (radius * 0.3) + 'px',
             'text-anchor': 'middle',
-            'stroke-width': (radius * 0.006)
-          }]
+            'stroke-width': radius * 0.006,
+          }],
         ], svgNS
       )
-    else
+    }
+    else      {
       config.data.forEach(drawSector)
+    }
 
   }
 
@@ -246,87 +251,80 @@ function Pie () {
 
 function Bar () {
 
-  var yDensity = 0.1,
-      yRange = (config.max.value - config.min.value),
-      g,
-      line,
-      text,
-      graphHeight = config.height * 0.8,
-      graphWidth = config.width * 0.95,
-      coSysHeight = config.height * 0.6,
-      coSysWidth = config.width * 0.85,
-      barchart = shaven(
-        ['g', {
-          transform: 'translate(' +
-                     (graphWidth * 0.1) + ', ' + graphHeight + ')'
-        }], svgNS
-      )[0],
-      coordinateSystem = shaven(['g'], svgNS)[0],
-      bars = shaven(['g'], svgNS)[0]
+  const yDensity = 0.1
+  const yRange = config.max.value - config.min.value
+  const graphHeight = config.height * 0.8
+  const graphWidth = config.width * 0.95
+  const coSysHeight = config.height * 0.6
+  const coSysWidth = config.width * 0.85
+  const barchart = shaven(
+    ['g', {
+      transform: 'translate(' +
+        [graphWidth * 0.1, graphHeight].join() +
+      ')',
+    }], svgNS
+  )[0]
+  const coordinateSystem = shaven(['g'], svgNS)[0]
+  const bars = shaven(['g'], svgNS)[0]
 
 
   function buildCoordinateSystem () {
-
     function ordinates () {
+      let cssClass
+      let index
 
-      var cssClass,
-          i
-
-      for (i = 0; i < config.size; i++) {
-
-        cssClass = (i == 0) ?
-                   'vectual_coordinate_axis_y' :
-                   'vectual_coordinate_lines_y'
+      for (index = 0; index < config.size; index++) {
+        cssClass = index === 0
+          ? 'vectual_coordinate_axis_y'
+          : 'vectual_coordinate_lines_y'
 
         shaven(
           [coordinateSystem,
             ['line', {
               class: cssClass,
-              x1: (coSysWidth / config.size) * i,
+              x1: (coSysWidth / config.size) * index,
               y1: '5',
-              x2: (coSysWidth / config.size) * i,
-              y2: -coSysHeight
+              x2: (coSysWidth / config.size) * index,
+              y2: -coSysHeight,
             }],
-            ['text', config.keys[i], {
+            ['text', config.keys[index], {
               class: 'vectual_coordinate_labels_x',
               transform: 'rotate(40 ' +
-                         ((coSysWidth / config.size) * i) +
+                         ((coSysWidth / config.size) * index) +
                          ', 10)',
-              x: ((coSysWidth / config.size) * i),
-              y: 10
-            }]
+              // eslint-disable-next-line id-length
+              x: (coSysWidth / config.size) * index,
+              y: 10, // eslint-disable-line id-length
+            }],
           ], svgNS
         )
       }
     }
 
     function abscissas () {
+      let styleClass
+      let index
 
-      var styleClass,
-          line,
-          text,
-          i
-
-      for (i = 0; i <= (yRange * yDensity); i++) {
-
-        styleClass = (i == 0) ?
-                     'vectual_coordinate_axis_x' :
-                     'vectual_coordinate_lines_x'
+      for (index = 0; index <= (yRange * yDensity); index++) {
+        styleClass = index === 0
+          ? 'vectual_coordinate_axis_x'
+          : 'vectual_coordinate_lines_x'
 
         shaven(
           [coordinateSystem,
             ['line', {
               class: styleClass,
               x1: -5,
-              y1: -(coSysHeight / yRange) * (i / yDensity),
+              y1: -(coSysHeight / yRange) * (index / yDensity),
               x2: coSysWidth,
-              y2: -(coSysHeight / yRange) * (i / yDensity)
+              y2: -(coSysHeight / yRange) * (index / yDensity),
             }],
-            ['text', String(i / yDensity + config.min.value), {
+            ['text', String(index / yDensity + config.min.value), {
               class: 'vectual_coordinate_labels_y',
-              x: -coSysWidth * 0.05,
-              y: -(coSysHeight / yRange) * (i / yDensity)
-            }]
+              x: -coSysWidth * 0.05, // eslint-disable-line id-length
+              // eslint-disable-next-line id-length
+              y: -(coSysHeight / yRange) * (index / yDensity),
+            }],
           ], svgNS
         )
       }
@@ -337,42 +335,46 @@ function Bar () {
   }
 
   function buildBars () {
+    function drawBar (element, index) {
+      const height = config.animations
+        ? 0
+        : (config.values[index] - config.min.value) * (coSysHeight / yRange)
+      const bar = shaven(
+        ['rect',
+          {
+            class: 'vectual_bar_bar',
+            // eslint-disable-next-line id-length
+            x: index * (coSysWidth / config.size),
+            // eslint-disable-next-line id-length
+            y: -(config.values[index] - config.min.value) *
+              (coSysHeight / yRange),
+            height: height,
+            width: 0.7 * (coSysWidth / config.size),
+          },
+          ['title', config.keys[index] + ':  ' + config.values[index]],
+        ],
+        svgNS
+      )[0]
 
-    function drawBar (element, i) {
-
-      var height = config.animations ?
-                   0 :
-                   (config.values[i] - config.min.value) *
-                   (coSysHeight / yRange),
-          bar = shaven(
-            ['rect', {
-              class: 'vectual_bar_bar',
-              x: (i * (coSysWidth / config.size)),
-              y: -(config.values[i] - config.min.value) * (coSysHeight / yRange),
-              height: height,
-              width: (0.7 * (coSysWidth / config.size))
-            },
-              ['title', config.keys[i] + ':  ' + config.values[i]]
-            ], svgNS
-          )[0]
-
-      function setAnimations () {
+      function localSetAnimations () {
         shaven(
           [bar,
             ['animate', {
               attributeName: 'height',
-              to: (config.values[i] - config.min.value) * (coSysHeight / yRange),
+              to: (config.values[index] - config.min.value) *
+                (coSysHeight / yRange),
               begin: '0s',
               dur: '1s',
-              fill: 'freeze'
+              fill: 'freeze',
             }],
             ['animate', {
               attributeName: 'y',
               from: 0,
-              to: -(config.values[i] - config.min.value) * (coSysHeight / yRange),
+              to: -(config.values[index] - config.min.value) *
+                (coSysHeight / yRange),
               begin: '0s',
               dur: '1s',
-              fill: 'freeze'
+              fill: 'freeze',
             }],
             ['animate', {
               attributeName: 'fill',
@@ -380,7 +382,7 @@ function Bar () {
               begin: 'mouseover',
               dur: '100ms',
               fill: 'freeze',
-              additive: 'replace'
+              additive: 'replace',
             }],
             ['animate', {
               attributeName: 'fill',
@@ -388,20 +390,18 @@ function Bar () {
               begin: 'mouseout',
               dur: '200ms',
               fill: 'freeze',
-              additive: 'replace'
-            }]
+              additive: 'replace',
+            }],
           ], svgNS
         )
       }
 
-      function inject () {
+      function localInject () {
         shaven([bars, [bar]])
       }
 
-
-      if (config.animations)
-        setAnimations()
-      inject()
+      if (config.animations) localSetAnimations()
+      localInject()
     }
 
     config.data.forEach(drawBar)
@@ -417,9 +417,10 @@ function Bar () {
           begin: '0s',
           dur: '1s',
           fill: 'freeze',
-          additive: 'replace'
-        }]
-      ], svgNS
+          additive: 'replace',
+        }],
+      ],
+      svgNS
     )
   }
 
@@ -428,97 +429,93 @@ function Bar () {
       [svg,
         [barchart,
           [coordinateSystem],
-          [bars]
-        ]
+          [bars],
+        ],
       ]
     )
   }
 
   buildCoordinateSystem()
   buildBars()
-  if (config.animations)
-    setAnimations()
+  if (config.animations) setAnimations()
   inject()
 
   return svg
 }
 
 function Line () {
-
-  var yDensity = 0.1,
-      yRange = (config.max.value - config.min.value),
-      g,
-      text,
-      graphWidth = config.width * 0.95,
-      graphHeight = config.height * 0.8,
-      coSysWidth = config.width * 0.85,
-      coSysHeight = config.height * 0.6,
-      graph = shaven(
-        ['g', {
-          'transform': 'translate(' + (graphWidth * 0.1) + ', ' + (graphHeight) + ')'
-        }], svgNS
-      )[0]
+  const yDensity = 0.1
+  const yRange = config.max.value - config.min.value
+  const graphWidth = config.width * 0.95
+  const graphHeight = config.height * 0.8
+  const coSysWidth = config.width * 0.85
+  const coSysHeight = config.height * 0.6
+  const graph = shaven(
+    ['g', {
+      transform: 'translate(' + (graphWidth * 0.1) + ', ' + graphHeight + ')',
+    }], svgNS
+  )[0]
 
   function init () {
     shaven([svg, [graph]])
   }
 
   function build () {
-
     function drawCoordinateSystem () {
-
       function horizontalLoop () {
+        let cssClass
 
-        var cssClass, line
-
-        for (var i = 0; i < config.size; i++) {
-
-          cssClass = (i == 0) ? 'vectual_coordinate_axis_y' : 'vectual_coordinate_lines_y'
+        for (let index = 0; index < config.size; index++) {
+          cssClass = index === 0
+            ? 'vectual_coordinate_axis_y'
+            : 'vectual_coordinate_lines_y'
 
           shaven(
             [graph,
               ['line', {
                 class: cssClass,
-                x1: (coSysWidth / config.size) * i,
+                x1: (coSysWidth / config.size) * index,
                 y1: 5,
-                x2: (coSysWidth / config.size) * i,
-                y2: -coSysHeight
+                x2: (coSysWidth / config.size) * index,
+                y2: -coSysHeight,
               }],
-              ['text', config.keys[i], {
+              ['text', config.keys[index], {
                 class: 'vectual_coordinate_labels_x',
-                transform: 'rotate(40 ' + ((coSysWidth / config.size) * i) + ', 10)',
-                x: ((coSysWidth / config.size) * i),
-                y: 10
-              }]
+                transform: 'rotate(40 ' +
+                  ((coSysWidth / config.size) * index) + ', 10)',
+                // eslint-disable-next-line id-length
+                x: (coSysWidth / config.size) * index,
+                y: 10, // eslint-disable-line id-length
+              }],
             ], svgNS)
 
         }
       }
 
       function verticalLoop () {
+        let styleClass
 
-        var styleClass,
-            line,
-            text
-
-        for (var i = 0; i <= (yRange * yDensity); i++) {
-
-          styleClass = (i == 0) ? 'vectual_coordinate_axis_x' : 'vectual_coordinate_lines_x'
+        for (let index = 0; index <= (yRange * yDensity); index++) {
+          styleClass = index === 0
+            ? 'vectual_coordinate_axis_x'
+            : 'vectual_coordinate_lines_x'
 
           shaven(
             [graph,
               ['line', {
-                'class': styleClass,
-                'x1': -5,
-                'y1': -(coSysHeight / yRange) * (i / yDensity),
-                'x2': coSysWidth,
-                'y2': -(coSysHeight / yRange) * (i / yDensity)
+                class: styleClass,
+                x1: -5,
+                y1: -(coSysHeight / yRange) * (index / yDensity),
+                x2: coSysWidth,
+                y2: -(coSysHeight / yRange) * (index / yDensity),
               }],
-              ['text', i / yDensity + config.min.value, {
-                'class': 'vectual_coordinate_labels_y',
-                'x': -coSysWidth * 0.05,
-                'y': -(coSysHeight / yRange) * (i / yDensity)
-              }]
+              ['text', index / yDensity + config.min.value, {
+                class: 'vectual_coordinate_labels_y',
+                // eslint-disable-next-line id-length
+                x: -coSysWidth * 0.05,
+                // eslint-disable-next-line id-length
+                y: -(coSysHeight / yRange) * (index / yDensity),
+              }],
             ]
             , svgNS)
 
@@ -531,52 +528,50 @@ function Line () {
 
     function buildLine () {
 
-      var points = '',
-          pointsTo = '',
-          shavenObject,
-          line,
-          i,
-          j
+      let points = ''
+      let pointsTo = ''
+      let index
+      let index2
 
-      for (i = 0; i < config.size; i++) {
-        points += (i * (coSysWidth / config.size)) + ',0 '
+      for (index = 0; index < config.size; index++) {
+        points += (index * (coSysWidth / config.size)) + ',0 '
       }
 
-      for (j = 0; j < config.size; j++) {
-        pointsTo += (j * (coSysWidth / config.size)) + ',' +
-                    ((-config.values[j] + config.min.value) *
+      for (index2 = 0; index2 < config.size; index2++) {
+        pointsTo += (index2 * (coSysWidth / config.size)) + ',' +
+                    ((-config.values[index2] + config.min.value) *
                      (coSysHeight / yRange)) + ' '
       }
 
-      shavenObject = shaven([graph,
+      const shavenObject = shaven([graph,
         ['polyline.vectual_line_line$line', {
-          points: pointsTo
-        }]
+          points: pointsTo,
+        }],
       ])
 
-      line = shavenObject.references.line
+      const line = shavenObject.references.line
 
 
       if (config.animations) {
         shaven(
           [line,
             ['animate', {
-              'attributeName': 'points',
-              'from': points,
-              'to': pointsTo,
-              'begin': '0s',
-              'dur': '1s',
-              'fill': 'freeze'}
+              attributeName: 'points',
+              from: points,
+              to: pointsTo,
+              begin: '0s',
+              dur: '1s',
+              fill: 'freeze'},
             ],
             ['animate', {
-              'attributeName': 'opacity',
-              'begin': '0s',
-              'from': '0',
-              'to': '1',
-              'dur': '1s',
-              'additive': 'replace',
-              'fill': 'freeze'}
-            ]
+              attributeName: 'opacity',
+              begin: '0s',
+              from: '0',
+              to: '1',
+              dur: '1s',
+              additive: 'replace',
+              fill: 'freeze'},
+            ],
           ],
           svgNS
         )
@@ -584,21 +579,21 @@ function Line () {
     }
 
     function setDots () {
+      let circle
+      let index
 
-      var circle,
-          i
-
-      for (i = 0; i < config.size; i++) {
+      for (index = 0; index < config.size; index++) {
 
         circle = shaven(
-          ['circle', {
-            'class': 'vectual_line_dot',
-            'r': '4',
-            'cx': i * (coSysWidth / config.size),
-            'cy': (-config.values[i] + config.min.value) *
-                  (coSysHeight / yRange)}
-
-            , ['title', config.keys[i] + ':  ' + config.values[i]]
+          ['circle',
+            {
+              class: 'vectual_line_dot',
+              r: '4', // eslint-disable-line id-length
+              cx: index * (coSysWidth / config.size),
+              cy: (-config.values[index] + config.min.value) *
+                (coSysHeight / yRange),
+            },
+            ['title', config.keys[index] + ':  ' + config.values[index]],
           ]
           , svgNS)[0]
 
@@ -611,30 +606,30 @@ function Line () {
           shaven(
             [circle,
               ['animate', {
-                'attributeName': 'opacity',
-                'begin': '0s',
-                'values': '0;0;1',
-                'keyTimes': '0;0.8;1',
-                'dur': '1.5s',
-                'additive': 'replace',
-                'fill': 'freeze'
+                attributeName: 'opacity',
+                begin: '0s',
+                values: '0;0;1',
+                keyTimes: '0;0.8;1',
+                dur: '1.5s',
+                additive: 'replace',
+                fill: 'freeze',
               }],
               ['animate', {
-                'attributeName': 'r',
-                'to': '8',
-                'dur': '0.1s',
-                'begin': 'mouseover',
-                'additive': 'replace',
-                'fill': 'freeze'
+                attributeName: 'r',
+                to: '8',
+                dur: '0.1s',
+                begin: 'mouseover',
+                additive: 'replace',
+                fill: 'freeze',
               }],
               ['animate', {
-                'attributeName': 'r',
-                'to': '4',
-                'dur': '0.2s',
-                'begin': 'mouseout',
-                'additive': 'replace',
-                'fill': 'freeze'}
-              ]
+                attributeName: 'r',
+                to: '4',
+                dur: '0.2s',
+                begin: 'mouseout',
+                additive: 'replace',
+                fill: 'freeze'},
+              ],
             ]
             , svgNS)
 
@@ -655,33 +650,29 @@ function Line () {
 }
 
 function Tagcloud () {
-
-  var minFontsize = 10, //minimum font-size
-      until = 300, //size of spiral
-      factor = 10, //resolution improvement
-      density = 0.2, //density of spiral
-      xySkew = 0.6, //elliptical shape of spiral (0 < xySkew < 1)
-      cloud = shaven(
-        ['g', {
-          transform: 'translate(' +
-                     (0.5 * config.width) + ', ' +
-                     (0.5 * config.height) + ')',
-          class: 'vectualTagcloud'
-        }], svgNS
-      )[0]
+  const minFontsize = 10 // minimum font-size
+  const until = 300 // size of spiral
+  const factor = 10 // resolution improvement
+  const density = 0.2 // density of spiral
+  const xySkew = 0.6 // elliptical shape of spiral (0 < xySkew < 1)
+  const cloud = shaven(
+    ['g', {
+      transform: 'translate(' +
+        (0.5 * config.width) + ', ' +
+        (0.5 * config.height) + ')',
+      class: 'vectualTagcloud',
+    }], svgNS
+  )[0]
 
 
   function init () {
-
-    config.data.forEach(function (element) {
-
-      //font-size
+    config.data.forEach((element) => {
+      // font-size
       element.fontSize = minFontsize +
-                         ((config.height * 0.1) *
-                          (element.value - config.min.value)) /
-                         (config.max.value - config.min.value)
+        ((config.height * 0.1) * (element.value - config.min.value)) /
+        (config.max.value - config.min.value)
 
-      //bounding-box
+      // bounding-box
       element.height = element.fontSize * 0.8
       element.width = element.key.length * element.fontSize * 0.5
     })
@@ -691,78 +682,68 @@ function Tagcloud () {
 
 
   function build () {
-
-    var pointsNumber = until * factor * density,
-        points = [],
-        i,
-        b,
-        x,
-        y
-
+    const pointsNumber = until * factor * density
+    const points = []
+    let index
+    let bValue
+    let xValue
+    let yValue
 
     function calculatePoints () {
+      for (index = 0; index < pointsNumber; index++) {
+        bValue = index * (1 / factor)
 
-      for (i = 0; i < pointsNumber; i++) {
-        b = i * (1 / factor)
+        xValue = -(1 / density) * xySkew * bValue * Math.cos(bValue)
+        yValue = -(1 / density) * (1 - xySkew) * bValue * Math.sin(bValue)
 
-        x = -(1 / density) * xySkew * b * Math.cos(b)
-        y = -(1 / density) * (1 - xySkew) * b * Math.sin(b)
-
-        points.push({x: x, y: y})
+        points.push({
+          x: xValue, // eslint-disable-line id-length
+          y: yValue, // eslint-disable-line id-length
+        })
       }
     }
 
-    function drawSpiral () {
-
-      var string = ''
-
-      points.forEach(function (point) {
-        string += point.x + ',' + point.y + ' '
-      })
-
-      shaven(
-        [cloud,
-          ['polyline', {
-            points: string,
-            style: 'fill: none; stroke:red; stroke-width:1'
-          }]
-        ]
-        , svgNS
-      )
-    }
+    // function drawSpiral () {
+    //   let string = ''
+    //
+    //   points.forEach((point) => {
+    //     string += point.x + ',' + point.y + ' '
+    //   })
+    //
+    //   shaven(
+    //     [cloud,
+    //       ['polyline', {
+    //         points: string,
+    //         style: 'fill: none; stroke:red; stroke-width:1',
+    //       }],
+    //     ]
+    //     , svgNS
+    //   )
+    // }
 
     function drawWords () {
-
-      function drawWord (element, index) {
-
+      function drawWord (element, wordIndex) {
         function calculatePosition () {
-
-          //returns true if point was found and saves it in element
-          function testPoint (point, pointIndex) {
-
-            function notOverlapping (formerElement, formerIndex) {
-
-              //if element is already set
+          // returns true if point was found and saves it in element
+          function testPoint (point) {
+            function notOverlapping (formerElement) {
+              // if element is already set
               if (formerElement.x !== undefined) {
-
                 return point.x > formerElement.x +
-                                 formerElement.width //right
-                         || point.x < formerElement.x -
-                                      element.width //left
-                         || point.y < formerElement.y -
-                                      formerElement.height //above
-                  || point.y > formerElement.y +
-                               element.height //beyond
-
+                    formerElement.width || // right
+                  point.x < formerElement.x - element.width || // left
+                  point.y < formerElement.y - formerElement.height || // above
+                  point.y > formerElement.y + element.height // beyond
               }
-              else
+              else {
                 return true
+              }
             }
 
-            //test if every element is not overlapping
-            if (config.data.every(notOverlapping) == true) {
-              element.x = point.x
-              element.y = point.y
+            // test if every element is not overlapping
+            if (config.data.every(notOverlapping) === true) {
+              element.x = point.x // eslint-disable-line id-length
+              element.y = point.y // eslint-disable-line id-length
               return true
             }
             else {
@@ -779,8 +760,8 @@ function Tagcloud () {
 
           shaven(
             [cloud,
-              //bounding-box
-              /*['rect', {
+              // bounding-box
+              /* ['rect', {
                width: element.width,
                height: element.height,
                style: 'fill: rgba(0,0,255,0.2)',
@@ -790,16 +771,17 @@ function Tagcloud () {
               ['text', element.key, {
                 class: 'vectual_tagcloud_text',
                 style: 'font-size: ' + element.fontSize,
-                x: element.x,
-                y: element.y}
-              ]
+                x: element.x, // eslint-disable-line id-length
+                y: element.y, // eslint-disable-line id-length
+              },
+              ],
             ], svgNS
           )
         }
 
         try {
-          if (index == 0) {
-            element.x = element.y = 0
+          if (wordIndex === 0) {
+            element.x = element.y = 0 // eslint-disable-line id-length
           }
           else {
             calculatePosition()
@@ -807,18 +789,17 @@ function Tagcloud () {
           renderWord()
           return true
         }
-        catch (e) {
-          console.log(e.message)
+        catch (error) {
+          console.error(error)
           return false
         }
-
       }
 
       config.data.every(drawWord)
     }
 
     calculatePoints()
-    //drawSpiral()
+    // drawSpiral()
     drawWords()
   }
 
@@ -830,24 +811,25 @@ function Tagcloud () {
 
 
 export default function (localConfig) {
-  var i,
-      defs,
-      size,
-      text,
-      temp = [],
-      tuples = [],
-      key
+  let index
+  const temp = []
+  const tuples = []
+  let key
 
-  //Overwrite global with custom configuration
-  for (key in localConfig)
-    if (localConfig.hasOwnProperty(key))
+  // Overwrite global with custom configuration
+  for (key in localConfig)    {
+    if (localConfig.hasOwnProperty(key))      {
       config[key] = localConfig[key]
+    }
+  }
 
-  //Convert data to JSON
+  // Convert data to JSON
   if (!(config.data instanceof Array)) {
-    for (i in config.data)
-      if (config.data.hasOwnProperty(i))
-        temp.push({key: i, value: config.data[i]})
+    for (index in config.data)      {
+      if (config.data.hasOwnProperty(index))        {
+        temp.push({key: index, value: config.data[index]})
+      }
+    }
 
     config.data = temp
   }
@@ -856,41 +838,47 @@ export default function (localConfig) {
   config.values = []
   config.sorted = {
     keys: [],
-    values: []
+    values: [],
   }
   config.size = config.data.length
   config.totalValue = 0
   config.max = {}
   config.min = {}
 
-  config.data.forEach(function (element, index) {
-
-    //Set maximum and minimum value
-    if (index == 0)
+  config.data.forEach((element, dataIndex) => {
+    // Set maximum and minimum value
+    if (dataIndex === 0)      {
       config.max = config.min = element
-    else if (element.value > config.max.value)
+    }
+    else if (element.value > config.max.value)      {
       config.max = element
-    else if (element.value < config.min.value)
+    }
+    else if (element.value < config.min.value)      {
       config.min = element
+    }
 
-    //get sum of all values
+    // get sum of all values
     config.totalValue += Number(element.value)
 
     config.keys.push(element.key)
     config.values.push(element.value)
 
-    //get sortable array
+    // get sortable array
     tuples.push([element.key, element.value])
 
   })
 
-  //sort array
-  tuples.sort(function (a, b) {
-    return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0
-  })
+  // sort array
+  tuples.sort((valueA, valueB) =>
+    valueA[1] < valueB[1]
+      ? 1
+      : valueA[1] > valueB[1]
+        ? -1
+        : 0
+  )
 
-  //split into key/value arrays
-  tuples.forEach(function (element) {
+  // split into key/value arrays
+  tuples.forEach((element) => {
     config.sorted.keys.push(element[0])
     config.sorted.values.push(element[1])
   })
@@ -899,61 +887,65 @@ export default function (localConfig) {
 
 
   svg = shaven(
-    ['svg', {
-      version: "1.1",
-      class: (config.inline) ? 'vectual_inline' : 'vectual',
-      width: config.width,
-      height: config.height,
-      viewBox: "0 0 " + config.width + " " + config.height},
+    ['svg',
+      {
+        version: '1.1',
+        class: config.inline ? 'vectual_inline' : 'vectual',
+        width: config.width,
+        height: config.height,
+        viewBox: '0 0 ' + config.width + ' ' + config.height,
+      },
       ['defs',
-        ['linearGradient#rect_background', {
-          x1: '0%',
-          y1: '0%',
-          x2: '0%',
-          y2: '100%'},
+        ['linearGradient#rect_background',
+          {
+            x1: '0%',
+            y1: '0%',
+            x2: '0%',
+            y2: '100%',
+          },
           ['stop', {
             offset: '0%',
-            style: 'stop-color:rgb(80,80,80); stop-opacity:1'
+            style: 'stop-color:rgb(80,80,80); stop-opacity:1',
           }],
           ['stop', {
             offset: '0%',
-            style: 'stop-color:rgb(40,40,40); stop-opacity:1'
-          }]
+            style: 'stop-color:rgb(40,40,40); stop-opacity:1',
+          }],
         ],
         ['filter#dropshadow',
           ['feGaussianBlur', {
             in: 'SourceAlpha',
             stdDeviation: 0.5,
-            result: 'blur'
+            result: 'blur',
           }],
           ['feOffset', {
             in: 'blur',
             dx: '2',
             dy: '2',
-            result: 'offsetBlur'
+            result: 'offsetBlur',
           }],
           ['feComposite', {
             in: 'SourceGraphic',
             in2: 'offsetBlur',
-            result: 'origin'
-          }]
-        ]
+            result: 'origin',
+          }],
+        ],
       ],
       ['rect', {
         class: 'vectual_background',
-        x: 0,
-        y: 0,
+        x: 0, // eslint-disable-line id-length
+        y: 0, // eslint-disable-line id-length
         width: config.width,
         height: config.height,
         rx: config.inline ? '' : 10,
-        ry: config.inline ? '' : 10
+        ry: config.inline ? '' : 10,
       }],
       ['text', config.title, {
         class: 'vectual_title',
-        x: 20,
-        y: (10 + config.height * 0.05),
-        style: 'font-size:' + (config.height * 0.05) + 'px'
-      }]
+        x: 20, // eslint-disable-line id-length
+        y: 10 + config.height * 0.05, // eslint-disable-line id-length
+        style: 'font-size:' + (config.height * 0.05) + 'px',
+      }],
     ]
     , svgNS
   )[0]
@@ -970,6 +962,6 @@ export default function (localConfig) {
     },
     tagCloud: function () {
       return new Tagcloud()
-    }
+    },
   }
 }
