@@ -1,5 +1,6 @@
-var shaven = require('shaven'),
-  svg,
+import shaven from 'shaven'
+
+var svg,
     svgNS = "http://www.w3.org/2000/svg",
     config = {
       id: "demo",
@@ -553,11 +554,10 @@ function Line () {
         }]
       ])
 
-      line = shavenObject.line
+      line = shavenObject.references.line
 
 
       if (config.animations) {
-
         shaven(
           [line,
             ['animate', {
@@ -577,9 +577,9 @@ function Line () {
               'additive': 'replace',
               'fill': 'freeze'}
             ]
-          ]
-          , svgNS)
-
+          ],
+          svgNS
+        )
       }
     }
 
@@ -770,8 +770,9 @@ function Tagcloud () {
             }
           }
 
-          if (points.some(testPoint) == false)
-            throw new Error('Element could not be positioned')
+          if (!points.some(testPoint)) {
+            console.error('Element could not be positioned')
+          }
         }
 
         function renderWord () {
@@ -828,8 +829,7 @@ function Tagcloud () {
 }
 
 
-module.exports = function v (localConfig) {
-
+export default function (localConfig) {
   var i,
       defs,
       size,

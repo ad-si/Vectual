@@ -1,5 +1,5 @@
-var fruitConsumption = {
-  title: "Fruit Consumption",
+export default {
+  title: 'Fruit Consumption',
   data: {
     Apple: 50,
     Plum: 27,
@@ -11,6 +11,6 @@ var fruitConsumption = {
     Grapefruit: 35,
     Strawberry: 56,
     Orange: 34,
-    Kiwi: 65
-  }
+    Kiwi: 65,
+  },
 }

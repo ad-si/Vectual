@@ -6,7 +6,10 @@
   "directories": {
     "example": "examples"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adius/vectual.git"
@@ -27,6 +30,9 @@
   },
   "homepage": "https://github.com/adius/vectual#readme",
   "dependencies": {
-    "shaven": "^0.7.3"
+    "shaven": "^1.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.4"
   }
 }

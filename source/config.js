@@ -1,4 +1,4 @@
-var config = {
+export default {
   title: 'Fruit Consumption',
   width: 500,
   height: 300,
@@ -10,12 +10,12 @@ var config = {
     1: 'value',
     2: 'key',
     3: 'time',
-    4: 'location'
+    4: 'location',
   },
   label: {
     1: 'Number',
     2: 'Fruit type',
     3: '',
-    4: ''
-  }
-};
+    4: '',
+  },
+}
