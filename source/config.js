@@ -3,7 +3,7 @@ export default {
   width: 500,
   height: 300,
   automatic: true,
-  animations: true,
+  animations: false,
   standalone: true,
   lineHeight: 22,
   dimension: {
