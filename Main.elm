@@ -6,7 +6,11 @@ import Svg exposing (Svg)
 
 
 main =
-    Html.beginnerProgram { model = model, view = view, update = update }
+    Html.beginnerProgram
+        { model = model
+        , view = view
+        , update = update
+        }
 
 
 type alias Model =
@@ -34,8 +38,14 @@ update msg model =
             { model | title = "Hide" }
 
 
+chartConfig : BarChartInfo
 chartConfig =
-    BarChartInfo "This is a test" False 100 100
+    { title = "This is a test"
+    , inline = False
+    , width = 400
+    , height = 300
+    , borderRadius = ( 2, 2 )
+    }
 
 
 view : Model -> Svg msg

@@ -14,6 +14,15 @@ import Svg exposing (..)
 import Svg.Attributes exposing (..)
 
 
+type alias ChartInfo =
+    { title : String
+    , inline : Bool
+    , width : Int
+    , height : Int
+    , borderRadius : ( Int, Int )
+    }
+
+
 type alias PieChartInfo =
     { title : String
     }
@@ -24,6 +33,7 @@ type alias BarChartInfo =
     , inline : Bool
     , width : Int
     , height : Int
+    , borderRadius : ( Int, Int )
     }
 
 
@@ -61,29 +71,56 @@ viewPieChart pieChartInfo =
     text (toString pieChartInfo)
 
 
-viewBarChart : BarChartInfo -> Svg msg
-viewBarChart barChartInfo =
+chartWrapper : ChartInfo -> Svg msg
+chartWrapper chartInfo =
     let
         className =
-            if barChartInfo.inline then
+            if chartInfo.inline then
                 "vectual_inline"
             else
                 "vectual"
+
+        ( borderRadiusX, borderRadiusY ) =
+            chartInfo.borderRadius
     in
         svg
             [ version "1.1"
             , class className
-            , width (toString barChartInfo.width)
-            , height (toString barChartInfo.height)
+            , width (toString chartInfo.width)
+            , height (toString chartInfo.height)
             , viewBox
                 ("0 0 "
-                    ++ toString barChartInfo.width
+                    ++ toString chartInfo.width
                     ++ " "
-                    ++ toString barChartInfo.height
+                    ++ toString chartInfo.height
                 )
             ]
-            [ circle [ cx "50", cy "50", r "45", fill "#0B79CE" ] []
+            [ Svg.style [] [ text "svg {color: green; font-family: Arial;}" ]
+            , rect
+                [ class "vectual_background"
+                , width (toString chartInfo.width)
+                , height (toString chartInfo.height)
+                , rx (toString borderRadiusX)
+                , ry (toString borderRadiusY)
+                ]
+                []
+            , text_
+                [ class "vectual_title"
+                , x (toString 20)
+                , y (toString (10 + 0.05 * (toFloat chartInfo.height)))
+                , Svg.Attributes.style
+                    ("font-size:"
+                        ++ (toString (0.05 * (toFloat chartInfo.height)))
+                        ++ "px"
+                    )
+                ]
+                [ text chartInfo.title ]
             ]
+
+
+viewBarChart : BarChartInfo -> Svg msg
+viewBarChart barChartInfo =
+    chartWrapper barChartInfo
 
 
 viewLineChart : LineChartInfo -> Svg msg
