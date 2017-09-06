@@ -12,6 +12,7 @@ module Charts
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
+import Html exposing (link)
 
 
 type alias ChartInfo =
@@ -71,33 +72,46 @@ viewPieChart pieChartInfo =
     text (toString pieChartInfo)
 
 
+css : String
+css =
+    """
+    .vectual-title {
+      fill: green;
+      font-family: Arial;
+    }
+    """
+
+
 chartWrapper : ChartInfo -> Svg msg
 chartWrapper chartInfo =
     let
         className =
             if chartInfo.inline then
-                "vectual_inline"
+                "vectual-inline"
             else
                 "vectual"
 
         ( borderRadiusX, borderRadiusY ) =
             chartInfo.borderRadius
     in
-        svg
+        Svg.svg
             [ version "1.1"
             , class className
             , width (toString chartInfo.width)
             , height (toString chartInfo.height)
             , viewBox
-                ("0 0 "
-                    ++ toString chartInfo.width
-                    ++ " "
-                    ++ toString chartInfo.height
+                (String.join " "
+                    (List.map toString
+                        [ 0, 0, chartInfo.width, chartInfo.height ]
+                    )
                 )
             ]
-            [ Svg.style [] [ text "svg {color: green; font-family: Arial;}" ]
+            [ Svg.style [] [ text css ]
+            , link
+                [ rel "stylesheet", type_ "text/css", href "css/vectual.css" ]
+                []
             , rect
-                [ class "vectual_background"
+                [ class "vectual-background"
                 , width (toString chartInfo.width)
                 , height (toString chartInfo.height)
                 , rx (toString borderRadiusX)
@@ -105,7 +119,7 @@ chartWrapper chartInfo =
                 ]
                 []
             , text_
-                [ class "vectual_title"
+                [ class "vectual-title"
                 , x (toString 20)
                 , y (toString (10 + 0.05 * (toFloat chartInfo.height)))
                 , Svg.Attributes.style
