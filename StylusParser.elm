@@ -57,6 +57,7 @@ type alias Declarations =
 type Expression
     = Rule ( Selectors, Declarations )
     | Comment String
+    | Newlines
 
 
 type alias Stylus =
@@ -156,11 +157,18 @@ commentLine =
             |. symbol "\n"
 
 
+newlines : Parser Expression
+newlines =
+    succeed Newlines
+        |. (ignore oneOrMore (\char -> char == '\n'))
+
+
 sections : Parser Expression
 sections =
     oneOf
         [ rule
         , commentLine
+        , newlines
         ]
 
 

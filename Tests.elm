@@ -18,6 +18,7 @@ main =
             , toString (run stylus rawRule)
             , toString (run stylus rawStylus)
             , toString (run stylus rawStylusWithComments)
+            , toString (run stylus rawStylusWithNewlines)
             ]
         )
 
@@ -71,4 +72,21 @@ rawStylusWithComments =
 // Just like that
 .alert
   color rgb(50, 50, 50)
+// Even more
+// Wow, so much comment
+"""
+
+
+rawStylusWithNewlines =
+    """
+h1.important
+  display inline-block
+  margin 0
+  like what
+
+// Just like that
+
+.alert
+  color rgb(50, 50, 50)
+
 """
