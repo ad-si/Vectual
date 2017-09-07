@@ -54,12 +54,18 @@ type alias Declarations =
     List Declaration
 
 
-type alias Rule =
-    ( Selectors, Declarations )
+type Expression
+    = Rule ( Selectors, Declarations )
+    | Comment String
 
 
 type alias Stylus =
-    List Rule
+    List Expression
+
+
+isNotNewline : Char -> Bool
+isNotNewline char =
+    char /= '\n'
 
 
 isValidChar : Char -> Bool
@@ -108,6 +114,11 @@ value =
     keep oneOrMore isValidValue
 
 
+comment : Parser Expression
+comment =
+    Parser.map Comment (keep oneOrMore isNotNewline)
+
+
 declaration : Parser Declaration
 declaration =
     inContext "declaration" <|
@@ -126,35 +137,36 @@ declarations =
             |. symbol "\n"
 
 
-meta : Parser ()
-meta =
-    ignore zeroOrMore (\c -> c == '\n')
-
-
-
--- oneOf
---     [ whitespace
---         { allowTabs = False
---         , lineComment = LineComment "// "
---         , multiComment = NestableComment "/*" "*/"
---         }
---     , symbol ""
---     ]
-
-
-rule : Parser Rule
+rule : Parser Expression
 rule =
-    inContext "rule" <|
-        succeed (,)
-            |. meta
-            |= selectors
-            |= declarations
+    Parser.map Rule
+        (inContext "rule" <|
+            succeed (,)
+                |= selectors
+                |= declarations
+        )
+
+
+commentLine : Parser Expression
+commentLine =
+    inContext "comment" <|
+        succeed identity
+            |. symbol "// "
+            |= comment
+            |. symbol "\n"
+
+
+sections : Parser Expression
+sections =
+    oneOf
+        [ rule
+        , commentLine
+        ]
 
 
 stylus : Parser Stylus
 stylus =
     inContext "stylus" <|
         succeed identity
-            |= (repeat oneOrMore rule)
-            |. meta
+            |= (repeat oneOrMore sections)
             |. end

@@ -17,6 +17,7 @@ main =
             , toString (run rule rawRule)
             , toString (run stylus rawRule)
             , toString (run stylus rawStylus)
+            , toString (run stylus rawStylusWithComments)
             ]
         )
 
@@ -43,8 +44,7 @@ rawDeclarations =
 
 
 rawRule =
-    """
-h1.important
+    """h1.important
   display inline-block
   margin 0
   like what
@@ -52,15 +52,23 @@ h1.important
 
 
 rawStylus =
-    """
-h1.important
+    """h1.important
   display inline-block
   margin 0
   like what
-
 .alert
   color rgb(50, 50, 50)
-
 .primary
   font-weight 900
+"""
+
+
+rawStylusWithComments =
+    """h1.important
+  display inline-block
+  margin 0
+  like what
+// Just like that
+.alert
+  color rgb(50, 50, 50)
 """
