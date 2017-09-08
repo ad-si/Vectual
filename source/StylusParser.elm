@@ -60,7 +60,7 @@ type Expression
     | Newlines
 
 
-type alias Stylus =
+type alias StylusAst =
     List Expression
 
 
@@ -80,12 +80,14 @@ isValidValue : Char -> Bool
 isValidValue char =
     isValidChar char
         || Char.isDigit char
-        || List.member char [ ' ', '.', ',', '(', ')', '"', '%' ]
+        || List.member char [ ' ', '.', ',', '(', ')', '"', '#', '%', '/' ]
 
 
 isValidSelector : Char -> Bool
 isValidSelector char =
-    (isValidValue char) || (List.member char [ ' ', '.', '=', '[', ']' ])
+    (isValidChar char)
+        || Char.isDigit char
+        || (List.member char [ ' ', '.', ':', '=', '(', ')', '[', ']' ])
 
 
 selector : Parser String
@@ -172,9 +174,40 @@ sections =
         ]
 
 
-stylus : Parser Stylus
+stylus : Parser StylusAst
 stylus =
     inContext "stylus" <|
         succeed identity
             |= (repeat oneOrMore sections)
             |. end
+
+
+serializeExpression : Expression -> String
+serializeExpression expression =
+    case expression of
+        Newlines ->
+            "\n"
+
+        Comment string ->
+            "/*" ++ string ++ "*/\n"
+
+        Rule ( selectors, declarations ) ->
+            let
+                decToCss decTuple =
+                    (Tuple.first decTuple) ++ ":" ++ (Tuple.second decTuple)
+            in
+                (String.join ", " selectors)
+                    ++ "{"
+                    ++ String.join ";" (List.map decToCss declarations)
+                    ++ "}\n"
+
+
+serializeStylusAst : StylusAst -> String
+serializeStylusAst stylus =
+    String.join ""
+        (List.map serializeExpression stylus)
+
+
+stylusToCss : String -> Result Parser.Error String
+stylusToCss stylusString =
+    Result.map serializeStylusAst (run stylus stylusString)

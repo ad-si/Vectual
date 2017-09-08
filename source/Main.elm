@@ -5,6 +5,7 @@ import Html exposing (Html, text)
 import Svg exposing (Svg)
 
 
+main : Program Never Model Msg
 main =
     Html.beginnerProgram
         { model = model
@@ -14,8 +15,7 @@ main =
 
 
 type alias Model =
-    { title : String
-    }
+    { title : String }
 
 
 model : Model

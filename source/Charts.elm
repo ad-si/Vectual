@@ -12,7 +12,8 @@ module Charts
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-import Html exposing (link)
+import Styles exposing (stylusString)
+import StylusParser exposing (stylusToCss)
 
 
 type alias ChartInfo =
@@ -72,22 +73,12 @@ viewPieChart pieChartInfo =
     text (toString pieChartInfo)
 
 
-css : String
-css =
-    """
-    .vectual-title {
-      fill: green;
-      font-family: Arial;
-    }
-    """
-
-
 chartWrapper : ChartInfo -> Svg msg
 chartWrapper chartInfo =
     let
         className =
             if chartInfo.inline then
-                "vectual-inline"
+                "vectual_inline"
             else
                 "vectual"
 
@@ -106,12 +97,10 @@ chartWrapper chartInfo =
                     )
                 )
             ]
-            [ Svg.style [] [ text css ]
-            , link
-                [ rel "stylesheet", type_ "text/css", href "css/vectual.css" ]
-                []
+            [ Svg.style []
+                [ text (Result.withDefault "" (stylusToCss stylusString)) ]
             , rect
-                [ class "vectual-background"
+                [ class "vectual_background"
                 , width (toString chartInfo.width)
                 , height (toString chartInfo.height)
                 , rx (toString borderRadiusX)
@@ -119,7 +108,7 @@ chartWrapper chartInfo =
                 ]
                 []
             , text_
-                [ class "vectual-title"
+                [ class "vectual_title"
                 , x (toString 20)
                 , y (toString (10 + 0.05 * (toFloat chartInfo.height)))
                 , Svg.Attributes.style

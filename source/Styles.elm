@@ -1,3 +1,8 @@
+module Styles exposing (stylusString)
+
+
+stylusString =
+    """
 // ===== SVG =====
 svg.vectual
   display inline-block
@@ -8,7 +13,7 @@ svg.vectual
 
 .vectual_title
   font-size 20px
-  font-family "Arial", sans-serif
+  font-family Arial, sans-serif
   fill white
 
 
@@ -29,13 +34,11 @@ svg.vectual_inline
 
 
 // ===== Pie =====
-.vectual_pie
-
 .vectual_pie_sector_path
   stroke white
 
 .vectual_pie_text
-  font-family "Arial", sans-serif
+  font-family Arial, sans-serif
   font-weight 100
 
 .vectual_pie_text_single
@@ -51,7 +54,7 @@ svg.vectual_inline
 .vectual_coordinate_labels_x
   font-size 10px
   line-height 12px
-  font-family "Arial", sans-serif
+  font-family Arial, sans-serif
   font-weight 100
   fill white
 
@@ -66,7 +69,7 @@ svg.vectual_inline
 .vectual_coordinate_labels_y
   font-size 10px
   line-height 12px
-  font-family "Arial", sans-serif
+  font-family Arial, sans-serif
   font-weight 100
   fill white
 
@@ -102,17 +105,15 @@ svg.vectual_inline
 // ===== Tagcloud =====
 .vectual_tagcloud_text
   font-weight 500
-  font-family "Arial", sans-serif
+  font-family Arial, sans-serif
   fill white
 
 
 // ===== Table =====
 .vectual_table
   background none
-  font 200 12px/12px "Arial", sans-serif
+  font 200 12px/12px Arial, sans-serif
   margin 10px 0 0 0
-
-.vectual_table table
 
 .vectual_table th
   background rgb(150, 180, 180)
@@ -130,7 +131,8 @@ svg.vectual_inline
 
 // ===== Map =====
 
-// Circles around small countries. Change opacity to 1 to display all circles.
+// Circles around small countries.
+// Change opacity to 1 to display all circles.
 .circlexx
   opacity 0
   fill #e0e0e0
@@ -192,3 +194,4 @@ svg.vectual_inline
   stroke #000
   stroke-width 0.5
   stroke-miterlimit 1
+"""
