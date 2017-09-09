@@ -3,10 +3,14 @@ module Styles exposing (stylusString)
 
 stylusString =
     """
+body
+  background-color hsl(0, 0%, 10%)
+
 // ===== SVG =====
 svg.vectual
   display inline-block
-  margin 0
+  margin 10em
+  float right
 
 .vectual_background
   fill rgb(50, 50, 50)
