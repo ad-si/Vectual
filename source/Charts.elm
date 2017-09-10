@@ -38,8 +38,18 @@ type alias PieChartConfig =
     Charted { radius : Int }
 
 
+type Alignment
+    = Left
+    | Center
+    | Right
+
+
 type alias BarChartConfig =
-    Charted { labelAngle : Radian }
+    Charted
+        { labelAngle : Radian
+        , yStartAtZero : Bool
+        , alignBars : Alignment
+        }
 
 
 type alias TimeRecord =
@@ -129,6 +139,9 @@ wrapChart config chart =
 getOrdinates : Charted a -> Data -> MetaData -> List (Svg msg)
 getOrdinates config data metaData =
     let
+        yAxisOffset =
+            5
+
         className number =
             if number == 0 then
                 "vectual_coordinate_axis_y"
@@ -174,7 +187,7 @@ getOrdinates config data metaData =
                     [ line
                         [ class (className number)
                         , x1 (toString (xValue number))
-                        , y1 "5"
+                        , y1 (toString yAxisOffset)
                         , x2 (toString (xValue number))
                         , y2 (toString -metaData.coordSysHeight)
                         ]
@@ -198,6 +211,9 @@ getAbscissas config data metaData =
         yDensity =
             0.1
 
+        xAxisOffset =
+            5
+
         className number =
             if number == 0 then
                 "vectual_coordinate_axis_x"
@@ -215,7 +231,7 @@ getAbscissas config data metaData =
             g []
                 [ line
                     [ class (className number)
-                    , x1 "-5"
+                    , x1 (toString -xAxisOffset)
                     , y1 (yValue number)
                     , x2 (metaData.coordSysWidth |> toString)
                     , y2 (yValue number)
@@ -246,9 +262,12 @@ getCoordinateSystem config data metaData =
         )
 
 
-getBar : Charted a -> Data -> MetaData -> Int -> Entry -> Svg msg
+getBar : BarChartConfig -> Data -> MetaData -> Int -> Entry -> Svg msg
 getBar config data metaData index entry =
     let
+        barProportionalWidth =
+            0.7
+
         barHeight =
             (entry.value - metaData.yMinimum)
                 * ((toFloat metaData.coordSysHeight) / metaData.yRange)
@@ -259,19 +278,38 @@ getBar config data metaData index entry =
 
         title =
             (entry.label ++ ": " ++ (toString entry.value))
+
+        xLeft =
+            truncate ((toFloat index) * barDistance)
+
+        xValue =
+            case config.alignBars of
+                Left ->
+                    xLeft
+
+                Center ->
+                    round
+                        ((toFloat xLeft)
+                            + (((1 - barProportionalWidth) / 2) * barDistance)
+                        )
+
+                Right ->
+                    round
+                        ((toFloat xLeft)
+                            + ((1 - barProportionalWidth) * barDistance)
+                        )
     in
         rect
             [ class "vectual_bar_bar"
-            , x ((truncate >> toString) ((toFloat index) * barDistance))
-            , y "0"
+            , x (toString xValue)
             , height (toString barHeight)
-            , width (toString (0.7 * barDistance))
+            , width (toString (barProportionalWidth * barDistance))
             , transform (toTranslate (Vector2d ( 0, -barHeight )))
             ]
             [ Svg.title [] [ text title ] ]
 
 
-getBars : Charted a -> Data -> MetaData -> Svg msg
+getBars : BarChartConfig -> Data -> MetaData -> Svg msg
 getBars config data metaData =
     g
         []
@@ -401,7 +439,10 @@ viewBarChart config data =
             getDataValues data
 
         yMinimum =
-            Maybe.withDefault 0 (List.minimum dataValues)
+            if config.yStartAtZero then
+                0
+            else
+                Maybe.withDefault 0 (List.minimum dataValues)
 
         yMaximum =
             Maybe.withDefault 0 (List.maximum dataValues)

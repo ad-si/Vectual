@@ -71,6 +71,8 @@ barChartConfig =
     , height = 300
     , borderRadius = ( 2, 2 )
     , labelAngle = 1.5
+    , yStartAtZero = True
+    , alignBars = Center
     }
 
 
