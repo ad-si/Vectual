@@ -1,0 +1,178 @@
+module Helpers exposing (..)
+
+import Date exposing (Date)
+import Date.Extra.Format as Format exposing (utcIsoString)
+import Date.Extra.Utils as Utils exposing (isoWeek)
+import String.Extra exposing (replace)
+import Svg exposing (..)
+import Svg.Attributes exposing (..)
+import OpenSolid.Geometry.Types exposing (..)
+import OpenSolid.Point2d as Point2d
+import OpenSolid.Vector2d as Vector2d
+import Styles exposing (stylusString)
+import StylusParser exposing (stylusToCss)
+import Types exposing (..)
+
+
+-- Formatter
+
+
+utcDateTime : Date -> String
+utcDateTime =
+    utcIsoString
+        >> String.slice 0 16
+        >> replace "T" " "
+
+
+utcDate : Date -> String
+utcDate =
+    utcIsoString >> String.slice 0 10
+
+
+utcWeek : Date -> String
+utcWeek =
+    isoWeek
+        >> (\( year, week, dayOfWeek ) ->
+                (toString year)
+                    ++ "-W"
+                    ++ (toString week)
+                    ++ "-"
+                    ++ (toString dayOfWeek)
+           )
+
+
+
+-- Data Converter
+
+
+getDataLength : Data -> Int
+getDataLength data =
+    case data of
+        TimeData list ->
+            List.length list
+
+        KeyData list ->
+            List.length list
+
+        Values list ->
+            List.length list
+
+
+getDataLabels : BaseConfigAnd a -> Data -> List String
+getDataLabels config data =
+    case data of
+        TimeData list ->
+            List.map (.utc >> config.xLabelFormatter) list
+
+        KeyData list ->
+            List.map .key list
+
+        Values list ->
+            List.map toString (List.range 0 ((List.length list) - 1))
+
+
+getDataValues : Data -> List Float
+getDataValues data =
+    case data of
+        TimeData list ->
+            List.map .value list
+
+        KeyData list ->
+            List.map .value list
+
+        Values list ->
+            list
+
+
+getDataRecords : Data -> List Entry
+getDataRecords data =
+    let
+        timeRecordToEntry record =
+            { label = (toString record.utc), value = record.value }
+
+        keyRecordToEntry record =
+            { label = record.key, value = record.value }
+
+        valueToEntry index value =
+            { label = (toString index), value = value }
+    in
+        case data of
+            TimeData list ->
+                List.map timeRecordToEntry list
+
+            KeyData list ->
+                List.map keyRecordToEntry list
+
+            Values list ->
+                List.indexedMap valueToEntry list
+
+
+
+-- SVG Helpers
+
+
+toTranslate : Vector2d -> String
+toTranslate vector =
+    "translate" ++ (Vector2d.components vector |> toString)
+
+
+toRotate : Int -> Point2d -> String
+toRotate degree point =
+    "rotate"
+        ++ (toString
+                ( degree
+                , (Point2d.xCoordinate point)
+                , (Point2d.yCoordinate point)
+                )
+           )
+
+
+wrapChart : BaseConfigAnd a -> Svg msg -> Svg msg
+wrapChart config chart =
+    let
+        className =
+            if config.inline then
+                "vectual_inline"
+            else
+                "vectual"
+
+        ( borderRadiusX, borderRadiusY ) =
+            ( 10, 10 )
+
+        -- config.borderRadius
+    in
+        Svg.svg
+            [ version "1.1"
+            , class className
+            , width (toString config.width)
+            , height (toString config.height)
+            , viewBox
+                (String.join " "
+                    (List.map toString
+                        [ 0, 0, config.width, config.height ]
+                    )
+                )
+            ]
+            [ Svg.style []
+                [ text (Result.withDefault "" (stylusToCss stylusString)) ]
+            , rect
+                [ class "vectual_background"
+                , width (toString config.width)
+                , height (toString config.height)
+                , rx (toString borderRadiusX)
+                , ry (toString borderRadiusY)
+                ]
+                []
+            , chart
+            , text_
+                [ class "vectual_title"
+                , x (toString 20)
+                , y (toString (10 + 0.05 * (toFloat config.height)))
+                , Svg.Attributes.style
+                    ("font-size:"
+                        ++ (toString (0.05 * (toFloat config.height)))
+                        ++ "px"
+                    )
+                ]
+                [ text config.title ]
+            ]
