@@ -55,38 +55,46 @@ stringToDate string =
         (Date.fromString string)
 
 
+dataTable =
+    [ ( "2017-09-25T12:00Z", "Apple", 50, 49 )
+    , ( "2017-09-26T12:00Z", "Plum", 27, 16 )
+    , ( "2017-09-27T12:00Z", "Peach", 11, 29 )
+    , ( "2017-09-28T12:00Z", "Lime", 23, 9 )
+    , ( "2017-09-29T12:00Z", "Cherry", 13, 5 )
+    , ( "2017-09-30T12:00Z", "Pineapple", 69, 35 )
+    , ( "2017-10-01T12:00Z", "Melon", 26, 58 )
+    , ( "2017-10-02T12:00Z", "Grapefruit", 35, 13 )
+    , ( "2017-10-03T12:00Z", "Strawberry", 56, 25 )
+    , ( "2017-10-04T12:00Z", "Orange", 34, 38 )
+    , ( "2017-10-05T12:00Z", "Kiwi", 65, 44 )
+    ]
+
+
 keyData : Data
 keyData =
-    KeyData
-        [ KeyRecord "Apple" 50
-        , KeyRecord "Plum" 27
-        , KeyRecord "Peach" 11
-        , KeyRecord "Lime" 23
-        , KeyRecord "Cherry" 13
-        , KeyRecord "Pineapple" 69
-        , KeyRecord "Melon" 26
-        , KeyRecord "Grapefruit" 35
-        , KeyRecord "Strawberry" 56
-        , KeyRecord "Orange" 34
-        , KeyRecord "Kiwi" 65
-        ]
+    let
+        tupleToRecord =
+            \( _, key, value, _ ) -> KeyRecord key value
+    in
+        KeyData (List.map tupleToRecord dataTable)
 
 
 timeData : Data
 timeData =
-    TimeData
-        [ TimeRecord (stringToDate "2017-09-25T12:00Z") 50
-        , TimeRecord (stringToDate "2017-09-26T12:00Z") 27
-        , TimeRecord (stringToDate "2017-09-27T12:00Z") 11
-        , TimeRecord (stringToDate "2017-09-28T12:00Z") 23
-        , TimeRecord (stringToDate "2017-09-29T12:00Z") 13
-        , TimeRecord (stringToDate "2017-09-30T12:00Z") 69
-        , TimeRecord (stringToDate "2017-10-01T12:00Z") 26
-        , TimeRecord (stringToDate "2017-10-02T12:00Z") 35
-        , TimeRecord (stringToDate "2017-10-03T12:00Z") 56
-        , TimeRecord (stringToDate "2017-10-04T12:00Z") 34
-        , TimeRecord (stringToDate "2017-10-05T12:00Z") 65
-        ]
+    let
+        tupleToRecord =
+            \( key, _, value, _ ) -> TimeRecord (stringToDate key) value
+    in
+        TimeData (List.map tupleToRecord dataTable)
+
+
+timeDataExtra : Data
+timeDataExtra =
+    let
+        tupleToRecord =
+            \( key, _, _, value ) -> TimeRecord (stringToDate key) value
+    in
+        TimeData (List.map tupleToRecord dataTable)
 
 
 barChart : Chart
