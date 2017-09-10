@@ -3,6 +3,9 @@ module Main exposing (..)
 import Charts exposing (..)
 import Html exposing (Html, text)
 import Svg exposing (Svg)
+import Date
+import Date.Extra.Format as Format exposing (utcIsoDateString)
+import Types exposing (..)
 
 
 main : Program Never Model Msg
@@ -46,8 +49,14 @@ update msg model =
             { model | title = "Hide" }
 
 
-defaultData : Data
-defaultData =
+stringToDate string =
+    Result.withDefault
+        (Date.fromTime 0)
+        (Date.fromString string)
+
+
+keyData : Data
+keyData =
     KeyData
         [ KeyRecord "Apple" 50
         , KeyRecord "Plum" 27
@@ -63,22 +72,30 @@ defaultData =
         ]
 
 
-barChartConfig : BarChartConfig
-barChartConfig =
-    { title = "This is a test"
-    , inline = False
-    , width = 400
-    , height = 300
-    , borderRadius = ( 2, 2 )
-    , labelAngle = 1.5
-    , yStartAtZero = True
-    , alignBars = Center
-    }
+timeData : Data
+timeData =
+    TimeData
+        [ TimeRecord (stringToDate "2017-09-25T12:00Z") 50
+        , TimeRecord (stringToDate "2017-09-26T12:00Z") 27
+        , TimeRecord (stringToDate "2017-09-27T12:00Z") 11
+        , TimeRecord (stringToDate "2017-09-28T12:00Z") 23
+        , TimeRecord (stringToDate "2017-09-29T12:00Z") 13
+        , TimeRecord (stringToDate "2017-09-30T12:00Z") 69
+        , TimeRecord (stringToDate "2017-10-01T12:00Z") 26
+        , TimeRecord (stringToDate "2017-10-02T12:00Z") 35
+        , TimeRecord (stringToDate "2017-10-03T12:00Z") 56
+        , TimeRecord (stringToDate "2017-10-04T12:00Z") 34
+        , TimeRecord (stringToDate "2017-10-05T12:00Z") 65
+        ]
 
 
 barChart : Chart
 barChart =
-    BarChart barChartConfig defaultData
+    BarChart
+        { defaultBarChartConfig
+            | xLabelFormatter = utcWeek
+        }
+        timeData
 
 
 

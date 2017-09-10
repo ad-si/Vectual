@@ -5,87 +5,44 @@ import Svg.Attributes exposing (..)
 import Styles exposing (stylusString)
 import StylusParser exposing (stylusToCss)
 import Date exposing (Date)
+import Date.Extra.Format as Format exposing (utcIsoString)
+import Date.Extra.Utils as Utils exposing (isoWeek)
 import OpenSolid.Geometry.Types exposing (..)
 import OpenSolid.Vector2d as Vector2d
 import OpenSolid.Point2d as Point2d
 import Array
+import String.Extra exposing (replace)
+import Types exposing (..)
 
 
-type alias Radian =
-    Float
-
-
-type alias Key =
-    String
-
-
-type Value
-    = Int
-    | Float
-
-
-type alias Charted extraFields =
-    { extraFields
-        | title : String
-        , inline : Bool
-        , width : Int
-        , height : Int
-        , borderRadius : ( Int, Int )
-    }
-
-
-type alias PieChartConfig =
-    Charted { radius : Int }
-
-
-type Alignment
-    = Left
-    | Center
-    | Right
-
-
-type alias BarChartConfig =
-    Charted
-        { labelAngle : Radian
-        , yStartAtZero : Bool
-        , alignBars : Alignment
-        }
-
-
-type alias TimeRecord =
-    { utc : Date
-    , value : Float
-    }
-
-
-type alias KeyRecord =
-    { key : Key
-    , value : Float
-    }
-
-
-type Data
-    = TimeData (List TimeRecord)
-    | KeyData (List KeyRecord)
-    | Values (List Float)
-
-
-type Chart
-    = PieChart PieChartConfig Data
-    | BarChart BarChartConfig Data
-
-
-defaultBaseConfig : Charted {}
+defaultBaseConfig : BaseConfigAnd {}
 defaultBaseConfig =
     { title = "Vectual Chart"
     , inline = False
     , width = 400
     , height = 300
     , borderRadius = ( 2, 2 )
+    , xLabelFormatter = utcDateTime
     }
 
 
-wrapChart : Charted a -> Svg msg -> Svg msg
+defaultBarChartConfig : BarChartConfig
+defaultBarChartConfig =
+    { title = "Vectual Bar Chart"
+    , inline = False
+    , width = 400
+    , height = 300
+    , borderRadius = ( 2, 2 )
+    , xLabelFormatter = utcDateTime
+
+    --
+    , labelAngle = 1.5
+    , yStartAtZero = True
+    , alignBars = Center
+    }
+
+
+wrapChart : BaseConfigAnd a -> Svg msg -> Svg msg
 wrapChart config chart =
     let
         className =
@@ -136,7 +93,7 @@ wrapChart config chart =
             ]
 
 
-getOrdinates : Charted a -> Data -> MetaData -> List (Svg msg)
+getOrdinates : BaseConfigAnd a -> Data -> MetaData -> List (Svg msg)
 getOrdinates config data metaData =
     let
         yAxisOffset =
@@ -151,7 +108,7 @@ getOrdinates config data metaData =
         dataLabelAt index =
             let
                 array =
-                    Array.fromList (getDataLabels data)
+                    Array.fromList (getDataLabels config data)
 
                 maybeElement =
                     Array.get index array
@@ -205,7 +162,7 @@ getOrdinates config data metaData =
             |> (List.map numToLine)
 
 
-getAbscissas : Charted a -> Data -> MetaData -> List (Svg msg)
+getAbscissas : BaseConfigAnd a -> Data -> MetaData -> List (Svg msg)
 getAbscissas config data metaData =
     let
         yDensity =
@@ -253,7 +210,7 @@ getAbscissas config data metaData =
             |> (List.map numToLine)
 
 
-getCoordinateSystem : Charted a -> Data -> MetaData -> Svg msg
+getCoordinateSystem : BaseConfigAnd a -> Data -> MetaData -> Svg msg
 getCoordinateSystem config data metaData =
     g []
         (List.append
@@ -332,11 +289,35 @@ getDataLength data =
             List.length list
 
 
-getDataLabels : Data -> List String
-getDataLabels data =
+utcDateTime : Date -> String
+utcDateTime =
+    utcIsoString
+        >> String.slice 0 16
+        >> replace "T" " "
+
+
+utcDate : Date -> String
+utcDate =
+    utcIsoString >> String.slice 0 10
+
+
+utcWeek : Date -> String
+utcWeek =
+    isoWeek
+        >> (\( year, week, dayOfWeek ) ->
+                (toString year)
+                    ++ "-W"
+                    ++ (toString week)
+                    ++ "-"
+                    ++ (toString dayOfWeek)
+           )
+
+
+getDataLabels : BaseConfigAnd a -> Data -> List String
+getDataLabels config data =
     case data of
         TimeData list ->
-            List.map (.utc >> toString) list
+            List.map (.utc >> config.xLabelFormatter) list
 
         KeyData list ->
             List.map .key list
@@ -356,12 +337,6 @@ getDataValues data =
 
         Values list ->
             list
-
-
-type alias Entry =
-    { label : String
-    , value : Float
-    }
 
 
 getDataRecords : Data -> List Entry
@@ -411,19 +386,6 @@ viewChart chart =
 
         PieChart config data ->
             viewPieChart config data
-
-
-type alias MetaData =
-    { graphWidth : Int
-    , graphHeight : Int
-    , coordSysWidth : Int
-    , coordSysHeight : Int
-    , translation : Vector2d
-    , numberOfEntries : Int
-    , yMinimum : Float
-    , yMaximum : Float
-    , yRange : Float
-    }
 
 
 viewBarChart : BarChartConfig -> Data -> Svg msg
