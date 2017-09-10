@@ -71,11 +71,12 @@ svg.vectual_inline
   stroke-width 2
 
 .vectual_coordinate_labels_y
-  font-size 10px
-  line-height 12px
-  font-family Arial, sans-serif
-  font-weight 100
   fill white
+  font-family Arial, sans-serif
+  font-size 10px
+  font-weight 100
+  line-height 12px
+  text-anchor end
 
 .vectual_coordinate_lines_y
   stroke grey
@@ -83,8 +84,42 @@ svg.vectual_inline
 
 
 // ===== Bar =====
-.vectual_bar_bar
-  fill rgb(0, 150, 250)
+.vectual_bars
+  fill #9dfff9
+  stroke gray
+
+// Colors created with coolors.co
+.vectual_bars0
+  fill #9dfff9
+  stroke none
+.vectual_bars1
+  fill #ffc1cf
+  stroke none
+.vectual_bars2
+  fill #e8ffb7
+  stroke none
+.vectual_bars3
+  fill #f5c396
+  stroke none
+.vectual_bars4
+  fill #93e5ab
+  stroke none
+
+.vectual_bars5
+  fill #d3a588
+  stroke none
+.vectual_bars6
+  fill #7f96ff
+  stroke none
+.vectual_bars7
+  fill #f2f79e
+  stroke none
+.vectual_bars8
+  fill #dbb3b1
+  stroke none
+.vectual_bars9
+  fill #9ed67f
+  stroke none
 
 
 // ===== Line =====

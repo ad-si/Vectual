@@ -87,17 +87,20 @@ getAbscissas config data metaData =
         xAxisOffset =
             5
 
+        -- TODO: Should be half of font size
+        yAxisOffset =
+            3
+
         className number =
             if number == 0 then
                 "vectual_coordinate_axis_x"
             else
                 "vectual_coordinate_lines_x"
 
-        yValue : Int -> String
+        yValue : Int -> Float
         yValue number =
             -((toFloat metaData.coordSysHeight) / metaData.yRange)
                 * ((toFloat number) / yDensity)
-                |> toString
 
         numToLine : Int -> Svg msg
         numToLine number =
@@ -105,15 +108,15 @@ getAbscissas config data metaData =
                 [ line
                     [ class (className number)
                     , x1 (toString -xAxisOffset)
-                    , y1 (yValue number)
+                    , y1 ((yValue number) |> toString)
                     , x2 (metaData.coordSysWidth |> toString)
-                    , y2 (yValue number)
+                    , y2 ((yValue number) |> toString)
                     ]
                     []
                 , text_
                     [ class "vectual_coordinate_labels_y"
-                    , x (toString ((toFloat -metaData.coordSysWidth) * 0.05))
-                    , y (yValue number)
+                    , x (toString ((toFloat -metaData.coordSysWidth) * 0.03))
+                    , y (toString ((yValue number) + yAxisOffset))
                     ]
                     [ text
                         (((toFloat number) / yDensity + metaData.yMinimum)

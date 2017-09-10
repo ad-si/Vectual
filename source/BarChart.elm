@@ -29,12 +29,14 @@ defaultBarChartConfig =
 getBar : BarChartConfig -> Data -> MetaData -> Int -> Entry -> Svg msg
 getBar config data metaData index entry =
     let
+        yScaleFactor =
+            ((toFloat metaData.coordSysHeight) / metaData.yRange)
+
         barProportionalWidth =
             0.7
 
         barHeight =
-            (entry.value - metaData.yMinimum)
-                * ((toFloat metaData.coordSysHeight) / metaData.yRange)
+            (entry.value - metaData.yMinimum) * yScaleFactor
 
         barDistance =
             (toFloat metaData.coordSysWidth)
@@ -64,11 +66,13 @@ getBar config data metaData index entry =
                         )
     in
         rect
-            [ class "vectual_bar_bar"
-            , x (toString xValue)
+            [ x (toString xValue)
             , height (toString barHeight)
             , width (toString (barProportionalWidth * barDistance))
-            , transform (toTranslate (Vector2d ( 0, -barHeight )))
+            , transform
+                (toTranslate
+                    (Vector2d ( 0, -barHeight - (entry.offset * yScaleFactor) ))
+                )
             ]
             [ Svg.title [] [ text title ] ]
 
@@ -76,7 +80,7 @@ getBar config data metaData index entry =
 getBars : BarChartConfig -> Data -> MetaData -> Svg msg
 getBars config data metaData =
     g
-        []
+        [ class "vectual_bars" ]
         (List.indexedMap
             (getBar config data metaData)
             (getDataRecords data)
@@ -86,36 +90,11 @@ getBars config data metaData =
 viewBarChart : BarChartConfig -> Data -> Svg msg
 viewBarChart config data =
     let
-        graphWidth =
-            0.95 * (toFloat config.width)
-
-        graphHeight =
-            0.8 * (toFloat config.height)
+        metaData =
+            getMetaData config data
 
         dataValues =
             getDataValues data
-
-        yMinimum =
-            if config.yStartAtZero then
-                0
-            else
-                Maybe.withDefault 0 (List.minimum dataValues)
-
-        yMaximum =
-            Maybe.withDefault 0 (List.maximum dataValues)
-
-        metaData : MetaData
-        metaData =
-            { graphWidth = ceiling graphWidth
-            , graphHeight = ceiling graphHeight
-            , coordSysWidth = ceiling (0.9 * graphWidth)
-            , coordSysHeight = ceiling (0.8 * graphHeight)
-            , translation = Vector2d ( graphWidth * 0.1, graphHeight )
-            , numberOfEntries = getDataLength data
-            , yMinimum = yMinimum
-            , yMaximum = yMaximum
-            , yRange = yMaximum - yMinimum
-            }
 
         chart =
             g

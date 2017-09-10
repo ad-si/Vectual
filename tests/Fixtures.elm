@@ -142,6 +142,7 @@ rulesWithCommentsRaw =
   color rgb(50, 50, 50)
 // Even more
 // Wow, so much comment
+// A lot of special chars : . // $ % ^ *
 """
 
 
@@ -163,6 +164,7 @@ rulesWithCommentsAst =
         )
     , Comment "Even more"
     , Comment "Wow, so much comment"
+    , Comment "A lot of special chars : . // $ % ^ *"
     ]
 
 
@@ -172,6 +174,7 @@ rulesWithCommentsCss =
 .alert{color:rgb(50, 50, 50)}
 /*Even more*/
 /*Wow, so much comment*/
+/*A lot of special chars : . // $ % ^ **/
 """
 
 

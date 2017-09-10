@@ -45,6 +45,42 @@ utcWeek =
 -- Data Converter
 
 
+getMetaData :
+    { a | width : Int, height : Int, yStartAtZero : Bool }
+    -> Data
+    -> MetaData
+getMetaData config data =
+    let
+        graphWidth =
+            0.95 * (toFloat config.width)
+
+        graphHeight =
+            0.8 * (toFloat config.height)
+
+        dataValues =
+            getDataValues data
+
+        yMinimum =
+            if config.yStartAtZero then
+                0
+            else
+                Maybe.withDefault 0 (List.minimum dataValues)
+
+        yMaximum =
+            Maybe.withDefault 0 (List.maximum dataValues)
+    in
+        { graphWidth = ceiling graphWidth
+        , graphHeight = ceiling graphHeight
+        , coordSysWidth = ceiling (0.9 * graphWidth)
+        , coordSysHeight = ceiling (0.8 * graphHeight)
+        , translation = Vector2d ( graphWidth * 0.1, graphHeight )
+        , numberOfEntries = getDataLength data
+        , yMinimum = yMinimum
+        , yMaximum = yMaximum
+        , yRange = yMaximum - yMinimum
+        }
+
+
 getDataLength : Data -> Int
 getDataLength data =
     case data of
@@ -56,6 +92,9 @@ getDataLength data =
 
         Values list ->
             List.length list
+
+        InvalidData ->
+            0
 
 
 getDataLabels : BaseConfigAnd a -> Data -> List String
@@ -70,6 +109,9 @@ getDataLabels config data =
         Values list ->
             List.map toString (List.range 0 ((List.length list) - 1))
 
+        InvalidData ->
+            []
+
 
 getDataValues : Data -> List Float
 getDataValues data =
@@ -83,18 +125,30 @@ getDataValues data =
         Values list ->
             list
 
+        InvalidData ->
+            []
 
-getDataRecords : Data -> List Entry
+
+getDataRecords : Data -> Entries
 getDataRecords data =
     let
         timeRecordToEntry record =
-            { label = (toString record.utc), value = record.value }
+            { label = (toString record.utc)
+            , value = record.value
+            , offset = record.offset
+            }
 
         keyRecordToEntry record =
-            { label = record.key, value = record.value }
+            { label = record.key
+            , value = record.value
+            , offset = record.offset
+            }
 
         valueToEntry index value =
-            { label = (toString index), value = value }
+            { label = (toString index)
+            , value = value
+            , offset = 0
+            }
     in
         case data of
             TimeData list ->
@@ -105,6 +159,9 @@ getDataRecords data =
 
             Values list ->
                 List.indexedMap valueToEntry list
+
+            InvalidData ->
+                []
 
 
 

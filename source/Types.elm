@@ -49,30 +49,48 @@ type alias BarChartConfig =
 type alias TimeRecord =
     { utc : Date
     , value : Float
+    , offset : Float
     }
 
 
 type alias KeyRecord =
     { key : Key
     , value : Float
+    , offset : Float
     }
+
+
+
+-- TODO: Normalize records to entries
 
 
 type alias Entry =
     { label : String
     , value : Float
+    , offset : Float -- Store offset in e.g. BarChartStacked or PieChart
     }
+
+
+type alias Entries =
+    -- Normalized form of Data
+    List Entry
 
 
 type Data
     = TimeData (List TimeRecord)
     | KeyData (List KeyRecord)
     | Values (List Float)
+    | InvalidData
+
+
+type alias Datas =
+    List Data
 
 
 type Chart
     = PieChart PieChartConfig Data
     | BarChart BarChartConfig Data
+    | BarChartStacked BarChartConfig Datas
 
 
 type alias MetaData =

@@ -14,6 +14,7 @@ import OpenSolid.Point2d as Point2d
 import String.Extra exposing (replace)
 import Types exposing (..)
 import BarChart exposing (..)
+import BarChartStacked exposing (..)
 import Helpers exposing (..)
 
 
@@ -33,6 +34,9 @@ viewChart chart =
     case chart of
         BarChart config data ->
             viewBarChart config data
+
+        BarChartStacked config dataSet ->
+            viewBarChartStacked config dataSet
 
         PieChart config data ->
             viewPieChart config data
