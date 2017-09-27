@@ -38,8 +38,8 @@ export default function (localConfig) {
   let key
 
   // Overwrite global with custom configuration
-  for (key in localConfig)    {
-    if (localConfig.hasOwnProperty(key))      {
+  for (key in localConfig) {
+    if (localConfig.hasOwnProperty(key)) {
       config[key] = localConfig[key]
     }
   }
@@ -47,7 +47,7 @@ export default function (localConfig) {
   // Convert data to JSON
   if (!(config.data instanceof Array)) {
     for (index in config.data)      {
-      if (config.data.hasOwnProperty(index))        {
+      if (config.data.hasOwnProperty(index)) {
         temp.push({key: index, value: config.data[index]})
       }
     }
@@ -71,10 +71,10 @@ export default function (localConfig) {
     if (dataIndex === 0)      {
       config.max = config.min = element
     }
-    else if (element.value > config.max.value)      {
+    else if (element.value > config.max.value) {
       config.max = element
     }
-    else if (element.value < config.min.value)      {
+    else if (element.value < config.min.value) {
       config.min = element
     }
 

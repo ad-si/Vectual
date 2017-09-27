@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/adius/vectual#readme",
   "dependencies": {
+    "elm-test": "^0.18.8",
     "shaven": "^1.1.0"
   },
   "devDependencies": {
