@@ -18,14 +18,19 @@ Display beautiful charts and customise them to fit perfectly to your needs.
 The most ubiquitous chart with an amazing fan out animation.
 You can also explode certain sectors to highlight them.
 
-![Pie Chart](img/pieChart.png)
+![Pie Chart](images/pieChart.png)
 
 
 ### Bar chart
 
 The right tool to display few data clearly arranged but still appealing
 
-![Bar Chart](img/barChart.png)
+![Bar Chart](images/barChart.png)
+
+
+#### Stacked
+
+![Bar Chart Stacked](images/barChartStacked.png)
 
 
 ### Line chart
@@ -33,7 +38,7 @@ The right tool to display few data clearly arranged but still appealing
 Watch your stocks reaching new heights.
 You can also hover the chart to get detailed Information.
 
-![Line Chart](img/lineChart.png)
+![Line Chart](images/lineChart.png)
 
 
 ### Tag cloud
@@ -41,7 +46,7 @@ You can also hover the chart to get detailed Information.
 Need a short overview on whats hot or not?
 Then you might like the awesome tag cloud feature.
 
-![Tag Cloud](img/tagCloud.png)
+![Tag Cloud](images/tagCloud.png)
 
 
 ### Map
