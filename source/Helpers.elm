@@ -195,14 +195,12 @@ wrapChart config chart =
 
         ( borderRadiusX, borderRadiusY ) =
             ( 10, 10 )
-
-        -- config.borderRadius
     in
         Svg.svg
             [ version "1.1"
             , class className
-            , width (toString config.width)
-            , height (toString config.height)
+            , width ((toString config.width) ++ "px")
+            , height ((toString config.height) ++ "px")
             , viewBox
                 (String.join " "
                     (List.map toString
