@@ -1,4 +1,16 @@
-module BarChart exposing (..)
+module BarChart exposing (defaultBarChartConfig, viewBarChart, getBar)
+
+{-| This module creates a simple SVG bar chart.
+
+![Bar Chart](../images/barChart.png)
+
+@docs defaultBarChartConfig
+
+@docs viewBarChart
+
+@docs getBar
+
+-}
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
@@ -10,6 +22,17 @@ import Helpers exposing (..)
 import CoordinateSystem exposing (..)
 
 
+{-| The default configuration for the bar chart.
+Create your own config by overwriting the fields you want to change.
+
+    barChart =
+        BarChart
+            { defaultBarChartConfig
+                | xLabelFormatter = utcWeek
+            }
+            timeData
+
+-}
 defaultBarChartConfig : BarChartConfig
 defaultBarChartConfig =
     { title = "Vectual Bar Chart"
@@ -26,6 +49,8 @@ defaultBarChartConfig =
     }
 
 
+{-| Helper to get SVG element for a single bar.
+-}
 getBar : BarChartConfig -> Data -> MetaData -> Int -> Entry -> Svg msg
 getBar config data metaData index entry =
     let
@@ -87,6 +112,12 @@ getBars config data metaData =
         )
 
 
+{-| Create SVG from bar chart config and a data set.
+
+    svgElement =
+        viewBarChart config dataSet
+
+-}
 viewBarChart : BarChartConfig -> Data -> Svg msg
 viewBarChart config data =
     let

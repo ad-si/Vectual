@@ -1,4 +1,12 @@
-module BarChartStacked exposing (..)
+module BarChartStacked exposing (viewBarChartStacked)
+
+{-| This module creates an SVG element of a stacked bar chart.
+
+![Bar Chart Stacked](../images/barChartStacked.png)
+
+@docs viewBarChartStacked
+
+-}
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
@@ -113,6 +121,12 @@ getBarsStacked config combinedData datas metaData =
             (List.indexedMap getBarsFunc (shiftDatas datas))
 
 
+{-| Create SVG from bar chart config and several data sets.
+
+    svgElement =
+        viewBarChartStacked config dataSets
+
+-}
 viewBarChartStacked : BarChartConfig -> Datas -> Svg msg
 viewBarChartStacked config datas =
     let

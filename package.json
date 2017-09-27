@@ -1,7 +1,7 @@
 {
   "name": "vectual",
   "version": "0.1.0",
-  "description": "The Open Source Charting Library",
+  "description": "Open source charting library",
   "main": "src/vectual.js",
   "directories": {
     "example": "examples"
