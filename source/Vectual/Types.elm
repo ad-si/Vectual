@@ -1,22 +1,63 @@
-module Types exposing (..)
+module Vectual.Types
+    exposing
+        ( Radian
+        , Key
+        , Value(..)
+        , BaseConfigAnd
+        , PieChartConfig
+        , Alignment(..)
+        , BarChartConfig
+        , TimeRecord
+        , KeyRecord
+        , Entry
+        , Entries
+        , Data(..)
+        , Datas
+        , Chart(..)
+        , MetaData
+        )
+
+{-| All types that are used in Vectual
+
+@docs Alignment
+@docs BarChartConfig
+@docs BaseConfigAnd
+@docs Chart
+@docs Data
+@docs Datas
+@docs Entries
+@docs Entry
+@docs Key
+@docs KeyRecord
+@docs MetaData
+@docs PieChartConfig
+@docs Radian
+@docs TimeRecord
+@docs Value
+
+-}
 
 import Date exposing (Date)
 import OpenSolid.Geometry.Types exposing (..)
 
 
+{-| -}
 type alias Radian =
     Float
 
 
+{-| -}
 type alias Key =
     String
 
 
+{-| -}
 type Value
     = Int
     | Float
 
 
+{-| -}
 type alias BaseConfigAnd extraFields =
     { extraFields
         | title : String
@@ -28,16 +69,19 @@ type alias BaseConfigAnd extraFields =
     }
 
 
+{-| -}
 type alias PieChartConfig =
     BaseConfigAnd { radius : Int }
 
 
+{-| -}
 type Alignment
     = Left
     | Center
     | Right
 
 
+{-| -}
 type alias BarChartConfig =
     BaseConfigAnd
         { labelAngle : Radian
@@ -46,6 +90,7 @@ type alias BarChartConfig =
         }
 
 
+{-| -}
 type alias TimeRecord =
     { utc : Date
     , value : Float
@@ -53,6 +98,7 @@ type alias TimeRecord =
     }
 
 
+{-| -}
 type alias KeyRecord =
     { key : Key
     , value : Float
@@ -64,6 +110,7 @@ type alias KeyRecord =
 -- TODO: Normalize records to entries
 
 
+{-| -}
 type alias Entry =
     { label : String
     , value : Float
@@ -71,11 +118,13 @@ type alias Entry =
     }
 
 
+{-| -}
 type alias Entries =
     -- Normalized form of Data
     List Entry
 
 
+{-| -}
 type Data
     = TimeData (List TimeRecord)
     | KeyData (List KeyRecord)
@@ -83,16 +132,19 @@ type Data
     | InvalidData
 
 
+{-| -}
 type alias Datas =
     List Data
 
 
+{-| -}
 type Chart
     = PieChart PieChartConfig Data
     | BarChart BarChartConfig Data
     | BarChartStacked BarChartConfig Datas
 
 
+{-| -}
 type alias MetaData =
     { graphWidth : Int
     , graphHeight : Int

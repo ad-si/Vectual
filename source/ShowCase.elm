@@ -1,14 +1,14 @@
-module Main exposing (..)
+module ShowCase exposing (..)
 
 import Date
 import Date.Extra.Format as Format exposing (utcIsoDateString)
 import Html exposing (Html, text)
 import Svg exposing (Svg)
-import Charts exposing (..)
-import BarChart exposing (..)
-import BarChartStacked exposing (..)
-import Types exposing (..)
-import Helpers exposing (..)
+import Vectual exposing (..)
+import Vectual.BarChart exposing (..)
+import Vectual.BarChartStacked exposing (..)
+import Vectual.Types exposing (..)
+import Vectual.Helpers exposing (..)
 
 
 main : Program Never Model Msg

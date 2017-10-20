@@ -8,8 +8,13 @@
         "tests"
     ],
     "exposed-modules": [
-        "BarChart",
-        "BarChartStacked"
+        "Vectual",
+        "Vectual.Types",
+        "Vectual.BarChart",
+        "Vectual.BarChartStacked",
+        "Vectual.PieChart",
+        "Vectual.CoordinateSystem",
+        "Vectual.Helpers"
     ],
     "dependencies": {
         "elm-community/string-extra": "1.4.0 <= v < 2.0.0",

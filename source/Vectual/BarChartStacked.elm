@@ -1,4 +1,4 @@
-module BarChartStacked exposing (viewBarChartStacked)
+module Vectual.BarChartStacked exposing (viewBarChartStacked)
 
 {-| This module creates an SVG element of a stacked bar chart.
 
@@ -13,10 +13,10 @@ import Svg.Attributes exposing (..)
 import OpenSolid.Geometry.Types exposing (..)
 import OpenSolid.Point2d as Point2d
 import OpenSolid.Vector2d as Vector2d
-import BarChart exposing (..)
-import Types exposing (..)
-import Helpers exposing (..)
-import CoordinateSystem exposing (..)
+import Vectual.BarChart exposing (..)
+import Vectual.Types exposing (..)
+import Vectual.Helpers exposing (..)
+import Vectual.CoordinateSystem exposing (..)
 
 
 combiner : Data -> Data -> Data

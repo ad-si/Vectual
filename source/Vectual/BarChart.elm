@@ -1,4 +1,4 @@
-module BarChart exposing (defaultBarChartConfig, viewBarChart, getBar)
+module Vectual.BarChart exposing (defaultBarChartConfig, viewBarChart, getBar)
 
 {-| This module creates a simple SVG bar chart.
 
@@ -17,9 +17,9 @@ import Svg.Attributes exposing (..)
 import OpenSolid.Geometry.Types exposing (..)
 import OpenSolid.Point2d as Point2d
 import OpenSolid.Vector2d as Vector2d
-import Types exposing (..)
-import Helpers exposing (..)
-import CoordinateSystem exposing (..)
+import Vectual.Types exposing (..)
+import Vectual.Helpers exposing (..)
+import Vectual.CoordinateSystem exposing (..)
 
 
 {-| The default configuration for the bar chart.

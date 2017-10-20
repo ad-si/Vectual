@@ -1,4 +1,20 @@
-module Helpers exposing (..)
+module Vectual.Helpers exposing (..)
+
+{-| Helpers for normalizing / sanitizing data and easier SVG creation.
+
+@docs getDataLabels
+@docs getDataLength
+@docs getDataRecords
+@docs getDataValues
+@docs getMetaData
+@docs toRotate
+@docs toTranslate
+@docs utcDate
+@docs utcDateTime
+@docs utcWeek
+@docs wrapChart
+
+-}
 
 import Date exposing (Date)
 import Date.Extra.Format as Format exposing (utcIsoString)
@@ -11,12 +27,13 @@ import OpenSolid.Point2d as Point2d
 import OpenSolid.Vector2d as Vector2d
 import Styles exposing (stylusString)
 import StylusParser exposing (stylusToCss)
-import Types exposing (..)
+import Vectual.Types exposing (..)
 
 
 -- Formatter
 
 
+{-| -}
 utcDateTime : Date -> String
 utcDateTime =
     utcIsoString
@@ -24,11 +41,13 @@ utcDateTime =
         >> replace "T" " "
 
 
+{-| -}
 utcDate : Date -> String
 utcDate =
     utcIsoString >> String.slice 0 10
 
 
+{-| -}
 utcWeek : Date -> String
 utcWeek =
     isoWeek
@@ -45,6 +64,7 @@ utcWeek =
 -- Data Converter
 
 
+{-| -}
 getMetaData :
     { a | width : Int, height : Int, yStartAtZero : Bool }
     -> Data
@@ -81,6 +101,7 @@ getMetaData config data =
         }
 
 
+{-| -}
 getDataLength : Data -> Int
 getDataLength data =
     case data of
@@ -97,6 +118,7 @@ getDataLength data =
             0
 
 
+{-| -}
 getDataLabels : BaseConfigAnd a -> Data -> List String
 getDataLabels config data =
     case data of
@@ -113,6 +135,7 @@ getDataLabels config data =
             []
 
 
+{-| -}
 getDataValues : Data -> List Float
 getDataValues data =
     case data of
@@ -129,6 +152,7 @@ getDataValues data =
             []
 
 
+{-| -}
 getDataRecords : Data -> Entries
 getDataRecords data =
     let
@@ -168,11 +192,13 @@ getDataRecords data =
 -- SVG Helpers
 
 
+{-| -}
 toTranslate : Vector2d -> String
 toTranslate vector =
     "translate" ++ (Vector2d.components vector |> toString)
 
 
+{-| -}
 toRotate : Int -> Point2d -> String
 toRotate degree point =
     "rotate"
@@ -184,6 +210,7 @@ toRotate degree point =
            )
 
 
+{-| -}
 wrapChart : BaseConfigAnd a -> Svg msg -> Svg msg
 wrapChart config chart =
     let

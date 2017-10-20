@@ -1,4 +1,9 @@
-module Charts exposing (..)
+module Vectual exposing (..)
+
+{-| Contains methods that are relevant for all chart types
+@docs defaultBaseConfig
+@docs viewChart
+-}
 
 import Array
 import Date exposing (Date)
@@ -12,12 +17,14 @@ import OpenSolid.Geometry.Types exposing (..)
 import OpenSolid.Vector2d as Vector2d
 import OpenSolid.Point2d as Point2d
 import String.Extra exposing (replace)
-import Types exposing (..)
-import BarChart exposing (..)
-import BarChartStacked exposing (..)
-import Helpers exposing (..)
+import Vectual.Types exposing (..)
+import Vectual.BarChart exposing (..)
+import Vectual.BarChartStacked exposing (..)
+import Vectual.PieChart exposing (..)
+import Vectual.Helpers exposing (..)
 
 
+{-| -}
 defaultBaseConfig : BaseConfigAnd {}
 defaultBaseConfig =
     { title = "Vectual Chart"
@@ -29,6 +36,7 @@ defaultBaseConfig =
     }
 
 
+{-| -}
 viewChart : Chart -> Svg msg
 viewChart chart =
     case chart of
@@ -40,8 +48,3 @@ viewChart chart =
 
         PieChart config data ->
             viewPieChart config data
-
-
-viewPieChart : PieChartConfig -> Data -> Svg msg
-viewPieChart config data =
-    circle [ r "50" ] []

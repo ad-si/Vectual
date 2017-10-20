@@ -1,14 +1,26 @@
-module CoordinateSystem exposing (..)
+module Vectual.CoordinateSystem
+    exposing
+        ( getCoordinateSystem
+        , getOrdinates
+        , getAbscissas
+        )
+
+{-| Create ordinates, abscissas or a complete coordinate system.
+@docs getAbscissas
+@docs getCoordinateSystem
+@docs getOrdinates
+-}
 
 import Array
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import OpenSolid.Geometry.Types exposing (..)
 import OpenSolid.Point2d as Point2d
-import Types exposing (..)
-import Helpers exposing (..)
+import Vectual.Types exposing (..)
+import Vectual.Helpers exposing (..)
 
 
+{-| -}
 getOrdinates : BaseConfigAnd a -> Data -> MetaData -> List (Svg msg)
 getOrdinates config data metaData =
     let
@@ -78,6 +90,7 @@ getOrdinates config data metaData =
             |> (List.map numToLine)
 
 
+{-| -}
 getAbscissas : BaseConfigAnd a -> Data -> MetaData -> List (Svg msg)
 getAbscissas config data metaData =
     let
@@ -129,6 +142,7 @@ getAbscissas config data metaData =
             |> (List.map numToLine)
 
 
+{-| -}
 getCoordinateSystem : BaseConfigAnd a -> Data -> MetaData -> Svg msg
 getCoordinateSystem config data metaData =
     g []
