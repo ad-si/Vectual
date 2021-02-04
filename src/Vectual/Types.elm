@@ -1,21 +1,20 @@
-module Vectual.Types
-    exposing
-        ( Radian
-        , Key
-        , Value(..)
-        , BaseConfigAnd
-        , PieChartConfig
-        , Alignment(..)
-        , BarChartConfig
-        , TimeRecord
-        , KeyRecord
-        , Entry
-        , Entries
-        , Data(..)
-        , Datas
-        , Chart(..)
-        , MetaData
-        )
+module Vectual.Types exposing
+    ( Alignment(..)
+    , BarChartConfig
+    , BaseConfigAnd
+    , Chart(..)
+    , Data(..)
+    , Datas
+    , Entries
+    , Entry
+    , Key
+    , KeyRecord
+    , MetaData
+    , PieChartConfig
+    , Radian
+    , TimeRecord
+    , Value(..)
+    )
 
 {-| All types that are used in Vectual
 
@@ -37,8 +36,8 @@ module Vectual.Types
 
 -}
 
-import Date exposing (Date)
-import OpenSolid.Geometry.Types exposing (..)
+import Time exposing (Posix)
+import Vector2d exposing (..)
 
 
 {-| -}
@@ -65,7 +64,7 @@ type alias BaseConfigAnd extraFields =
         , width : Int
         , height : Int
         , borderRadius : ( Int, Int )
-        , xLabelFormatter : Date -> String
+        , xLabelFormatter : Posix -> String
     }
 
 
@@ -92,7 +91,7 @@ type alias BarChartConfig =
 
 {-| -}
 type alias TimeRecord =
-    { utc : Date
+    { utc : Posix
     , value : Float
     , offset : Float
     }
@@ -145,12 +144,12 @@ type Chart
 
 
 {-| -}
-type alias MetaData =
+type alias MetaData units coordinates =
     { graphWidth : Int
     , graphHeight : Int
     , coordSysWidth : Int
     , coordSysHeight : Int
-    , translation : Vector2d
+    , translation : Vector2d units coordinates
     , numberOfEntries : Int
     , yMinimum : Float
     , yMaximum : Float

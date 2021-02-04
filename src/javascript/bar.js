@@ -15,7 +15,7 @@ export default function (svg, config) {
       transform: 'translate(' +
         [graphWidth * 0.1, graphHeight].join() +
       ')',
-    }], svgNS
+    }], svgNS,
   )[0]
   const coordinateSystem = shaven(['g'], svgNS)[0]
   const bars = shaven(['g'], svgNS)[0]
@@ -49,7 +49,7 @@ export default function (svg, config) {
               x: (coSysWidth / config.size) * index,
               y: 10, // eslint-disable-line id-length
             }],
-          ], svgNS
+          ], svgNS,
         )
       }
     }
@@ -78,7 +78,7 @@ export default function (svg, config) {
               // eslint-disable-next-line id-length
               y: -(coSysHeight / yRange) * (index / yDensity),
             }],
-          ], svgNS
+          ], svgNS,
         )
       }
     }
@@ -106,7 +106,7 @@ export default function (svg, config) {
           },
           ['title', config.keys[index] + ':  ' + config.values[index]],
         ],
-        svgNS
+        svgNS,
       )[0]
 
       function localSetAnimations () {
@@ -145,7 +145,7 @@ export default function (svg, config) {
               fill: 'freeze',
               additive: 'replace',
             }],
-          ], svgNS
+          ], svgNS,
         )
       }
 
@@ -173,7 +173,7 @@ export default function (svg, config) {
           additive: 'replace',
         }],
       ],
-      svgNS
+      svgNS,
     )
   }
 
@@ -184,7 +184,7 @@ export default function (svg, config) {
           [coordinateSystem],
           [bars],
         ],
-      ]
+      ],
     )
   }
 

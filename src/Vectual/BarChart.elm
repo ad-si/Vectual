@@ -1,4 +1,8 @@
-module Vectual.BarChart exposing (defaultBarChartConfig, viewBarChart, getBar)
+module Vectual.BarChart exposing
+    ( defaultBarChartConfig
+    , viewBarChart
+    , getBar
+    )
 
 {-| This module creates a simple SVG bar chart.
 
@@ -12,14 +16,14 @@ module Vectual.BarChart exposing (defaultBarChartConfig, viewBarChart, getBar)
 
 -}
 
+import Quantity exposing (Unitless)
+import String exposing (fromFloat, fromInt)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-import OpenSolid.Geometry.Types exposing (..)
-import OpenSolid.Point2d as Point2d
-import OpenSolid.Vector2d as Vector2d
-import Vectual.Types exposing (..)
-import Vectual.Helpers exposing (..)
+import Vector2d exposing (..)
 import Vectual.CoordinateSystem exposing (..)
+import Vectual.Helpers exposing (..)
+import Vectual.Types exposing (..)
 
 
 {-| The default configuration for the bar chart.
@@ -51,11 +55,17 @@ defaultBarChartConfig =
 
 {-| Helper to get SVG element for a single bar.
 -}
-getBar : BarChartConfig -> Data -> MetaData -> Int -> Entry -> Svg msg
+getBar :
+    BarChartConfig
+    -> Data
+    -> MetaData Unitless coordinates
+    -> Int
+    -> Entry
+    -> Svg msg
 getBar config data metaData index entry =
     let
         yScaleFactor =
-            ((toFloat metaData.coordSysHeight) / metaData.yRange)
+            toFloat metaData.coordSysHeight / metaData.yRange
 
         barProportionalWidth =
             0.7
@@ -64,14 +74,14 @@ getBar config data metaData index entry =
             (entry.value - metaData.yMinimum) * yScaleFactor
 
         barDistance =
-            (toFloat metaData.coordSysWidth)
-                / (toFloat metaData.numberOfEntries)
+            toFloat metaData.coordSysWidth
+                / toFloat metaData.numberOfEntries
 
         title =
-            (entry.label ++ ": " ++ (toString entry.value))
+            entry.label ++ ": " ++ fromFloat entry.value
 
         xLeft =
-            truncate ((toFloat index) * barDistance)
+            truncate (toFloat index * barDistance)
 
         xValue =
             case config.alignBars of
@@ -80,29 +90,33 @@ getBar config data metaData index entry =
 
                 Center ->
                     round
-                        ((toFloat xLeft)
+                        (toFloat xLeft
                             + (((1 - barProportionalWidth) / 2) * barDistance)
                         )
 
                 Right ->
                     round
-                        ((toFloat xLeft)
+                        (toFloat xLeft
                             + ((1 - barProportionalWidth) * barDistance)
                         )
     in
-        rect
-            [ x (toString xValue)
-            , height (toString barHeight)
-            , width (toString (barProportionalWidth * barDistance))
-            , transform
-                (toTranslate
-                    (Vector2d ( 0, -barHeight - (entry.offset * yScaleFactor) ))
-                )
-            ]
-            [ Svg.title [] [ text title ] ]
+    rect
+        [ x (fromInt xValue)
+        , height (fromFloat barHeight)
+        , width (fromFloat (barProportionalWidth * barDistance))
+        , transform
+            (toTranslate
+                (Vector2d.unitless 0 (-barHeight - (entry.offset * yScaleFactor)))
+            )
+        ]
+        [ Svg.title [] [ text title ] ]
 
 
-getBars : BarChartConfig -> Data -> MetaData -> Svg msg
+getBars :
+    BarChartConfig
+    -> Data
+    -> MetaData Unitless coordinates
+    -> Svg msg
 getBars config data metaData =
     g
         [ class "vectual_bars" ]
@@ -134,4 +148,4 @@ viewBarChart config data =
                 , getBars config data metaData
                 ]
     in
-        wrapChart config chart
+    wrapChart config chart

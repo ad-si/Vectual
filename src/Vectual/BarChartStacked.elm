@@ -8,15 +8,15 @@ module Vectual.BarChartStacked exposing (viewBarChartStacked)
 
 -}
 
+import List.Extra exposing (scanl)
+import Quantity exposing (Unitless)
+import String exposing (fromFloat, fromInt)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-import OpenSolid.Geometry.Types exposing (..)
-import OpenSolid.Point2d as Point2d
-import OpenSolid.Vector2d as Vector2d
 import Vectual.BarChart exposing (..)
-import Vectual.Types exposing (..)
-import Vectual.Helpers exposing (..)
 import Vectual.CoordinateSystem exposing (..)
+import Vectual.Helpers exposing (..)
+import Vectual.Types exposing (..)
 
 
 combiner : Data -> Data -> Data
@@ -31,18 +31,18 @@ combiner dataA dataB =
         combineLists listA listB =
             List.map2 combineRecords listA listB
     in
-        case dataTuple of
-            ( TimeData listA, TimeData listB ) ->
-                TimeData (combineLists listA listB)
+    case dataTuple of
+        ( TimeData listA, TimeData listB ) ->
+            TimeData (combineLists listA listB)
 
-            ( KeyData listA, KeyData listB ) ->
-                KeyData (combineLists listA listB)
+        ( KeyData listA, KeyData listB ) ->
+            KeyData (combineLists listA listB)
 
-            ( Values listA, Values listB ) ->
-                Values (List.map2 (+) listA listB)
+        ( Values listA, Values listB ) ->
+            Values (List.map2 (+) listA listB)
 
-            ( _, _ ) ->
-                InvalidData
+        ( _, _ ) ->
+            InvalidData
 
 
 foldDatas : Datas -> Data
@@ -51,15 +51,15 @@ foldDatas sets =
         maybeFirst =
             List.head sets
     in
-        case maybeFirst of
-            Just first ->
-                List.foldl
-                    combiner
-                    first
-                    (Maybe.withDefault [] (List.tail sets))
+    case maybeFirst of
+        Just first ->
+            List.foldl
+                combiner
+                first
+                (Maybe.withDefault [] (List.tail sets))
 
-            Nothing ->
-                Values []
+        Nothing ->
+            Values []
 
 
 combineOffsets : Data -> Data -> Data
@@ -74,18 +74,18 @@ combineOffsets dataB dataA =
         combineLists listA listB =
             List.map2 combineRecords listA listB
     in
-        case dataTuple of
-            ( TimeData listA, TimeData listB ) ->
-                TimeData (combineLists listA listB)
+    case dataTuple of
+        ( TimeData listA, TimeData listB ) ->
+            TimeData (combineLists listA listB)
 
-            ( KeyData listA, KeyData listB ) ->
-                KeyData (combineLists listA listB)
+        ( KeyData listA, KeyData listB ) ->
+            KeyData (combineLists listA listB)
 
-            ( Values listA, Values listB ) ->
-                Values (List.map2 (+) listA listB)
+        ( Values listA, Values listB ) ->
+            Values (List.map2 (+) listA listB)
 
-            ( _, _ ) ->
-                InvalidData
+        ( _, _ ) ->
+            InvalidData
 
 
 shiftDatas : Datas -> Datas
@@ -94,31 +94,36 @@ shiftDatas datas =
         maybeFirst =
             List.head datas
     in
-        case maybeFirst of
-            Just first ->
-                List.scanl
-                    combineOffsets
-                    first
-                    (Maybe.withDefault [] (List.tail datas))
+    case maybeFirst of
+        Just first ->
+            scanl
+                combineOffsets
+                first
+                (Maybe.withDefault [] (List.tail datas))
 
-            Nothing ->
-                []
+        Nothing ->
+            []
 
 
-getBarsStacked : BarChartConfig -> Data -> Datas -> MetaData -> Svg msg
+getBarsStacked :
+    BarChartConfig
+    -> Data
+    -> Datas
+    -> MetaData Unitless coordinates
+    -> Svg msg
 getBarsStacked config combinedData datas metaData =
     let
         getBarsFunc index data =
             g
-                [ class ("vectual_bars vectual_bars" ++ (toString index)) ]
+                [ class ("vectual_bars vectual_bars" ++ fromInt index) ]
                 (List.indexedMap
                     (getBar config data metaData)
                     (getDataRecords data)
                 )
     in
-        g
-            []
-            (List.indexedMap getBarsFunc (shiftDatas datas))
+    g
+        []
+        (List.indexedMap getBarsFunc (shiftDatas datas))
 
 
 {-| Create SVG from bar chart config and several data sets.
@@ -150,4 +155,4 @@ viewBarChartStacked config datas =
                     metaData
                 ]
     in
-        wrapChart config chart
+    wrapChart config chart

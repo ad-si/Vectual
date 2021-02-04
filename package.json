@@ -10,7 +10,8 @@
     "lint": "eslint --ignore-path .gitignore --max-warnings 0 .",
     "build": "webpack",
     "watch": "webpack --watch",
-    "test": "npm run lint"
+    "test": "npm run lint && elm-test",
+    "unit-tests": "elm-test"
   },
   "repository": {
     "type": "git",
@@ -32,15 +33,19 @@
   },
   "homepage": "https://github.com/adius/vectual#readme",
   "dependencies": {
-    "elm-test": "^0.18.8",
-    "shaven": "^1.1.0"
+    "shaven": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^4.4.1",
+    "elm": "^0.19.1-5",
+    "elm-format": "^0.8.4",
+    "elm-test": "^0.19.1",
+    "eslint": "^7.19.0",
     "eslint-config-javascript": "^1.3.0",
-    "webpack": "^3.5.4"
+    "webpack": "^5.20.2",
+    "webpack-cli": "^4.5.0"
   },
   "eslintConfig": {
-    "extends": "eslint-config-javascript"
+    "extends": "eslint-config-javascript",
+    "ignorePatterns": "design/presentation"
   }
 }

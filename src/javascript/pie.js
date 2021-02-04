@@ -13,7 +13,7 @@ export default function (svg, config) {
     ['g', {
       transform: 'translate(' +
         [0.5 * config.width, 0.5 * config.height].join() + ')',
-    }], svgNS
+    }], svgNS,
   )[0]
 
 
@@ -44,7 +44,7 @@ export default function (svg, config) {
           : '0 0,0'
       const sector = shaven(
         ['g', {class: 'vectual_pie_sector'}],
-        svgNS
+        svgNS,
       )[0]
 
 
@@ -79,7 +79,7 @@ export default function (svg, config) {
               ' A ' + radius + ',' + radius + ' ' + size + ' ' +
                  nextx + ',' + nexty + ' z',
           }],
-          svgNS
+          svgNS,
         )[0]
 
         text = shaven(
@@ -92,7 +92,7 @@ export default function (svg, config) {
                      (angleThis * radius * 0.002 + 8) + 'px',
             fill: config.colors[index],
             transform: 'translate(0, 5)',
-          }], svgNS
+          }], svgNS,
         )[0]
 
         title = shaven(
@@ -101,7 +101,7 @@ export default function (svg, config) {
               config.sorted.values[index] + ' | ' +
               Math.round(config.sorted.values[index] /
                           config.totalValue * 100)  + '%',
-          ], svgNS
+          ], svgNS,
         )[0]
 
       }
@@ -128,7 +128,7 @@ export default function (svg, config) {
               additive: 'replace',
               fill: 'freeze',
             }],
-          ], svgNS
+          ], svgNS,
         )
 
         shaven(
@@ -150,7 +150,7 @@ export default function (svg, config) {
               additive: 'replace',
               fill: 'freeze',
             }],
-          ], svgNS
+          ], svgNS,
         )
 
 
@@ -163,7 +163,7 @@ export default function (svg, config) {
               dur: '1s',
               fill: 'freeze',
             }],
-          ], svgNS
+          ], svgNS,
         )
 
       }
@@ -176,7 +176,7 @@ export default function (svg, config) {
               [text],
               [title],
             ],
-          ], svgNS
+          ], svgNS,
         )
       }
 
@@ -208,7 +208,7 @@ export default function (svg, config) {
             'text-anchor': 'middle',
             'stroke-width': radius * 0.006,
           }],
-        ], svgNS
+        ], svgNS,
       )
     }
     else      {

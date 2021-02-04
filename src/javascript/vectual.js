@@ -39,7 +39,7 @@ export default function (localConfig) {
 
   // Overwrite global with custom configuration
   for (key in localConfig) {
-    if (localConfig.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(localConfig, key)) {
       config[key] = localConfig[key]
     }
   }
@@ -47,7 +47,7 @@ export default function (localConfig) {
   // Convert data to JSON
   if (!(config.data instanceof Array)) {
     for (index in config.data)      {
-      if (config.data.hasOwnProperty(index)) {
+      if (Object.prototype.hasOwnProperty.call(config.data, index)) {
         temp.push({key: index, value: config.data[index]})
       }
     }
@@ -95,7 +95,7 @@ export default function (localConfig) {
       ? 1
       : valueA[1] > valueB[1]
         ? -1
-        : 0
+        : 0,
   )
 
   // split into key/value arrays
@@ -168,7 +168,7 @@ export default function (localConfig) {
         style: 'font-size:' + (config.height * 0.05) + 'px',
       }],
     ]
-    , svgNS
+    , svgNS,
   )[0]
 
   return {

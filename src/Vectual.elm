@@ -1,27 +1,27 @@
-module Vectual exposing (..)
+module Vectual exposing
+    ( defaultBaseConfig
+    , viewChart
+    )
 
 {-| Contains methods that are relevant for all chart types
+
 @docs defaultBaseConfig
 @docs viewChart
+
 -}
 
-import Array
-import Date exposing (Date)
-import Date.Extra.Format as Format exposing (utcIsoString)
-import Date.Extra.Utils as Utils exposing (isoWeek)
-import Svg exposing (..)
-import Svg.Attributes exposing (..)
+--import Date exposing (Date)
+--import Date.Extra.Format as Format exposing (utcIsoString)
+
 import Styles exposing (stylusString)
 import StylusParser exposing (stylusToCss)
-import OpenSolid.Geometry.Types exposing (..)
-import OpenSolid.Vector2d as Vector2d
-import OpenSolid.Point2d as Point2d
-import String.Extra exposing (replace)
-import Vectual.Types exposing (..)
+import Svg exposing (..)
+import Svg.Attributes exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
-import Vectual.PieChart exposing (..)
 import Vectual.Helpers exposing (..)
+import Vectual.PieChart exposing (..)
+import Vectual.Types exposing (..)
 
 
 {-| -}

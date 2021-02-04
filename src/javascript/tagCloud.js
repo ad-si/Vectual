@@ -15,7 +15,7 @@ export default function (svg, config) {
         (0.5 * config.width) + ', ' +
         (0.5 * config.height) + ')',
       class: 'vectualTagcloud',
-    }], svgNS
+    }], svgNS,
   )[0]
 
 
@@ -129,7 +129,7 @@ export default function (svg, config) {
                 y: element.y, // eslint-disable-line id-length
               },
               ],
-            ], svgNS
+            ], svgNS,
           )
         }
 

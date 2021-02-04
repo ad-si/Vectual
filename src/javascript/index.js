@@ -1,22 +1,22 @@
 import vectual from './vectual.js'
 import config from './config.js'
-import fruitConsumption from '../tests/fixtures/fruit-consumption.js'
+import fruitConsumption from '../../tests/fixtures/fruit-consumption.js'
 
 config.data = fruitConsumption
 
 document.body.append(
   vectual(config)
-    .pieChart()
+    .pieChart(),
 )
 
 document.body.append(
   vectual(config)
-    .barChart()
+    .barChart(),
 )
 
 document.body.append(
   vectual(config)
-    .lineChart()
+    .lineChart(),
 )
 
 // document.body.append(

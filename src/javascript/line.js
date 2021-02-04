@@ -13,7 +13,7 @@ export default function (svg, config) {
   const graph = shaven(
     ['g', {
       transform: 'translate(' + (graphWidth * 0.1) + ', ' + graphHeight + ')',
-    }], svgNS
+    }], svgNS,
   )[0]
 
   function init () {
@@ -133,7 +133,7 @@ export default function (svg, config) {
               fill: 'freeze'},
             ],
           ],
-          svgNS
+          svgNS,
         )
       }
     }
