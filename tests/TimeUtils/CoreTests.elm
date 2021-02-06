@@ -66,12 +66,13 @@ tests =
             \() ->
                 Expect.equal 31
                     (Core.daysInNextMonth (fromYMDHM 2011 Dec 25 22 23))
-        , skip <|
-            test "toFirstOfMonth \"2015-11-11 11:45\" is \"2015-11-01 11:45\"" <|
-                TestUtils.assertDateFunc
-                    "2015-11-11 11:45"
-                    "2015-11-01T11:45:00.000"
-                    Core.toFirstOfMonth
+
+        --, skip <|
+        --    test "toFirstOfMonth \"2015-11-11 11:45\" is \"2015-11-01 11:45\"" <|
+        --        TestUtils.assertDateFunc
+        --            "2015-11-11 11:45"
+        --            "2015-11-01T11:45:00.000"
+        --            Core.toFirstOfMonth
         , test "toFirstOfMonth \"2016-01-02 00:00\" is \"2016-01-01 00:00\"" <|
             TestUtils.assertDateFunc
                 "2016-01-02"
@@ -107,96 +108,96 @@ tests =
                 "2017-03-28"
                 "2017-03-01T00:00:00.000"
                 Core.toFirstOfMonth
-        , skip <|
-            test "lastOfMonthDate" <|
-                TestUtils.assertDateFunc
-                    "2015-11-11 11:45"
-                    "2015-11-30T11:45:00.000"
-                    Core.lastOfMonthDate
-        , skip <|
-            test "lastOfMonthDate Leap Year Feb" <|
-                TestUtils.assertDateFunc
-                    "2012-02-18 11:45"
-                    "2012-02-29T11:45:00.000"
-                    Core.lastOfMonthDate
-        , skip <|
-            test
-                ("lastOfMonthDate \"2017-03-03\" is \"2017-03-31\""
-                    ++ " daylight saving for UTC +02:00 CET to CEST"
-                )
-            <|
-                TestUtils.assertDateFunc
-                    "2017-03-03 11:45"
-                    "2017-03-31T11:45:00.000"
-                    Core.lastOfMonthDate
-        , skip <|
-            test
-                ("lastOfMonthDate \"2017-10-03\" is \"2017-10-31\""
-                    ++ " leave daylight saving for UTC +02:00 CEST to CET"
-                )
-            <|
-                TestUtils.assertDateFunc
-                    "2017-10-03 11:45"
-                    "2017-10-31T11:45:00.000"
-                    Core.lastOfMonthDate
-        , skip <|
-            test "lastOfPrevMonthDate" <|
-                TestUtils.assertDateFunc
-                    "2012-03-02 11:45"
-                    "2012-02-29T11:45:00.000"
-                    Core.lastOfPrevMonthDate
-        , skip <|
-            test
-                ("lastOfPrevMonthDate \"2017-03-30\" is \"2017-02-28\""
-                    ++ " where lastOfPrevMonth is CET and input date is CEST "
-                )
-            <|
-                TestUtils.assertDateFunc
-                    "2017-03-30 11:45"
-                    "2017-02-28T11:45:00.000"
-                    Core.lastOfPrevMonthDate
-        , skip <|
-            test
-                ("lastOfPrevMonthDate \"2017-10-30\" is \"2017-09-30\""
-                    ++ " where lastOfPrevMonth is CEST and input date is CET "
-                )
-            <|
-                TestUtils.assertDateFunc
-                    "2017-10-30 11:45"
-                    "2017-09-30T11:45:00.000"
-                    Core.lastOfPrevMonthDate
-        , skip <|
-            test "firstOfNextMonthDate" <|
-                -- TODO: Fix firstOfNextMonthDate DTS compensation
-                TestUtils.assertDateFunc
-                    "2012-02-01 02:20"
-                    "2012-03-01T02:20:00.000"
-                    Core.firstOfNextMonthDate
-        , skip <|
-            test
-                ("firstOfNextMonthDate \"2017-03-03\" is \"2017-04-01\" "
-                    ++ "where `firstOfNextMonthDate` is CEST "
-                    ++ "and input date is CET"
-                )
-            <|
-                -- TODO: Fix firstOfNextMonthDate DTS compensation
-                TestUtils.assertDateFunc
-                    "2017-03-03 02:20"
-                    "2017-04-01T02:20:00.000"
-                    Core.firstOfNextMonthDate
-        , skip <|
-            test
-                ("firstOfNextMonthDate \"2017-10-03\" is \"2017-11-01\""
-                    ++ " where firstOfNextMonthDate is CET "
-                    ++ "and input date is CEST"
-                )
-            <|
-                -- TODO: Fix firstOfNextMonthDate DTS compensation
-                TestUtils.assertDateFunc
-                    "2017-10-03 02:20"
-                    "2017-11-01T02:20:00.000"
-                    Core.firstOfNextMonthDate
 
+        --, skip <|
+        --    test "lastOfMonthDate" <|
+        --        TestUtils.assertDateFunc
+        --            "2015-11-11 11:45"
+        --            "2015-11-30T11:45:00.000"
+        --            Core.lastOfMonthDate
+        --, skip <|
+        --    test "lastOfMonthDate Leap Year Feb" <|
+        --        TestUtils.assertDateFunc
+        --            "2012-02-18 11:45"
+        --            "2012-02-29T11:45:00.000"
+        --            Core.lastOfMonthDate
+        --, skip <|
+        --    test
+        --        ("lastOfMonthDate \"2017-03-03\" is \"2017-03-31\""
+        --            ++ " daylight saving for UTC +02:00 CET to CEST"
+        --        )
+        --    <|
+        --        TestUtils.assertDateFunc
+        --            "2017-03-03 11:45"
+        --            "2017-03-31T11:45:00.000"
+        --            Core.lastOfMonthDate
+        --, skip <|
+        --    test
+        --        ("lastOfMonthDate \"2017-10-03\" is \"2017-10-31\""
+        --            ++ " leave daylight saving for UTC +02:00 CEST to CET"
+        --        )
+        --    <|
+        --        TestUtils.assertDateFunc
+        --            "2017-10-03 11:45"
+        --            "2017-10-31T11:45:00.000"
+        --            Core.lastOfMonthDate
+        --, skip <|
+        --    test "lastOfPrevMonthDate" <|
+        --        TestUtils.assertDateFunc
+        --            "2012-03-02 11:45"
+        --            "2012-02-29T11:45:00.000"
+        --            Core.lastOfPrevMonthDate
+        --, skip <|
+        --    test
+        --        ("lastOfPrevMonthDate \"2017-03-30\" is \"2017-02-28\""
+        --            ++ " where lastOfPrevMonth is CET and input date is CEST "
+        --        )
+        --    <|
+        --        TestUtils.assertDateFunc
+        --            "2017-03-30 11:45"
+        --            "2017-02-28T11:45:00.000"
+        --            Core.lastOfPrevMonthDate
+        --, skip <|
+        --    test
+        --        ("lastOfPrevMonthDate \"2017-10-30\" is \"2017-09-30\""
+        --            ++ " where lastOfPrevMonth is CEST and input date is CET "
+        --        )
+        --    <|
+        --        TestUtils.assertDateFunc
+        --            "2017-10-30 11:45"
+        --            "2017-09-30T11:45:00.000"
+        --            Core.lastOfPrevMonthDate
+        --, skip <|
+        --    test "firstOfNextMonthDate" <|
+        --        -- TODO: Fix firstOfNextMonthDate DTS compensation
+        --        TestUtils.assertDateFunc
+        --            "2012-02-01 02:20"
+        --            "2012-03-01T02:20:00.000"
+        --            Core.firstOfNextMonthDate
+        --, skip <|
+        --    test
+        --        ("firstOfNextMonthDate \"2017-03-03\" is \"2017-04-01\" "
+        --            ++ "where `firstOfNextMonthDate` is CEST "
+        --            ++ "and input date is CET"
+        --        )
+        --    <|
+        --        -- TODO: Fix firstOfNextMonthDate DTS compensation
+        --        TestUtils.assertDateFunc
+        --            "2017-03-03 02:20"
+        --            "2017-04-01T02:20:00.000"
+        --            Core.firstOfNextMonthDate
+        --, skip <|
+        --    test
+        --        ("firstOfNextMonthDate \"2017-10-03\" is \"2017-11-01\""
+        --            ++ " where firstOfNextMonthDate is CET "
+        --            ++ "and input date is CEST"
+        --        )
+        --    <|
+        --        -- TODO: Fix firstOfNextMonthDate DTS compensation
+        --        TestUtils.assertDateFunc
+        --            "2017-10-03 02:20"
+        --            "2017-11-01T02:20:00.000"
+        --            Core.firstOfNextMonthDate
         -- this is all the possible cases.
         , describe "DateUtils.daysBackToStartOfWeek tests" <|
             List.map
