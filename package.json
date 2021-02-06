@@ -27,7 +27,7 @@
     "linegraph"
   ],
   "author": "Adrian Sieber",
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/adius/vectual/issues"
   },
