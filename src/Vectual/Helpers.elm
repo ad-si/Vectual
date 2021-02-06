@@ -6,9 +6,6 @@ module Vectual.Helpers exposing
     , getMetaData
     , toRotate
     , toTranslate
-    , utcDate
-    , utcDateTime
-    , utcWeek
     , wrapChart
     )
 
@@ -21,122 +18,22 @@ module Vectual.Helpers exposing
 @docs getMetaData
 @docs toRotate
 @docs toTranslate
-@docs utcDate
-@docs utcDateTime
-@docs utcWeek
 @docs wrapChart
 
 -}
 
-import Debug exposing (toString)
-import Iso8601
+import Iso8601 exposing (fromTime)
 import Point2d exposing (..)
 import Quantity exposing (Unitless)
-import String exposing (replace)
+import String exposing (fromFloat, fromInt, join, replace)
 import Styles exposing (stylusString)
-import StylusParser exposing (stylusToCss)
+import Stylus.Parser exposing (stylusToCss)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import Time exposing (..)
+import TimeUtils.Time exposing (..)
 import Vector2d exposing (..)
 import Vectual.Types exposing (..)
-
-
-
--- Formatter
---diffDays : Date -> Date -> Int
---diffDays date1 date2 =
---    if Compare.is Compare.After date1 date2 then
---        positiveDiffDays date1 date2 1
---    else
---        positiveDiffDays date2 date1 -1
---{-| Return number of days added to date1 to produce date2
----}
---positiveDiffDays : Date -> Date -> Int -> Int
---positiveDiffDays date1 date2 multiplier =
---    let
---        date1DaysFromCivil =
---            Internal.daysFromCivil
---                (Date.year date1)
---                (Core.monthToInt (Date.month date1))
---                (Date.day date1)
---        date2DaysFromCivil =
---            Internal.daysFromCivil
---                (Date.year date2)
---                (Core.monthToInt (Date.month date2))
---                (Date.day date2)
---    in
---    (date1DaysFromCivil - date2DaysFromCivil) * multiplier
---getYearIsoWeekDate date =
---    let
---        inputYear =
---            Date.year date
---        maxIsoWeekDateInYear =
---            Create.dateFromFields inputYear Date.Dec 29 0 0 0 0
---    in
---    if is SameOrAfter date maxIsoWeekDateInYear then
---        let
---            nextYearIsoWeek1Date =
---                isoWeekOne (inputYear + 1)
---        in
---        if is Before date nextYearIsoWeek1Date then
---            ( inputYear, isoWeekOne inputYear )
---        else
---            ( inputYear + 1, nextYearIsoWeek1Date )
---    else
---        let
---            thisYearIsoWeek1Date =
---                isoWeekOne inputYear
---        in
---        if is Before date thisYearIsoWeek1Date then
---            ( inputYear - 1, isoWeekOne (inputYear - 1) )
---        else
---            ( inputYear, thisYearIsoWeek1Date )
---{-| Return iso week values year, week, isoDayOfWeek.
---Input date is expected to be in local time zone of vm.
----}
-
-
-isoWeek : Time.Posix -> ( Int, Int, Int )
-isoWeek date =
-    --let
-    --    ( year, isoWeek1Date ) =
-    --        getYearIsoWeekDate date
-    --    daysSinceIsoWeek1 =
-    --        diffDays date isoWeek1Date
-    --in
-    --( year
-    --, (daysSinceIsoWeek1 // 7) + 1
-    --, Core.isoDayOfWeek (Date.dayOfWeek date)
-    --)
-    ( 1, 2, 3 )
-
-
-{-| -}
-utcDateTime : Posix -> String
-utcDateTime =
-    Iso8601.fromTime
-        >> String.slice 0 16
-        >> replace "T" " "
-
-
-{-| -}
-utcDate : Posix -> String
-utcDate =
-    Iso8601.fromTime >> String.slice 0 10
-
-
-{-| -}
-utcWeek : Posix -> String
-utcWeek =
-    isoWeek
-        >> (\( year, week, dayOfWeek ) ->
-                toString year
-                    ++ "-W"
-                    ++ toString week
-                    ++ "-"
-                    ++ toString dayOfWeek
-           )
 
 
 
@@ -209,7 +106,7 @@ getDataLabels config data =
             List.map .key list
 
         Values list ->
-            List.map toString (List.range 0 (List.length list - 1))
+            List.map fromInt (List.range 0 (List.length list - 1))
 
         InvalidData ->
             []
@@ -237,7 +134,7 @@ getDataRecords : Data -> Entries
 getDataRecords data =
     let
         timeRecordToEntry record =
-            { label = toString record.utc
+            { label = fromTime record.utc
             , value = record.value
             , offset = record.offset
             }
@@ -249,7 +146,7 @@ getDataRecords data =
             }
 
         valueToEntry index value =
-            { label = toString index
+            { label = fromInt index
             , value = value
             , offset = 0
             }
@@ -275,18 +172,31 @@ getDataRecords data =
 {-| -}
 toTranslate : Vector2d units coordinates -> String
 toTranslate vector =
-    "translate" ++ (Vector2d.components vector |> toString)
+    let
+        vectorRec =
+            Vector2d.unwrap vector
+    in
+    "translate("
+        ++ fromFloat vectorRec.x
+        ++ ","
+        ++ fromFloat vectorRec.y
+        ++ ")"
 
 
 {-| -}
 toRotate : Int -> Point2d units coordinates -> String
 toRotate degree point =
-    "rotate"
-        ++ toString
-            ( degree
-            , Point2d.xCoordinate point
-            , Point2d.yCoordinate point
-            )
+    let
+        pointRec =
+            Point2d.unwrap point
+    in
+    "rotate("
+        ++ join ","
+            [ fromInt degree
+            , fromFloat pointRec.x
+            , fromFloat pointRec.y
+            ]
+        ++ ")"
 
 
 {-| -}
@@ -306,11 +216,11 @@ wrapChart config chart =
     Svg.svg
         [ version "1.1"
         , class className
-        , width (toString config.width ++ "px")
-        , height (toString config.height ++ "px")
+        , width (fromInt config.width ++ "px")
+        , height (fromInt config.height ++ "px")
         , viewBox
             (String.join " "
-                (List.map toString
+                (List.map fromInt
                     [ 0, 0, config.width, config.height ]
                 )
             )
@@ -319,20 +229,20 @@ wrapChart config chart =
             [ text (Result.withDefault "" (stylusToCss stylusString)) ]
         , rect
             [ class "vectual_background"
-            , width (toString config.width)
-            , height (toString config.height)
-            , rx (toString borderRadiusX)
-            , ry (toString borderRadiusY)
+            , width (fromInt config.width)
+            , height (fromInt config.height)
+            , rx (fromInt borderRadiusX)
+            , ry (fromInt borderRadiusY)
             ]
             []
         , chart
         , text_
             [ class "vectual_title"
-            , x (toString 20)
-            , y (toString (10 + 0.05 * Basics.toFloat config.height))
+            , x (fromInt 20)
+            , y (fromFloat (10 + 0.05 * Basics.toFloat config.height))
             , Svg.Attributes.style
                 ("font-size:"
-                    ++ toString (0.05 * Basics.toFloat config.height)
+                    ++ fromFloat (0.05 * Basics.toFloat config.height)
                     ++ "px"
                 )
             ]

@@ -1,4 +1,4 @@
-module StylusParser exposing (..)
+module Stylus.Parser exposing (..)
 
 import Char
 import Parser.Advanced exposing (..)

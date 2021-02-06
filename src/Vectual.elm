@@ -10,13 +10,11 @@ module Vectual exposing
 
 -}
 
---import Date exposing (Date)
---import Date.Extra.Format as Format exposing (utcIsoString)
-
 import Styles exposing (stylusString)
-import StylusParser exposing (stylusToCss)
+import Stylus.Parser exposing (stylusToCss)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
+import TimeUtils.Time exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)

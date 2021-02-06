@@ -1,11 +1,10 @@
-module Main exposing (..)
+module Stylus exposing (..)
 
 import Expect exposing (Expectation)
-import Fuzz exposing (Fuzzer, int, list, string)
 import List exposing (foldr)
 import Parser.Advanced exposing (Step(..), run)
 import String exposing (join)
-import StylusParser exposing (..)
+import Stylus.Parser exposing (..)
 import Test exposing (..)
 import Tuple exposing (..)
 
@@ -92,7 +91,7 @@ primitiveTests =
 
 stylusTests : Test
 stylusTests =
-    describe "Stylus"
+    describe "Stylus Parsing"
         [ test "Rule" <|
             \_ ->
                 Expect.equal
@@ -258,7 +257,7 @@ stylusTests =
 
 stylusAstToCssTests : Test
 stylusAstToCssTests =
-    describe "Stylus Ast To Css"
+    describe "Stylus AST to CSS"
         [ test "Rule" <|
             \_ ->
                 Expect.equal
@@ -384,7 +383,7 @@ stylusAstToCssTests =
 
 stylusToCssTests : Test
 stylusToCssTests =
-    describe "Stylus To Css"
+    describe "Stylus to CSS"
         [ test "Rule" <|
             \_ ->
                 Expect.equal
