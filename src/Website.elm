@@ -1,4 +1,4 @@
-module ShowCase exposing
+module Website exposing
     ( Model
     , Msg(..)
     , barChart
@@ -17,8 +17,10 @@ module ShowCase exposing
     )
 
 import Browser
-import Html exposing (Html, text)
+import Html exposing (Attribute, Html, a, div, h1, main_, nav, node, p, text)
+import Html.Attributes exposing (class, href)
 import Iso8601 exposing (fromTime, toTime)
+import Stylus.Parser exposing (stylusToCss)
 import Svg exposing (Svg)
 import Time exposing (..)
 import TimeUtils.Time exposing (utcWeek)
@@ -26,11 +28,12 @@ import Vectual exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
+import Vectual.PieChart exposing (..)
 import Vectual.Types exposing (..)
 
 
 
--- Model
+-- Model,
 
 
 type alias Model =
@@ -93,14 +96,13 @@ values =
     Values (List.map (\(FruitRecord _ _ value _ _) -> value) dataTable)
 
 
+fruitRecToKeyRecord =
+    \(FruitRecord _ key value _ _) -> KeyRecord key value 0
+
+
 keyData : Data
 keyData =
-    let
-        fruitRecToRecord =
-            \(FruitRecord _ key value _ _) ->
-                KeyRecord key value 0
-    in
-    KeyData (List.map fruitRecToRecord dataTable)
+    KeyData (List.map fruitRecToKeyRecord dataTable)
 
 
 timeData : Data
@@ -133,11 +135,23 @@ timeData2 =
     TimeData (List.map fruitRecToRecord dataTable)
 
 
+pieChart : Chart
+pieChart =
+    PieChart
+        { defaultPieChartConfig
+            | title = "Pie Chart"
+            , xLabelFormatter = utcWeek
+            , showAnimations = True
+        }
+        keyData
+
+
 barChart : Chart
 barChart =
     BarChart
         { defaultBarChartConfig
-            | xLabelFormatter = utcWeek
+            | title = "Bar Chart"
+            , xLabelFormatter = utcWeek
         }
         timeData
 
@@ -146,7 +160,8 @@ barChartStacked : Chart
 barChartStacked =
     BarChartStacked
         { defaultBarChartConfig
-            | xLabelFormatter = utcWeek
+            | title = "Stacked Bar Chart"
+            , xLabelFormatter = utcWeek
         }
         [ timeData, timeData1, timeData2 ]
 
@@ -155,9 +170,79 @@ barChartStacked =
 -- View
 
 
-view : Model -> Svg msg
+styleEl : List (Attribute msg) -> List (Html msg) -> Html msg
+styleEl attributes children =
+    node "style" attributes children
+
+
+bodyStylus =
+    """
+body
+  font-family sans-serif
+  background-color hsl(0, 0%, 12%)
+  color lightgray
+
+.wrapper
+  width 54rem
+  margin 0 auto
+
+nav
+  border-bottom 1px solid dimgray
+  margin-bottom 2em
+
+h1
+  color white
+  font-size 2.2rem
+  font-weight 900
+  margin-right 0.5em
+  margin-bottom 0.5em
+  display inline-block
+
+a
+  color hsl(176, 100%, 81%)
+
+a:visited
+  color hsl(346, 100%, 88%)
+
+.subtitle
+  display inline-block
+
+.vectual
+  margin 0 1.5em 1.5em 0
+"""
+
+
+view : Model -> Html msg
 view _ =
-    viewChart barChartStacked
+    div [ class "wrapper" ]
+        [ styleEl []
+            [ case stylusToCss bodyStylus of
+                Ok value ->
+                    text value
+
+                Err error ->
+                    Debug.log (Debug.toString error) (text "Error")
+            ]
+        , nav []
+            [ h1 [] [ text "Vectual" ]
+            , p [ class "subtitle" ]
+                [ text "The Open Source Charting Library" ]
+            , p []
+                [ text "Learn more at "
+                , a
+                    [ href "https://github.com/ad-si/vectual" ]
+                    [ text "github.com/ad-si/vectual"
+                    ]
+                , text "."
+                ]
+            ]
+        , main_
+            []
+            [ viewChart barChart
+            , viewChart barChartStacked
+            , viewChart pieChart
+            ]
+        ]
 
 
 main : Program () Model Msg

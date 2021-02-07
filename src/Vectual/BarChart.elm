@@ -107,7 +107,10 @@ getBar config data metaData index entry =
         , width (fromFloat (barProportionalWidth * barDistance))
         , transform
             (toTranslate
-                (Vector2d.unitless 0 (-barHeight - (entry.offset * yScaleFactor)))
+                (Vector2d.unitless
+                    0
+                    (-barHeight - (entry.offset * yScaleFactor))
+                )
             )
         ]
         [ Svg.title [] [ text title ] ]

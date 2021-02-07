@@ -3,14 +3,9 @@ module Styles exposing (stylusString)
 
 stylusString =
     """
-body
-  background-color hsl(0, 0%, 10%)
-
 // ===== SVG =====
 svg.vectual
   display inline-block
-  margin 10em
-  float right
 
 .vectual_background
   fill rgb(50, 50, 50)
@@ -88,37 +83,50 @@ svg.vectual_inline
   fill #9dfff9
   stroke gray
 
-// Colors created with coolors.co
-.vectual_bars0
-  fill #9dfff9
-  stroke none
-.vectual_bars1
-  fill #ffc1cf
-  stroke none
-.vectual_bars2
-  fill #e8ffb7
-  stroke none
-.vectual_bars3
-  fill #f5c396
-  stroke none
-.vectual_bars4
-  fill #93e5ab
+
+// Colors created with https://coolors.co
+.vectual_bars0, .vectual_color_0
+  fill hsl(176, 100%, 81%)
   stroke none
 
-.vectual_bars5
-  fill #d3a588
+.vectual_bars1, .vectual_color_1
+  fill hsl(346, 100%, 88%)
   stroke none
-.vectual_bars6
-  fill #7f96ff
+
+.vectual_bars2, .vectual_color_2
+  fill hsl(79, 100%, 86%)
   stroke none
-.vectual_bars7
-  fill #f2f79e
+
+.vectual_bars3, .vectual_color_3
+  fill hsl(28, 83%, 77%)
   stroke none
-.vectual_bars8
-  fill #dbb3b1
+
+.vectual_bars4, .vectual_color_4
+  fill hsl(138, 61%, 74%)
   stroke none
-.vectual_bars9
-  fill #9ed67f
+
+.vectual_bars5, .vectual_color_5
+  fill hsl(23, 46%, 68%)
+  stroke none
+
+.vectual_bars6, .vectual_color_6
+  fill hsl(229, 100%, 75%)
+  stroke none
+
+.vectual_bars7, .vectual_color_7
+  fill hsl(63, 85%, 79%)
+  stroke none
+
+.vectual_bars8, .vectual_color_8
+  fill hsl(3, 37%, 78%)
+  stroke none
+
+.vectual_bars9, .vectual_color_9
+  fill hsl(99, 51%, 67%)
+  stroke none
+
+.vectual_bars10, .vectual_color_10
+  fill hsl(18, 83%, 75%)
   stroke none
 
 
@@ -172,61 +180,61 @@ svg.vectual_inline
 
 // Circles around small countries.
 // Change opacity to 1 to display all circles.
-.circlexx
+.vectual .circlexx
   opacity 0
   fill #e0e0e0
   stroke #000000
   stroke-width 0.5
 
 // Smaller circles around French DOMs and Chinese SARs. Change opacity to 1 to display all subnational circles.
-.subxx
+.vectual .subxx
   opacity 0
   stroke-width 0.3
 
 // Circles around small, unrecognized countries. Change opacity to 1 to display all circles.
-.unxx
+.vectual .unxx
   opacity 0
   fill #e0e0e0
   stroke #000000
   stroke-width 0.3
 
 // Circles around small countries, but with no permanent residents. Change opacity to 1 to display all circles.
-.noxx
+.vectual .noxx
   opacity 0
   fill #e0e0e0
   stroke #000000
   stroke-width 0.5
 
 // land
-.landxx
+.vectual .landxx
   fill rgb(230, 230, 230)
   stroke rgb(50, 50, 50)
   stroke-width 0.5
   fill-rule evenodd
 
 // Styles for coastlines of islands with no borders
-.coastxx
+.vectual .coastxx
   fill rgb(230, 230, 230)
   stroke #ffffff
   stroke-width 0.3
   fill-rule evenodd
 
 // Styles for nations with limited recognition
-.limitxx
+.vectual .limitxx
   fill rgb(230, 230, 230)
   stroke #ffffff
   stroke-width 0
   fill-rule evenodd
 
 // Styles for nations with no permanent population.
-.antxx
+.vectual .antxx
   fill rgb(230, 230, 230)
   stroke #ffffff
   stroke-width 0
   fill-rule evenodd
 
 // Ocean
-.oceanxx
+.vectual .oceanxx
   opacity 1
   color blue
   fill #ffffff

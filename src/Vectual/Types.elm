@@ -56,6 +56,10 @@ type Value
     | Float
 
 
+
+-- TODO: Add GridBaseConfig for all chart types with a coordinate system
+
+
 {-| -}
 type alias BaseConfigAnd extraFields =
     { extraFields
@@ -70,7 +74,11 @@ type alias BaseConfigAnd extraFields =
 
 {-| -}
 type alias PieChartConfig =
-    BaseConfigAnd { radius : Int }
+    BaseConfigAnd
+        { radius : Int
+        , showAnimations : Bool
+        , yStartAtZero : Bool -- TODO: Remove
+        }
 
 
 {-| -}
