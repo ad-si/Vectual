@@ -59,7 +59,6 @@ module TimeUtils.Core exposing
 ## Conversion
 
 @docs fromTime
-@docs toTime
 
 
 ## Iteration Utility

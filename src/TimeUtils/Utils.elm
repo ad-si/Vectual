@@ -1,4 +1,8 @@
-module TimeUtils.Utils exposing (..)
+module TimeUtils.Utils exposing
+    ( dayList
+    , isoWeek
+    , isoWeekOne
+    )
 
 {-|
 

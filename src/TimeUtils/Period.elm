@@ -1,4 +1,13 @@
-module TimeUtils.Period exposing (..)
+module TimeUtils.Period exposing
+    ( add
+    , diff
+    , Period(..)
+    , PeriodDeltaRecord
+    , periodToString
+    , zeroDelta
+    , toTicks
+    , addTimeUnit
+    )
 
 {-| Period is a fixed length of time. It is an elapsed time concept, which
 does not include the concept of Years Months or Daylight saving variations.
@@ -10,9 +19,11 @@ Name of type concept copied from NodaTime.
 @docs add
 @docs diff
 @docs Period
-@docs DeltaRecord
+@docs PeriodDeltaRecord
+@docs periodToString
 @docs zeroDelta
 @docs toTicks
+@docs addTimeUnit
 
 -}
 
@@ -25,7 +36,7 @@ import TimeUtils.Internal2 exposing (..)
 Week is a convenience for users if they want to use it, it does
 just scale Day in functionality so is not strictly required.
 
-`DeltaRecord` values are multiplied addend on application.
+`PeriodDeltaRecord` values are multiplied addend on application.
 
 -}
 type Period

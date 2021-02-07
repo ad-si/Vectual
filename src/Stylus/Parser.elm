@@ -1,4 +1,10 @@
-module Stylus.Parser exposing (..)
+module Stylus.Parser exposing (stylusToCss)
+
+{-| Convert a strict subset of Stylus to CSS
+
+@docs stylusToCss
+
+-}
 
 import Char
 import Parser.Advanced exposing (..)
@@ -214,6 +220,19 @@ serializeStylusAst stylusAst =
         (List.map serializeExpression stylusAst)
 
 
+{-|
+
+    stylusToCss """
+    div
+      width 400px
+      height 300px
+    """
+
+yields
+
+    div { width: 400px; height: 300px; }
+
+-}
 stylusToCss : String -> Result (List (DeadEnd Context Problem)) String
 stylusToCss stylusString =
     Result.map serializeStylusAst (run stylus stylusString)

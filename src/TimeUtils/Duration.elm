@@ -1,4 +1,18 @@
-module TimeUtils.Duration exposing (..)
+module TimeUtils.Duration exposing
+    ( add
+    , Duration(..)
+    , DurationDeltaRecord
+    , durationToString
+    , zeroDelta
+    , diff
+    , diffDays
+    , addMonth
+    , addYear
+    , deltaToString
+    , positiveDiff
+    , positiveDiffDays
+    , requireDaylightCompensateInAdd
+    )
 
 {-| A Duration is a length of time that may vary with calendar date and time.
 It can be used to modify a date.
@@ -24,16 +38,25 @@ transitions occur as part of the date change.
 **Warning**
 
 Be careful if you add Duration Delta to a Date as Duration contains months
-and Years which are not fixed elapsed times like Period Delta, however if
+and Years which are not fixed elapsed times like Period Delta
+, however if
 you really need a relative number of months or years then it may meet
 your needs.
 
 @docs add
 @docs Duration
 @docs DurationDeltaRecord
+@docs durationToString
 @docs zeroDelta
 @docs diff
 @docs diffDays
+
+@docs addMonth
+@docs addYear
+@docs deltaToString
+@docs positiveDiff
+@docs positiveDiffDays
+@docs requireDaylightCompensateInAdd
 
 -}
 
@@ -65,6 +88,9 @@ type Duration
     | Delta DurationDeltaRecord
 
 
+{-| Convert a `Duration` to a `String`.
+Especially helpful printing debugging information.
+-}
 durationToString : Duration -> String
 durationToString dur =
     case dur of
@@ -336,44 +362,46 @@ addYear yearCount date =
     addMonth (12 * yearCount) date
 
 
+{-| Return a `Period` representing date difference `date1 - date2`.
+If you add the result of this function to `date2` with addend of 1
+will not always return `date1`, this is because this module supports
+human calendar concepts like Day Light Saving, Months with varying
+number of days dependent on the month and leap years. So the difference
+between two dates is dependent on when those dates are.
+**Differences to `Period.diff`**
 
---| Return a Period representing date difference. date1 - date2.
---If you add the result of this function to date2 with addend of 1
---will not always return date1, this is because this module supports
---human calendar concepts like Day Light Saving, Months with varying
---number of days dependent on the month and leap years. So the difference
---between two dates is dependent on when those dates are.
---**Differences to Period.diff**
---  - Duration DurationDeltaRecord excludes week field
---  - Duration DurationDeltaRecord includes month field
---  - Duration DurationDeltaRecord includes year field
---  - Day is number of days difference between months.
---When adding a Duration DurationDeltaRecord to a date.
---The larger granularity fields are added before lower granularity fields
---so Years are added before Months before Days etc.
---  - Very different behaviour to Period diff
---      - If date1 > date2
---            then all fields in `DurationDeltaRecord` will be positive or zero.
---      - If date1 < date2
---            then all fields in `DurationDeltaRecord` will be negative or zero.
---  - Because it deals with non fixed length periods of time
---Example 1.
---days in 2016/05 (May) = 31
---days in 2016/04 (Apr) = 30
---days in 2016/03 (Mar) = 31
---days in 2015/03 (Mar) = 31
---diff of "2016/05/15" "2015/03/20"
---result naive field diff.
---year 1, month 2, day -5
---days "2015/03/20" to "2015/04/01" (31 - 20) = 11 days (12).
---    still in march with 11.
---days "2015/04/01" to "2016/04/15" (15 - 1) = 14 days
---months "2016/04/15" to "2016/05/15" 1 months
---result field diff
---year 1, month 1, day 26
---This logic applies all the way down to milliseconds.
+  - Duration `DurationDeltaRecord` excludes week field
+  - Duration `DurationDeltaRecord` includes month field
+  - Duration `DurationDeltaRecord` includes year field
+  - Day is number of days difference between months.
+    When adding a Duration `DurationDeltaRecord` to a date.
+    The larger granularity fields are added before lower granularity fields
+    so Years are added before Months before Days etc.
+  - Very different behavior to Period diff
+  - If date1 > date2
+    then all fields in `DurationDeltaRecord`
+    will be positive or zero.
+  - If date1 < date2
+    then all fields in `DurationDeltaRecord`
+    will be negative or zero.
+  - Because it deals with non fixed length periods of time
+    Example 1.
+    days in 2016-05 (May) = 31
+    days in 2016-04 (Apr) = 30
+    days in 2016-03 (Mar) = 31
+    days in 2015-03 (Mar) = 31
+    diff of "2016-05-15" "2015-03-20"
+    result naive field diff.
+    year 1, month 2, day -5
+    days "2015-03-20" to "2015-04-01" (31 - 20) = 11 days (12).
+    still in march with 11.
+    days "2015-04-01" to "2016-04-15" (15 - 1) = 14 days
+    months "2016-04-15" to "2016-05-15" 1 months
+    result field diff
+    year 1, month 1, day 26
+    This logic applies all the way down to milliseconds.
 
-
+-}
 diff : Posix -> Posix -> DurationDeltaRecord
 diff date1 date2 =
     if posixToMillis date1 < posixToMillis date2 then
@@ -384,8 +412,8 @@ diff date1 date2 =
 
 
 {-| Return diff between dates.
-It returns date1 - date2 in a DurationDeltaRecord.
-Precondition for this function is date1 must be after date2.
+It returns `date1 - date2` in a `DurationDeltaRecord`.
+Precondition for this function is `date1` must be after `date2`.
 Input multiplier is used to multiply output fields as needed for caller,
 this is used to conditionally negate them in initial use case.
 -}

@@ -1,4 +1,10 @@
-module TimeUtils.Time exposing (..)
+module TimeUtils.Time exposing
+    ( daysInMonth
+    , isLeapYear
+    , isoDayOfWeek
+    , monthToInt
+    , utcDateTime
+    )
 
 {-| Helpers for working with elm/lang's Posix data type
 (Mostly copied from
@@ -8,6 +14,7 @@ module TimeUtils.Time exposing (..)
 @docs isLeapYear
 @docs isoDayOfWeek
 @docs monthToInt
+@docs utcDateTime
 
 -}
 

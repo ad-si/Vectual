@@ -1,4 +1,4 @@
-module TimeUtils.Config.Config_en_us exposing (..)
+module TimeUtils.Config.Config_en_us exposing (config)
 
 {-| This is the default english config for formatting dates.
 

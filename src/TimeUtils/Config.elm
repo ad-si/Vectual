@@ -1,4 +1,4 @@
-module TimeUtils.Config exposing (..)
+module TimeUtils.Config exposing (Config)
 
 {-| Date configuration.
 

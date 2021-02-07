@@ -1,8 +1,12 @@
-module Vectual.PieChart exposing (..)
+module Vectual.PieChart exposing
+    ( viewPieChart
+    , defaultPieChartConfig
+    )
 
 {-| This module creates a simple pie chart.
 
 @docs viewPieChart
+@docs defaultPieChartConfig
 
 -}
 
@@ -16,6 +20,8 @@ import Vectual.Helpers exposing (..)
 import Vectual.Types exposing (..)
 
 
+{-| Default configuration for pie charts
+-}
 defaultPieChartConfig : PieChartConfig
 defaultPieChartConfig =
     { title = "Vectual Bar Chart"
@@ -28,18 +34,6 @@ defaultPieChartConfig =
     , yStartAtZero = False -- TODO: Remove
     , showAnimations = False
     }
-
-
-setAnimations : Float -> Float -> Float -> Svg msg
-setAnimations tx ty combinedAngle =
-    g []
-        [ g [ class "sector" ]
-            []
-        , g [ class "path" ]
-            []
-        , g [ class "text" ]
-            []
-        ]
 
 
 type alias PrevSectorRec msg =

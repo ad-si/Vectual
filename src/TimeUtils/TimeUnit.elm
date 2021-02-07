@@ -30,6 +30,7 @@ Example `TimeUnit.endOfTime Hour date` will return a modified date with
 @docs startOfTime
 @docs endOfTime
 @docs TimeUnit
+@docs timeUnitToString
 
 **Warning about using `endOfTime` for date ranges**
 
@@ -82,6 +83,7 @@ type TimeUnit
     | Year
 
 
+{-| -}
 timeUnitToString : TimeUnit -> String
 timeUnitToString timeUnit =
     case timeUnit of

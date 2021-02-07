@@ -10,6 +10,7 @@ module TimeUtils.Field exposing
 @docs fieldToDate
 @docs fieldToDateClamp
 @docs Field
+@docs fieldToString
 
 -}
 

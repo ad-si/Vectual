@@ -1,4 +1,31 @@
-module TimeUtils.Internal2 exposing (..)
+module TimeUtils.Internal2 exposing
+    ( daysInMonth
+    , daysInMonthDate
+    , daysInNextMonth
+    , daysInPrevMonth
+    , epochDateStr
+    , firstOfMonthTicks
+    , firstOfNextMonthDate
+    , intToMonth
+    , isLeapYear
+    , isLeapYearDate
+    , isoDayOfWeek
+    , lastOfMonthTicks
+    , lastOfPrevMonthDate
+    , monthList
+    , monthToInt
+    , nextDay
+    , nextMonth
+    , prevDay
+    , prevMonth
+    , ticksADay
+    , ticksAMillisecond
+    , ticksAMinute
+    , ticksASecond
+    , ticksAWeek
+    , ticksAnHour
+    , yearToDayLength
+    )
 
 {-| This module is not exposed to clients.
 
