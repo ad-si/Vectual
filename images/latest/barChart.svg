@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="vectual" width="400px" height="300px" viewBox="0 0 400 300"><style>
+/*===== SVG =====*/
+svg.vectual{display:inline-block}
+
+.vectual_background{fill:rgb(50, 50, 50)}
+
+.vectual_title{font-size:20px;font-family:Arial, sans-serif;fill:white}
+
+/*===== Inline =====*/
+svg.vectual_inline{display:inline-block}
+
+.vectual_inline_sparkline{fill:none;stroke:rgb(200, 200, 200);stroke-width:0.8}
+
+.vectual_inline_sparkline_min{fill:red}
+
+.vectual_inline_sparkline_max{fill:green}
+
+/*===== Pie =====*/
+.vectual_pie_sector_path{stroke:white}
+
+.vectual_pie_text{font-family:Arial, sans-serif;font-weight:100}
+
+.vectual_pie_text_single{stroke:black;fill:white}
+
+/*===== Coordinate =====*/
+.vectual_coordinate_axis_x{stroke:white;stroke-width:2}
+
+.vectual_coordinate_labels_x{font-size:10px;line-height:12px;font-family:Arial, sans-serif;font-weight:100;fill:white}
+
+.vectual_coordinate_lines_x{stroke:grey;stroke-width:1}
+
+.vectual_coordinate_axis_y{stroke:white;stroke-width:2}
+
+.vectual_coordinate_labels_y{fill:white;font-family:Arial, sans-serif;font-size:10px;font-weight:100;line-height:12px;text-anchor:end}
+
+.vectual_coordinate_lines_y{stroke:grey;stroke-width:1}
+
+/*===== Bar =====*/
+.vectual_bars{fill:#9dfff9;stroke:gray}
+
+/*Colors created with https://coolors.co*/
+.vectual_bars0, .vectual_color_0{fill:#9dfff9;stroke:none}
+.vectual_bars1, .vectual_color_1{fill:#ffc1cf;stroke:none}
+.vectual_bars2, .vectual_color_2{fill:#e8ffb7;stroke:none}
+.vectual_bars3, .vectual_color_3{fill:#f5c396;stroke:none}
+.vectual_bars4, .vectual_color_4{fill:#93e5ab;stroke:none}
+.vectual_bars5, .vectual_color_5{fill:#d3a588;stroke:none}
+.vectual_bars6, .vectual_color_6{fill:#7f96ff;stroke:none}
+.vectual_bars7, .vectual_color_7{fill:#f2f79e;stroke:none}
+.vectual_bars8, .vectual_color_8{fill:#dbb3b1;stroke:none}
+.vectual_bars9, .vectual_color_9{fill:#9ed67f;stroke:none}
+
+/*===== Line =====*/
+.vectual_line_line{fill:none;stroke:rgb(96, 255, 0);stroke-width:3;stroke-linejoin:round}
+
+.vectual_line_dot{fill:rgb(96, 255, 0);stroke:rgb(96, 255, 0);stroke-width:0}
+
+/*===== Scatter =====*/
+.vectual_scatter_dot{fill:rgb(255, 0, 0);stroke:rgb(255, 0, 0)}
+
+/*===== Tagcloud =====*/
+.vectual_tagcloud_text{font-weight:500;font-family:Arial, sans-serif;fill:white}
+
+/*===== Table =====*/
+.vectual_table{background:none;font:200 12px/12px Arial, sans-serif;margin:10px 0 0 0}
+
+.vectual_table th{background:rgb(150, 180, 180);padding:2px}
+
+.vectual_table td{padding:2px}
+
+.vectual_table tr:nth-child(odd){background-color:rgb(120, 120, 120)}
+
+.vectual_table tr:nth-child(even){background-color:rgb(180, 180, 180)}
+
+/*===== Map =====*/
+
+/*Circles around small countries.*/
+/*Change opacity to 1 to display all circles.*/
+.vectual .circlexx{opacity:0;fill:#e0e0e0;stroke:#000000;stroke-width:0.5}
+
+/*Smaller circles around French DOMs and Chinese SARs. Change opacity to 1 to display all subnational circles.*/
+.vectual .subxx{opacity:0;stroke-width:0.3}
+
+/*Circles around small, unrecognized countries. Change opacity to 1 to display all circles.*/
+.vectual .unxx{opacity:0;fill:#e0e0e0;stroke:#000000;stroke-width:0.3}
+
+/*Circles around small countries, but with no permanent residents. Change opacity to 1 to display all circles.*/
+.vectual .noxx{opacity:0;fill:#e0e0e0;stroke:#000000;stroke-width:0.5}
+
+/*land*/
+.vectual .landxx{fill:rgb(230, 230, 230);stroke:rgb(50, 50, 50);stroke-width:0.5;fill-rule:evenodd}
+
+/*Styles for coastlines of islands with no borders*/
+.vectual .coastxx{fill:rgb(230, 230, 230);stroke:#ffffff;stroke-width:0.3;fill-rule:evenodd}
+
+/*Styles for nations with limited recognition*/
+.vectual .limitxx{fill:rgb(230, 230, 230);stroke:#ffffff;stroke-width:0;fill-rule:evenodd}
+
+/*Styles for nations with no permanent population.*/
+.vectual .antxx{fill:rgb(230, 230, 230);stroke:#ffffff;stroke-width:0;fill-rule:evenodd}
+
+/*Ocean*/
+.vectual .oceanxx{opacity:1;color:blue;fill:#ffffff;stroke:#000;stroke-width:0.5;stroke-miterlimit:1}
+</style><rect class="vectual_background" width="400" height="300" rx="10" ry="10"></rect><g transform="translate(38,240)"><g><g><line class="vectual_coordinate_axis_y" x1="0" y1="5" x2="0" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,0,10)" x="0" y="10">2020-W52-5</text></g><g><line class="vectual_coordinate_lines_y" x1="31.09090909090909" y1="5" x2="31.09090909090909" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,31.09090909090909,10)" x="31.09090909090909" y="10">2020-W52-6</text></g><g><line class="vectual_coordinate_lines_y" x1="62.18181818181818" y1="5" x2="62.18181818181818" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,62.18181818181818,10)" x="62.18181818181818" y="10">2020-W52-7</text></g><g><line class="vectual_coordinate_lines_y" x1="93.27272727272727" y1="5" x2="93.27272727272727" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,93.27272727272727,10)" x="93.27272727272727" y="10">2020-W53-1</text></g><g><line class="vectual_coordinate_lines_y" x1="124.36363636363636" y1="5" x2="124.36363636363636" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,124.36363636363636,10)" x="124.36363636363636" y="10">2020-W53-2</text></g><g><line class="vectual_coordinate_lines_y" x1="155.45454545454544" y1="5" x2="155.45454545454544" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,155.45454545454544,10)" x="155.45454545454544" y="10">2020-W53-3</text></g><g><line class="vectual_coordinate_lines_y" x1="186.54545454545453" y1="5" x2="186.54545454545453" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,186.54545454545453,10)" x="186.54545454545453" y="10">2020-W53-4</text></g><g><line class="vectual_coordinate_lines_y" x1="217.63636363636363" y1="5" x2="217.63636363636363" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,217.63636363636363,10)" x="217.63636363636363" y="10">2020-W53-5</text></g><g><line class="vectual_coordinate_lines_y" x1="248.72727272727272" y1="5" x2="248.72727272727272" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,248.72727272727272,10)" x="248.72727272727272" y="10">2020-W53-6</text></g><g><line class="vectual_coordinate_lines_y" x1="279.8181818181818" y1="5" x2="279.8181818181818" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,279.8181818181818,10)" x="279.8181818181818" y="10">2020-W53-7</text></g><g><line class="vectual_coordinate_lines_y" x1="310.9090909090909" y1="5" x2="310.9090909090909" y2="-192"></line><text class="vectual_coordinate_labels_x" transform="rotate(40,310.9090909090909,10)" x="310.9090909090909" y="10">2021-W01-1</text></g><g><line class="vectual_coordinate_axis_x" x1="-5" y1="0" x2="342" y2="0"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="3">0</text></g><g><line class="vectual_coordinate_lines_x" x1="-5" y1="-27.82608695652174" x2="342" y2="-27.82608695652174"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="-24.82608695652174">10</text></g><g><line class="vectual_coordinate_lines_x" x1="-5" y1="-55.65217391304348" x2="342" y2="-55.65217391304348"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="-52.65217391304348">20</text></g><g><line class="vectual_coordinate_lines_x" x1="-5" y1="-83.47826086956522" x2="342" y2="-83.47826086956522"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="-80.47826086956522">30</text></g><g><line class="vectual_coordinate_lines_x" x1="-5" y1="-111.30434782608695" x2="342" y2="-111.30434782608695"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="-108.30434782608695">40</text></g><g><line class="vectual_coordinate_lines_x" x1="-5" y1="-139.1304347826087" x2="342" y2="-139.1304347826087"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="-136.1304347826087">50</text></g><g><line class="vectual_coordinate_lines_x" x1="-5" y1="-166.95652173913044" x2="342" y2="-166.95652173913044"></line><text class="vectual_coordinate_labels_y" x="-10.26" y="-163.95652173913044">60</text></g></g><g class="vectual_bars"><rect x="5" height="139.1304347826087" width="21.763636363636362" transform="translate(0,-139.1304347826087)"><title>2020-12-25T12:00:00.000Z: 50</title></rect><rect x="36" height="89.04347826086956" width="21.763636363636362" transform="translate(0,-89.04347826086956)"><title>2020-12-26T12:00:00.000Z: 32</title></rect><rect x="67" height="30.608695652173914" width="21.763636363636362" transform="translate(0,-30.608695652173914)"><title>2020-12-27T12:00:00.000Z: 11</title></rect><rect x="98" height="64" width="21.763636363636362" transform="translate(0,-64)"><title>2020-12-28T12:00:00.000Z: 23</title></rect><rect x="129" height="36.17391304347826" width="21.763636363636362" transform="translate(0,-36.17391304347826)"><title>2020-12-29T12:00:00.000Z: 13</title></rect><rect x="160" height="192" width="21.763636363636362" transform="translate(0,-192)"><title>2020-12-30T12:00:00.000Z: 69</title></rect><rect x="191" height="72.34782608695652" width="21.763636363636362" transform="translate(0,-72.34782608695652)"><title>2020-12-31T12:00:00.000Z: 26</title></rect><rect x="222" height="97.39130434782608" width="21.763636363636362" transform="translate(0,-97.39130434782608)"><title>2021-01-01T12:00:00.000Z: 35</title></rect><rect x="253" height="155.82608695652175" width="21.763636363636362" transform="translate(0,-155.82608695652175)"><title>2021-01-02T12:00:00.000Z: 56</title></rect><rect x="284" height="94.6086956521739" width="21.763636363636362" transform="translate(0,-94.6086956521739)"><title>2021-01-03T12:00:00.000Z: 34</title></rect><rect x="315" height="180.8695652173913" width="21.763636363636362" transform="translate(0,-180.8695652173913)"><title>2021-01-04T12:00:00.000Z: 65</title></rect></g></g><text class="vectual_title" x="20" y="25" style="font-size:15px">Bar Chart</text></svg>

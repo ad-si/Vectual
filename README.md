@@ -2,45 +2,56 @@
 
 A simple to use charting library written in Elm.
 It visualizes data and helps you to understand it.
+Display beautiful charts and customize them in various ways.
 
-**Attention:**
+**Attention:** \
 This software is still a alpha version.
 It might not work as expected and the API may change at any time.
+For a live example page, check out [vectual.org](https://vectual.org).
 
-
-## Good Looking
-
-Display beautiful charts and customize them to fit perfectly to your needs.
+Currently it supports pie charts, bar charts, and stacked bar charts.
 
 
 ## Visualizations
 
-### Pie Chart
+<table>
+  <tr>
+    <td width="50%">
+      <img src="images/latest/barChart.svg" alt="Bar Chart">
+      <p>
+        The right tool to display little data clearly arranged,
+        but still appealing.
+      </p>
+    </td>
+    <td width="50%">
+      <img src="images/latest/barChartStacked.svg" alt="Pie Chart">
+      <p>
+        Also available as a stacked variant to compare several series,
+        while also keeping an eye on the combined values.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="images/latest/pieChart.svg" alt="Pie Chart">
+      <p>
+        The most ubiquitous chart with an amazing fan out animation.
+        You can also explode certain sectors to highlight them.
+      </p>
+    </td>
+    <td width="50%"></td>
+  </tr>
+</table>
 
-The most ubiquitous chart with an amazing fan out animation.
-You can also explode certain sectors to highlight them.
 
-![Pie Chart](images/pieChart.png)
-
-
-### Bar Chart
-
-The right tool to display few data clearly arranged but still appealing
-
-![Bar Chart](images/barChart.png)
-
-
-#### Stacked
-
-![Bar Chart Stacked](images/barChartStacked.png)
-
+## Coming Soon
 
 ### Line Chart
 
 Watch your stocks reaching new heights.
 You can also hover the chart to get detailed Information.
 
-![Line Chart](images/lineChart.png)
+![Line Chart](images/1.0.0/lineChart.png)
 
 
 ### Tag Cloud
@@ -48,7 +59,7 @@ You can also hover the chart to get detailed Information.
 Need a short overview on whats hot or not?
 Then you might like the awesome tag cloud feature.
 
-![Tag Cloud](images/tagCloud.png)
+![Tag Cloud](images/1.0.0/tagCloud.png)
 
 
 ### Map
@@ -75,7 +86,3 @@ No problem! Export them as SVG images!
 - [Elm Visualization] - A data visualization library for Elm.
 
 [Elm Visualization]: https://github.com/gampleman/elm-visualization
-
-
-The library also includes a lot of time handling code adapted from
-(rluiten/elm-date-extra)[https://github.com/rluiten/elm-date-extra].

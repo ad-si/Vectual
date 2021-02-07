@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="vectual" width="400px" height="300px" viewBox="0 0 400 300"><style>
+/*===== SVG =====*/
+svg.vectual{display:inline-block}
+
+.vectual_background{fill:rgb(50, 50, 50)}
+
+.vectual_title{font-size:20px;font-family:Arial, sans-serif;fill:white}
+
+/*===== Inline =====*/
+svg.vectual_inline{display:inline-block}
+
+.vectual_inline_sparkline{fill:none;stroke:rgb(200, 200, 200);stroke-width:0.8}
+
+.vectual_inline_sparkline_min{fill:red}
+
+.vectual_inline_sparkline_max{fill:green}
+
+/*===== Pie =====*/
+.vectual_pie_sector_path{stroke:white}
+
+.vectual_pie_text{font-family:Arial, sans-serif;font-weight:100}
+
+.vectual_pie_text_single{stroke:black;fill:white}
+
+/*===== Coordinate =====*/
+.vectual_coordinate_axis_x{stroke:white;stroke-width:2}
+
+.vectual_coordinate_labels_x{font-size:10px;line-height:12px;font-family:Arial, sans-serif;font-weight:100;fill:white}
+
+.vectual_coordinate_lines_x{stroke:grey;stroke-width:1}
+
+.vectual_coordinate_axis_y{stroke:white;stroke-width:2}
+
+.vectual_coordinate_labels_y{fill:white;font-family:Arial, sans-serif;font-size:10px;font-weight:100;line-height:12px;text-anchor:end}
+
+.vectual_coordinate_lines_y{stroke:grey;stroke-width:1}
+
+/*===== Bar =====*/
+.vectual_bars{fill:#9dfff9;stroke:gray}
+
+/*Colors created with https://coolors.co*/
+.vectual_bars0, .vectual_color_0{fill:hsl(176, 100%, 81%);stroke:none}
+
+.vectual_bars1, .vectual_color_1{fill:hsl(346, 100%, 88%);stroke:none}
+
+.vectual_bars2, .vectual_color_2{fill:hsl(79, 100%, 86%);stroke:none}
+
+.vectual_bars3, .vectual_color_3{fill:hsl(28, 83%, 77%);stroke:none}
+
+.vectual_bars4, .vectual_color_4{fill:hsl(138, 61%, 74%);stroke:none}
+
+.vectual_bars5, .vectual_color_5{fill:hsl(23, 46%, 68%);stroke:none}
+
+.vectual_bars6, .vectual_color_6{fill:hsl(229, 100%, 75%);stroke:none}
+
+.vectual_bars7, .vectual_color_7{fill:hsl(63, 85%, 79%);stroke:none}
+
+.vectual_bars8, .vectual_color_8{fill:hsl(3, 37%, 78%);stroke:none}
+
+.vectual_bars9, .vectual_color_9{fill:hsl(99, 51%, 67%);stroke:none}
+
+.vectual_bars10, .vectual_color_10{fill:hsl(18, 83%, 75%);stroke:none}
+
+/*===== Line =====*/
+.vectual_line_line{fill:none;stroke:rgb(96, 255, 0);stroke-width:3;stroke-linejoin:round}
+
+.vectual_line_dot{fill:rgb(96, 255, 0);stroke:rgb(96, 255, 0);stroke-width:0}
+
+/*===== Scatter =====*/
+.vectual_scatter_dot{fill:rgb(255, 0, 0);stroke:rgb(255, 0, 0)}
+
+/*===== Tagcloud =====*/
+.vectual_tagcloud_text{font-weight:500;font-family:Arial, sans-serif;fill:white}
+
+/*===== Table =====*/
+.vectual_table{background:none;font:200 12px/12px Arial, sans-serif;margin:10px 0 0 0}
+
+.vectual_table th{background:rgb(150, 180, 180);padding:2px}
+
+.vectual_table td{padding:2px}
+
+.vectual_table tr:nth-child(odd){background-color:rgb(120, 120, 120)}
+
+.vectual_table tr:nth-child(even){background-color:rgb(180, 180, 180)}
+
+/*===== Map =====*/
+
+/*Circles around small countries.*/
+/*Change opacity to 1 to display all circles.*/
+.vectual .circlexx{opacity:0;fill:#e0e0e0;stroke:#000000;stroke-width:0.5}
+
+/*Smaller circles around French DOMs and Chinese SARs. Change opacity to 1 to display all subnational circles.*/
+.vectual .subxx{opacity:0;stroke-width:0.3}
+
+/*Circles around small, unrecognized countries. Change opacity to 1 to display all circles.*/
+.vectual .unxx{opacity:0;fill:#e0e0e0;stroke:#000000;stroke-width:0.3}
+
+/*Circles around small countries, but with no permanent residents. Change opacity to 1 to display all circles.*/
+.vectual .noxx{opacity:0;fill:#e0e0e0;stroke:#000000;stroke-width:0.5}
+
+/*land*/
+.vectual .landxx{fill:rgb(230, 230, 230);stroke:rgb(50, 50, 50);stroke-width:0.5;fill-rule:evenodd}
+
+/*Styles for coastlines of islands with no borders*/
+.vectual .coastxx{fill:rgb(230, 230, 230);stroke:#ffffff;stroke-width:0.3;fill-rule:evenodd}
+
+/*Styles for nations with limited recognition*/
+.vectual .limitxx{fill:rgb(230, 230, 230);stroke:#ffffff;stroke-width:0;fill-rule:evenodd}
+
+/*Styles for nations with no permanent population.*/
+.vectual .antxx{fill:rgb(230, 230, 230);stroke:#ffffff;stroke-width:0;fill-rule:evenodd}
+
+/*Ocean*/
+.vectual .oceanxx{opacity:1;color:blue;fill:#ffffff;stroke:#000;stroke-width:0.5;stroke-miterlimit:1}
+</style><rect class="vectual_background" width="400" height="300" rx="10" ry="10"></rect><g class="vectual_pie_chart" transform="translate(200,150)"><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_10" style="stroke-width:1.44;" d="M 0,0 L -52.955573100578675,-80.07313705350421 A 96,96 0 0,0 -96,-2.351321854362918e-14 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_10" x="-101.46826702330141" y="-54.545676155750456" text-anchor="end" style="font-size:18.85217391304348px" transform="translate(0, 5)">Kiwi<g></g></text><title>Kiwi | 65 | 16%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_9" style="stroke-width:1.44;" d="M 0,0 L -6.551271683008415,-95.77620184229175 A 96,96 0 0,0 -52.955573100578675,-80.07313705350421 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_9" x="-36.926336064510366" y="-109.12142642419425" text-anchor="end" style="font-size:13.676521739130436px" transform="translate(0, 5)">Orange<g></g></text><title>Orange | 34 | 8%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_8" style="stroke-width:1.44;" d="M 0,0 L 67.6242045679308,-68.13932019439764 A 96,96 0 0,0 -6.551271683008415,-95.77620184229175 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_8" x="40.221040874384876" y="-107.95048805346393" text-anchor="start" style="font-size:17.349565217391305px" transform="translate(0, 5)">Strawberry<g></g></text><title>Strawberry | 56 | 14%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_7" style="stroke-width:1.44;" d="M 0,0 L 92.8224845689158,-24.49461896934485 A 96,96 0 0,0 67.6242045679308,-68.13932019439764 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_7" x="99.76612651596737" y="-57.59999999999993" text-anchor="start" style="font-size:13.843478260869565px" transform="translate(0, 5)">Grapefruit<g></g></text><title>Grapefruit | 35 | 8%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_6" style="stroke-width:1.44;" d="M 0,0 L 95.10585081948776,13.071998313239678 A 96,96 0 0,0 92.8224845689158,-24.49461896934485 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_6" x="114.98778887920442" y="-6.9891636603754" text-anchor="start" style="font-size:12.340869565217393px" transform="translate(0, 5)">Melon<g></g></text><title>Melon | 26 | 6%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_5" style="stroke-width:1.44;" d="M 0,0 L 36.23224279225097,88.90008201482931 A 96,96 0 0,0 95.10585081948776,13.071998313239678 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_5" x="90.99370044190752" y="70.64832963268415" text-anchor="start" style="font-size:19.52px" transform="translate(0, 5)">Pineapple<g></g></text><title>Pineapple | 69 | 17%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_4" style="stroke-width:1.44;" d="M 0,0 L 18.103085997449796,94.27766584599418 A 96,96 0 0,0 36.23224279225097,88.90008201482931 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_4" x="32.760474516047445" y="110.44361144712448" text-anchor="start" style="font-size:10.170434782608696px" transform="translate(0, 5)">Cherry<g></g></text><title>Cherry | 13 | 3%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_3" style="stroke-width:1.44;" d="M 0,0 L -15.233524459800137,94.78364696788509 A 96,96 0 0,0 18.103085997449796,94.27766584599418 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_3" x="1.7482974898639307" y="115.18673298556104" text-anchor="middle" style="font-size:11.84px" transform="translate(0, 5)">Lime<g></g></text><title>Lime | 23 | 6%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_2" style="stroke-width:1.44;" d="M 0,0 L -30.771946720425326,90.93452202016186 A 96,96 0 0,0 -15.233524459800137,94.78364696788509 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_2" x="-27.699727271148106" y="111.82023568703481" text-anchor="middle" style="font-size:9.836521739130434px" transform="translate(0, 5)">Peach<g></g></text><title>Peach | 11 | 3%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_1" style="stroke-width:1.44;" d="M 0,0 L -69.66100741207671,66.05561328406992 A 96,96 0 0,0 -30.771946720425326,90.93452202016186 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_1" x="-62.08112285747431" y="97.04109533983622" text-anchor="end" style="font-size:13.342608695652174px" transform="translate(0, 5)">Plum<g></g></text><title>Plum | 32 | 8%</title><g></g><g></g></g><g class="vectual_pie_sector"><path class="vectual_pie_sector_path vectual_color_0" style="stroke-width:1.44;" d="M 0,0 L -96,0 A 96,96 0 0,0 -69.66100741207671,66.05561328406992 z"><g></g><g></g></path><text class="vectual_pie_text vectual_color_0" x="-107.0069569342234" y="42.667917311221764" text-anchor="end" style="font-size:16.347826086956523px" transform="translate(0, 5)">Apple<g></g></text><title>Apple | 50 | 12%</title><g></g><g></g></g></g><text class="vectual_title" x="20" y="25" style="font-size:15px">Pie Chart</text></svg>
