@@ -1,8 +1,38 @@
-module Stylus.Parser exposing (stylusToCss)
+module Stylus.Parser exposing
+    ( stylusToCss
+    , Expression(..)
+    , Problem(..)
+    , selector
+    , selectors
+    , section
+    , rule
+    , declaration
+    , declarations
+    , newlines
+    , commentLine
+    , stylus
+    , serializeStylusAst
+    )
 
 {-| Convert a strict subset of Stylus to CSS
 
 @docs stylusToCss
+
+
+## Internal
+
+@docs Expression
+@docs Problem
+@docs selector
+@docs selectors
+@docs section
+@docs rule
+@docs declaration
+@docs declarations
+@docs newlines
+@docs commentLine
+@docs stylus
+@docs serializeStylusAst
 
 -}
 
@@ -20,6 +50,7 @@ type Context
     | Record
 
 
+{-| -}
 type Problem
     = BadIndent
     | BadKeyword String
@@ -46,6 +77,7 @@ type alias Declaration =
     ( Property, Value )
 
 
+{-| -}
 type Expression
     = Rule ( Selectors, List Declaration )
     | Comment String
@@ -78,6 +110,7 @@ isValidSelector char =
         || List.member char [ ' ', '.', ':', '=', '(', ')', '[', ']' ]
 
 
+{-| -}
 selector : StyParser String
 selector =
     getChompedString <|
@@ -86,6 +119,7 @@ selector =
             |. chompWhile isValidSelector
 
 
+{-| -}
 selectors : StyParser Selectors
 selectors =
     sequence
@@ -119,6 +153,7 @@ comment =
     map Comment (getChompedString (chompUntilEndOr "\n"))
 
 
+{-| -}
 declaration :
     List Declaration
     -> StyParser (Step (List Declaration) (List Declaration))
@@ -135,11 +170,13 @@ declaration dcls =
         ]
 
 
+{-| -}
 declarations : StyParser (List Declaration)
 declarations =
     loop [] declaration
 
 
+{-| -}
 rule : StyParser Expression
 rule =
     inContext (Definition "rule") <|
@@ -148,6 +185,7 @@ rule =
             |= declarations
 
 
+{-| -}
 commentLine : StyParser Expression
 commentLine =
     inContext (Definition "comment") <|
@@ -157,6 +195,7 @@ commentLine =
             |. symbol (Token "\n" GenericProblem)
 
 
+{-| -}
 newlines : StyParser Expression
 newlines =
     succeed Newlines
@@ -164,6 +203,7 @@ newlines =
         |. chompWhile (\c -> c == '\n')
 
 
+{-| -}
 section :
     List Expression
     -> StyParser (Step (List Expression) (List Expression))
@@ -189,6 +229,7 @@ section scts =
         ]
 
 
+{-| -}
 stylus : StyParser (List Expression)
 stylus =
     loop [] section
@@ -214,6 +255,7 @@ serializeExpression expression =
                 ++ "}\n"
 
 
+{-| -}
 serializeStylusAst : List Expression -> String
 serializeStylusAst stylusAst =
     String.join ""

@@ -131,16 +131,28 @@ svg.vectual_inline
 
 
 // ===== Line =====
-.vectual_line_line
+.vectual_line_polyline
   fill none
-  stroke rgb(96, 255, 0)
   stroke-width 3
   stroke-linejoin round
 
 .vectual_line_dot
-  fill rgb(96, 255, 0)
-  stroke rgb(96, 255, 0)
-  stroke-width 0
+  stroke none
+
+.vectual_line_polyline_0
+  stroke hsl(176, 100%, 81%)
+
+.vectual_line_polyline_1
+  stroke hsl(346, 100%, 88%)
+
+.vectual_line_polyline_2
+  stroke hsl(79, 100%, 86%)
+
+.vectual_line_polyline_3
+  stroke hsl(28, 83%, 77%)
+
+.vectual_line_polyline_4
+  stroke hsl(138, 61%, 74%)
 
 
 // ===== Scatter =====

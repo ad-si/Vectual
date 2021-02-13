@@ -18,6 +18,7 @@ import TimeUtils.Time exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
+import Vectual.LineChart exposing (..)
 import Vectual.PieChart exposing (..)
 import Vectual.Types exposing (..)
 
@@ -38,6 +39,9 @@ defaultBaseConfig =
 viewChart : Chart -> Svg msg
 viewChart chart =
     case chart of
+        LineChart config data ->
+            viewLineChart config data
+
         BarChart config data ->
             viewBarChart config data
 

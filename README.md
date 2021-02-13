@@ -9,12 +9,29 @@ This software is still a alpha version.
 It might not work as expected and the API may change at any time.
 For a live example page, check out [vectual.org](https://vectual.org).
 
-Currently it supports pie charts, bar charts, and stacked bar charts.
+Currently it supports line charts, pie charts,
+bar charts, and stacked bar charts.
 
 
 ## Visualizations
 
 <table>
+  <tr>
+    <td width="50%">
+      <img src="images/latest/lineChart.svg" alt="Line Chart">
+      <p>
+        Watch your stocks reaching new heights.
+        You can also hover the chart to get detailed information.
+      </p>
+    </td>
+    <td width="50%">
+      <img src="images/latest/pieChart.svg" alt="Pie Chart">
+      <p>
+        The most ubiquitous chart with an amazing fan out animation.
+        You can also explode certain sectors to highlight them.
+      </p>
+    </td>
+  </tr>
   <tr>
     <td width="50%">
       <img src="images/latest/barChart.svg" alt="Bar Chart">
@@ -31,28 +48,10 @@ Currently it supports pie charts, bar charts, and stacked bar charts.
       </p>
     </td>
   </tr>
-  <tr>
-    <td width="50%">
-      <img src="images/latest/pieChart.svg" alt="Pie Chart">
-      <p>
-        The most ubiquitous chart with an amazing fan out animation.
-        You can also explode certain sectors to highlight them.
-      </p>
-    </td>
-    <td width="50%"></td>
-  </tr>
 </table>
 
 
 ## Coming Soon
-
-### Line Chart
-
-Watch your stocks reaching new heights.
-You can also hover the chart to get detailed Information.
-
-![Line Chart](images/1.0.0/lineChart.png)
-
 
 ### Tag Cloud
 

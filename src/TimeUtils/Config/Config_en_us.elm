@@ -1,8 +1,12 @@
-module TimeUtils.Config.Config_en_us exposing (config)
+module TimeUtils.Config.Config_en_us exposing
+    ( config
+    , dayName
+    )
 
 {-| This is the default english config for formatting dates.
 
 @docs config
+@docs dayName
 
 -}
 

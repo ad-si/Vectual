@@ -8,7 +8,6 @@
         "Stylus.Parser",
         "TimeUtils.Compare",
         "TimeUtils.Config",
-        "TimeUtils.Config.Config_en_us",
         "TimeUtils.Config.Configs",
         "TimeUtils.Core",
         "TimeUtils.Create",

@@ -1,5 +1,6 @@
 module Vectual.Types exposing
     ( Alignment(..)
+    , LineChartConfig
     , BarChartConfig
     , BaseConfigAnd
     , Chart(..)
@@ -19,6 +20,7 @@ module Vectual.Types exposing
 {-| All types that are used in Vectual
 
 @docs Alignment
+@docs LineChartConfig
 @docs BarChartConfig
 @docs BaseConfigAnd
 @docs Chart
@@ -89,6 +91,16 @@ type Alignment
 
 
 {-| -}
+type alias LineChartConfig =
+    BaseConfigAnd
+        { labelAngle : Radian
+        , yStartAtZero : Bool
+        , alignBars : Alignment
+        , showAnimations : Bool
+        }
+
+
+{-| -}
 type alias BarChartConfig =
     BaseConfigAnd
         { labelAngle : Radian
@@ -146,9 +158,10 @@ type alias Datas =
 
 {-| -}
 type Chart
-    = PieChart PieChartConfig Data
+    = LineChart LineChartConfig Data
     | BarChart BarChartConfig Data
     | BarChartStacked BarChartConfig Datas
+    | PieChart PieChartConfig Data
 
 
 {-| -}

@@ -4,6 +4,7 @@ module TimeUtils.Time exposing
     , isoDayOfWeek
     , monthToInt
     , utcDateTime
+    , utcWeek
     )
 
 {-| Helpers for working with elm/lang's Posix data type
@@ -15,6 +16,7 @@ module TimeUtils.Time exposing
 @docs isoDayOfWeek
 @docs monthToInt
 @docs utcDateTime
+@docs utcWeek
 
 -}
 

@@ -5,6 +5,7 @@ module Website exposing
     , barChartStacked
     , dataTable
     , keyData
+    , lineChart
     , main
     , model
     , stringToPosix
@@ -28,6 +29,7 @@ import Vectual exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
+import Vectual.LineChart exposing (..)
 import Vectual.PieChart exposing (..)
 import Vectual.Types exposing (..)
 
@@ -146,6 +148,17 @@ pieChart =
         keyData
 
 
+lineChart : Chart
+lineChart =
+    LineChart
+        { defaultLineChartConfig
+            | title = "Line Chart"
+            , xLabelFormatter = utcWeek
+            , showAnimations = True
+        }
+        timeData
+
+
 barChart : Chart
 barChart =
     BarChart
@@ -238,7 +251,8 @@ view _ =
             ]
         , main_
             []
-            [ viewChart barChart
+            [ viewChart lineChart
+            , viewChart barChart
             , viewChart barChartStacked
             , viewChart pieChart
             ]

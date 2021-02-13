@@ -2,6 +2,7 @@ module TimeUtils.Utils exposing
     ( dayList
     , isoWeek
     , isoWeekOne
+    , getYearIsoWeekDate
     )
 
 {-|
@@ -15,6 +16,7 @@ module TimeUtils.Utils exposing
 @docs dayList
 @docs isoWeek
 @docs isoWeekOne
+@docs getYearIsoWeekDate
 
 -}
 
