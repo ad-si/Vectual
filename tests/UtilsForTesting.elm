@@ -140,4 +140,4 @@ describeOffsetTests description year candidateTests =
 dummyPassingTest : String -> Test
 dummyPassingTest description =
     test ("Dummy passing test" ++ description) <|
-        \_ -> Expect.true "Dummy passing test" True
+        \_ -> Expect.pass
