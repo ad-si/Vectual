@@ -325,7 +325,7 @@ viewPieChart config data =
                                         (pieRadius * 0.006)
                                     )
                                 ]
-                                [ text (keyRecords |> List.head |> Maybe.map .key |> Maybe.withDefault "config.max.key") ]
+                                [ text (keyRecords |> List.head |> Maybe.map .key |> Maybe.withDefault "") ]
                             ]
 
                          else
