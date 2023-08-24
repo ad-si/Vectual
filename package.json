@@ -41,7 +41,7 @@
     "elm-test": "^0.19.1-revision12",
     "eslint": "^8.47.0",
     "eslint-config-javascript": "^2.1.0",
-    "webpack": "^5.88.2",
+    "webpack": "5.55.1",
     "webpack-cli": "^5.1.4"
   },
   "eslintConfig": {
