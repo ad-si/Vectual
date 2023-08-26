@@ -2,20 +2,11 @@
   "name": "vectual",
   "version": "4.0.0",
   "description": "Open source charting library",
-  "main": "src/vectual.js",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "lint": "eslint --ignore-path .gitignore --max-warnings 0 .",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "test": "npm run lint && elm-test",
-    "unit-tests": "elm-test"
-  },
+  "author": "Adrian Sieber",
+  "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adius/vectual.git"
+    "url": "git+https://github.com/ad-si/vectual.git"
   },
   "keywords": [
     "graph",
@@ -26,29 +17,15 @@
     "tagcloud",
     "linegraph"
   ],
-  "author": "Adrian Sieber",
-  "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/adius/vectual/issues"
+    "url": "https://github.com/ad-si/vectual/issues"
   },
-  "homepage": "https://github.com/adius/vectual#readme",
+  "homepage": "https://github.com/ad-si/vectual#readme",
   "dependencies": {
-    "shaven": "^2.1.0"
+    "elm": "^0.19.1-5"
   },
   "devDependencies": {
-    "elm": "^0.19.1-5",
     "elm-format": "^0.8.7",
-    "elm-test": "^0.19.1-revision12",
-    "eslint": "^8.47.0",
-    "eslint-config-javascript": "^2.1.0",
-    "webpack": "5.55.1",
-    "webpack-cli": "^5.1.4"
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-javascript",
-    "ignorePatterns": "design/presentation",
-    "rules": {
-      "quotes": [2, "single"]
-    }
+    "elm-test": "^0.19.1-revision12"
   }
 }

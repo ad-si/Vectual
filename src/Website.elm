@@ -20,9 +20,8 @@ module Website exposing
 import Browser
 import Html exposing (Attribute, Html, a, div, h1, main_, nav, node, p, text)
 import Html.Attributes exposing (class, href)
-import Iso8601 exposing (fromTime, toTime)
+import Iso8601 exposing (toTime)
 import Stylus.Parser exposing (stylusToCss)
-import Svg exposing (Svg)
 import Time exposing (..)
 import TimeUtils.Time exposing (utcWeek)
 import Vectual exposing (..)
@@ -31,6 +30,7 @@ import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
 import Vectual.LineChart exposing (..)
 import Vectual.PieChart exposing (..)
+import Vectual.TagCloud exposing (..)
 import Vectual.Types exposing (..)
 
 
@@ -179,6 +179,15 @@ barChartStacked =
         [ timeData, timeData1, timeData2 ]
 
 
+tagCloud : Chart
+tagCloud =
+    TagCloud
+        { defaultTagCloudConfig
+            | title = "Tag Cloud"
+        }
+        timeData
+
+
 
 -- View
 
@@ -255,6 +264,7 @@ view _ =
             , viewChart barChart
             , viewChart barChartStacked
             , viewChart pieChart
+            , viewChart tagCloud
             ]
         ]
 

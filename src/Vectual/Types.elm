@@ -2,6 +2,7 @@ module Vectual.Types exposing
     ( Alignment(..)
     , LineChartConfig
     , BarChartConfig
+    , TagCloudConfig
     , BaseConfigAnd
     , Chart(..)
     , Data(..)
@@ -22,6 +23,7 @@ module Vectual.Types exposing
 @docs Alignment
 @docs LineChartConfig
 @docs BarChartConfig
+@docs TagCloudConfig
 @docs BaseConfigAnd
 @docs Chart
 @docs Data
@@ -110,6 +112,12 @@ type alias BarChartConfig =
 
 
 {-| -}
+type alias TagCloudConfig =
+    BaseConfigAnd
+        {}
+
+
+{-| -}
 type alias TimeRecord =
     { utc : Posix
     , value : Float
@@ -162,6 +170,7 @@ type Chart
     | BarChart BarChartConfig Data
     | BarChartStacked BarChartConfig Datas
     | PieChart PieChartConfig Data
+    | TagCloud TagCloudConfig Data
 
 
 {-| -}

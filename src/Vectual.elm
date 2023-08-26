@@ -20,6 +20,7 @@ import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
 import Vectual.LineChart exposing (..)
 import Vectual.PieChart exposing (..)
+import Vectual.TagCloud exposing (..)
 import Vectual.Types exposing (..)
 
 
@@ -50,3 +51,6 @@ viewChart chart =
 
         PieChart config data ->
             viewPieChart config data
+
+        TagCloud config _ ->
+            viewTagCloud config
