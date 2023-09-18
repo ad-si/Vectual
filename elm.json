@@ -3,7 +3,7 @@
     "name": "adius/vectual",
     "summary": "Open source charting library",
     "license": "AGPL-3.0",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "exposed-modules": [
         "Stylus.Parser",
         "TimeUtils.Compare",
