@@ -155,6 +155,36 @@ svg.vectual_inline
   stroke hsl(138, 61%, 74%)
 
 
+// ===== Area =====
+.vectual_area_polygon
+  stroke-width 2
+  stroke-linejoin round
+  opacity 0.7
+
+.vectual_area_dot
+  stroke none
+
+.vectual_area_polygon_0
+  stroke hsl(176, 100%, 81%)
+  fill hsl(176, 100%, 81%)
+
+.vectual_area_polygon_1
+  stroke hsl(346, 100%, 88%)
+  fill hsl(346, 100%, 88%)
+
+.vectual_area_polygon_2
+  stroke hsl(79, 100%, 86%)
+  fill hsl(79, 100%, 86%)
+
+.vectual_area_polygon_3
+  stroke hsl(28, 83%, 77%)
+  fill hsl(28, 83%, 77%)
+
+.vectual_area_polygon_4
+  stroke hsl(138, 61%, 74%)
+  fill hsl(138, 61%, 74%)
+
+
 // ===== Scatter =====
 .vectual_scatter_dot
   fill rgb(255, 0, 0)

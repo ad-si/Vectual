@@ -1,14 +1,18 @@
 module Vectual.CoordinateSystem exposing
     ( getAbscissas
     , getCoordinateSystem
+    , getCoordinateSystemForBarChart
     , getOrdinates
+    , getOrdinatesForBarChart
     )
 
 {-| Create ordinates, abscissas or a complete coordinate system.
 
 @docs getAbscissas
 @docs getCoordinateSystem
+@docs getCoordinateSystemForBarChart
 @docs getOrdinates
+@docs getOrdinatesForBarChart
 
 -}
 
@@ -151,6 +155,76 @@ getAbscissas config data metaData =
     in
     List.range 0 (truncate (metaData.yRange * yDensity))
         |> List.map numToLine
+
+
+{-| Bar chart specific ordinates without vertical lines and with centered labels -}
+getOrdinatesForBarChart :
+    BaseConfigAnd a
+    -> Data
+    -> MetaData Unitless coordinates
+    -> List (Svg msg)
+getOrdinatesForBarChart config data metaData =
+    let
+        dataLabelAt index =
+            let
+                array =
+                    Array.fromList (getDataLabels config data)
+
+                maybeElement =
+                    Array.get index array
+
+                errorMessage =
+                    "Error: Trying to access non existant element "
+                        ++ "at index"
+            in
+            case maybeElement of
+                Just element ->
+                    element
+
+                Nothing ->
+                    Debug.log errorMessage (fromInt index)
+
+        -- Calculate x position for center of each bar
+        xValue : Int -> Float
+        xValue number =
+            let
+                barWidth = toFloat metaData.coordSysWidth / toFloat metaData.numberOfEntries
+                barCenter = barWidth / 2
+            in
+            (barWidth * toFloat number) + barCenter
+
+        numToLabel number =
+            let
+                rotationPoint =
+                    Point2d.unitless (xValue number) 10
+            in
+            g []
+                [ -- No vertical line for bar charts
+                  text_
+                    [ class "vectual_coordinate_labels_x"
+                    , transform (toRotate 40 rotationPoint)
+                    , x (fromFloat (xValue number))
+                    , y "10"
+                    ]
+                    [ text (dataLabelAt number) ]
+                ]
+    in
+    List.range 0 (metaData.numberOfEntries - 1)
+        |> List.map numToLabel
+
+
+{-| Bar chart specific coordinate system without vertical lines -}
+getCoordinateSystemForBarChart :
+    BaseConfigAnd a
+    -> Data
+    -> MetaData Unitless coordinates
+    -> Svg msg
+getCoordinateSystemForBarChart config data metaData =
+    g []
+        (List.append
+            (getOrdinatesForBarChart config data metaData)
+            (getAbscissas config data metaData)
+        )
 
 
 {-| -}

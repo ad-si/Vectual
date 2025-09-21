@@ -15,9 +15,11 @@ import Stylus.Parser exposing (stylusToCss)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import TimeUtils.Time exposing (..)
+import Vectual.AreaChart exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
+import Vectual.HorizontalBarChart exposing (..)
 import Vectual.LineChart exposing (..)
 import Vectual.PieChart exposing (..)
 import Vectual.TagCloud exposing (..)
@@ -43,8 +45,14 @@ viewChart chart =
         LineChart config data ->
             viewLineChart config data
 
+        AreaChart config data ->
+            viewAreaChart config data
+
         BarChart config data ->
             viewBarChart config data
+
+        HorizontalBarChart config data ->
+            viewHorizontalBarChart config data
 
         BarChartStacked config dataSet ->
             viewBarChartStacked config dataSet
@@ -52,5 +60,5 @@ viewChart chart =
         PieChart config data ->
             viewPieChart config data
 
-        TagCloud config _ ->
-            viewTagCloud config
+        TagCloud config data ->
+            viewTagCloud config data

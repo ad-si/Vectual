@@ -2,26 +2,133 @@ module Vectual.TagCloud exposing (..)
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
+import String exposing (fromFloat)
 import Vector2d exposing (..)
 import Vectual.CoordinateSystem exposing (..)
 import Vectual.Helpers exposing (..)
 import Vectual.Types exposing (..)
 
 
+type alias CloudState msg =
+    { x : Float
+    , y : Float
+    , lineMax : Float
+    , nodes : List (Svg msg)
+    }
+
+
 defaultTagCloudConfig : TagCloudConfig
 defaultTagCloudConfig =
     { title = "Vectual Tag Cloud"
     , inline = False
-    , width = 100
-    , height = 100
+    , width = 400
+    , height = 300
     , borderRadius = ( 2, 2 )
     , xLabelFormatter = \_ -> ""
     }
 
 
-viewTagCloud : TagCloudConfig -> Svg msg
-viewTagCloud config =
-    wrapChart config (g [] [])
+viewTagCloud : TagCloudConfig -> Data -> Svg msg
+viewTagCloud config data =
+    let
+        entries =
+            getDataRecords data
+
+        values = List.map .value entries
+
+        minVal = Maybe.withDefault 0 (List.minimum values)
+        maxVal = Maybe.withDefault 0 (List.maximum values)
+
+        minFont = 10.0
+        maxFont = Basics.max 18.0 (0.12 * toFloat config.height)
+
+        scale v =
+            if maxVal == minVal then
+                (minFont + maxFont) / 2
+            else
+                minFont + ((v - minVal) / (maxVal - minVal)) * (maxFont - minFont)
+
+        estimateWidth fontSize label =
+            -- rough estimate with extra padding to avoid edge overlap
+            let
+                chars = toFloat (String.length label)
+                base = chars * 0.68 * fontSize
+                padding = 0.45 * fontSize
+            in
+            base + padding
+
+        leftPadding = 20.0
+        rightPadding = 20.0
+        topPadding = 0.18 * toFloat config.height
+        lineGap = 6.0
+
+        availableWidth = toFloat config.width - leftPadding - rightPadding
+
+        -- Track current line height to prevent overlaps when mixing sizes
+        step entry state =
+            let
+                fs = scale entry.value
+                w = estimateWidth fs entry.label
+                newX =
+                    if state.x == 0 then
+                        leftPadding
+                    else
+                        state.x
+
+                -- gap scales with font size for better separation of large words
+                gap = Basics.max 10 (0.35 * fs)
+                nextX = newX + w + gap
+
+                limit = leftPadding + availableWidth
+
+                ( xPos, yPos, newState ) =
+                    if nextX > limit then
+                        let
+                            newY = state.y + state.lineMax + lineGap
+                        in
+                        ( leftPadding
+                        , newY
+                        , { x = leftPadding + w + gap
+                          , y = newY
+                          , lineMax = fs
+                          , nodes = state.nodes
+                          }
+                        )
+
+                    else
+                        ( newX
+                        , state.y
+                        , { state | x = nextX, lineMax = Basics.max state.lineMax fs }
+                        )
+
+                txt =
+                    text_
+                        [ class "vectual_tagcloud_text"
+                        , x (fromFloat xPos)
+                        , y (fromFloat (yPos + fs))
+                        , Svg.Attributes.style ("font-size:" ++ fromFloat fs ++ "px")
+                        ]
+                        [ text entry.label ]
+            in
+            { newState | nodes = txt :: newState.nodes }
+
+        words =
+            case entries of
+                [] ->
+                    []
+
+                _ ->
+                    let
+                        finalState : CloudState msg
+                        finalState =
+                            List.foldl
+                                step
+                                { x = 0, y = topPadding, lineMax = 0, nodes = [] }
+                                entries
+                    in
+                    List.reverse finalState.nodes
+    in
+    wrapChart config (g [] words)
 
 
 

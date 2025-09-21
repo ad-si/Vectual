@@ -167,7 +167,9 @@ type alias Datas =
 {-| -}
 type Chart
     = LineChart LineChartConfig Data
+    | AreaChart LineChartConfig Data
     | BarChart BarChartConfig Data
+    | HorizontalBarChart BarChartConfig Data
     | BarChartStacked BarChartConfig Datas
     | PieChart PieChartConfig Data
     | TagCloud TagCloudConfig Data

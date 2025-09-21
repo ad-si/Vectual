@@ -148,7 +148,7 @@ viewBarChart config data =
         chart =
             g
                 [ transform (toTranslate metaData.translation) ]
-                [ getCoordinateSystem config data metaData
+                [ getCoordinateSystemForBarChart config data metaData
                 , getBars config data metaData
                 ]
     in

@@ -24,7 +24,7 @@ import Vectual.Types exposing (..)
 -}
 defaultPieChartConfig : PieChartConfig
 defaultPieChartConfig =
-    { title = "Vectual Bar Chart"
+    { title = "Vectual Pie Chart"
     , inline = False
     , width = 400
     , height = 300

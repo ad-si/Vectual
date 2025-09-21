@@ -1,9 +1,11 @@
 module Website exposing
     ( Model
     , Msg(..)
+    , areaChart
     , barChart
     , barChartStacked
     , dataTable
+    , horizontalBarChart
     , keyData
     , lineChart
     , main
@@ -18,16 +20,20 @@ module Website exposing
     )
 
 import Browser
-import Html exposing (Attribute, Html, a, div, h1, main_, nav, node, p, text)
+import Html exposing (Attribute, Html, a, div, h1, h2, main_, nav, node, p, section, text)
+import Svg exposing (svg, path)
+import Svg.Attributes as SA
 import Html.Attributes exposing (class, href)
 import Iso8601 exposing (toTime)
 import Stylus.Parser exposing (stylusToCss)
 import Time exposing (..)
 import TimeUtils.Time exposing (utcWeek)
 import Vectual exposing (..)
+import Vectual.AreaChart exposing (..)
 import Vectual.BarChart exposing (..)
 import Vectual.BarChartStacked exposing (..)
 import Vectual.Helpers exposing (..)
+import Vectual.HorizontalBarChart exposing (..)
 import Vectual.LineChart exposing (..)
 import Vectual.PieChart exposing (..)
 import Vectual.TagCloud exposing (..)
@@ -159,6 +165,17 @@ lineChart =
         timeData
 
 
+areaChart : Chart
+areaChart =
+    AreaChart
+        { defaultAreaChartConfig
+            | title = "Area Chart"
+            , xLabelFormatter = utcWeek
+            , showAnimations = True
+        }
+        timeData
+
+
 barChart : Chart
 barChart =
     BarChart
@@ -179,13 +196,23 @@ barChartStacked =
         [ timeData, timeData1, timeData2 ]
 
 
+horizontalBarChart : Chart
+horizontalBarChart =
+    HorizontalBarChart
+        { defaultHorizontalBarChartConfig
+            | title = "Horizontal Bar Chart"
+            , xLabelFormatter = utcWeek
+        }
+        timeData
+
+
 tagCloud : Chart
 tagCloud =
     TagCloud
         { defaultTagCloudConfig
             | title = "Tag Cloud"
         }
-        timeData
+        keyData
 
 
 
@@ -209,15 +236,16 @@ body
   margin 0 auto
 
 nav
-  border-bottom 1px solid dimgray
   margin-bottom 2em
+  display flex
+  align-items baseline
 
 h1
   color white
   font-size 2.2rem
   font-weight 900
   margin-right 0.5em
-  margin-bottom 0.5em
+  margin-bottom 0
   display inline-block
 
 a
@@ -226,11 +254,48 @@ a
 a:visited
   color hsl(346, 100%, 88%)
 
+.github-btn
+  margin-left auto
+  display inline-flex
+  align-items center
+  align-self center
+  background hsl(176, 25%, 28%)
+  color #e6f3f1
+  padding 0.35em 0.8em
+  border-radius 6px
+  font-weight 700
+  text-decoration none
+  border 1px solid rgba(255,255,255,0.12)
+  transition background 120ms ease-in-out
+
+.github-btn:visited
+  color #e6f3f1
+
+.github-btn:hover
+  background hsl(176, 30%, 36%)
+  color #ffffff
+
+.github-btn svg
+  margin-right 0.45em
+  display inline-block
+  vertical-align middle
+
 .subtitle
   display inline-block
 
 .vectual
   margin 0 1.5em 1.5em 0
+
+.chart-section
+  margin-bottom 3em
+
+.chart-section h2
+  color white
+  font-size 1.8rem
+  font-weight 700
+  margin-bottom 1em
+  border-bottom 1px solid dimgray
+  padding-bottom 0.5em
 """
 
 
@@ -249,22 +314,51 @@ view _ =
             [ h1 [] [ text "Vectual" ]
             , p [ class "subtitle" ]
                 [ text "The Open Source Charting Library" ]
-            , p []
-                [ text "Learn more at "
-                , a
-                    [ href "https://github.com/ad-si/vectual" ]
-                    [ text "github.com/ad-si/vectual"
+            , a [ class "github-btn", href "https://github.com/ad-si/vectual" ]
+                [ svg
+                    [ SA.width "16"
+                    , SA.height "16"
+                    , SA.viewBox "0 0 16 16"
+                    , SA.fill "currentColor"
                     ]
-                , text "."
+                    [ path
+                        [ SA.d """
+                            M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82
+                            -1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87
+                            2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31
+                            -1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32
+                            -.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16
+                            1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65
+                            3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38
+                            A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z
+                            """ ]
+                        []
+                    ]
+                , text "GitHub"
                 ]
             ]
         , main_
             []
-            [ viewChart lineChart
-            , viewChart barChart
-            , viewChart barChartStacked
-            , viewChart pieChart
-            , viewChart tagCloud
+            [ section [ class "chart-section" ]
+                [ h2 [] [ text "Line Charts" ]
+                , viewChart lineChart
+                , viewChart areaChart
+                ]
+            , section [ class "chart-section" ]
+                [ h2 [] [ text "Bar Charts" ]
+                , viewChart barChart
+                , viewChart barChartStacked
+                , viewChart horizontalBarChart
+                ]
+            , section [ class "chart-section" ]
+                [ h2 [] [ text "Pie Charts" ]
+                , viewChart pieChart
+                ]
+            , section [ class "chart-section" ]
+                [ h2 [] [ text "Other Charts" ]
+                , viewChart tagCloud
+                ]
             ]
         ]
 

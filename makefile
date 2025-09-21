@@ -12,6 +12,12 @@ test:
 build: test docs.json index.html
 
 
+.PHONY: dev
+dev:
+	@echo -e "Go to http://localhost:8000/src/Website.elm to see the app\n\n"
+	npx elm reactor
+
+
 docs.json: src elm.json node_modules
 	npx elm make --docs=$@
 

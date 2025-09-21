@@ -147,7 +147,7 @@ viewBarChartStacked config datas =
         chart =
             g
                 [ transform (toTranslate metaData.translation) ]
-                [ getCoordinateSystem config combinedData metaData
+                [ getCoordinateSystemForBarChart config combinedData metaData
                 , getBarsStacked
                     config
                     combinedData

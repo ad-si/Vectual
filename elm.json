@@ -1,6 +1,6 @@
 {
     "type": "package",
-    "name": "adius/vectual",
+    "name": "ad-si/vectual",
     "summary": "Open source charting library",
     "license": "AGPL-3.0",
     "version": "5.0.0",
