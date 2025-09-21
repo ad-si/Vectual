@@ -21,11 +21,11 @@ module Website exposing
 
 import Browser
 import Html exposing (Attribute, Html, a, div, h1, h2, main_, nav, node, p, section, text)
-import Svg exposing (svg, path)
-import Svg.Attributes as SA
 import Html.Attributes exposing (class, href)
 import Iso8601 exposing (toTime)
 import Stylus.Parser exposing (stylusToCss)
+import Svg exposing (path, svg)
+import Svg.Attributes as SA
 import Time exposing (..)
 import TimeUtils.Time exposing (utcWeek)
 import Vectual exposing (..)

@@ -69,7 +69,8 @@ buildArea config data metaData =
             str ++ " " ++ fromFloat x ++ "," ++ fromFloat y
 
         -- Calculate y-coordinate for y=0 on the chart (x-axis position)
-        zeroY = (0 + metaData.yMinimum) * (toFloat metaData.coordSysHeight / metaData.yRange)
+        zeroY =
+            (0 + metaData.yMinimum) * (toFloat metaData.coordSysHeight / metaData.yRange)
 
         startPointsStr =
             let
@@ -87,14 +88,21 @@ buildArea config data metaData =
                         entries
 
                 -- Get x-coordinates for first and last data points
-                firstX = 0
-                lastX = toFloat (List.length entries - 1)
-                    * (toFloat metaData.coordSysWidth / toFloat (List.length entries))
+                firstX =
+                    0
+
+                lastX =
+                    toFloat (List.length entries - 1)
+                        * (toFloat metaData.coordSysWidth / toFloat (List.length entries))
 
                 allStartPoints =
-                    [ ( firstX, zeroY ) ] -- Start at x-axis
-                    ++ startDataPoints -- All data points at zero
-                    ++ [ ( lastX, zeroY ) ] -- End at x-axis
+                    [ ( firstX, zeroY ) ]
+                        -- Start at x-axis
+                        ++ startDataPoints
+                        -- All data points at zero
+                        ++ [ ( lastX, zeroY ) ]
+
+                -- End at x-axis
             in
             allStartPoints
                 |> foldl foldPoints ""
@@ -116,14 +124,21 @@ buildArea config data metaData =
                         entries
 
                 -- Get x-coordinates for first and last data points
-                firstX = 0
-                lastX = toFloat (List.length entries - 1)
-                    * (toFloat metaData.coordSysWidth / toFloat (List.length entries))
+                firstX =
+                    0
+
+                lastX =
+                    toFloat (List.length entries - 1)
+                        * (toFloat metaData.coordSysWidth / toFloat (List.length entries))
 
                 allPoints =
-                    [ ( firstX, zeroY ) ] -- Start at x-axis
-                    ++ dataPoints -- Add data points
-                    ++ [ ( lastX, zeroY ) ] -- End at x-axis
+                    [ ( firstX, zeroY ) ]
+                        -- Start at x-axis
+                        ++ dataPoints
+                        -- Add data points
+                        ++ [ ( lastX, zeroY ) ]
+
+                -- End at x-axis
             in
             allPoints
                 |> foldl foldPoints ""

@@ -3,6 +3,11 @@ help: makefile
 	@tail -n +4 makefile | grep ".PHONY"
 
 
+.PHONY: format
+format:
+	npx elm-format --yes src/ tests/
+
+
 .PHONY: test
 test:
 	npx elm-test

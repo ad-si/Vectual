@@ -1,8 +1,8 @@
 module Vectual.TagCloud exposing (..)
 
+import String exposing (fromFloat)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-import String exposing (fromFloat)
 import Vector2d exposing (..)
 import Vectual.CoordinateSystem exposing (..)
 import Vectual.Helpers exposing (..)
@@ -34,57 +34,88 @@ viewTagCloud config data =
         entries =
             getDataRecords data
 
-        values = List.map .value entries
+        values =
+            List.map .value entries
 
-        minVal = Maybe.withDefault 0 (List.minimum values)
-        maxVal = Maybe.withDefault 0 (List.maximum values)
+        minVal =
+            Maybe.withDefault 0 (List.minimum values)
 
-        minFont = 10.0
-        maxFont = Basics.max 18.0 (0.12 * toFloat config.height)
+        maxVal =
+            Maybe.withDefault 0 (List.maximum values)
+
+        minFont =
+            10.0
+
+        maxFont =
+            Basics.max 18.0 (0.12 * toFloat config.height)
 
         scale v =
             if maxVal == minVal then
                 (minFont + maxFont) / 2
+
             else
                 minFont + ((v - minVal) / (maxVal - minVal)) * (maxFont - minFont)
 
         estimateWidth fontSize label =
             -- rough estimate with extra padding to avoid edge overlap
             let
-                chars = toFloat (String.length label)
-                base = chars * 0.68 * fontSize
-                padding = 0.45 * fontSize
+                chars =
+                    toFloat (String.length label)
+
+                base =
+                    chars * 0.68 * fontSize
+
+                padding =
+                    0.45 * fontSize
             in
             base + padding
 
-        leftPadding = 20.0
-        rightPadding = 20.0
-        topPadding = 0.18 * toFloat config.height
-        lineGap = 6.0
+        leftPadding =
+            20.0
 
-        availableWidth = toFloat config.width - leftPadding - rightPadding
+        rightPadding =
+            20.0
+
+        topPadding =
+            0.18 * toFloat config.height
+
+        lineGap =
+            6.0
+
+        availableWidth =
+            toFloat config.width - leftPadding - rightPadding
 
         -- Track current line height to prevent overlaps when mixing sizes
         step entry state =
             let
-                fs = scale entry.value
-                w = estimateWidth fs entry.label
+                fs =
+                    scale entry.value
+
+                w =
+                    estimateWidth fs entry.label
+
                 newX =
                     if state.x == 0 then
                         leftPadding
+
                     else
                         state.x
 
                 -- gap scales with font size for better separation of large words
-                gap = Basics.max 10 (0.35 * fs)
-                nextX = newX + w + gap
+                gap =
+                    Basics.max 10 (0.35 * fs)
 
-                limit = leftPadding + availableWidth
+                nextX =
+                    newX + w + gap
+
+                limit =
+                    leftPadding + availableWidth
 
                 ( xPos, yPos, newState ) =
                     if nextX > limit then
                         let
-                            newY = state.y + state.lineMax + lineGap
+                            newY =
+                                state.y + state.lineMax + lineGap
                         in
                         ( leftPadding
                         , newY

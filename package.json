@@ -25,7 +25,7 @@
     "elm": "^0.19.1-5"
   },
   "devDependencies": {
-    "elm-format": "^0.8.7",
+    "elm-format": "^0.8.8",
     "elm-test": "^0.19.1-revision12"
   }
 }

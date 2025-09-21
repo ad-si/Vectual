@@ -1,10 +1,10 @@
 module Vectual.HorizontalBarChart exposing
     ( defaultHorizontalBarChartConfig
-    , estimateTextWidth
-    , getHorizontalBars
-    , getHorizontalMetaData
-    , getMaxLabelWidth
     , viewHorizontalBarChart
+    , getHorizontalBars
+    , estimateTextWidth
+    , getMaxLabelWidth
+    , getHorizontalMetaData
     )
 
 {-| This module creates a simple SVG horizontal bar chart.
@@ -24,6 +24,7 @@ module Vectual.HorizontalBarChart exposing
 -}
 
 import Array
+import Html.Attributes exposing (style)
 import List exposing (length)
 import Quantity exposing (Unitless)
 import String exposing (fromFloat, fromInt)
@@ -31,9 +32,8 @@ import Styles exposing (stylusString)
 import Stylus.Parser exposing (stylusToCss)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-import Html.Attributes exposing (style)
-import TimeUtils.Time exposing (utcDateTime)
 import Time exposing (Posix)
+import TimeUtils.Time exposing (utcDateTime)
 import Vector2d exposing (..)
 import Vectual.CoordinateSystem exposing (..)
 import Vectual.Helpers exposing (..)
@@ -67,32 +67,39 @@ defaultHorizontalBarChartConfig =
     }
 
 
-{-| Estimate text width based on character count and font size -}
+{-| Estimate text width based on character count and font size
+-}
 estimateTextWidth : String -> Float
 estimateTextWidth text =
     let
         -- Very conservative character width in pixels for 10px Arial font
-        avgCharWidth = 12.0
+        avgCharWidth =
+            12.0
 
         -- Add substantial padding for safety
-        padding = 40.0
+        padding =
+            40.0
     in
     (toFloat (String.length text) * avgCharWidth) + padding
 
 
 {-| Tighter estimate for label width used for layout (less conservative).
-    Assumes 10px Arial: ~6.2px per character + small padding.
+Assumes 10px Arial: ~6.2px per character + small padding.
 -}
 estimateTextWidthTight : String -> Float
 estimateTextWidthTight text =
     let
-        avgCharWidth = 6.2
-        padding = 4.0
+        avgCharWidth =
+            6.2
+
+        padding =
+            4.0
     in
     (toFloat (String.length text) * avgCharWidth) + padding
 
 
-{-| Calculate maximum label width using tighter estimate for layout -}
+{-| Calculate maximum label width using tighter estimate for layout
+-}
 getTightMaxLabelWidth :
     { a
         | title : String
@@ -107,7 +114,8 @@ getTightMaxLabelWidth :
     -> Float
 getTightMaxLabelWidth config data =
     let
-        labels = getDataLabels config data
+        labels =
+            getDataLabels config data
     in
     labels
         |> List.map estimateTextWidthTight
@@ -115,7 +123,8 @@ getTightMaxLabelWidth config data =
         |> Maybe.withDefault 24.0
 
 
-{-| Calculate maximum label width for a dataset -}
+{-| Calculate maximum label width for a dataset
+-}
 getMaxLabelWidth :
     { a
         | title : String
@@ -131,13 +140,17 @@ getMaxLabelWidth :
 getMaxLabelWidth config data =
     let
         -- Use the actual labels as rendered (respects xLabelFormatter)
-        labels = getDataLabels config data
-        widths = List.map estimateTextWidth labels
+        labels =
+            getDataLabels config data
+
+        widths =
+            List.map estimateTextWidth labels
     in
     Maybe.withDefault 60.0 (List.maximum widths)
 
 
-{-| Custom metadata for horizontal bar charts with dynamic left margin for labels -}
+{-| Custom metadata for horizontal bar charts with dynamic left margin for labels
+-}
 getHorizontalMetaData :
     { a
         | title : String
@@ -152,26 +165,43 @@ getHorizontalMetaData :
     -> MetaData Unitless coordinates
 getHorizontalMetaData config data =
     let
-        totalWidth = Basics.toFloat config.width
-        totalHeight = Basics.toFloat config.height
+        totalWidth =
+            Basics.toFloat config.width
+
+        totalHeight =
+            Basics.toFloat config.height
 
         -- Vertical sizing: use a fixed bottom padding for a tighter bottom gap
-        bottomPadding = 30.0
-        graphHeight = Basics.max 0 (totalHeight - bottomPadding)
+        bottomPadding =
+            30.0
+
+        graphHeight =
+            Basics.max 0 (totalHeight - bottomPadding)
 
         -- Compute left padding from a tighter label width estimate
-        maxLabelWidth = getTightMaxLabelWidth config data
-        xAxisOffset = 5.0
-        minLeft = 10.0
+        maxLabelWidth =
+            getTightMaxLabelWidth config data
+
+        xAxisOffset =
+            5.0
+
+        minLeft =
+            10.0
+
         -- Keep the leftmost edge of labels aligned with the title's left margin
-        titleOffset = 20.0
-        leftPadding = Basics.max minLeft (maxLabelWidth + xAxisOffset + titleOffset)
+        titleOffset =
+            20.0
+
+        leftPadding =
+            Basics.max minLeft (maxLabelWidth + xAxisOffset + titleOffset)
 
         -- Keep a fixed right padding so bars never touch edge
-        rightPadding = 20.0
+        rightPadding =
+            20.0
 
         -- Available width for bars after accounting for label space and right padding
-        availableChartWidth = Basics.max 0 (totalWidth - leftPadding - rightPadding)
+        availableChartWidth =
+            Basics.max 0 (totalWidth - leftPadding - rightPadding)
 
         dataValues =
             getDataValues data
@@ -249,7 +279,7 @@ getHorizontalBar config data metaData index entry =
         , height (fromFloat (barProportionalHeight * barDistance))
         , transform
             (toTranslate
-                (Vector2d.unitless 0 (-(toFloat metaData.coordSysHeight)))
+                (Vector2d.unitless 0 -(toFloat metaData.coordSysHeight))
             )
         , class "vectual_bars"
         ]
@@ -273,7 +303,8 @@ getHorizontalBars config data metaData =
     g [] bars
 
 
-{-| Horizontal coordinate system for horizontal bar charts -}
+{-| Horizontal coordinate system for horizontal bar charts
+-}
 getHorizontalCoordinateSystem :
     BaseConfigAnd a
     -> Data
@@ -302,9 +333,12 @@ getHorizontalCoordinateSystem config data metaData =
                 className =
                     if number == 0 then
                         "vectual_coordinate_axis_x"
+
                     else
                         "vectual_coordinate_lines_x"
-                labelOffset = 10
+
+                labelOffset =
+                    10
             in
             g []
                 [ line
@@ -351,8 +385,11 @@ getHorizontalCoordinateSystem config data metaData =
         yValue : Int -> Float
         yValue number =
             let
-                barHeight = toFloat metaData.coordSysHeight / toFloat metaData.numberOfEntries
-                barCenter = barHeight / 2
+                barHeight =
+                    toFloat metaData.coordSysHeight / toFloat metaData.numberOfEntries
+
+                barCenter =
+                    barHeight / 2
             in
             -((barHeight * toFloat number) + barCenter)
 
@@ -379,7 +416,7 @@ getHorizontalCoordinateSystem config data metaData =
 
 
 {-| Custom chart wrapper for horizontal bar charts. Keep viewBox equal to SVG size
-    to avoid scaling/skewing of elements.
+to avoid scaling/skewing of elements.
 -}
 wrapHorizontalChart : BarChartConfig -> MetaData Unitless coordinates -> Svg msg -> Svg msg
 wrapHorizontalChart config metaData chart =
@@ -387,6 +424,7 @@ wrapHorizontalChart config metaData chart =
         className =
             if config.inline then
                 "vectual_inline"
+
             else
                 "vectual"
 

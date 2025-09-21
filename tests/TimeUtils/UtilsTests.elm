@@ -1,7 +1,7 @@
 module TimeUtils.UtilsTests exposing (..)
 
 import Expect
-import Iso8601 as Iso8601
+import Iso8601
 import Test exposing (..)
 import Time exposing (..)
 import TimeExtra exposing (fromYMD)

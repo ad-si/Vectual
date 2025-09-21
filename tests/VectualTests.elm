@@ -4,15 +4,18 @@ import Expect
 import Test exposing (..)
 import Time exposing (Posix, millisToPosix)
 import Vectual exposing (..)
-import Vectual.Types exposing (..)
-import Vectual.BarChart exposing (defaultBarChartConfig)
-import Vectual.LineChart exposing (defaultLineChartConfig)
 import Vectual.AreaChart exposing (defaultAreaChartConfig)
-import Vectual.PieChart exposing (defaultPieChartConfig)
+import Vectual.BarChart exposing (defaultBarChartConfig)
 import Vectual.HorizontalBarChart exposing (defaultHorizontalBarChartConfig)
+import Vectual.LineChart exposing (defaultLineChartConfig)
+import Vectual.PieChart exposing (defaultPieChartConfig)
+import Vectual.Types exposing (..)
+
 
 
 -- Test data
+
+
 testTimeData : Data
 testTimeData =
     TimeData
@@ -43,7 +46,8 @@ suite =
             [ test "LineChart creation with TimeData" <|
                 \_ ->
                     let
-                        chart = LineChart defaultLineChartConfig testTimeData
+                        chart =
+                            LineChart defaultLineChartConfig testTimeData
                     in
                     case chart of
                         LineChart config data ->
@@ -51,11 +55,11 @@ suite =
 
                         _ ->
                             Expect.fail "Expected LineChart"
-
             , test "AreaChart creation with TimeData" <|
                 \_ ->
                     let
-                        chart = AreaChart defaultAreaChartConfig testTimeData
+                        chart =
+                            AreaChart defaultAreaChartConfig testTimeData
                     in
                     case chart of
                         AreaChart config data ->
@@ -63,11 +67,11 @@ suite =
 
                         _ ->
                             Expect.fail "Expected AreaChart"
-
             , test "BarChart creation with TimeData" <|
                 \_ ->
                     let
-                        chart = BarChart defaultBarChartConfig testTimeData
+                        chart =
+                            BarChart defaultBarChartConfig testTimeData
                     in
                     case chart of
                         BarChart config data ->
@@ -75,11 +79,11 @@ suite =
 
                         _ ->
                             Expect.fail "Expected BarChart"
-
             , test "HorizontalBarChart creation with TimeData" <|
                 \_ ->
                     let
-                        chart = HorizontalBarChart defaultHorizontalBarChartConfig testTimeData
+                        chart =
+                            HorizontalBarChart defaultHorizontalBarChartConfig testTimeData
                     in
                     case chart of
                         HorizontalBarChart config data ->
@@ -87,11 +91,11 @@ suite =
 
                         _ ->
                             Expect.fail "Expected HorizontalBarChart"
-
             , test "PieChart creation with KeyData" <|
                 \_ ->
                     let
-                        chart = PieChart defaultPieChartConfig testKeyData
+                        chart =
+                            PieChart defaultPieChartConfig testKeyData
                     in
                     case chart of
                         PieChart config data ->
@@ -99,12 +103,14 @@ suite =
 
                         _ ->
                             Expect.fail "Expected PieChart"
-
             , test "BarChartStacked creation with multiple datasets" <|
                 \_ ->
                     let
-                        datasets = [ testTimeData, testTimeData ]
-                        chart = BarChartStacked defaultBarChartConfig datasets
+                        datasets =
+                            [ testTimeData, testTimeData ]
+
+                        chart =
+                            BarChartStacked defaultBarChartConfig datasets
                     in
                     case chart of
                         BarChartStacked config data ->
@@ -113,12 +119,12 @@ suite =
                         _ ->
                             Expect.fail "Expected BarChartStacked"
             ]
-
         , describe "Chart Configuration Tests"
             [ test "LineChart config has correct defaults" <|
                 \_ ->
                     let
-                        config = defaultLineChartConfig
+                        config =
+                            defaultLineChartConfig
                     in
                     Expect.all
                         [ \c -> Expect.equal c.title "Vectual Line Chart"
@@ -127,11 +133,11 @@ suite =
                         , \c -> Expect.equal c.yStartAtZero True
                         ]
                         config
-
             , test "AreaChart config has correct defaults" <|
                 \_ ->
                     let
-                        config = defaultAreaChartConfig
+                        config =
+                            defaultAreaChartConfig
                     in
                     Expect.all
                         [ \c -> Expect.equal c.title "Vectual Area Chart"
@@ -140,11 +146,11 @@ suite =
                         , \c -> Expect.equal c.yStartAtZero True
                         ]
                         config
-
             , test "BarChart config has correct defaults" <|
                 \_ ->
                     let
-                        config = defaultBarChartConfig
+                        config =
+                            defaultBarChartConfig
                     in
                     Expect.all
                         [ \c -> Expect.equal c.title "Vectual Bar Chart"
@@ -153,11 +159,11 @@ suite =
                         , \c -> Expect.equal c.yStartAtZero True
                         ]
                         config
-
             , test "HorizontalBarChart config has correct defaults" <|
                 \_ ->
                     let
-                        config = defaultHorizontalBarChartConfig
+                        config =
+                            defaultHorizontalBarChartConfig
                     in
                     Expect.all
                         [ \c -> Expect.equal c.title "Vectual Horizontal Bar Chart"
@@ -167,11 +173,11 @@ suite =
                         , \c -> Expect.equal c.labelAngle 0
                         ]
                         config
-
             , test "PieChart config has correct defaults" <|
                 \_ ->
                     let
-                        config = defaultPieChartConfig
+                        config =
+                            defaultPieChartConfig
                     in
                     Expect.all
                         [ \c -> Expect.equal c.title "Vectual Pie Chart"

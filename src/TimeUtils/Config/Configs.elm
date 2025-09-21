@@ -11,7 +11,7 @@ module TimeUtils.Config.Configs exposing
 -}
 
 import Dict exposing (Dict)
-import Regex as Regex
+import Regex
 import String
 import TimeUtils.Config as Config exposing (Config)
 import TimeUtils.Config.Config_en_us as Config_en_us

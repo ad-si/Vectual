@@ -1,10 +1,10 @@
 module VectualSuite exposing (..)
 
 import Test exposing (..)
-import VectualTests
+import VectualDataTests
 import VectualHelpersTests
 import VectualHorizontalBarChartTests
-import VectualDataTests
+import VectualTests
 
 
 suite : Test

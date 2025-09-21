@@ -52,7 +52,7 @@ The format code originally came from and was modified and extended from.
 
 -}
 
-import Regex as Regex
+import Regex
 import String exposing (fromInt, padLeft, right)
 import Time exposing (..)
 import TimeUtils.Config as Config

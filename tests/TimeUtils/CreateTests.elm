@@ -1,7 +1,7 @@
 module TimeUtils.CreateTests exposing (..)
 
 import Expect
-import Iso8601 as Iso8601
+import Iso8601
 import Test exposing (..)
 import Time exposing (..)
 import TimeUtils.Config.Config_en_us as Config_en_us

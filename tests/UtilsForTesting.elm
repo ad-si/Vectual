@@ -4,8 +4,8 @@ module UtilsForTesting exposing (..)
 -}
 
 import Expect
-import Iso8601 as Iso8601
-import Result as Result
+import Iso8601
+import Result
 import String
 import Test exposing (..)
 import Time exposing (..)

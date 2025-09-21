@@ -157,7 +157,8 @@ getAbscissas config data metaData =
         |> List.map numToLine
 
 
-{-| Bar chart specific ordinates without vertical lines and with centered labels -}
+{-| Bar chart specific ordinates without vertical lines and with centered labels
+-}
 getOrdinatesForBarChart :
     BaseConfigAnd a
     -> Data
@@ -188,8 +189,11 @@ getOrdinatesForBarChart config data metaData =
         xValue : Int -> Float
         xValue number =
             let
-                barWidth = toFloat metaData.coordSysWidth / toFloat metaData.numberOfEntries
-                barCenter = barWidth / 2
+                barWidth =
+                    toFloat metaData.coordSysWidth / toFloat metaData.numberOfEntries
+
+                barCenter =
+                    barWidth / 2
             in
             (barWidth * toFloat number) + barCenter
 
@@ -213,7 +217,8 @@ getOrdinatesForBarChart config data metaData =
         |> List.map numToLabel
 
 
-{-| Bar chart specific coordinate system without vertical lines -}
+{-| Bar chart specific coordinate system without vertical lines
+-}
 getCoordinateSystemForBarChart :
     BaseConfigAnd a
     -> Data
