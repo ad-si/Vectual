@@ -1,4 +1,5 @@
-/elm-stuff
-/node_modules
-/index.html
 /docs.json
+/elm-stuff
+/index.html
+/node_modules
+/public
