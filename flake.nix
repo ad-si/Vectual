@@ -24,6 +24,7 @@
             elmPackages.elm
             elmPackages.elm-format
             elmPackages.elm-test-rs
+            git-cliff
             gnumake
           ];
         };

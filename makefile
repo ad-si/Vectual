@@ -43,6 +43,19 @@ deploy: build
 	@echo "2. Drag & drop the ./public directory"
 
 
+.PHONY: release
+release:
+	@echo '1. Bump the version with `elm bump`'
+	@echo '2. `git add --interactive && git commit -m "Bump version"`'
+	@echo '3. `git tag -a x.y.z -m x.y.z`'
+	@echo '4. `git push --follow-tags`'
+	@echo '5. Run `elm publish`'
+	@echo '6. Run `git cliff` to generate changelog entries for the new version'
+	@echo '7. Merge `_todo_changelog.md` into `changelog.md`'
+	@echo '8. Create a new GitHub release at https://github.com/ad-si/Vectual/releases/new'
+	@echo '9. Announce the release on relevant channels'
+
+
 .PHONY: clean
 clean:
 	rm -f docs.json
