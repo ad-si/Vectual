@@ -5,12 +5,12 @@ help: makefile
 
 .PHONY: format
 format:
-	npx elm-format --yes src/ tests/
+	elm-format --yes src/ tests/
 
 
 .PHONY: test
 test:
-	npx elm-test
+	elm-test-rs
 
 
 .PHONY: build
@@ -20,15 +20,15 @@ build: test docs.json public/index.html
 .PHONY: dev
 dev:
 	@echo -e "Go to http://localhost:8000/src/Website.elm to see the app\n\n"
-	npx elm reactor
+	elm reactor
 
 
 docs.json: src elm.json node_modules
-	npx elm make --docs=$@
+	elm make --docs=$@
 
 
 public/index.html: src elm.json node_modules
-	npx elm make src/Website.elm --output=$@
+	elm make src/Website.elm --output=$@
 
 
 node_modules: package.json package-lock.json

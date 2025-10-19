@@ -1,13 +1,16 @@
 {
   "name": "vectual",
   "version": "4.0.0",
-  "description": "Open source charting library",
   "author": "Adrian Sieber",
-  "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ad-si/vectual.git"
   },
+  "bugs": {
+    "url": "https://github.com/ad-si/vectual/issues"
+  },
+  "description": "Open source charting library",
+  "homepage": "https://github.com/ad-si/vectual#readme",
   "keywords": [
     "graph",
     "chart",
@@ -17,15 +20,5 @@
     "tagcloud",
     "linegraph"
   ],
-  "bugs": {
-    "url": "https://github.com/ad-si/vectual/issues"
-  },
-  "homepage": "https://github.com/ad-si/vectual#readme",
-  "dependencies": {
-    "elm": "^0.19.1-5"
-  },
-  "devDependencies": {
-    "elm-format": "^0.8.8",
-    "elm-test": "^0.19.1-revision12"
-  }
+  "license": "AGPL-3.0-or-later"
 }
