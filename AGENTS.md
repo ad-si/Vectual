@@ -1,0 +1,1 @@
+- Always run `make test` after making changes to the code.
