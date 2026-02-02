@@ -1,9 +1,9 @@
 module TimeUtils.TimeUnit exposing
-    ( startOfTime
-    , endOfTime
-    , TimeUnit(..)
-    , timeUnitToString
-    )
+  ( startOfTime
+  , endOfTime
+  , TimeUnit(..)
+  , timeUnitToString
+  )
 
 {-| Reduce or Increase a date to a given start or end
 of a `TimeUnit` granularity.
@@ -74,39 +74,33 @@ import TimeUtils.Field as Field
 {-| Date granularity of operations.
 -}
 type TimeUnit
-    = Millisecond
-    | Second
-    | Minute
-    | Hour
-    | Day
-    | Month
-    | Year
+  = Millisecond
+  | Second
+  | Minute
+  | Hour
+  | Day
+  | Month
+  | Year
 
 
 {-| -}
 timeUnitToString : TimeUnit -> String
 timeUnitToString timeUnit =
-    case timeUnit of
-        Millisecond ->
-            "Millisecond"
-
-        Second ->
-            "Second"
-
-        Minute ->
-            "Minute"
-
-        Hour ->
-            "Hour"
-
-        Day ->
-            "Day"
-
-        Month ->
-            "Month"
-
-        Year ->
-            "Year"
+  case timeUnit of
+    Millisecond ->
+      "Millisecond"
+    Second ->
+      "Second"
+    Minute ->
+      "Minute"
+    Hour ->
+      "Hour"
+    Day ->
+      "Day"
+    Month ->
+      "Month"
+    Year ->
+      "Year"
 
 
 {-| Return a date created by reducing to minimum value all values below
@@ -118,45 +112,39 @@ are pulled straight from the local time zone date values.
 -}
 startOfTime : TimeUnit -> Posix -> Posix
 startOfTime unit date =
-    case unit of
-        Millisecond ->
-            date
-
-        Second ->
-            Field.fieldToDateClamp (Field.Millisecond 0) date
-
-        Minute ->
-            Field.fieldToDateClamp (Field.Second 0) (startOfTime Second date)
-
-        Hour ->
-            Field.fieldToDateClamp (Field.Minute 0) (startOfTime Minute date)
-
-        Day ->
-            Field.fieldToDateClamp (Field.Hour 0) (startOfTime Hour date)
-
-        Month ->
-            Field.fieldToDateClamp (Field.DayOfMonth 1) (startOfTime Day date)
-
-        Year ->
-            startOfTimeYear date
+  case unit of
+    Millisecond ->
+      date
+    Second ->
+      Field.fieldToDateClamp (Field.Millisecond 0) date
+    Minute ->
+      Field.fieldToDateClamp (Field.Second 0) (startOfTime Second date)
+    Hour ->
+      Field.fieldToDateClamp (Field.Minute 0) (startOfTime Minute date)
+    Day ->
+      Field.fieldToDateClamp (Field.Hour 0) (startOfTime Hour date)
+    Month ->
+      Field.fieldToDateClamp (Field.DayOfMonth 1) (startOfTime Day date)
+    Year ->
+      startOfTimeYear date
 
 
 startOfTimeYear : Posix -> Posix
 startOfTimeYear date =
-    let
-        startMonthDate =
-            Field.fieldToDateClamp (Field.DayOfMonth 1) date
+  let
+    startMonthDate =
+      Field.fieldToDateClamp (Field.DayOfMonth 1) date
 
-        startYearDate =
-            Field.fieldToDateClamp (Field.Month Jan) startMonthDate
+    startYearDate =
+      Field.fieldToDateClamp (Field.Month Jan) startMonthDate
 
-        monthTicks =
-            posixToMillis startMonthDate - posixToMillis startYearDate
+    monthTicks =
+      posixToMillis startMonthDate - posixToMillis startYearDate
 
-        updatedDate =
-            Core.fromTime (posixToMillis date - monthTicks)
-    in
-    startOfTime Month updatedDate
+    updatedDate =
+      Core.fromTime (posixToMillis date - monthTicks)
+  in
+  startOfTime Month updatedDate
 
 
 {-| Return a date created by increasing to maximum value all values below
@@ -168,31 +156,25 @@ are pulled straight from the local time zone date values.
 -}
 endOfTime : TimeUnit -> Posix -> Posix
 endOfTime unit date =
-    case unit of
-        Millisecond ->
-            date
+  case unit of
+    Millisecond ->
+      date
+    Second ->
+      Field.fieldToDateClamp (Field.Millisecond 999) date
+    Minute ->
+      Field.fieldToDateClamp (Field.Second 59) (endOfTime Second date)
+    Hour ->
+      Field.fieldToDateClamp (Field.Minute 59) (endOfTime Minute date)
+    Day ->
+      Field.fieldToDateClamp (Field.Hour 23) (endOfTime Hour date)
+    Month ->
+      Field.fieldToDateClamp (Field.DayOfMonth 31) (endOfTime Day date)
+    Year ->
+      let
+        extraYear =
+          Duration.add Duration.Year 1 date
 
-        Second ->
-            Field.fieldToDateClamp (Field.Millisecond 999) date
-
-        Minute ->
-            Field.fieldToDateClamp (Field.Second 59) (endOfTime Second date)
-
-        Hour ->
-            Field.fieldToDateClamp (Field.Minute 59) (endOfTime Minute date)
-
-        Day ->
-            Field.fieldToDateClamp (Field.Hour 23) (endOfTime Hour date)
-
-        Month ->
-            Field.fieldToDateClamp (Field.DayOfMonth 31) (endOfTime Day date)
-
-        Year ->
-            let
-                extraYear =
-                    Duration.add Duration.Year 1 date
-
-                startYear =
-                    startOfTime Year extraYear
-            in
-            Duration.add Duration.Millisecond -1 startYear
+        startYear =
+          startOfTime Year extraYear
+      in
+      Duration.add Duration.Millisecond -1 startYear

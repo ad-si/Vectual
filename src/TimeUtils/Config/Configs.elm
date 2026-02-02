@@ -1,7 +1,7 @@
 module TimeUtils.Config.Configs exposing
-    ( getConfig
-    , configs
-    )
+  ( getConfig
+  , configs
+  )
 
 {-| Get a TimeUtils.Config based up on a locale code.
 
@@ -21,8 +21,8 @@ import TimeUtils.Config.Config_en_us as Config_en_us
 -}
 configs : Dict String Config
 configs =
-    Dict.fromList
-        [ ( "en_us", Config_en_us.config ) ]
+  Dict.fromList
+    [ ( "en_us", Config_en_us.config ) ]
 
 
 {-| Get a TimeUtils.Config for a locale id.
@@ -35,15 +35,16 @@ Returns "en\_us" config if it can't find a match in configs.
 -}
 getConfig : String -> Config
 getConfig id =
-    let
-        lowerId =
-            String.toLower id
+  let
+    lowerId =
+      String.toLower id
 
-        fixedId =
-            Regex.replace
-                (Maybe.withDefault Regex.never (Regex.fromString "-"))
-                (\_ -> "_")
-                lowerId
-    in
-    Maybe.withDefault Config_en_us.config
-        (Dict.get fixedId configs)
+    fixedId =
+      Regex.replace
+        (Maybe.withDefault Regex.never (Regex.fromString "-"))
+        (\_ -> "_")
+        lowerId
+  in
+  Maybe.withDefault
+    Config_en_us.config
+    (Dict.get fixedId configs)

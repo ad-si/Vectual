@@ -9,9 +9,10 @@ import VectualTests
 
 suite : Test
 suite =
-    describe "Vectual Library Test Suite"
-        [ VectualTests.suite
-        , VectualHelpersTests.suite
-        , VectualHorizontalBarChartTests.suite
-        , VectualDataTests.suite
-        ]
+  describe
+    "Vectual Library Test Suite"
+    [ VectualTests.suite
+    , VectualHelpersTests.suite
+    , VectualHorizontalBarChartTests.suite
+    , VectualDataTests.suite
+    ]

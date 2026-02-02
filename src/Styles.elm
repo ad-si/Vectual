@@ -1,8 +1,7 @@
 module Styles exposing (stylusString)
 
-
 stylusString =
-    """
+  """
 // ===== SVG =====
 svg.vectual
   display inline-block

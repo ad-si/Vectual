@@ -1,9 +1,9 @@
 module TimeUtils.Compare exposing
-    ( is
-    , is3
-    , Compare2(..)
-    , Compare3(..)
-    )
+  ( is
+  , is3
+  , Compare2(..)
+  , Compare3(..)
+  )
 
 {-| Compare dates.
 
@@ -33,11 +33,11 @@ import TimeUtils.Core as Core
 
 -}
 type Compare2
-    = After
-    | Before
-    | Same
-    | SameOrAfter
-    | SameOrBefore
+  = After
+  | Before
+  | Same
+  | SameOrAfter
+  | SameOrBefore
 
 
 {-| Date comparison type for 3 dates.
@@ -56,38 +56,34 @@ Between does not care if date2 > date3 or date2 < date3.
 
 -}
 type Compare3
-    = Between
-    | BetweenOpenStart
-    | BetweenOpenEnd
-    | BetweenOpen
+  = Between
+  | BetweenOpenStart
+  | BetweenOpenEnd
+  | BetweenOpen
 
 
 {-| Compare two dates.
 -}
 is : Compare2 -> Posix -> Posix -> Bool
 is comp date1 date2 =
-    let
-        time1 =
-            posixToMillis date1
+  let
+    time1 =
+      posixToMillis date1
 
-        time2 =
-            posixToMillis date2
-    in
-    case comp of
-        Before ->
-            time1 < time2
-
-        After ->
-            time1 > time2
-
-        Same ->
-            time1 == time2
-
-        SameOrBefore ->
-            time1 <= time2
-
-        SameOrAfter ->
-            time1 >= time2
+    time2 =
+      posixToMillis date2
+  in
+  case comp of
+    Before ->
+      time1 < time2
+    After ->
+      time1 > time2
+    Same ->
+      time1 == time2
+    SameOrBefore ->
+      time1 <= time2
+    SameOrAfter ->
+      time1 >= time2
 
 
 {-| Compare three dates.
@@ -98,31 +94,28 @@ and date3 using minimum and maximum of them respectively.
 -}
 is3 : Compare3 -> Posix -> Posix -> Posix -> Bool
 is3 comp date1 date2 date3 =
-    let
-        time1 =
-            posixToMillis date1
+  let
+    time1 =
+      posixToMillis date1
 
-        time2 =
-            posixToMillis date2
+    time2 =
+      posixToMillis date2
 
-        time3 =
-            posixToMillis date3
+    time3 =
+      posixToMillis date3
 
-        highBound =
-            max time2 time3
+    highBound =
+      max time2 time3
 
-        lowBound =
-            min time2 time3
-    in
-    case comp of
-        Between ->
-            time1 > lowBound && time1 < highBound
-
-        BetweenOpenStart ->
-            time1 >= lowBound && time1 < highBound
-
-        BetweenOpenEnd ->
-            time1 > lowBound && time1 <= highBound
-
-        BetweenOpen ->
-            time1 >= lowBound && time1 <= highBound
+    lowBound =
+      min time2 time3
+  in
+  case comp of
+    Between ->
+      time1 > lowBound && time1 < highBound
+    BetweenOpenStart ->
+      time1 >= lowBound && time1 < highBound
+    BetweenOpenEnd ->
+      time1 > lowBound && time1 <= highBound
+    BetweenOpen ->
+      time1 >= lowBound && time1 <= highBound

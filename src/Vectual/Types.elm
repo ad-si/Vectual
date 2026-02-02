@@ -1,22 +1,22 @@
 module Vectual.Types exposing
-    ( Alignment(..)
-    , LineChartConfig
-    , BarChartConfig
-    , TagCloudConfig
-    , BaseConfigAnd
-    , Chart(..)
-    , Data(..)
-    , Datas
-    , Entries
-    , Entry
-    , Key
-    , KeyRecord
-    , MetaData
-    , PieChartConfig
-    , Radian
-    , TimeRecord
-    , Value(..)
-    )
+  ( Alignment(..)
+  , LineChartConfig
+  , BarChartConfig
+  , TagCloudConfig
+  , BaseConfigAnd
+  , Chart(..)
+  , Data(..)
+  , Datas
+  , Entries
+  , Entry
+  , Key
+  , KeyRecord
+  , MetaData
+  , PieChartConfig
+  , Radian
+  , TimeRecord
+  , Value(..)
+  )
 
 {-| All types that are used in Vectual
 
@@ -46,144 +46,138 @@ import Vector2d exposing (..)
 
 {-| -}
 type alias Radian =
-    Float
+  Float
 
 
 {-| -}
 type alias Key =
-    String
+  String
 
 
 {-| -}
 type Value
-    = Int
-    | Float
+  = Int
+  | Float -- TODO: Add GridBaseConfig for all chart types with a coordinate system
 
-
-
--- TODO: Add GridBaseConfig for all chart types with a coordinate system
 
 
 {-| -}
 type alias BaseConfigAnd extraFields =
-    { extraFields
-        | title : String
-        , inline : Bool
-        , width : Int
-        , height : Int
-        , borderRadius : ( Int, Int )
-        , xLabelFormatter : Posix -> String
-    }
+  { extraFields|title : String
+  , inline : Bool
+  , width : Int
+  , height : Int
+  , borderRadius : ( Int, Int )
+  , xLabelFormatter : Posix -> String
+  }
 
 
 {-| -}
 type alias PieChartConfig =
-    BaseConfigAnd
-        { radius : Int
-        , showAnimations : Bool
-        , yStartAtZero : Bool -- TODO: Remove
-        }
+  BaseConfigAnd
+    { radius : Int
+    , showAnimations : Bool
+    , yStartAtZero : Bool-- TODO: Remove
+    }
 
 
 {-| -}
 type Alignment
-    = Left
-    | Center
-    | Right
+  = Left
+  | Center
+  | Right
 
 
 {-| -}
 type alias LineChartConfig =
-    BaseConfigAnd
-        { labelAngle : Radian
-        , yStartAtZero : Bool
-        , alignBars : Alignment
-        , showAnimations : Bool
-        }
+  BaseConfigAnd
+    { labelAngle : Radian
+    , yStartAtZero : Bool
+    , alignBars : Alignment
+    , showAnimations : Bool
+    }
 
 
 {-| -}
 type alias BarChartConfig =
-    BaseConfigAnd
-        { labelAngle : Radian
-        , yStartAtZero : Bool
-        , alignBars : Alignment
-        }
+  BaseConfigAnd
+    { labelAngle : Radian
+    , yStartAtZero : Bool
+    , alignBars : Alignment
+    }
 
 
 {-| -}
 type alias TagCloudConfig =
-    BaseConfigAnd
-        {}
+  BaseConfigAnd
+    {}
 
 
 {-| -}
 type alias TimeRecord =
-    { utc : Posix
-    , value : Float
-    , offset : Float
-    }
+  { utc : Posix
+  , value : Float
+  , offset : Float
+  }
 
 
 {-| -}
 type alias KeyRecord =
-    { key : Key
-    , value : Float
-    , offset : Float
-    }
-
+  { key : Key
+  , value : Float
+  , offset : Float
+  }
 
 
 -- TODO: Normalize records to entries
 
-
 {-| -}
 type alias Entry =
-    { label : String
-    , value : Float
-    , offset : Float -- Store offset in e.g. BarChartStacked or PieChart
-    }
+  { label : String
+  , value : Float
+  , offset : Float-- Store offset in e.g. BarChartStacked or PieChart
+  }
 
 
 {-| -}
 type alias Entries =
-    -- Normalized form of Data
-    List Entry
+  -- Normalized form of Data
+  List Entry
 
 
 {-| -}
 type Data
-    = TimeData (List TimeRecord)
-    | KeyData (List KeyRecord)
-    | Values (List Float)
-    | InvalidData
+  = TimeData (List TimeRecord)
+  | KeyData (List KeyRecord)
+  | Values (List Float)
+  | InvalidData
 
 
 {-| -}
 type alias Datas =
-    List Data
+  List Data
 
 
 {-| -}
 type Chart
-    = LineChart LineChartConfig Data
-    | AreaChart LineChartConfig Data
-    | BarChart BarChartConfig Data
-    | HorizontalBarChart BarChartConfig Data
-    | BarChartStacked BarChartConfig Datas
-    | PieChart PieChartConfig Data
-    | TagCloud TagCloudConfig Data
+  = LineChart LineChartConfig Data
+  | AreaChart LineChartConfig Data
+  | BarChart BarChartConfig Data
+  | HorizontalBarChart BarChartConfig Data
+  | BarChartStacked BarChartConfig Datas
+  | PieChart PieChartConfig Data
+  | TagCloud TagCloudConfig Data
 
 
 {-| -}
 type alias MetaData units coordinates =
-    { graphWidth : Int
-    , graphHeight : Int
-    , coordSysWidth : Int
-    , coordSysHeight : Int
-    , translation : Vector2d units coordinates
-    , numberOfEntries : Int
-    , yMinimum : Float
-    , yMaximum : Float
-    , yRange : Float
-    }
+  { graphWidth : Int
+  , graphHeight : Int
+  , coordSysWidth : Int
+  , coordSysHeight : Int
+  , translation : Vector2d units coordinates
+  , numberOfEntries : Int
+  , yMinimum : Float
+  , yMaximum : Float
+  , yRange : Float
+  }

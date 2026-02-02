@@ -1,18 +1,18 @@
 module TimeUtils.Duration exposing
-    ( add
-    , Duration(..)
-    , DurationDeltaRecord
-    , durationToString
-    , zeroDelta
-    , diff
-    , diffDays
-    , addMonth
-    , addYear
-    , deltaToString
-    , positiveDiff
-    , positiveDiffDays
-    , requireDaylightCompensateInAdd
-    )
+  ( add
+  , Duration(..)
+  , DurationDeltaRecord
+  , durationToString
+  , zeroDelta
+  , diff
+  , diffDays
+  , addMonth
+  , addYear
+  , deltaToString
+  , positiveDiff
+  , positiveDiffDays
+  , requireDaylightCompensateInAdd
+  )
 
 {-| A Duration is a length of time that may vary with calendar date and time.
 It can be used to modify a date.
@@ -63,7 +63,6 @@ your needs.
 -- import TimeUtilsCalendar as Calendar
 -- import TimeUtils.Compare as Compare
 -- import TimeUtils.Create as Create
-
 import Time exposing (..)
 import TimeUtils.Core as Core
 import TimeUtils.Internal as Internal
@@ -77,15 +76,15 @@ Using `Duration` adding 24 hours can produce different result to adding 1 day.
 
 -}
 type Duration
-    = Millisecond
-    | Second
-    | Minute
-    | Hour
-    | Day
-    | Week
-    | Month
-    | Year
-    | Delta DurationDeltaRecord
+  = Millisecond
+  | Second
+  | Minute
+  | Hour
+  | Day
+  | Week
+  | Month
+  | Year
+  | Delta DurationDeltaRecord
 
 
 {-| Convert a `Duration` to a `String`.
@@ -93,33 +92,25 @@ Especially helpful printing debugging information.
 -}
 durationToString : Duration -> String
 durationToString dur =
-    case dur of
-        Millisecond ->
-            "Millisecond"
-
-        Second ->
-            "Second"
-
-        Minute ->
-            "Minute"
-
-        Hour ->
-            "Hour"
-
-        Day ->
-            "Day"
-
-        Week ->
-            "Week"
-
-        Month ->
-            "Month"
-
-        Year ->
-            "Year"
-
-        Delta durDeltaRec ->
-            "Delta " ++ deltaToString durDeltaRec
+  case dur of
+    Millisecond ->
+      "Millisecond"
+    Second ->
+      "Second"
+    Minute ->
+      "Minute"
+    Hour ->
+      "Hour"
+    Day ->
+      "Day"
+    Week ->
+      "Week"
+    Month ->
+      "Month"
+    Year ->
+      "Year"
+    Delta durDeltaRec ->
+      "Delta " ++ deltaToString durDeltaRec
 
 
 {-| A multi granularity duration delta.
@@ -127,14 +118,14 @@ This does not contain week like Period.DeltaRecord.
 It does contain month and year.
 -}
 type alias DurationDeltaRecord =
-    { year : Int
-    , month : Int
-    , day : Int
-    , hour : Int
-    , minute : Int
-    , second : Int
-    , millisecond : Int
-    }
+  { year : Int
+  , month : Int
+  , day : Int
+  , hour : Int
+  , minute : Int
+  , second : Int
+  , millisecond : Int
+  }
 
 
 {-| All zero delta.
@@ -142,14 +133,14 @@ Useful as a starting point if you want to set a few fields only.
 -}
 zeroDelta : DurationDeltaRecord
 zeroDelta =
-    { year = 0
-    , month = 0
-    , day = 0
-    , hour = 0
-    , minute = 0
-    , second = 0
-    , millisecond = 0
-    }
+  { year = 0
+  , month = 0
+  , day = 0
+  , hour = 0
+  , minute = 0
+  , second = 0
+  , millisecond = 0
+  }
 
 
 {-| Convert a `DurationDeltaRecord` to a `String`
@@ -157,21 +148,21 @@ to easily display it during testing.
 -}
 deltaToString : DurationDeltaRecord -> String
 deltaToString durDeltaRec =
-    "{ year : "
-        ++ String.fromInt durDeltaRec.year
-        ++ "\n, month : "
-        ++ String.fromInt durDeltaRec.month
-        ++ "\n, day : "
-        ++ String.fromInt durDeltaRec.day
-        ++ "\n, hour : "
-        ++ String.fromInt durDeltaRec.hour
-        ++ "\n, minute : "
-        ++ String.fromInt durDeltaRec.minute
-        ++ "\n, second : "
-        ++ String.fromInt durDeltaRec.second
-        ++ "\n, millisecond : "
-        ++ String.fromInt durDeltaRec.millisecond
-        ++ "\n}"
+  "{ year : "
+  ++ String.fromInt durDeltaRec.year
+  ++ "\n, month : "
+  ++ String.fromInt durDeltaRec.month
+  ++ "\n, day : "
+  ++ String.fromInt durDeltaRec.day
+  ++ "\n, hour : "
+  ++ String.fromInt durDeltaRec.hour
+  ++ "\n, minute : "
+  ++ String.fromInt durDeltaRec.minute
+  ++ "\n, second : "
+  ++ String.fromInt durDeltaRec.second
+  ++ "\n, millisecond : "
+  ++ String.fromInt durDeltaRec.millisecond
+  ++ "\n}"
 
 
 {-| Return true if this Duration unit compensates
@@ -182,126 +173,104 @@ can cause the date to change the zone offset.
 -}
 requireDaylightCompensateInAdd : Duration -> Bool
 requireDaylightCompensateInAdd duration =
-    case duration of
-        Millisecond ->
-            False
-
-        Second ->
-            False
-
-        Minute ->
-            False
-
-        Hour ->
-            False
-
-        Day ->
-            True
-
-        Week ->
-            True
-
-        Month ->
-            True
-
-        Year ->
-            True
-
-        --  If day,month,year is non zero in Delta then compensate.
-        Delta delta ->
-            delta.day /= 0 || delta.month /= 0 || delta.year /= 0
+  case duration of
+    Millisecond ->
+      False
+    Second ->
+      False
+    Minute ->
+      False
+    Hour ->
+      False
+    Day ->
+      True
+    Week ->
+      True
+    Month ->
+      True
+    Year ->
+      True --  If day,month,year is non zero in Delta then compensate.
+    Delta delta ->
+      delta.day /= 0 || delta.month /= 0 || delta.year /= 0
 
 
 {-| Add duration count to date.
 -}
 add : Duration -> Int -> Posix -> Posix
 add duration addend date =
-    let
-        outputDate =
-            doAdd duration addend date
-    in
-    if requireDaylightCompensateInAdd duration then
-        daylightOffsetCompensate date outputDate
-
-    else
-        outputDate
+  let
+    outputDate =
+      doAdd duration addend date
+  in
+  if requireDaylightCompensateInAdd duration
+    then daylightOffsetCompensate date outputDate
+    else outputDate
 
 
 doAdd : Duration -> Int -> Posix -> Posix
 doAdd duration addend date =
-    case duration of
-        Millisecond ->
-            Period.add Period.Millisecond addend date
-
-        Second ->
-            Period.add Period.Second addend date
-
-        Minute ->
-            Period.add Period.Minute addend date
-
-        Hour ->
-            Period.add Period.Hour addend date
-
-        Day ->
-            Period.add Period.Day addend date
-
-        Week ->
-            Period.add Period.Week addend date
-
-        Month ->
-            addMonth addend date
-
-        Year ->
-            addYear addend date
-
-        Delta delta ->
-            doAdd Year delta.year date
-                |> doAdd Month delta.month
-                |> Period.add
-                    (Period.Delta
-                        { week = 0
-                        , day = delta.day
-                        , hour = delta.hour
-                        , minute = delta.minute
-                        , second = delta.second
-                        , millisecond = delta.millisecond
-                        }
-                    )
-                    addend
+  case duration of
+    Millisecond ->
+      Period.add Period.Millisecond addend date
+    Second ->
+      Period.add Period.Second addend date
+    Minute ->
+      Period.add Period.Minute addend date
+    Hour ->
+      Period.add Period.Hour addend date
+    Day ->
+      Period.add Period.Day addend date
+    Week ->
+      Period.add Period.Week addend date
+    Month ->
+      addMonth addend date
+    Year ->
+      addYear addend date
+    Delta delta ->
+      doAdd Year delta.year date
+        |> doAdd Month delta.month
+        |> Period.add
+            (Period.Delta
+                { week = 0
+                , day = delta.day
+                , hour = delta.hour
+                , minute = delta.minute
+                , second = delta.second
+                , millisecond = delta.millisecond
+                }
+            )
+            addend
 
 
 daylightOffsetCompensate : Posix -> Posix -> Posix
 daylightOffsetCompensate dateBefore dateAfter =
-    let
-        offsetBefore =
-            Internal.getTimezoneOffset dateBefore
+  let
+    offsetBefore =
+      Internal.getTimezoneOffset dateBefore
 
-        offsetAfter =
-            Internal.getTimezoneOffset dateAfter
-    in
-    -- this 'fix' can only happen if the date isnt allready shifted ?
-    if offsetBefore /= offsetAfter then
-        let
-            adjustedDate =
-                Period.add
-                    Period.Millisecond
-                    ((offsetAfter - offsetBefore) * Core.ticksAMinute)
-                    dateAfter
-
-            adjustedOffset =
-                Internal.getTimezoneOffset adjustedDate
-        in
-        -- our timezone difference compensation caused us to leave the
-        -- the after time zone this indicates we are falling in a place
-        -- that is shifted by daylight saving so do not compensate
-        if adjustedOffset /= offsetAfter then
+    offsetAfter =
+      Internal.getTimezoneOffset dateAfter
+  in
+  -- this 'fix' can only happen if the date isnt allready shifted ?
+  if offsetBefore /= offsetAfter
+    then
+      let
+        adjustedDate =
+          Period.add
+            Period.Millisecond
+            ((offsetAfter - offsetBefore) * Core.ticksAMinute)
             dateAfter
 
-        else
-            adjustedDate
-
-    else
-        dateAfter
+        adjustedOffset =
+          Internal.getTimezoneOffset adjustedDate
+      in
+      -- our timezone difference compensation caused us to leave the
+      -- the after time zone this indicates we are falling in a place
+      -- that is shifted by daylight saving so do not compensate
+      if adjustedOffset /= offsetAfter
+        then dateAfter
+        else adjustedDate
+    else dateAfter
 
 
 {-| Return a date with month count added to date.
@@ -313,53 +282,50 @@ Return is in local time zone.
 -}
 addMonth : Int -> Posix -> Posix
 addMonth monthCount date =
-    let
-        year =
-            toYear utc date
+  let
+    year =
+      toYear utc date
 
-        monthInt =
-            monthToInt (toMonth utc date)
+    monthInt =
+      monthToInt (toMonth utc date)
 
-        day =
-            toDay utc date
+    day =
+      toDay utc date
 
-        inputCivil =
-            Internal.daysFromCivil year monthInt day
+    inputCivil =
+      Internal.daysFromCivil year monthInt day
 
-        newMonthInt =
-            monthInt + monthCount
+    newMonthInt =
+      monthInt + monthCount
 
-        targetMonthInt =
-            remainderBy 12 newMonthInt
+    targetMonthInt =
+      remainderBy 12 newMonthInt
 
-        yearOffset =
-            if newMonthInt < 0 && targetMonthInt /= 0 then
-                (newMonthInt // 12) - 1
-                -- one extra year than the negative modulus
+    yearOffset =
+      if newMonthInt < 0 && targetMonthInt /= 0
+        then (newMonthInt // 12) - 1-- one extra year than the negative modulus
+        else newMonthInt // 12
 
-            else
-                newMonthInt // 12
+    newYear =
+      year + yearOffset
 
-        newYear =
-            year + yearOffset
+    newDay =
+      min (Core.daysInMonth newYear (Core.intToMonth newMonthInt)) day
 
-        newDay =
-            min (Core.daysInMonth newYear (Core.intToMonth newMonthInt)) day
+    newCivil =
+      Internal.daysFromCivil newYear targetMonthInt newDay
 
-        newCivil =
-            Internal.daysFromCivil newYear targetMonthInt newDay
-
-        daysDifferent =
-            newCivil - inputCivil
-    in
-    Period.add Period.Day daysDifferent date
+    daysDifferent =
+      newCivil - inputCivil
+  in
+  Period.add Period.Day daysDifferent date
 
 
 {-| Return a date with year count added to date.
 -}
 addYear : Int -> Posix -> Posix
 addYear yearCount date =
-    addMonth (12 * yearCount) date
+  addMonth (12 * yearCount) date
 
 
 {-| Return a `Period` representing date difference `date1 - date2`.
@@ -404,11 +370,9 @@ between two dates is dependent on when those dates are.
 -}
 diff : Posix -> Posix -> DurationDeltaRecord
 diff date1 date2 =
-    if posixToMillis date1 < posixToMillis date2 then
-        positiveDiff date1 date2 1
-
-    else
-        positiveDiff date2 date1 -1
+  if posixToMillis date1 < posixToMillis date2
+    then positiveDiff date1 date2 1
+    else positiveDiff date2 date1 -1
 
 
 {-| Return diff between dates.
@@ -419,132 +383,130 @@ this is used to conditionally negate them in initial use case.
 -}
 positiveDiff : Posix -> Posix -> Int -> DurationDeltaRecord
 positiveDiff date1 date2 multiplier =
-    let
-        year1 =
-            toYear utc date1
+  let
+    year1 =
+      toYear utc date1
 
-        year2 =
-            toYear utc date2
+    year2 =
+      toYear utc date2
 
-        month1Mon =
-            toMonth utc date1
+    month1Mon =
+      toMonth utc date1
 
-        month2Mon =
-            toMonth utc date2
+    month2Mon =
+      toMonth utc date2
 
-        month1 =
-            Core.monthToInt month1Mon
+    month1 =
+      Core.monthToInt month1Mon
 
-        month2 =
-            Core.monthToInt month2Mon
+    month2 =
+      Core.monthToInt month2Mon
 
-        day1 =
-            toDay utc date1
+    day1 =
+      toDay utc date1
 
-        day2 =
-            toDay utc date2
+    day2 =
+      toDay utc date2
 
-        hour1 =
-            toHour utc date1
+    hour1 =
+      toHour utc date1
 
-        hour2 =
-            toHour utc date2
+    hour2 =
+      toHour utc date2
 
-        minute1 =
-            toMinute utc date1
+    minute1 =
+      toMinute utc date1
 
-        minute2 =
-            toMinute utc date2
+    minute2 =
+      toMinute utc date2
 
-        second1 =
-            toSecond utc date1
+    second1 =
+      toSecond utc date1
 
-        second2 =
-            toSecond utc date2
+    second2 =
+      toSecond utc date2
 
-        msec1 =
-            toMillis utc date1
+    msec1 =
+      toMillis utc date1
 
-        msec2 =
-            toMillis utc date2
+    msec2 =
+      toMillis utc date2
 
-        accumulatedDiff acc v1 v2 maxV2 =
-            if v1 < v2 then
-                ( acc - 1, maxV2 + v1 - v2 )
+    accumulatedDiff acc v1 v2 maxV2 =
+      if v1 < v2
+        then ( acc - 1, maxV2 + v1 - v2 )
 
-            else
-                ( acc, v1 - v2 )
+        else ( acc, v1 - v2 )
 
-        daysInDate1Month =
-            Core.daysInMonth year1 month1Mon
+    daysInDate1Month =
+      Core.daysInMonth year1 month1Mon
 
-        daysInDate2Month =
-            Core.daysInMonth year2 month2Mon
+    daysInDate2Month =
+      Core.daysInMonth year2 month2Mon
 
-        ( yearDiff, monthDiffA ) =
-            accumulatedDiff (year1 - year2) month1 month2 12
+    ( yearDiff, monthDiffA ) =
+      accumulatedDiff (year1 - year2) month1 month2 12
 
-        ( monthDiff, dayDiffA ) =
-            accumulatedDiff monthDiffA day1 day2 daysInDate2Month
+    ( monthDiff, dayDiffA ) =
+      accumulatedDiff monthDiffA day1 day2 daysInDate2Month
 
-        ( dayDiff, hourDiffA ) =
-            accumulatedDiff dayDiffA hour1 hour2 24
+    ( dayDiff, hourDiffA ) =
+      accumulatedDiff dayDiffA hour1 hour2 24
 
-        ( hourDiff, minuteDiffA ) =
-            accumulatedDiff hourDiffA minute1 minute2 60
+    ( hourDiff, minuteDiffA ) =
+      accumulatedDiff hourDiffA minute1 minute2 60
 
-        ( minuteDiff, secondDiffA ) =
-            accumulatedDiff minuteDiffA second1 second2 60
+    ( minuteDiff, secondDiffA ) =
+      accumulatedDiff minuteDiffA second1 second2 60
 
-        ( secondDiff, msecDiff ) =
-            accumulatedDiff secondDiffA msec1 msec2 1000
+    ( secondDiff, msecDiff ) =
+      accumulatedDiff secondDiffA msec1 msec2 1000
 
-        -- Need to carry negative differences to next higher unit
-        -- to make all differences output positive.
-        propogateCarry current carry maxVal =
-            let
-                adjusted =
-                    current + carry
-            in
-            if adjusted < 0 then
-                ( maxVal + adjusted, -1 )
+    -- Need to carry negative differences to next higher unit
+    -- to make all differences output positive.
+    propogateCarry current carry maxVal =
+      let
+        adjusted =
+          current + carry
+      in
+      if adjusted < 0
+        then ( maxVal + adjusted, -1 )
 
-            else
-                ( adjusted, 0 )
+        else ( adjusted, 0 )
 
-        ( msecX, secondCarry ) =
-            propogateCarry msecDiff 0 1000
+    ( msecX, secondCarry ) =
+      propogateCarry msecDiff 0 1000
 
-        ( secondX, minuteCarry ) =
-            propogateCarry secondDiff secondCarry 60
+    ( secondX, minuteCarry ) =
+      propogateCarry secondDiff secondCarry 60
 
-        ( minuteX, hourCarry ) =
-            propogateCarry minuteDiff minuteCarry 60
+    ( minuteX, hourCarry ) =
+      propogateCarry minuteDiff minuteCarry 60
 
-        ( hourX, dayCarry ) =
-            propogateCarry hourDiff hourCarry 60
+    ( hourX, dayCarry ) =
+      propogateCarry hourDiff hourCarry 60
 
-        -- if `dayDiff + dayCarry` is negative
-        --    then add days in `date1` month to make `dayDiff` positive
-        --    and carry Month negative
-        ( dayX, monthCarry ) =
-            propogateCarry dayDiff dayCarry daysInDate1Month
+    -- if `dayDiff + dayCarry` is negative
+    --    then add days in `date1` month to make `dayDiff` positive
+    --    and carry Month negative
+    ( dayX, monthCarry ) =
+      propogateCarry dayDiff dayCarry daysInDate1Month
 
-        ( monthX, yearCarry ) =
-            propogateCarry monthDiff monthCarry 12
+    ( monthX, yearCarry ) =
+      propogateCarry monthDiff monthCarry 12
 
-        -- `maxVal` parameter no effect for year
-        ( yearX, _ ) =
-            propogateCarry yearDiff yearCarry 0
-    in
-    { year = yearX * multiplier
-    , month = monthX * multiplier
-    , day = dayX * multiplier
-    , hour = hourX * multiplier
-    , minute = minuteX * multiplier
-    , second = secondX * multiplier
-    , millisecond = msecX * multiplier
-    }
+    -- `maxVal` parameter no effect for year
+    ( yearX, _ ) =
+      propogateCarry yearDiff yearCarry 0
+  in
+  { year = yearX * multiplier
+  , month = monthX * multiplier
+  , day = dayX * multiplier
+  , hour = hourX * multiplier
+  , minute = minuteX * multiplier
+  , second = secondX * multiplier
+  , millisecond = msecX * multiplier
+  }
 
 
 {-| Returns `date1 - date2` as number of days
@@ -555,28 +517,26 @@ and ignores any field smaller than day in calculation.
 -}
 diffDays : Posix -> Posix -> Int
 diffDays date1 date2 =
-    if compare (posixToMillis date1) (posixToMillis date2) == GT then
-        positiveDiffDays date1 date2 1
-
-    else
-        positiveDiffDays date2 date1 -1
+  if compare (posixToMillis date1) (posixToMillis date2) == GT
+    then positiveDiffDays date1 date2 1
+    else positiveDiffDays date2 date1 -1
 
 
 {-| Return number of days added to `date1` to produce `date2`
 -}
 positiveDiffDays : Posix -> Posix -> Int -> Int
 positiveDiffDays date1 date2 multiplier =
-    let
-        date1DaysFromCivil =
-            Internal.daysFromCivil
-                (toYear utc date1)
-                (Core.monthToInt (toMonth utc date1))
-                (toDay utc date1)
+  let
+    date1DaysFromCivil =
+      Internal.daysFromCivil
+        (toYear utc date1)
+        (Core.monthToInt (toMonth utc date1))
+        (toDay utc date1)
 
-        date2DaysFromCivil =
-            Internal.daysFromCivil
-                (toYear utc date2)
-                (Core.monthToInt (toMonth utc date2))
-                (toDay utc date2)
-    in
-    (date1DaysFromCivil - date2DaysFromCivil) * multiplier
+    date2DaysFromCivil =
+      Internal.daysFromCivil
+        (toYear utc date2)
+        (Core.monthToInt (toMonth utc date2))
+        (toDay utc date2)
+  in
+  (date1DaysFromCivil - date2DaysFromCivil) * multiplier

@@ -5,7 +5,7 @@ help: makefile
 
 .PHONY: format
 format:
-	elm-format --yes src/ tests/
+	elmfmt -i src/ tests/
 
 
 .PHONY: test

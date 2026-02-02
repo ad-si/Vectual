@@ -1,10 +1,10 @@
 module TimeUtils.Create exposing
-    ( getTimezoneOffset
-    , dateFromFields
-    , dateFromFieldsRecord
-    , timeFromFields
-    , timeFromFieldsRecord
-    )
+  ( getTimezoneOffset
+  , dateFromFields
+  , dateFromFieldsRecord
+  , timeFromFields
+  , timeFromFieldsRecord
+  )
 
 {-| Create dates and offsets.
 
@@ -23,9 +23,7 @@ import TimeUtils.Period as Period
 import TimeUtils.TypeAlias exposing (DateFromFields, TimeFromFields)
 
 
-
 -- import TimeUtils.TypeAlias exposing (TimeFromFields, DateFromFields, Year, Day, Hour, Minute, Second, Millisecond)
-
 
 {-| Return the time zone offset of current javascript environment underneath
 Elm in Minutes. This should produce the same result getTimezoneOffset()
@@ -45,16 +43,12 @@ For an offset of -600 minutes, in +10:00 time zone offset.
 -}
 getTimezoneOffset : Posix -> Int
 getTimezoneOffset =
-    Internal.getTimezoneOffset
-
+  Internal.getTimezoneOffset
 
 
 {- Reference date used by dateFromFields. -}
-
-
 epochDate =
-    millisToPosix 0
-
+  millisToPosix 0
 
 
 {- The TimezoneOffset of epochDate in current vm.
@@ -64,18 +58,14 @@ epochDate =
    Y/M/D comes out 1970-01-01. The date time offset is positive hours minutes
 
 -}
-
-
 epochTimezoneOffset =
-    let
-        inMinutes =
-            (toHour utc epochDate * 60) + toMinute utc epochDate
-    in
-    if toYear utc epochDate == 1969 then
-        -(inMinutes - (24 * 60))
-
-    else
-        -inMinutes
+  let
+    inMinutes =
+      (toHour utc epochDate * 60) + toMinute utc epochDate
+  in
+  if toYear utc epochDate == 1969
+    then -(inMinutes - (24 * 60))
+    else -inMinutes
 
 
 {-| Create a date in current time zone from given fields.
@@ -100,15 +90,15 @@ introduced by `epochDate` as starting point.
 -}
 dateFromFields : Int -> Month -> Int -> Int -> Int -> Int -> Int -> Posix
 dateFromFields year month day hour minute second millisecond =
-    adjustedTicksToDate <|
-        Internal.ticksFromFields year month day hour minute second millisecond
+  adjustedTicksToDate <|
+    Internal.ticksFromFields year month day hour minute second millisecond
 
 
 {-| Alternate record signature for [dateFromFields](#dateFromFields)
 -}
 dateFromFieldsRecord : DateFromFields -> Posix
 dateFromFieldsRecord =
-    adjustedTicksToDate << Internal.ticksFromFieldsRecord
+  adjustedTicksToDate << Internal.ticksFromFieldsRecord
 
 
 {-| This now compensates for current timezone offset compared to epoch offset.
@@ -116,24 +106,22 @@ In relation to #17.
 -}
 adjustedTicksToDate : Int -> Posix
 adjustedTicksToDate ticks =
-    let
-        date =
-            Period.add
-                Period.Millisecond
-                (ticks + (epochTimezoneOffset * Core.ticksAMinute))
-                epochDate
+  let
+    date =
+      Period.add
+        Period.Millisecond
+        (ticks + (epochTimezoneOffset * Core.ticksAMinute))
+        epochDate
 
-        dateOffset =
-            getTimezoneOffset date
-    in
-    if dateOffset == epochTimezoneOffset then
-        date
-
-    else
-        Period.add
-            Period.Minute
-            (dateOffset - epochTimezoneOffset)
-            date
+    dateOffset =
+      getTimezoneOffset date
+  in
+  if dateOffset == epochTimezoneOffset
+    then date
+    else Period.add
+      Period.Minute
+      (dateOffset - epochTimezoneOffset)
+      date
 
 
 {-| Create a time in current time zone from given fields, for
@@ -152,7 +140,7 @@ This defaults to year 1970, month Jan, day of month 1 for date part.
 -}
 timeFromFields : Int -> Int -> Int -> Int -> Posix
 timeFromFields =
-    dateFromFields 1970 Jan 1
+  dateFromFields 1970 Jan 1
 
 
 {-| Alternate record signature for [timeFromFields](#timeFromFields)
@@ -162,8 +150,7 @@ Try [TimeFromFieldsTESTING](#TimeUtilsTypeAlias)
 -}
 timeFromFieldsRecord : TimeFromFields -> Posix
 timeFromFieldsRecord { hour, minute, second, millisecond } =
-    dateFromFields 1970 Jan 1 hour minute second millisecond
-
+  dateFromFields 1970 Jan 1 hour minute second millisecond
 
 
 {- Timezone fun in Javascript

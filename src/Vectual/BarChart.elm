@@ -1,8 +1,8 @@
 module Vectual.BarChart exposing
-    ( defaultBarChartConfig
-    , viewBarChart
-    , getBar
-    )
+  ( defaultBarChartConfig
+  , viewBarChart
+  , getBar
+  )
 
 {-| This module creates a simple SVG bar chart.
 
@@ -40,94 +40,90 @@ Create your own config by overwriting the fields you want to change.
 -}
 defaultBarChartConfig : BarChartConfig
 defaultBarChartConfig =
-    { title = "Vectual Bar Chart"
-    , inline = False
-    , width = 400
-    , height = 300
-    , borderRadius = ( 2, 2 )
-    , xLabelFormatter = utcDateTime
-
-    --
-    , labelAngle = 1.5
-    , yStartAtZero = True
-    , alignBars = Center
-    }
+  { title = "Vectual Bar Chart"
+  , inline = False
+  , width = 400
+  , height = 300
+  , borderRadius = ( 2, 2 )
+  , xLabelFormatter = utcDateTime --
+  , labelAngle = 1.5
+  , yStartAtZero = True
+  , alignBars = Center
+  }
 
 
 {-| Helper to get SVG element for a single bar.
 -}
 getBar :
-    BarChartConfig
-    -> Data
-    -> MetaData Unitless coordinates
-    -> Int
-    -> Entry
-    -> Svg msg
+  BarChartConfig
+  -> Data
+  -> MetaData Unitless coordinates
+  -> Int
+  -> Entry
+  -> Svg msg
 getBar config data metaData index entry =
-    let
-        yScaleFactor =
-            toFloat metaData.coordSysHeight / metaData.yRange
+  let
+    yScaleFactor =
+      toFloat metaData.coordSysHeight / metaData.yRange
 
-        barProportionalWidth =
-            0.7
+    barProportionalWidth =
+      0.7
 
-        barHeight =
-            (entry.value - metaData.yMinimum) * yScaleFactor
+    barHeight =
+      (entry.value - metaData.yMinimum) * yScaleFactor
 
-        barDistance =
-            toFloat metaData.coordSysWidth
-                / toFloat metaData.numberOfEntries
+    barDistance =
+      toFloat metaData.coordSysWidth
+      / toFloat metaData.numberOfEntries
 
-        title =
-            entry.label ++ ": " ++ fromFloat entry.value
+    title =
+      entry.label ++ ": " ++ fromFloat entry.value
 
-        xLeft =
-            truncate (toFloat index * barDistance)
+    xLeft =
+      truncate (toFloat index * barDistance)
 
-        xValue =
-            case config.alignBars of
-                Left ->
-                    xLeft
-
-                Center ->
-                    round
-                        (toFloat xLeft
-                            + (((1 - barProportionalWidth) / 2) * barDistance)
-                        )
-
-                Right ->
-                    round
-                        (toFloat xLeft
-                            + ((1 - barProportionalWidth) * barDistance)
-                        )
-    in
-    rect
-        [ x (fromInt xValue)
-        , height (fromFloat barHeight)
-        , width (fromFloat (barProportionalWidth * barDistance))
-        , transform
-            (toTranslate
-                (Vector2d.unitless
-                    0
-                    (-barHeight - (entry.offset * yScaleFactor))
-                )
+    xValue =
+      case config.alignBars of
+        Left ->
+          xLeft
+        Center ->
+          round
+            (toFloat xLeft
+              + (((1 - barProportionalWidth) / 2) * barDistance)
             )
-        ]
-        [ Svg.title [] [ text title ] ]
+        Right ->
+          round
+            (toFloat xLeft
+              + ((1 - barProportionalWidth) * barDistance)
+            )
+  in
+  rect
+    [ x (fromInt xValue)
+    , height (fromFloat barHeight)
+    , width (fromFloat (barProportionalWidth * barDistance))
+    , transform
+        (toTranslate
+            (Vector2d.unitless
+                0
+                (-barHeight - (entry.offset * yScaleFactor))
+            )
+        )
+    ]
+    [ Svg.title [] [ text title ] ]
 
 
 getBars :
-    BarChartConfig
-    -> Data
-    -> MetaData Unitless coordinates
-    -> Svg msg
+  BarChartConfig
+  -> Data
+  -> MetaData Unitless coordinates
+  -> Svg msg
 getBars config data metaData =
-    g
-        [ class "vectual_bars" ]
-        (List.indexedMap
-            (getBar config data metaData)
-            (getDataRecords data)
-        )
+  g
+    [ class "vectual_bars" ]
+    (List.indexedMap
+        (getBar config data metaData)
+        (getDataRecords data)
+    )
 
 
 {-| Create SVG from bar chart config and a data set.
@@ -138,18 +134,18 @@ getBars config data metaData =
 -}
 viewBarChart : BarChartConfig -> Data -> Svg msg
 viewBarChart config data =
-    let
-        metaData =
-            getMetaData config data
+  let
+    metaData =
+      getMetaData config data
 
-        dataValues =
-            getDataValues data
+    dataValues =
+      getDataValues data
 
-        chart =
-            g
-                [ transform (toTranslate metaData.translation) ]
-                [ getCoordinateSystemForBarChart config data metaData
-                , getBars config data metaData
-                ]
-    in
-    wrapChart config chart
+    chart =
+      g
+        [ transform (toTranslate metaData.translation) ]
+        [ getCoordinateSystemForBarChart config data metaData
+        , getBars config data metaData
+        ]
+  in
+  wrapChart config chart

@@ -18,20 +18,20 @@ import TimeUtils.TwelveHourClock exposing (TwelveHourPeriod)
 {-| Configuration for formatting dates.
 -}
 type alias Config =
-    { i18n :
-        { dayShort : Weekday -> String
-        , dayName : Weekday -> String
-        , monthShort : Month -> String
-        , monthName : Month -> String
-        , dayOfMonthWithSuffix : Bool -> Int -> String
-        , twelveHourPeriod : TwelveHourPeriod -> String
-        }
-    , format :
-        { date : String
-        , longDate : String
-        , time : String
-        , longTime : String
-        , dateTime : String
-        , firstDayOfWeek : Weekday
-        }
-    }
+  { i18n :
+      { dayShort : Weekday -> String
+      , dayName : Weekday -> String
+      , monthShort : Month -> String
+      , monthName : Month -> String
+      , dayOfMonthWithSuffix : Bool -> Int -> String
+      , twelveHourPeriod : TwelveHourPeriod -> String
+      }
+  , format :
+      { date : String
+      , longDate : String
+      , time : String
+      , longTime : String
+      , dateTime : String
+      , firstDayOfWeek : Weekday
+      }
+  }
